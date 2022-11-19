@@ -1,3 +1,3 @@
 ### Web register
 
-Web application for the university schedule intercation
+Web application for the university schedule interaction

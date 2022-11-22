@@ -1,7 +1,8 @@
 import { DataSource } from 'typeorm';
 import { ENV } from 'src/common/enums/enums';
 import { Discipline } from 'src/disciplines/discipline.entity';
-import { Faculty } from 'src/faculties/faculty.enitity';
+import { Faculty } from 'src/faculties/faculty.entity';
+import { Teacher } from 'src/teachers/teacher.entity';
 
 const { TYPE, HOST, PORT, USERNAME, PASSWORD, NAME } = ENV.DB;
 
@@ -15,6 +16,6 @@ export default new DataSource({
   username: USERNAME,
   password: PASSWORD,
   database: NAME,
-  entities: [Discipline, Faculty],
+  entities: [Discipline, Faculty, Teacher],
   migrations: ['dist/src/data/migrations/*.js'],
 });

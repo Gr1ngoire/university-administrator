@@ -2,18 +2,20 @@ import { Module } from '@nestjs/common';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
+import { ENV } from './common/enums/enums';
 
+const { TYPE, HOST, PORT, USERNAME, PASSWORD, NAME } = ENV.DB;
 @Module({
   imports: [
     TypeOrmModule.forRoot({
-      type: 'postgres',
+      type: TYPE,
       entities: [],
-      host: '127.0.0.1',
-      port: 5432,
-      username: 'postgres',
-      password: 'root',
-      database: 'web_register',
-      migrations: ['src/migrations/*.ts'],
+      host: HOST,
+      port: PORT,
+      username: USERNAME,
+      password: PASSWORD,
+      database: NAME,
+      migrations: ['dist/migrations/*.ts'],
       migrationsTableName: 'migrations',
       // disable in production
       // synchronize: true,

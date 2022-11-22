@@ -1,2 +1,2 @@
-export { DbTablesNames } from './db/db-tables-names.enum';
-export { DbTablesColumnsName } from './db/db-tables-columns-names.enum';
+export { DbTablesNames } from './db/db';
+export { AppEnvironment, ENV } from './app/app';

@@ -1,27 +1,22 @@
-import { DbTablesColumnsName, DbTablesNames } from 'src/common/enums/enums';
 import { MigrationInterface, QueryRunner, Table, TableColumn } from 'typeorm';
+
+const TABLE_NAME = 'disciplines';
+
+enum ColumnsNames {
+  ID = 'id',
+  UPDATED_AT = 'updated_at',
+  CREATED_AT = 'created_at',
+  NAME = 'name',
+}
 
 export class createDisciplinesTable1669069550486 implements MigrationInterface {
   public async up(queryRunner: QueryRunner): Promise<void> {
     const disciplinesTable = new Table({
-      name: DbTablesNames.DISCIPLINES,
+      name: TABLE_NAME,
     });
-    const disciplinesTableColumns: TableColumn[] = [
-      {
-        isPrimary: true,
-        isGenerated: false,
-        isNullable: false,
-        isUnique: true,
-        isArray: false,
-        name: DbTablesColumnsName.ID,
-        type: '',
-      },
-    ];
+    const disciplinesTableColumns: TableColumn[] = [];
     await queryRunner.createTable(disciplinesTable);
-    await queryRunner.addColumns(
-      DbTablesNames.DISCIPLINES,
-      disciplinesTableColumns,
-    );
+    await queryRunner.addColumns(TABLE_NAME, disciplinesTableColumns);
   }
 
   public async down(queryRunner: QueryRunner): Promise<void> {}

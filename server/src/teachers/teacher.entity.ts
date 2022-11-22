@@ -1,9 +1,11 @@
+import { Schedule } from 'src/schedules/schedule.entity';
 import {
   Entity,
   PrimaryGeneratedColumn,
   UpdateDateColumn,
   CreateDateColumn,
   Column,
+  OneToMany,
 } from 'typeorm';
 
 @Entity()
@@ -37,4 +39,7 @@ export class Teacher {
 
   @Column()
   phone: string;
+
+  @OneToMany(() => Schedule, (schedule) => schedule.teacher)
+  schedules: Schedule[];
 }

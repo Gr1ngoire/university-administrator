@@ -1,4 +1,5 @@
 import { Department } from 'src/departments/department.entity';
+import { Schedule } from 'src/schedules/schedule.entity';
 import { Student } from 'src/students/student.entity';
 import {
   Entity,
@@ -39,6 +40,9 @@ export class Group {
 
   @OneToMany(() => Student, (student) => student.group)
   students: Student[];
+
+  @OneToMany(() => Schedule, (schedule) => schedule.group)
+  schedules: Schedule[];
 
   @ManyToOne(() => Department, (department) => department.groups)
   @JoinColumn({ name: 'department_id' })

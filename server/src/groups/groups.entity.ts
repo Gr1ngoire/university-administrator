@@ -1,15 +1,19 @@
+import { Department } from 'src/departments/department.entity';
 import { Schedule } from 'src/schedules/schedule.entity';
+import { Student } from 'src/students/student.entity';
 import {
   Entity,
-  Column,
   PrimaryGeneratedColumn,
-  CreateDateColumn,
   UpdateDateColumn,
+  CreateDateColumn,
+  Column,
+  ManyToOne,
+  JoinColumn,
   OneToMany,
 } from 'typeorm';
 
 @Entity()
-export class Discipline {
+export class Group {
   @PrimaryGeneratedColumn()
   id: number;
 
@@ -31,6 +35,16 @@ export class Discipline {
   @Column()
   name: string;
 
-  @OneToMany(() => Schedule, (schedule) => schedule.discipline)
+  @Column()
+  course: number;
+
+  @OneToMany(() => Student, (student) => student.group)
+  students: Student[];
+
+  @OneToMany(() => Schedule, (schedule) => schedule.group)
   schedules: Schedule[];
+
+  @ManyToOne(() => Department, (department) => department.groups)
+  @JoinColumn({ name: 'department_id' })
+  department: Department;
 }

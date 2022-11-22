@@ -1,15 +1,15 @@
-import { Schedule } from 'src/schedules/schedule.entity';
+import { Department } from 'src/departments/department.entity';
 import {
   Entity,
-  Column,
   PrimaryGeneratedColumn,
-  CreateDateColumn,
   UpdateDateColumn,
+  CreateDateColumn,
+  Column,
   OneToMany,
 } from 'typeorm';
 
 @Entity()
-export class Discipline {
+export class Faculty {
   @PrimaryGeneratedColumn()
   id: number;
 
@@ -31,6 +31,9 @@ export class Discipline {
   @Column()
   name: string;
 
-  @OneToMany(() => Schedule, (schedule) => schedule.discipline)
-  schedules: Schedule[];
+  @Column({ name: 'short_name' })
+  shortName: string;
+
+  @OneToMany(() => Department, (department) => department.faculty)
+  departments: Department[];
 }

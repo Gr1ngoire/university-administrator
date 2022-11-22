@@ -1,15 +1,16 @@
-import { Schedule } from 'src/schedules/schedule.entity';
+import { Group } from 'src/groups/groups.entity';
 import {
   Entity,
-  Column,
   PrimaryGeneratedColumn,
-  CreateDateColumn,
   UpdateDateColumn,
-  OneToMany,
+  CreateDateColumn,
+  Column,
+  ManyToOne,
+  JoinColumn,
 } from 'typeorm';
 
 @Entity()
-export class Discipline {
+export class Student {
   @PrimaryGeneratedColumn()
   id: number;
 
@@ -31,6 +32,13 @@ export class Discipline {
   @Column()
   name: string;
 
-  @OneToMany(() => Schedule, (schedule) => schedule.discipline)
-  schedules: Schedule[];
+  @Column({ unique: true })
+  email: string;
+
+  @Column()
+  phone: string;
+
+  @ManyToOne(() => Group, (group) => group.students)
+  @JoinColumn({ name: 'group_id' })
+  group: Group;
 }

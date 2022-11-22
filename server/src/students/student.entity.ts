@@ -1,5 +1,4 @@
-import { Department } from 'src/departments/department.entity';
-import { Student } from 'src/students/student.entity';
+import { Group } from 'src/groups/groups.entity';
 import {
   Entity,
   PrimaryGeneratedColumn,
@@ -8,11 +7,10 @@ import {
   Column,
   ManyToOne,
   JoinColumn,
-  OneToMany,
 } from 'typeorm';
 
 @Entity()
-export class Group {
+export class Student {
   @PrimaryGeneratedColumn()
   id: number;
 
@@ -34,13 +32,13 @@ export class Group {
   @Column()
   name: string;
 
+  @Column({ unique: true })
+  email: string;
+
   @Column()
-  course: number;
+  phone: string;
 
-  @OneToMany(() => Student, (student) => student.group)
-  students: Student[];
-
-  @ManyToOne(() => Department, (department) => department.groups)
-  @JoinColumn({ name: 'department_id' })
-  department: Department;
+  @ManyToOne(() => Group, (group) => group.students)
+  @JoinColumn({ name: 'group_id' })
+  group: Group;
 }

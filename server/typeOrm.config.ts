@@ -5,6 +5,7 @@ import { Faculty } from 'src/faculties/faculty.entity';
 import { Teacher } from 'src/teachers/teacher.entity';
 import { Department } from 'src/departments/department.entity';
 import { Group } from 'src/groups/groups.entity';
+import { Student } from 'src/students/student.entity';
 
 const { TYPE, HOST, PORT, USERNAME, PASSWORD, NAME } = ENV.DB;
 
@@ -18,6 +19,6 @@ export default new DataSource({
   username: USERNAME,
   password: PASSWORD,
   database: NAME,
-  entities: [Discipline, Faculty, Teacher, Department, Group],
+  entities: [Discipline, Faculty, Teacher, Department, Group, Student],
   migrations: ['dist/src/data/migrations/*.js'],
 });

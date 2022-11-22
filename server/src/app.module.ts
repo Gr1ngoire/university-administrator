@@ -13,13 +13,15 @@ import { DepartmentsModule } from './departments/departments.module';
 import { Department } from './departments/department.entity';
 import { GroupsModule } from './groups/groups.module';
 import { Group } from './groups/groups.entity';
+import { StudentsModule } from './students/students.module';
+import { Student } from './students/student.entity';
 
 const { TYPE, HOST, PORT, USERNAME, PASSWORD, NAME } = ENV.DB;
 @Module({
   imports: [
     TypeOrmModule.forRoot({
       type: TYPE,
-      entities: [Discipline, Faculty, Teacher, Department, Group],
+      entities: [Discipline, Faculty, Teacher, Department, Group, Student],
       host: HOST,
       port: PORT,
       username: USERNAME,
@@ -35,6 +37,7 @@ const { TYPE, HOST, PORT, USERNAME, PASSWORD, NAME } = ENV.DB;
     TeachersModule,
     DepartmentsModule,
     GroupsModule,
+    StudentsModule,
   ],
   controllers: [AppController],
   providers: [AppService],

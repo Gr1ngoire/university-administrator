@@ -1,15 +1,16 @@
-import { Department } from 'src/departments/department.entity';
+import { Faculty } from 'src/faculties/faculty.entity';
 import {
   Entity,
   PrimaryGeneratedColumn,
   UpdateDateColumn,
   CreateDateColumn,
   Column,
-  OneToMany,
+  ManyToOne,
+  JoinColumn,
 } from 'typeorm';
 
 @Entity()
-export class Faculty {
+export class Department {
   @PrimaryGeneratedColumn()
   id: number;
 
@@ -34,6 +35,7 @@ export class Faculty {
   @Column({ name: 'short_name' })
   shortName: string;
 
-  @OneToMany(() => Department, (department) => department.faculty)
-  departments: Department[];
+  @ManyToOne(() => Faculty, (faculty) => faculty.departments)
+  @JoinColumn({ name: 'faculty_id' })
+  faculty: Faculty;
 }

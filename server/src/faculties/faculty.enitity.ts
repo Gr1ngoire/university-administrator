@@ -1,13 +1,13 @@
 import {
   Entity,
-  Column,
   PrimaryGeneratedColumn,
-  CreateDateColumn,
   UpdateDateColumn,
+  CreateDateColumn,
+  Column,
 } from 'typeorm';
 
 @Entity()
-export class Discipline {
+export class Faculty {
   @PrimaryGeneratedColumn()
   id: number;
 
@@ -28,4 +28,7 @@ export class Discipline {
 
   @Column()
   name: string;
+
+  @Column({ name: 'short_name' })
+  shortName: string;
 }

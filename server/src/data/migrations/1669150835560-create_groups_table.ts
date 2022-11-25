@@ -8,7 +8,7 @@ export class createGroupsTable1669150835560 implements MigrationInterface {
       `CREATE TABLE "groups" ("id" SERIAL NOT NULL, "updated_at" TIMESTAMP WITH TIME ZONE NOT NULL DEFAULT ('now'::text)::timestamp(6) with time zone, "created_at" TIMESTAMP WITH TIME ZONE NOT NULL DEFAULT ('now'::text)::timestamp(6) with time zone, "name" character varying NOT NULL, "course" integer NOT NULL, "department_id" integer, CONSTRAINT "PK_256aa0fda9b1de1a73ee0b7106b" PRIMARY KEY ("id"))`,
     );
     await queryRunner.query(
-      `ALTER TABLE "groups" ADD CONSTRAINT "FK_f469c5432c719b0bbb668010ddb" FOREIGN KEY ("department_id") REFERENCES "departments"("id") ON DELETE NO ACTION ON UPDATE NO ACTION`,
+      `ALTER TABLE "groups" ADD CONSTRAINT "FK_f469c5432c719b0bbb668010ddb" FOREIGN KEY ("department_id") REFERENCES "departments"("id") ON DELETE CASCADE ON UPDATE NO ACTION`,
     );
   }
 

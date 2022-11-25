@@ -44,7 +44,9 @@ export class Group {
   @OneToMany(() => Schedule, (schedule) => schedule.group)
   schedules: Schedule[];
 
-  @ManyToOne(() => Department, (department) => department.groups)
+  @ManyToOne(() => Department, (department) => department.groups, {
+    onDelete: 'CASCADE',
+  })
   @JoinColumn({ name: 'department_id' })
   department: Department;
 }

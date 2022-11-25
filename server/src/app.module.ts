@@ -12,7 +12,7 @@ import { Teacher } from './teachers/teacher.entity';
 import { DepartmentsModule } from './departments/departments.module';
 import { Department } from './departments/department.entity';
 import { GroupsModule } from './groups/groups.module';
-import { Group } from './groups/groups.entity';
+import { Group } from './groups/group.entity';
 import { StudentsModule } from './students/students.module';
 import { Student } from './students/student.entity';
 import { SchedulesModule } from './schedules/schedules.module';

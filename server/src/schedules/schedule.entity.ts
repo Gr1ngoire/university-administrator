@@ -1,5 +1,5 @@
 import { Discipline } from 'src/disciplines/discipline.entity';
-import { Group } from 'src/groups/groups.entity';
+import { Group } from 'src/groups/group.entity';
 import { Teacher } from 'src/teachers/teacher.entity';
 import {
   Entity,
@@ -40,15 +40,21 @@ export class Schedule {
   @Column()
   classroom: string;
 
-  @ManyToOne(() => Teacher, (teacher) => teacher.schedules)
+  @ManyToOne(() => Teacher, (teacher) => teacher.schedules, {
+    onDelete: 'CASCADE',
+  })
   @JoinColumn({ name: 'teacher_id' })
   teacher: Teacher;
 
-  @ManyToOne(() => Discipline, (discipline) => discipline.schedules)
+  @ManyToOne(() => Discipline, (discipline) => discipline.schedules, {
+    onDelete: 'CASCADE',
+  })
   @JoinColumn({ name: 'discipline_id' })
   discipline: Discipline;
 
-  @ManyToOne(() => Group, (group) => group.schedules)
+  @ManyToOne(() => Group, (group) => group.schedules, {
+    onDelete: 'CASCADE',
+  })
   @JoinColumn({ name: 'group_id' })
   group: Group;
 }

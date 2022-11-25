@@ -4,7 +4,7 @@ import { Discipline } from 'src/disciplines/discipline.entity';
 import { Faculty } from 'src/faculties/faculty.entity';
 import { Teacher } from 'src/teachers/teacher.entity';
 import { Department } from 'src/departments/department.entity';
-import { Group } from 'src/groups/groups.entity';
+import { Group } from 'src/groups/group.entity';
 import { Student } from 'src/students/student.entity';
 import { Schedule } from 'src/schedules/schedule.entity';
 

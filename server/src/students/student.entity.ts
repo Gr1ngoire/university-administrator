@@ -1,4 +1,4 @@
-import { Group } from 'src/groups/groups.entity';
+import { Group } from 'src/groups/group.entity';
 import {
   Entity,
   PrimaryGeneratedColumn,
@@ -38,7 +38,7 @@ export class Student {
   @Column()
   phone: string;
 
-  @ManyToOne(() => Group, (group) => group.students)
+  @ManyToOne(() => Group, (group) => group.students, { onDelete: 'CASCADE' })
   @JoinColumn({ name: 'group_id' })
   group: Group;
 }

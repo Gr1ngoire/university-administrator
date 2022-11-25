@@ -1,5 +1,5 @@
 import { Faculty } from 'src/faculties/faculty.entity';
-import { Group } from 'src/groups/groups.entity';
+import { Group } from 'src/groups/group.entity';
 import {
   Entity,
   PrimaryGeneratedColumn,
@@ -40,7 +40,9 @@ export class Department {
   @OneToMany(() => Group, (group) => group.department)
   groups: Group[];
 
-  @ManyToOne(() => Faculty, (faculty) => faculty.departments)
+  @ManyToOne(() => Faculty, (faculty) => faculty.departments, {
+    onDelete: 'CASCADE',
+  })
   @JoinColumn({ name: 'faculty_id' })
   faculty: Faculty;
 }

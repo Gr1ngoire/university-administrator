@@ -1,3 +1,4 @@
+import { DbTablesNames } from 'src/common/enums/enums';
 import { Department } from 'src/departments/department.entity';
 import {
   Entity,
@@ -8,7 +9,7 @@ import {
   OneToMany,
 } from 'typeorm';
 
-@Entity()
+@Entity({ name: DbTablesNames.FACULTIES })
 export class Faculty {
   @PrimaryGeneratedColumn()
   id: number;

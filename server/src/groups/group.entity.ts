@@ -1,3 +1,4 @@
+import { DbTablesNames } from 'src/common/enums/enums';
 import { Department } from 'src/departments/department.entity';
 import { Schedule } from 'src/schedules/schedule.entity';
 import { Student } from 'src/students/student.entity';
@@ -12,7 +13,7 @@ import {
   OneToMany,
 } from 'typeorm';
 
-@Entity()
+@Entity({ name: DbTablesNames.GROUPS })
 export class Group {
   @PrimaryGeneratedColumn()
   id: number;

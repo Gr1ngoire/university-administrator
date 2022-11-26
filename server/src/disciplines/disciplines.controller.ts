@@ -8,7 +8,10 @@ import {
   Delete,
   NotFoundException,
 } from '@nestjs/common';
-import { CreateDisciplineDto, UpdateDisciplineDto } from 'src/common/dtos/dtos';
+import {
+  CreateDisciplineValidationDto,
+  UpdateDisciplineValidationDto,
+} from 'src/common/validation-dtos/validation-dtos';
 import {
   DisciplinesApi,
   DisciplinesControllerParams,
@@ -37,14 +40,14 @@ export class DisciplinesController {
   }
 
   @Post(DisciplinesApi.ROOT)
-  createDiscipline(@Body() discipline: CreateDisciplineDto) {
-    return this.disciplinesService.createDiscipline(discipline.name);
+  createDiscipline(@Body() discipline: CreateDisciplineValidationDto) {
+    return this.disciplinesService.createDiscipline(discipline);
   }
 
   @Put(DisciplinesApi.$ID)
   async update(
     @Param(DisciplinesControllerParams.ID) id: string,
-    @Body() discipline: UpdateDisciplineDto,
+    @Body() discipline: UpdateDisciplineValidationDto,
   ) {
     return this.disciplinesService.update(parseInt(id), discipline);
   }

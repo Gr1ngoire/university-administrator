@@ -8,10 +8,13 @@ import {
   Delete,
   NotFoundException,
 } from '@nestjs/common';
-import { CreateDisciplineDto, UpdateDisciplineDto } from 'src/common/dtos/dtos';
+import {
+  CreateDisciplineValidationDto,
+  UpdateDisciplineValidationDto,
+} from 'src/common/validation-dtos/validation-dtos';
 import {
   DisciplinesApi,
-  DisciplinesControllerParams,
+  ControllerParams,
   ExceptionsMessages,
 } from 'src/common/enums/enums';
 import { DisciplinesService } from './disciplines.service';
@@ -26,7 +29,7 @@ export class DisciplinesController {
   }
 
   @Get(DisciplinesApi.$ID)
-  async getById(@Param(DisciplinesControllerParams.ID) id: string) {
+  async getById(@Param(ControllerParams.ID) id: string) {
     const discipline = await this.disciplinesService.getById(parseInt(id));
 
     if (!discipline) {
@@ -37,20 +40,20 @@ export class DisciplinesController {
   }
 
   @Post(DisciplinesApi.ROOT)
-  createDiscipline(@Body() discipline: CreateDisciplineDto) {
-    return this.disciplinesService.createDiscipline(discipline.name);
+  create(@Body() discipline: CreateDisciplineValidationDto) {
+    return this.disciplinesService.create(discipline);
   }
 
   @Put(DisciplinesApi.$ID)
-  async update(
-    @Param(DisciplinesControllerParams.ID) id: string,
-    @Body() discipline: UpdateDisciplineDto,
+  update(
+    @Param(ControllerParams.ID) id: string,
+    @Body() discipline: UpdateDisciplineValidationDto,
   ) {
     return this.disciplinesService.update(parseInt(id), discipline);
   }
 
   @Delete(DisciplinesApi.$ID)
-  async delete(@Param(DisciplinesControllerParams.ID) id: string) {
+  delete(@Param(ControllerParams.ID) id: string) {
     return this.disciplinesService.delete(parseInt(id));
   }
 }

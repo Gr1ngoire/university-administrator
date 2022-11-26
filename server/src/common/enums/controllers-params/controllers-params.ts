@@ -1,1 +1,1 @@
-export { DisciplinesControllerParams } from './disciplines/disciplines';
+export { ControllerParams } from './common-controllers-params/common-controllers-params.enum';

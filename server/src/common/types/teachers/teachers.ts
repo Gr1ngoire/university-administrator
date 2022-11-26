@@ -1,4 +1,4 @@
 export {
   type CreateTeacherRequestDto,
   type UpdateTeacherRequestDto,
-} from 'shared/types/types';
+} from 'shared/common/types/types';

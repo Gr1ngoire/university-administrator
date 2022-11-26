@@ -20,9 +20,7 @@ export class DisciplinesService {
     return this.repository.findOne({ where: { id } });
   }
 
-  createDiscipline(
-    discipline: CreateDisciplineRequestDto,
-  ): Promise<Discipline> {
+  create(discipline: CreateDisciplineRequestDto): Promise<Discipline> {
     const newDiscipline = this.repository.create(discipline);
 
     return this.repository.save(newDiscipline);

@@ -1,3 +1,4 @@
+import { DbTablesNames } from 'src/common/enums/enums';
 import { Schedule } from 'src/schedules/schedule.entity';
 import {
   Entity,
@@ -6,9 +7,10 @@ import {
   CreateDateColumn,
   UpdateDateColumn,
   OneToMany,
+  AfterRemove,
 } from 'typeorm';
 
-@Entity()
+@Entity({ name: DbTablesNames.DISCIPLINES })
 export class Discipline {
   @PrimaryGeneratedColumn()
   id: number;
@@ -33,4 +35,9 @@ export class Discipline {
 
   @OneToMany(() => Schedule, (schedule) => schedule.discipline)
   schedules: Schedule[];
+
+  @AfterRemove()
+  logRemove() {
+    console.log(`User with id ${this.id} has been successfully removed`);
+  }
 }

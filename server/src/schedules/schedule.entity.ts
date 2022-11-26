@@ -1,3 +1,4 @@
+import { DbTablesNames } from 'src/common/enums/enums';
 import { Discipline } from 'src/disciplines/discipline.entity';
 import { Group } from 'src/groups/group.entity';
 import { Teacher } from 'src/teachers/teacher.entity';
@@ -11,7 +12,7 @@ import {
   JoinColumn,
 } from 'typeorm';
 
-@Entity()
+@Entity({ name: DbTablesNames.SCHEDULES })
 export class Schedule {
   @PrimaryGeneratedColumn()
   id: number;

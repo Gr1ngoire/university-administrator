@@ -1,3 +1,4 @@
+import { DbTablesNames } from 'src/common/enums/enums';
 import { Group } from 'src/groups/group.entity';
 import {
   Entity,
@@ -9,7 +10,7 @@ import {
   JoinColumn,
 } from 'typeorm';
 
-@Entity()
+@Entity({ name: DbTablesNames.STUDENTS })
 export class Student {
   @PrimaryGeneratedColumn()
   id: number;

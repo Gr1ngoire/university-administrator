@@ -7,6 +7,7 @@ import {
   CreateDateColumn,
   UpdateDateColumn,
   OneToMany,
+  AfterRemove,
 } from 'typeorm';
 
 @Entity({ name: DbTablesNames.DISCIPLINES })
@@ -34,4 +35,9 @@ export class Discipline {
 
   @OneToMany(() => Schedule, (schedule) => schedule.discipline)
   schedules: Schedule[];
+
+  @AfterRemove()
+  logRemove() {
+    console.log(`User with id ${this.id} has been successfully removed`);
+  }
 }

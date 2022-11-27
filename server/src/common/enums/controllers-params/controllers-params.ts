@@ -1,1 +1,1 @@
-export { ControllerParams } from './common-controllers-params/common-controllers-params.enum';
+export { ControllerParams } from './common-controllers-params.enum';

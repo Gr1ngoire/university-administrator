@@ -1,4 +1,3 @@
-import { Module } from '@nestjs/common';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
@@ -17,6 +16,7 @@ import { StudentsModule } from './students/students.module';
 import { Student } from './students/student.entity';
 import { SchedulesModule } from './schedules/schedules.module';
 import { Schedule } from './schedules/schedule.entity';
+import { Module } from './common/decorators/decorators';
 
 const { TYPE, HOST, PORT, USERNAME, PASSWORD, NAME } = ENV.DB;
 @Module({

@@ -1,4 +1,4 @@
-export { Injectable, InjectRepository } from './common/common';
+export { Injectable, Module, InjectRepository } from './common/common';
 export {
   Body,
   Controller,

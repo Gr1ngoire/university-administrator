@@ -1,5 +1,5 @@
-import { Module } from '@nestjs/common';
 import { TypeOrmModule } from '@nestjs/typeorm';
+import { Module } from 'src/common/decorators/decorators';
 import { FacultiesModule } from 'src/faculties/faculties.module';
 import { FacultiesService } from 'src/faculties/faculties.service';
 import { Faculty } from 'src/faculties/faculty.entity';

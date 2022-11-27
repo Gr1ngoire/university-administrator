@@ -1,4 +1,8 @@
-import { Injectable, NotFoundException } from '@nestjs/common';
+import {
+  BadRequestException,
+  Injectable,
+  NotFoundException,
+} from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { ExceptionsMessages } from 'src/common/enums/enums';
 import {
@@ -14,6 +18,10 @@ export class TeachersService {
     @InjectRepository(Teacher) private repository: Repository<Teacher>,
   ) {}
 
+  private getByEmail(email: string): Promise<Teacher | null> {
+    return this.repository.findOne({ where: { email } });
+  }
+
   getAll(): Promise<Teacher[]> {
     return this.repository.find();
   }
@@ -22,7 +30,15 @@ export class TeachersService {
     return this.repository.findOne({ where: { id } });
   }
 
-  create(teacher: CreateTeacherRequestDto): Promise<Teacher> {
+  async create(teacher: CreateTeacherRequestDto): Promise<Teacher> {
+    const teacherInDb = await this.getByEmail(teacher.email);
+
+    if (teacherInDb) {
+      throw new BadRequestException(
+        ExceptionsMessages.TEACHER_WITH_SUCH_EMAIL_ALREADY_EXISTS,
+      );
+    }
+
     const newTeacher = this.repository.create(teacher);
 
     return this.repository.save(newTeacher);
@@ -36,6 +52,18 @@ export class TeachersService {
 
     if (!teacherToUpdate) {
       throw new NotFoundException(ExceptionsMessages.TEACHER_NOT_FOUND);
+    }
+
+    const teacherToCheckByEmail = await this.getByEmail(teacher.email);
+
+    if (
+      teacherToCheckByEmail &&
+      teacher.email !== teacherToUpdate.email &&
+      id !== teacherToCheckByEmail.id
+    ) {
+      throw new BadRequestException(
+        ExceptionsMessages.TEACHER_WITH_SUCH_EMAIL_ALREADY_EXISTS,
+      );
     }
 
     Object.assign(teacherToUpdate, teacher);

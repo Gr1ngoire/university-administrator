@@ -1,5 +1,6 @@
 import { Injectable, NotFoundException } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
+import { ExceptionsMessages } from 'src/common/enums/enums';
 import {
   CreateDisciplineRequestDto,
   UpdateDisciplineRequestDto,
@@ -32,10 +33,10 @@ export class DisciplinesService {
   ): Promise<Discipline> {
     const discipline = await this.getById(id);
     if (!discipline) {
-      throw new NotFoundException('User not found');
+      throw new NotFoundException(ExceptionsMessages.DISCIPLINE_NOT_FOUD);
     }
-    Object.assign(discipline, attributes);
 
+    Object.assign(discipline, attributes);
     return this.repository.save(discipline);
   }
 
@@ -43,7 +44,7 @@ export class DisciplinesService {
     const discipline = await this.getById(id);
 
     if (!discipline) {
-      throw new NotFoundException('User not found');
+      throw new NotFoundException(ExceptionsMessages.DISCIPLINE_NOT_FOUD);
     }
 
     return this.repository.remove(discipline);

@@ -1,9 +1,9 @@
+export { Injectable, Module, InjectRepository } from './common/common';
 export {
   Body,
   Controller,
   Delete,
   Get,
-  NotFoundException,
   Param,
   Post,
   Put,
@@ -26,4 +26,5 @@ export {
   IsPhoneNumber,
   IsNotEmpty,
   IsNumberString,
+  IsNumber,
 } from './validation-dto/validation-dto';

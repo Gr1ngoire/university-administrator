@@ -2,4 +2,4 @@ type CreateDisciplineRequestDto = {
   name: string;
 };
 
-export type { CreateDisciplineRequestDto };
+export { type CreateDisciplineRequestDto };

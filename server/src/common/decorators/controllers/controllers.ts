@@ -3,7 +3,6 @@ export {
   Controller,
   Delete,
   Get,
-  NotFoundException,
   Param,
   Post,
   Put,

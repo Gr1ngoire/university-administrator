@@ -1,5 +1,9 @@
 export { GetByIdParams } from './common/common';
 export {
+  CreateDepartmentValidationDto,
+  UpdateDepartmentValidationDto,
+} from './departments/departments';
+export {
   CreateDisciplineValidationDto,
   UpdateDisciplineValidationDto,
 } from './disciplines/disciplines';

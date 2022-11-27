@@ -10,8 +10,9 @@ import {
   JoinColumn,
   OneToMany,
 } from 'src/common/decorators/decorators';
+import { DbTablesNames } from 'src/common/enums/enums';
 
-@Entity()
+@Entity({ name: DbTablesNames.DEPARTMENTS })
 export class Department {
   @PrimaryGeneratedColumn()
   id: number;
@@ -45,4 +46,7 @@ export class Department {
   })
   @JoinColumn({ name: 'faculty_id' })
   faculty: Faculty;
+
+  @Column({ type: 'number', name: 'faculty_id' })
+  facultyId: number;
 }

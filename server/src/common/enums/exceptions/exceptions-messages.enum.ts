@@ -1,4 +1,5 @@
 enum ExceptionsMessages {
+  DEPARTMENT_NOT_FOUND = 'Department not found',
   DISCIPLINE_NOT_FOUD = 'Discipline not found',
   TEACHER_NOT_FOUND = 'Teacher not found',
   TEACHER_WITH_SUCH_EMAIL_ALREADY_EXISTS = 'Teacher with such email already exists',

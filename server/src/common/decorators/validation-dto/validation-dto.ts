@@ -5,4 +5,5 @@ export {
   IsPhoneNumber,
   IsNotEmpty,
   IsNumberString,
+  IsNumber,
 } from 'class-validator';

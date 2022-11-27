@@ -1,3 +1,4 @@
+export { GetByIdParams } from './common/common';
 export {
   CreateDisciplineValidationDto,
   UpdateDisciplineValidationDto,

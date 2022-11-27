@@ -7,15 +7,11 @@ import {
   Delete,
   Param,
   NotFoundException,
-  BadRequestException,
 } from '@nestjs/common';
-import {
-  ControllerParams,
-  ExceptionsMessages,
-  TeachersApi,
-} from 'src/common/enums/enums';
+import { ExceptionsMessages, TeachersApi } from 'src/common/enums/enums';
 import {
   CreateTeacherValidationDto,
+  GetByIdParams,
   UpdateTeacherValidatonDto,
 } from 'src/common/validation-dtos/validation-dtos';
 import { TeachersService } from './teachers.service';
@@ -30,17 +26,12 @@ export class TeachersController {
   }
 
   @Get(TeachersApi.$ID)
-  async getById(@Param(ControllerParams.ID) id: string) {
-    const idToUse = parseInt(id);
-
-    if (typeof idToUse !== 'number') {
-      throw new BadRequestException(ExceptionsMessages.INVALID_ID_FORMAT);
-    }
-
-    const teacher = await this.teachersService.getById(idToUse);
+  async getById(@Param() params: GetByIdParams) {
+    const { id } = params;
+    const teacher = await this.teachersService.getById(id);
 
     if (!teacher) {
-      throw new NotFoundException(ExceptionsMessages.DISCIPLINE_NOT_FOUD);
+      throw new NotFoundException(ExceptionsMessages.TEACHER_NOT_FOUND);
     }
 
     return teacher;
@@ -53,26 +44,18 @@ export class TeachersController {
 
   @Put(TeachersApi.$ID)
   update(
-    @Param(ControllerParams.ID) id: string,
+    @Param() params: GetByIdParams,
     @Body() teacher: UpdateTeacherValidatonDto,
   ) {
-    const idToUse = parseInt(id);
+    const { id } = params;
 
-    if (typeof idToUse !== 'number') {
-      throw new BadRequestException(ExceptionsMessages.INVALID_ID_FORMAT);
-    }
-
-    return this.teachersService.update(idToUse, teacher);
+    return this.teachersService.update(id, teacher);
   }
 
   @Delete(TeachersApi.$ID)
-  delete(@Param(ControllerParams.ID) id: string) {
-    const idToUse = parseInt(id);
+  delete(@Param() params: GetByIdParams) {
+    const { id } = params;
 
-    if (typeof idToUse !== 'number') {
-      throw new BadRequestException(ExceptionsMessages.INVALID_ID_FORMAT);
-    }
-
-    return this.teachersService.delete(idToUse);
+    return this.teachersService.delete(id);
   }
 }

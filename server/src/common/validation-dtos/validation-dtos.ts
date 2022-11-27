@@ -4,6 +4,10 @@ export {
   UpdateDisciplineValidationDto,
 } from './disciplines/disciplines';
 export {
+  CreateFacultyValidationDto,
+  UpdateFacultyValidationDto,
+} from './faculties/faculties';
+export {
   CreateTeacherValidationDto,
   UpdateTeacherValidatonDto,
 } from './teachers/teachers';

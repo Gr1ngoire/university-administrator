@@ -1,6 +1,6 @@
-import { Injectable, NotFoundException } from '@nestjs/common';
-import { InjectRepository } from '@nestjs/typeorm';
+import { Injectable, InjectRepository } from 'src/common/decorators/decorators';
 import { ExceptionsMessages } from 'src/common/enums/enums';
+import { NotFoundException } from 'src/common/exceptions/excpetions';
 import {
   CreateDisciplineRequestDto,
   UpdateDisciplineRequestDto,

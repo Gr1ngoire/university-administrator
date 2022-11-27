@@ -1,4 +1,8 @@
 export {
+  type CreateDepartmentRequestDto,
+  type UpdateDepartmentRequestDto,
+} from "./departments/departments";
+export {
   type CreateDisciplineRequestDto,
   type UpdateDisciplineRequestDto,
 } from "./disciplines/disciplines";

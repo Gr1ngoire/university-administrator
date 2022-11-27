@@ -1,9 +1,9 @@
+export { Injectable, InjectRepository } from './common/common';
 export {
   Body,
   Controller,
   Delete,
   Get,
-  NotFoundException,
   Param,
   Post,
   Put,

@@ -6,9 +6,9 @@ import {
   Put,
   Delete,
   Param,
-  NotFoundException,
 } from 'src/common/decorators/decorators';
 import { ExceptionsMessages, TeachersApi } from 'src/common/enums/enums';
+import { NotFoundException } from 'src/common/exceptions/excpetions';
 import {
   CreateTeacherValidationDto,
   GetByIdParams,

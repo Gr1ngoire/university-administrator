@@ -3,12 +3,12 @@ import {
   Controller,
   Delete,
   Get,
-  NotFoundException,
   Param,
   Post,
   Put,
 } from 'src/common/decorators/decorators';
 import { ExceptionsMessages, FacultiesApi } from 'src/common/enums/enums';
+import { NotFoundException } from 'src/common/exceptions/excpetions';
 import {
   CreateFacultyValidationDto,
   GetByIdParams,

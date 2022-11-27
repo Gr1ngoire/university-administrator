@@ -1,13 +1,13 @@
-import { DbTablesNames } from 'src/common/enums/enums';
-import { Schedule } from 'src/schedules/schedule.entity';
 import {
+  Column,
+  CreateDateColumn,
   Entity,
+  OneToMany,
   PrimaryGeneratedColumn,
   UpdateDateColumn,
-  CreateDateColumn,
-  Column,
-  OneToMany,
-} from 'typeorm';
+} from 'src/common/decorators/decorators';
+import { DbTablesNames } from 'src/common/enums/enums';
+import { Schedule } from 'src/schedules/schedule.entity';
 
 @Entity({ name: DbTablesNames.TEACHERS })
 export class Teacher {

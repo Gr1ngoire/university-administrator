@@ -4,7 +4,7 @@ import {
   IsOptional,
   IsPhoneNumber,
   IsString,
-} from 'class-validator';
+} from 'src/common/decorators/decorators';
 
 export class UpdateTeacherValidatonDto {
   @IsString()

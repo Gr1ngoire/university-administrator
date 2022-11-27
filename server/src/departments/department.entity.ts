@@ -9,7 +9,7 @@ import {
   ManyToOne,
   JoinColumn,
   OneToMany,
-} from 'typeorm';
+} from 'src/common/decorators/decorators';
 
 @Entity()
 export class Department {

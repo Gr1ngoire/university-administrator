@@ -7,7 +7,7 @@ import {
   CreateDateColumn,
   Column,
   OneToMany,
-} from 'typeorm';
+} from 'src/common/decorators/decorators';
 
 @Entity({ name: DbTablesNames.FACULTIES })
 export class Faculty {

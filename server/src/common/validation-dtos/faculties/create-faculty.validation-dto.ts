@@ -1,4 +1,4 @@
-import { IsNotEmpty, IsString } from 'class-validator';
+import { IsNotEmpty, IsString } from 'src/common/decorators/decorators';
 
 export class CreateFacultyValidationDto {
   @IsString()

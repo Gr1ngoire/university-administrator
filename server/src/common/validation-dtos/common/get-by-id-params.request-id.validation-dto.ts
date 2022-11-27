@@ -1,4 +1,4 @@
-import { IsNumberString } from 'class-validator';
+import { IsNumberString } from 'src/common/decorators/decorators';
 
 export class GetByIdParams {
   @IsNumberString()

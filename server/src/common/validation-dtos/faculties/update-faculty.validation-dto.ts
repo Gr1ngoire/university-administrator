@@ -1,4 +1,8 @@
-import { IsNotEmpty, IsOptional, IsString } from 'class-validator';
+import {
+  IsNotEmpty,
+  IsOptional,
+  IsString,
+} from 'src/common/decorators/decorators';
 
 export class UpdateFacultyValidationDto {
   @IsString()

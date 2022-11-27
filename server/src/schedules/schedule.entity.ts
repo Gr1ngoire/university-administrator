@@ -1,16 +1,16 @@
+import {
+  Column,
+  CreateDateColumn,
+  Entity,
+  ManyToOne,
+  PrimaryGeneratedColumn,
+  UpdateDateColumn,
+  JoinColumn,
+} from 'src/common/decorators/decorators';
 import { DbTablesNames } from 'src/common/enums/enums';
 import { Discipline } from 'src/disciplines/discipline.entity';
 import { Group } from 'src/groups/group.entity';
 import { Teacher } from 'src/teachers/teacher.entity';
-import {
-  Entity,
-  PrimaryGeneratedColumn,
-  UpdateDateColumn,
-  CreateDateColumn,
-  Column,
-  ManyToOne,
-  JoinColumn,
-} from 'typeorm';
 
 @Entity({ name: DbTablesNames.SCHEDULES })
 export class Schedule {

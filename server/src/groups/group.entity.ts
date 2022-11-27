@@ -11,7 +11,7 @@ import {
   ManyToOne,
   JoinColumn,
   OneToMany,
-} from 'typeorm';
+} from 'src/common/decorators/decorators';
 
 @Entity({ name: DbTablesNames.GROUPS })
 export class Group {

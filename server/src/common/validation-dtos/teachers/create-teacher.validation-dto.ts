@@ -1,4 +1,9 @@
-import { IsString, IsEmail, IsPhoneNumber, IsNotEmpty } from 'class-validator';
+import {
+  IsString,
+  IsEmail,
+  IsPhoneNumber,
+  IsNotEmpty,
+} from 'src/common/decorators/decorators';
 
 export class CreateTeacherValidationDto {
   @IsString()

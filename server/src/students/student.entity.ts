@@ -1,14 +1,14 @@
-import { DbTablesNames } from 'src/common/enums/enums';
-import { Group } from 'src/groups/group.entity';
 import {
+  Column,
+  CreateDateColumn,
   Entity,
   PrimaryGeneratedColumn,
   UpdateDateColumn,
-  CreateDateColumn,
-  Column,
   ManyToOne,
   JoinColumn,
-} from 'typeorm';
+} from 'src/common/decorators/decorators';
+import { DbTablesNames } from 'src/common/enums/enums';
+import { Group } from 'src/groups/group.entity';
 
 @Entity({ name: DbTablesNames.STUDENTS })
 export class Student {

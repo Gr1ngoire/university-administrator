@@ -7,7 +7,7 @@ import {
   Param,
   Post,
   Put,
-} from '@nestjs/common';
+} from 'src/common/decorators/decorators';
 import { ExceptionsMessages, FacultiesApi } from 'src/common/enums/enums';
 import {
   CreateFacultyValidationDto,

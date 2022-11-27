@@ -7,7 +7,7 @@ import {
   Put,
   Delete,
   NotFoundException,
-} from '@nestjs/common';
+} from 'src/common/decorators/decorators';
 import {
   CreateDisciplineValidationDto,
   GetByIdParams,

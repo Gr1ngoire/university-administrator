@@ -7,7 +7,7 @@ import {
   Delete,
   Param,
   NotFoundException,
-} from '@nestjs/common';
+} from 'src/common/decorators/decorators';
 import { ExceptionsMessages, TeachersApi } from 'src/common/enums/enums';
 import {
   CreateTeacherValidationDto,

@@ -8,7 +8,7 @@ import {
   UpdateDateColumn,
   OneToMany,
   AfterRemove,
-} from 'typeorm';
+} from 'src/common/decorators/decorators';
 
 @Entity({ name: DbTablesNames.DISCIPLINES })
 export class Discipline {

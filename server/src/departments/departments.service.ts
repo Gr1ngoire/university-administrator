@@ -19,11 +19,15 @@ export class DepartmentsService {
   ) {}
 
   getAll(): Promise<Department[]> {
-    return this.repository.find();
+    return this.repository.find({ relations: ['faculty'] });
   }
 
-  getById(id: number): Promise<Department | null> {
-    return this.repository.findOne({ where: { id } });
+  async getById(id: number): Promise<Department | null> {
+    return this.repository.findOne({
+      where: { id },
+      relationLoadStrategy: 'join',
+      relations: ['faculty'],
+    });
   }
 
   async create(department: CreateDepartmentRequestDto): Promise<Department> {
@@ -35,14 +39,16 @@ export class DepartmentsService {
 
     const newDepartment = this.repository.create(department);
 
-    return this.repository.save(newDepartment);
+    const createdDepartment = await this.repository.save(newDepartment);
+
+    return this.getById(createdDepartment.id);
   }
 
   async update(
     id: number,
     department: Partial<UpdateDepartmentRequestDto>,
   ): Promise<Department> {
-    const departmentToUpdate = await this.getById(id);
+    const departmentToUpdate = await this.repository.findOne({ where: { id } });
 
     if (!departmentToUpdate) {
       throw new NotFoundException(ExceptionsMessages.DEPARTMENT_NOT_FOUND);
@@ -57,7 +63,8 @@ export class DepartmentsService {
     }
 
     Object.assign(departmentToUpdate, department);
-    return this.repository.save(departmentToUpdate);
+    const updatedDepartment = await this.repository.save(departmentToUpdate);
+    return this.getById(updatedDepartment.id);
   }
 
   async delete(id: number): Promise<Department> {

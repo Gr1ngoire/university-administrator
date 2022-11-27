@@ -26,4 +26,5 @@ export {
   IsPhoneNumber,
   IsNotEmpty,
   IsNumberString,
+  IsNumber,
 } from './validation-dto/validation-dto';

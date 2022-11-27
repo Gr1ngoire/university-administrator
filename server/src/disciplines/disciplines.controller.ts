@@ -6,7 +6,6 @@ import {
   Param,
   Put,
   Delete,
-  NotFoundException,
 } from 'src/common/decorators/decorators';
 import {
   CreateDisciplineValidationDto,
@@ -15,6 +14,7 @@ import {
 } from 'src/common/validation-dtos/validation-dtos';
 import { DisciplinesApi, ExceptionsMessages } from 'src/common/enums/enums';
 import { DisciplinesService } from './disciplines.service';
+import { NotFoundException } from 'src/common/exceptions/excpetions';
 
 @Controller(DisciplinesApi.DISCIPLINES)
 export class DisciplinesController {

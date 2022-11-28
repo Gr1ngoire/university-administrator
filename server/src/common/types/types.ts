@@ -16,6 +16,10 @@ export {
   type UpdateGroupRequestDto,
 } from './groups/groups';
 export {
+  type CreateNewsRequestDto,
+  type UpdateNewsRequestDto,
+} from './news/news';
+export {
   type CreateScheduleRequestDto,
   type UpdateScheduleRequestDto,
 } from './schedules/schedule';

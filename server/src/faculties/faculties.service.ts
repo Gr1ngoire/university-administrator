@@ -22,8 +22,8 @@ export class FacultiesService {
     return this.repository.findOne({ where: { id } });
   }
 
-  async create(faculty: CreateFacultyRequestDto): Promise<Faculty> {
-    const newFaculty = await this.repository.create(faculty);
+  create(faculty: CreateFacultyRequestDto): Promise<Faculty> {
+    const newFaculty = this.repository.create(faculty);
 
     return this.repository.save(newFaculty);
   }

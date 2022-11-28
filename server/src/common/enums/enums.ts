@@ -4,6 +4,7 @@ export {
   DisciplinesApi,
   TeachersApi,
   FacultiesApi,
+  StudentsApi,
 } from './api/api';
 export { AppEnvironment, ENV } from './app/app';
 export { ControllerParams } from './controllers-params/controllers-params';

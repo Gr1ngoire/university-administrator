@@ -64,7 +64,7 @@ export class DepartmentsService {
     );
 
     if (!facultyToJoin) {
-      throw new NotFoundException(ExceptionsMessages.FACULTY_NOT_FOUND);
+      throw new BadRequestException(ExceptionsMessages.FACULTY_NOT_FOUND);
     }
 
     Object.assign(departmentToUpdate, department);

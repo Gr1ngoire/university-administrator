@@ -32,6 +32,7 @@ export class DisciplinesService {
     attributes: Partial<UpdateDisciplineRequestDto>,
   ): Promise<Discipline> {
     const discipline = await this.getById(id);
+
     if (!discipline) {
       throw new NotFoundException(ExceptionsMessages.DISCIPLINE_NOT_FOUD);
     }

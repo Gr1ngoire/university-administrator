@@ -2,8 +2,8 @@ import {
   Body,
   Controller,
   Get,
+  Patch,
   Post,
-  Put,
   Delete,
   Param,
 } from 'src/common/decorators/decorators';
@@ -42,7 +42,7 @@ export class DepartmentsController {
     return this.departmentsService.create(department);
   }
 
-  @Put(DepartmentsApi.$ID)
+  @Patch(DepartmentsApi.$ID)
   update(
     @Param() params: GetByIdParams,
     @Body() department: UpdateDepartmentValidationDto,

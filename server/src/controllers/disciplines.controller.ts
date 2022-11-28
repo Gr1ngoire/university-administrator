@@ -4,7 +4,7 @@ import {
   Body,
   Get,
   Param,
-  Put,
+  Patch,
   Delete,
 } from 'src/common/decorators/decorators';
 import {
@@ -43,7 +43,7 @@ export class DisciplinesController {
     return this.disciplinesService.create(discipline);
   }
 
-  @Put(DisciplinesApi.$ID)
+  @Patch(DisciplinesApi.$ID)
   update(
     @Param() params: GetByIdParams,
     @Body() discipline: UpdateDisciplineValidationDto,

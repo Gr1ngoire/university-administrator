@@ -2,8 +2,8 @@ import {
   Body,
   Controller,
   Get,
+  Patch,
   Post,
-  Put,
   Delete,
   Param,
 } from 'src/common/decorators/decorators';
@@ -42,7 +42,7 @@ export class GroupsController {
     return this.groupsService.create(group);
   }
 
-  @Put(GroupsApi.$ID)
+  @Patch(GroupsApi.$ID)
   update(
     @Param() params: GetByIdParams,
     @Body() group: UpdateGroupValidationDto,

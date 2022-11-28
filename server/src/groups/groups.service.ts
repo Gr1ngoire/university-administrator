@@ -66,12 +66,17 @@ export class GroupsService {
       throw new NotFoundException(ExceptionsMessages.GROUP_NOT_FOUND);
     }
 
-    const departmentToJoin = await this.departmentsService.getById(
-      group.departmentId,
-    );
+    if (
+      group.departmentId &&
+      group.departmentId !== groupToUpdate.departmentId
+    ) {
+      const departmentToJoin = await this.departmentsService.getById(
+        group.departmentId,
+      );
 
-    if (!departmentToJoin) {
-      throw new BadRequestException(ExceptionsMessages.DEPARTMENT_NOT_FOUND);
+      if (!departmentToJoin) {
+        throw new BadRequestException(ExceptionsMessages.DEPARTMENT_NOT_FOUND);
+      }
     }
 
     Object.assign(groupToUpdate, group);

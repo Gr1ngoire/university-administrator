@@ -50,4 +50,7 @@ export class Group {
   })
   @JoinColumn({ name: 'department_id' })
   department: Department;
+
+  @Column({ type: 'number', name: 'department_id' })
+  departmentId: number;
 }

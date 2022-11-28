@@ -71,7 +71,7 @@ export class DepartmentsService {
     const department = await this.getById(id);
 
     if (!department) {
-      throw new NotFoundException(ExceptionsMessages.TEACHER_NOT_FOUND);
+      throw new NotFoundException(ExceptionsMessages.DEPARTMENT_NOT_FOUND);
     }
 
     return this.repository.remove(department);

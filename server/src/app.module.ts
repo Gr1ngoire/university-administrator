@@ -18,6 +18,7 @@ import { SchedulesModule } from './schedules/schedules.module';
 import { Schedule } from './schedules/schedule.entity';
 import { Module } from './common/decorators/decorators';
 import { NewsModule } from './news/news.module';
+import { News } from './news/news.entity';
 
 const { TYPE, HOST, PORT, USERNAME, PASSWORD, NAME } = ENV.DB;
 @Module({
@@ -25,13 +26,14 @@ const { TYPE, HOST, PORT, USERNAME, PASSWORD, NAME } = ENV.DB;
     TypeOrmModule.forRoot({
       type: TYPE,
       entities: [
+        Department,
         Discipline,
         Faculty,
-        Teacher,
-        Department,
         Group,
+        News,
         Student,
         Schedule,
+        Teacher,
       ],
       host: HOST,
       port: PORT,
@@ -43,14 +45,14 @@ const { TYPE, HOST, PORT, USERNAME, PASSWORD, NAME } = ENV.DB;
       logging: true,
       // synchronize: ENV.APP.NODE_ENV === 'development',
     }),
+    DepartmentsModule,
     DisciplinesModule,
     FacultiesModule,
-    TeachersModule,
-    DepartmentsModule,
     GroupsModule,
+    NewsModule,
     StudentsModule,
     SchedulesModule,
-    NewsModule,
+    TeachersModule,
   ],
   controllers: [AppController],
   providers: [AppService],

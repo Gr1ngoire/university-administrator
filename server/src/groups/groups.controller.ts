@@ -8,14 +8,13 @@ import {
   Param,
 } from 'src/common/decorators/decorators';
 import { NotFoundException } from 'src/common/exceptions/excpetions';
-import { GroupsApi } from 'src/common/enums/api/api';
 import { GroupsService } from './groups.service';
 import {
   CreateGroupValidationDto,
   GetByIdParams,
   UpdateGroupValidationDto,
 } from 'src/common/validation-dtos/validation-dtos';
-import { ExceptionsMessages } from 'src/common/enums/enums';
+import { ExceptionsMessages, GroupsApi } from 'src/common/enums/enums';
 
 @Controller(GroupsApi.GROUPS)
 export class GroupsController {

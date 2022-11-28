@@ -3,6 +3,8 @@ export {
   DepartmentsApi,
   DisciplinesApi,
   FacultiesApi,
+  GroupsApi,
+  NewsApi,
   SchedulesApi,
   StudentsApi,
   TeachersApi,

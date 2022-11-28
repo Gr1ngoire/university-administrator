@@ -7,6 +7,7 @@ import { Department } from 'src/departments/department.entity';
 import { Group } from 'src/groups/group.entity';
 import { Student } from 'src/students/student.entity';
 import { Schedule } from 'src/schedules/schedule.entity';
+import { News } from 'src/news/news.entity';
 
 const { TYPE, HOST, PORT, USERNAME, PASSWORD, NAME } = ENV.DB;
 
@@ -21,13 +22,14 @@ export default new DataSource({
   password: PASSWORD,
   database: NAME,
   entities: [
+    Department,
     Discipline,
     Faculty,
-    Teacher,
-    Department,
     Group,
-    Student,
+    News,
     Schedule,
+    Student,
+    Teacher,
   ],
-  migrations: ['dist/src/data/migrations/*.js'],
+  migrations: ['dist/server/src/data/migrations/*.js'],
 });

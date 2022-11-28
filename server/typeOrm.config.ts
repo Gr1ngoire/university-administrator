@@ -1,8 +1,20 @@
 import { DataSource } from 'typeorm';
+import {
+  Department,
+  Discipline,
+  Faculty,
+  Group,
+  News,
+  Schedule,
+  Student,
+  Teacher,
+} from 'src/entities/entities';
 import { ENV } from 'src/common/enums/enums';
-import { Discipline } from 'src/disciplines/discipline.entity';
 
 const { TYPE, HOST, PORT, USERNAME, PASSWORD, NAME } = ENV.DB;
+
+// To make migration
+// npm run typeorm -- migration:generate ./src/data/migrations/[--name]
 
 export default new DataSource({
   type: TYPE,
@@ -11,6 +23,15 @@ export default new DataSource({
   username: USERNAME,
   password: PASSWORD,
   database: NAME,
-  entities: [Discipline],
-  migrations: ['dist/src/data/migrations/*.js'],
+  entities: [
+    Department,
+    Discipline,
+    Faculty,
+    Group,
+    News,
+    Schedule,
+    Student,
+    Teacher,
+  ],
+  migrations: ['dist/server/src/data/migrations/*.js'],
 });

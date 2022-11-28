@@ -30,9 +30,9 @@ export class TeachersService {
   }
 
   async create(teacher: CreateTeacherRequestDto): Promise<Teacher> {
-    const teacherInDb = await this.getByEmail(teacher.email);
+    const teacherWithSameEmail = await this.getByEmail(teacher.email);
 
-    if (teacherInDb) {
+    if (teacherWithSameEmail) {
       throw new BadRequestException(
         ExceptionsMessages.TEACHER_WITH_SUCH_EMAIL_ALREADY_EXISTS,
       );

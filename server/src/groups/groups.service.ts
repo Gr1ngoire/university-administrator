@@ -41,7 +41,9 @@ export class GroupsService {
   }
 
   async create(group: CreateGroupRequestDto): Promise<Group> {
-    const departmentInDb = this.departmentsService.getById(group.departmentId);
+    const departmentInDb = await this.departmentsService.getById(
+      group.departmentId,
+    );
 
     if (!departmentInDb) {
       throw new BadRequestException(ExceptionsMessages.DEPARTMENT_NOT_FOUND);
@@ -69,7 +71,7 @@ export class GroupsService {
     );
 
     if (!departmentToJoin) {
-      throw new NotFoundException(ExceptionsMessages.DEPARTMENT_NOT_FOUND);
+      throw new BadRequestException(ExceptionsMessages.DEPARTMENT_NOT_FOUND);
     }
 
     Object.assign(groupToUpdate, group);

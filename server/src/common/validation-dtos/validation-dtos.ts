@@ -16,6 +16,10 @@ export {
   UpdateGroupValidationDto,
 } from './groups/groups';
 export {
+  CreateScheduleValidationDto,
+  UpdateScheduleValidationDto,
+} from './schedules/schedules';
+export {
   CreateStudentValidationDto,
   UpdateStudentValidatonDto,
 } from './students/students';

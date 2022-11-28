@@ -19,14 +19,19 @@ export class DepartmentsService {
   ) {}
 
   getAll(): Promise<Department[]> {
-    return this.repository.find({ relations: ['faculty'] });
+    return this.repository.find({
+      relations: {
+        faculty: true,
+      },
+    });
   }
 
-  async getById(id: number): Promise<Department | null> {
+  getById(id: number): Promise<Department | null> {
     return this.repository.findOne({
       where: { id },
-      relationLoadStrategy: 'join',
-      relations: ['faculty'],
+      relations: {
+        faculty: true,
+      },
     });
   }
 

@@ -12,6 +12,10 @@ export {
   UpdateFacultyValidationDto,
 } from './faculties/faculties';
 export {
+  CreateGroupValidationDto,
+  UpdateGroupValidationDto,
+} from './groups/groups';
+export {
   CreateTeacherValidationDto,
   UpdateTeacherValidatonDto,
 } from './teachers/teachers';

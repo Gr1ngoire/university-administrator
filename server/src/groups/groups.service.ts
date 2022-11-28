@@ -20,14 +20,23 @@ export class GroupsService {
   ) {}
 
   getAll(): Promise<Group[]> {
-    return this.repository.find({ relations: ['department'] });
+    return this.repository.find({
+      relations: {
+        department: {
+          faculty: true,
+        },
+      },
+    });
   }
 
-  async getById(id: number): Promise<Group | null> {
+  getById(id: number): Promise<Group | null> {
     return this.repository.findOne({
       where: { id },
-      relationLoadStrategy: 'join',
-      relations: ['department'],
+      relations: {
+        department: {
+          faculty: true,
+        },
+      },
     });
   }
 

@@ -33,6 +33,6 @@ export class News {
   @Column()
   content: string;
 
-  @Column({ name: 'img_url' })
+  @Column({ name: 'img_url', nullable: true })
   imgUrl: string;
 }

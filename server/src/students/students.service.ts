@@ -25,11 +25,28 @@ export class StudentsService {
   }
 
   getAll(): Promise<Student[]> {
-    return this.repository.find();
+    return this.repository.find({
+      relations: {
+        group: {
+          department: {
+            faculty: true,
+          },
+        },
+      },
+    });
   }
 
   getById(id: number): Promise<Student | null> {
-    return this.repository.findOne({ where: { id } });
+    return this.repository.findOne({
+      where: { id },
+      relations: {
+        group: {
+          department: {
+            faculty: true,
+          },
+        },
+      },
+    });
   }
 
   async create(student: CreateStudentRequestDto): Promise<Student> {

@@ -42,4 +42,7 @@ export class Student {
   @ManyToOne(() => Group, (group) => group.students, { onDelete: 'CASCADE' })
   @JoinColumn({ name: 'group_id' })
   group: Group;
+
+  @Column({ type: 'number', name: 'group_id' })
+  groupId: number;
 }

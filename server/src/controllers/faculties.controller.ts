@@ -4,8 +4,8 @@ import {
   Delete,
   Get,
   Param,
+  Patch,
   Post,
-  Put,
 } from 'src/common/decorators/decorators';
 import { ExceptionsMessages, FacultiesApi } from 'src/common/enums/enums';
 import { NotFoundException } from 'src/common/exceptions/excpetions';
@@ -42,7 +42,7 @@ export class FacultiesController {
     return this.facultiesService.create(faculty);
   }
 
-  @Put(FacultiesApi.$ID)
+  @Patch(FacultiesApi.$ID)
   update(
     @Param() params: GetByIdParams,
     @Body() faculty: UpdateFacultyValidationDto,

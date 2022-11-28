@@ -3,7 +3,7 @@ import {
   Controller,
   Get,
   Post,
-  Put,
+  Patch,
   Delete,
   Param,
 } from 'src/common/decorators/decorators';
@@ -42,7 +42,7 @@ export class NewsController {
     return this.newsService.create(news);
   }
 
-  @Put(NewsApi.$ID)
+  @Patch(NewsApi.$ID)
   update(
     @Param() params: GetByIdParams,
     @Body() news: UpdateNewsValidationDto,

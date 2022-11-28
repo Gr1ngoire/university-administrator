@@ -5,8 +5,8 @@ export {
   Delete,
   Get,
   Param,
+  Patch,
   Post,
-  Put,
 } from './controllers/controllers';
 export {
   Entity,

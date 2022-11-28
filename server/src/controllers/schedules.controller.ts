@@ -3,7 +3,7 @@ import {
   Controller,
   Get,
   Post,
-  Put,
+  Patch,
   Delete,
   Param,
 } from 'src/common/decorators/decorators';
@@ -42,7 +42,7 @@ export class SchedulesController {
     return this.groupsService.create(group);
   }
 
-  @Put(SchedulesApi.$ID)
+  @Patch(SchedulesApi.$ID)
   update(
     @Param() params: GetByIdParams,
     @Body() group: UpdateScheduleValidationDto,

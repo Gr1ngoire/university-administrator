@@ -59,12 +59,17 @@ export class DepartmentsService {
       throw new NotFoundException(ExceptionsMessages.DEPARTMENT_NOT_FOUND);
     }
 
-    const facultyToJoin = await this.facultiesService.getById(
-      department.facultyId,
-    );
+    if (
+      department.facultyId &&
+      department.facultyId !== departmentToUpdate.facultyId
+    ) {
+      const facultyToJoin = await this.facultiesService.getById(
+        department.facultyId,
+      );
 
-    if (!facultyToJoin) {
-      throw new BadRequestException(ExceptionsMessages.FACULTY_NOT_FOUND);
+      if (!facultyToJoin) {
+        throw new BadRequestException(ExceptionsMessages.FACULTY_NOT_FOUND);
+      }
     }
 
     Object.assign(departmentToUpdate, department);

@@ -81,10 +81,12 @@ export class StudentsService {
       throw new NotFoundException(ExceptionsMessages.STUDENT_NOT_FOUND);
     }
 
-    const groupToJoin = await this.groupsService.getById(student.groupId);
+    if (student.groupId && student.groupId !== studentToUpdate.groupId) {
+      const groupToJoin = await this.groupsService.getById(student.groupId);
 
-    if (!groupToJoin) {
-      throw new BadRequestException(ExceptionsMessages.GROUP_NOT_FOUND);
+      if (!groupToJoin) {
+        throw new BadRequestException(ExceptionsMessages.GROUP_NOT_FOUND);
+      }
     }
 
     const studentToCheckByEmail = await this.getByEmail(student.email);

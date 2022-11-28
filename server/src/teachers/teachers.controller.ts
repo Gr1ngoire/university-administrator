@@ -12,7 +12,7 @@ import { NotFoundException } from 'src/common/exceptions/excpetions';
 import {
   CreateTeacherValidationDto,
   GetByIdParams,
-  UpdateTeacherValidatonDto,
+  UpdateTeacherValidationDto,
 } from 'src/common/validation-dtos/validation-dtos';
 import { TeachersService } from './teachers.service';
 
@@ -45,7 +45,7 @@ export class TeachersController {
   @Put(TeachersApi.$ID)
   update(
     @Param() params: GetByIdParams,
-    @Body() teacher: UpdateTeacherValidatonDto,
+    @Body() teacher: UpdateTeacherValidationDto,
   ) {
     const { id } = params;
 

@@ -1,27 +1,22 @@
 import {
-  IsEmail,
   IsNotEmpty,
   IsOptional,
-  IsPhoneNumber,
   IsString,
 } from 'src/common/decorators/decorators';
 
-export class UpdateTeacherValidationDto {
+export class UpdateNewsValidationDto {
   @IsString()
   @IsNotEmpty()
   @IsOptional()
-  name: string;
+  title: string;
 
   @IsString()
   @IsNotEmpty()
   @IsOptional()
-  surname: string;
+  content: string;
 
-  @IsEmail()
+  @IsString()
+  @IsNotEmpty()
   @IsOptional()
-  email: string;
-
-  @IsPhoneNumber('UA')
-  @IsOptional()
-  phone: string;
+  imgUrl: string;
 }

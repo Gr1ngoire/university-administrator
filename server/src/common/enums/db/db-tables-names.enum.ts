@@ -1,11 +1,12 @@
 enum DbTablesNames {
+  DEPARTMENTS = 'departments',
   DISCIPLINES = 'disciplines',
+  FACULTIES = 'faculties',
+  GROUPS = 'groups',
+  NEWS = 'news',
+  SCHEDULES = 'schedules',
   STUDENTS = 'students',
   TEACHERS = 'teachers',
-  FACULTIES = 'faculties',
-  DEPARTMENTS = 'departments',
-  GROUPS = 'groups',
-  SCHEDULES = 'schedules',
 }
 
 export { DbTablesNames };

@@ -15,6 +15,7 @@ export {
   CreateGroupValidationDto,
   UpdateGroupValidationDto,
 } from './groups/groups';
+export { CreateNewsValidationDto, UpdateNewsValidationDto } from './news/news';
 export {
   CreateScheduleValidationDto,
   UpdateScheduleValidationDto,
@@ -25,5 +26,5 @@ export {
 } from './students/students';
 export {
   CreateTeacherValidationDto,
-  UpdateTeacherValidatonDto,
+  UpdateTeacherValidationDto,
 } from './teachers/teachers';

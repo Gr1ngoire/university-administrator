@@ -1,0 +1,8 @@
+.header {
+  background: $primary-brand-color;
+  @extend %centered-flex-row;
+}
+
+.headerOptions {
+  @extend %centered-flex-row;
+}

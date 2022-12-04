@@ -12,9 +12,7 @@ const props = defineProps<HeaderOptionProps>();
 
 <template>
   <div :class="styles.headerOption">
-    <RouterLink :class="styles.link" :to="props.link">{{
-      props.description
-    }}</RouterLink>
+    <RouterLink :to="props.link">{{ props.description }}</RouterLink>
     <hr :class="styles.underline" />
   </div>
 </template>

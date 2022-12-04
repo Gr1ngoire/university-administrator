@@ -3,15 +3,20 @@
   background: $primary-brand-color;
   color: $secondary-brand-color;
   cursor: pointer;
+  font-size: 1.1rem;
   @extend %centered-flex-column;
 
   &:hover .underline {
+    opacity: 1;
     transition: 0.5s;
     width: 100%;
   }
 }
 
 .underline {
+  margin-top: 7.5px;
   width: 0%;
   color: $secondary-brand-color;
+  border-width: 1px;
+  opacity: 0;
 }

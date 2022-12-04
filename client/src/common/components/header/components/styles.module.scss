@@ -1,7 +1,6 @@
 .headerOption {
   padding: 20px;
   background: $primary-brand-color;
-  color: $secondary-brand-color;
   cursor: pointer;
   font-size: 1.1rem;
   @extend %centered-flex-column;
@@ -13,10 +12,28 @@
   }
 }
 
+.link {
+  color: $secondary-brand-color;
+}
+
 .underline {
   margin-top: 7.5px;
   width: 0%;
   color: $secondary-brand-color;
   border-width: 1px;
   opacity: 0;
+}
+
+.selected {
+  background: $secondary-brand-color;
+
+  & .link {
+    color: $primary-brand-color;
+  }
+
+  & .underline {
+    border-color: $primary-brand-color;
+    width: 100%;
+    opacity: 1;
+  }
 }

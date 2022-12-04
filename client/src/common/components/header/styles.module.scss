@@ -3,5 +3,6 @@
   background: $primary-brand-color;
   margin: 0;
   padding: 0;
+  flex-wrap: wrap;
   @extend %centered-flex-row;
 }

@@ -4,15 +4,22 @@ import styles from "./styles.module.scss";
 
 type HeaderOptionProps = {
   link: string;
-  description: string;
+  name: string;
+  isSelected: boolean;
+  onClick: () => void;
 };
 
-const props = defineProps<HeaderOptionProps>();
+defineProps<HeaderOptionProps>();
 </script>
 
 <template>
-  <div :class="styles.headerOption">
-    <RouterLink :to="props.link">{{ props.description }}</RouterLink>
+  <!--isSelectedick is a temporary decision, it will be replaced with
+  intercative eleemnt (button) -->
+  <div
+    :class="`${styles.headerOption} ${isSelected ? styles.selected : ''}`"
+    @click="onClick"
+  >
+    <RouterLink :class="styles.link" :to="link">{{ name }}</RouterLink>
     <hr :class="styles.underline" />
   </div>
 </template>

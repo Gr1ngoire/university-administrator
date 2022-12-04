@@ -2,16 +2,11 @@
   box-sizing: border-box;
 }
 
-html {
-  width: 100%;
-}
-
 body {
-  width: 100%;
-  display: flex;
-  flex-grow: 1;
   margin: 0;
   padding: 0;
+
+  @extend %default-flex-dashboard;
 }
 
 a {

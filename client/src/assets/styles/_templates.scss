@@ -3,6 +3,11 @@
   font-family: "Nanum Gothic Coding", monospace;
 }
 
+%default-flex-dashboard {
+  display: flex;
+  flex-grow: 1;
+}
+
 %centered-flex-column {
   display: flex;
   flex-direction: column;

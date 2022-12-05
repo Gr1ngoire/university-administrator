@@ -2,6 +2,10 @@
   box-sizing: border-box;
 }
 
+html {
+  @extend %default-flex-dashboard;
+}
+
 body {
   margin: 0;
   padding: 0;
@@ -16,4 +20,17 @@ a {
 
 hr {
   margin: 0;
+}
+
+button {
+  padding: 0px;
+  margin: 0px;
+  border: none;
+  outline: none;
+}
+
+ul {
+  margin: 0px;
+  padding: 0px;
+  list-style: none;
 }

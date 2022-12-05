@@ -2,19 +2,17 @@
 import { RouterLink } from "vue-router";
 import styles from "./styles.module.scss";
 
-type HeaderOptionProps = {
+type Props = {
   link: string;
   name: string;
   isSelected: boolean;
   onClick: () => void;
 };
 
-defineProps<HeaderOptionProps>();
+defineProps<Props>();
 </script>
 
 <template>
-  <!--isSelected is a temporary decision, it will be replaced with
-  intercative element (button) -->
   <RouterLink
     :class="`${styles.headerOption} ${isSelected ? styles.selected : ''}`"
     :to="link"

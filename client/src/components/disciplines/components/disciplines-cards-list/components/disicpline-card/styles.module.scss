@@ -1,0 +1,15 @@
+.disciplineCard {
+  padding: 10px;
+  border-radius: 10px;
+  background: $primary-brand-color;
+
+  @extend %centered-flex-row;
+}
+
+.disicplineName {
+  color: $secondary-brand-color;
+}
+
+.actionsSection {
+  @extend %centered-flex-row;
+}

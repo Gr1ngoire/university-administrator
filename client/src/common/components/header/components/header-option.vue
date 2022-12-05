@@ -13,13 +13,14 @@ defineProps<HeaderOptionProps>();
 </script>
 
 <template>
-  <!--isSelectedick is a temporary decision, it will be replaced with
-  intercative eleemnt (button) -->
-  <div
+  <!--isSelected is a temporary decision, it will be replaced with
+  intercative element (button) -->
+  <RouterLink
     :class="`${styles.headerOption} ${isSelected ? styles.selected : ''}`"
+    :to="link"
     @click="onClick"
   >
-    <RouterLink :class="styles.link" :to="link">{{ name }}</RouterLink>
-    <hr :class="styles.underline" />
-  </div>
+    <div :class="styles.link">{{ name }}</div>
+    <hr :class="styles.underline"
+  /></RouterLink>
 </template>

@@ -20,8 +20,6 @@ const handleSelectionSwitch = (idToFind: number): void => {
       }
     });
   }
-
-  console.log(option);
 };
 </script>
 

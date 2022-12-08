@@ -6,7 +6,8 @@
     "paths": {
       "@/*": ["./src/*"],
       "shared/*": ["../shared/*"]
-    }
+    },
+    "types": ["node"]
   },
 
   "references": [

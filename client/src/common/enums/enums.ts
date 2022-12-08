@@ -1,1 +1,1 @@
-export { AppRoutes } from "./app/app";
+export { AppEnvironment, AppRoutes, ENV } from "./app/app";

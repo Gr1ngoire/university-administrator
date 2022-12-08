@@ -1,10 +1,10 @@
-import { AppEnvironment } from "./app-environment.enum";
+import type { AppEnvironment } from "./app-environment.enum";
 
-const { MODE } = process.env;
+const { ENVIRONMENT } = process.env;
 
 const ENV = {
   APP: {
-    APPLICATION_MODE: MODE,
+    APPLICATION_ENVIRONMENT: <AppEnvironment>ENVIRONMENT,
   },
 };
 

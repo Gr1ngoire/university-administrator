@@ -3,6 +3,8 @@ export {
   type UpdateDepartmentRequestDto,
 } from "./departments/departments";
 export {
+  type DisciplinesGetAllItemRequestDto,
+  type DisciplinesGetAllRequestDto,
   type CreateDisciplineRequestDto,
   type UpdateDisciplineRequestDto,
 } from "./disciplines/disciplines";

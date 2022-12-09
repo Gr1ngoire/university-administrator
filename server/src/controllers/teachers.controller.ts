@@ -7,7 +7,11 @@ import {
   Delete,
   Param,
 } from 'src/common/decorators/decorators';
-import { ExceptionsMessages, TeachersApi } from 'src/common/enums/enums';
+import {
+  ApiPath,
+  ExceptionsMessages,
+  TeachersApi,
+} from 'src/common/enums/enums';
 import { NotFoundException } from 'src/common/exceptions/excpetions';
 import {
   CreateTeacherValidationDto,
@@ -16,7 +20,7 @@ import {
 } from 'src/common/validation-dtos/validation-dtos';
 import { TeachersService } from 'src/services/services';
 
-@Controller(TeachersApi.TEACHERS)
+@Controller(ApiPath.TEACHERS)
 export class TeachersController {
   constructor(private teachersService: TeachersService) {}
 

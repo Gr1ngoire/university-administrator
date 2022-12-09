@@ -1,4 +1,4 @@
 export {
-  type DisciplinesGetAllItemRequestDto,
-  type DisciplinesGetAllRequestDto,
+  type DisciplinesGetAllItemResponseDto,
+  type DisciplinesGetAllResponseDto,
 } from "shared/common/types/types";

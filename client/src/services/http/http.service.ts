@@ -8,16 +8,20 @@ import type {
   AxiosInstance,
   AxiosResponse,
   Method,
+  RawAxiosRequestHeaders,
   HttpOptions,
 } from "@/common/types/types";
 import { HttpError } from "@/exceptions/exceptions";
-import { AxiosHeaders, type RawAxiosRequestHeaders } from "axios";
+import { AxiosHeaders } from "axios";
 import { axios as axiosService } from "../axios/axios";
 
-class HttpService {
+class Http {
   constructor(private axiosServ: AxiosInstance = axiosService) {}
 
-  public load<T = unknown>(url: string, options: Partial<HttpOptions> = {}) {
+  public load<T = unknown>(
+    url: string,
+    options: Partial<HttpOptions> = {}
+  ): Promise<T> {
     const {
       method = HttpMethod.GET,
       payload = null,
@@ -25,18 +29,18 @@ class HttpService {
       hasAuth = true,
       queryString,
     } = options;
-    const headers = this.getHeaders(contentType, hasAuth);
+    const headers: RawAxiosRequestHeaders = {
+      headers: this.getHeaders(contentType, hasAuth),
+    };
 
     return this.axiosServ({
       url: this.getUrlWithQueryString(url, queryString),
       method: method as Method,
-      headers: {
-        headers,
-      },
+      headers,
       data: payload,
     })
       .then(this.checkStatus)
-      .then((res) => res)
+      .then((res) => res.data as T)
       .catch(this.throwError);
 
     // return fetch(this.getUrlWithQueryString(url, queryString), {
@@ -100,9 +104,9 @@ class HttpService {
     return response;
   }
 
-  private throwError(error: Error) {
+  private throwError(error: Error): never {
     throw error;
   }
 }
 
-export { HttpService };
+export { Http };

@@ -1,10 +1,10 @@
 <script lang="ts" setup>
-import type { DisciplinesGetAllItemRequestDto } from "shared/common/types/types";
+import type { DisciplinesGetAllItemResponseDto } from "@/common/types/types";
 import { DisciplineCard } from "./components/components";
 import styles from "./styles.module.scss";
 
 type Props = {
-  cards: DisciplinesGetAllItemRequestDto[];
+  cards: DisciplinesGetAllItemResponseDto[];
 };
 
 defineProps<Props>();

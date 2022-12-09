@@ -1,8 +1,8 @@
 import type { DataStatus } from "@/common/enums/enums";
-import type { DisciplinesGetAllItemRequestDto } from "@/common/types/types";
+import type { DisciplinesGetAllItemResponseDto } from "@/common/types/types";
 
 type State = {
-  disciplines: DisciplinesGetAllItemRequestDto[];
+  disciplines: DisciplinesGetAllItemResponseDto[];
   dataStatus: DataStatus;
 };
 

@@ -7,7 +7,11 @@ import {
   Patch,
   Post,
 } from 'src/common/decorators/decorators';
-import { ExceptionsMessages, FacultiesApi } from 'src/common/enums/enums';
+import {
+  ApiPath,
+  ExceptionsMessages,
+  FacultiesApi,
+} from 'src/common/enums/enums';
 import { NotFoundException } from 'src/common/exceptions/excpetions';
 import {
   CreateFacultyValidationDto,
@@ -16,7 +20,7 @@ import {
 } from 'src/common/validation-dtos/validation-dtos';
 import { FacultiesService } from 'src/services/faculties.service';
 
-@Controller(FacultiesApi.FACULTIES)
+@Controller(ApiPath.FACULTIES)
 export class FacultiesController {
   constructor(private facultiesService: FacultiesService) {}
 

@@ -1,1 +1,6 @@
-export { type AxiosInstance, type AxiosResponse, type Method } from "axios";
+export {
+  type AxiosInstance,
+  type AxiosResponse,
+  type Method,
+  type RawAxiosRequestHeaders,
+} from "axios";

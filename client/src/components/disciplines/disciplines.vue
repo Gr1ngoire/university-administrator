@@ -1,15 +1,28 @@
 <script lang="ts" setup>
-import type { DisciplinesGetAllItemRequestDto } from "shared/common/types/types";
-import {} from "./components/components";
-import styles from "./styles.module.scss";
+import { DisciplinesCardList } from "./components/components";
+import { useStore } from "@/hooks/hooks";
 
-const mock: DisciplinesGetAllItemRequestDto[] = [];
+import styles from "./styles.module.scss";
+import { DisciplinesActions } from "@/store/actions.common";
+import { computed } from "vue";
+
+const store = useStore();
+
+console.log(store.state.disciplines.disciplines);
+
+const disciplines = computed(() => store.state.disciplines.disciplines);
+
+console.log(disciplines);
+
+console.log(
+  store.dispatch(`disciplines/${DisciplinesActions.GET_ALL_DISICPLINES}`)
+);
 </script>
 
 <template>
   <div :class="styles.disciplinesDashboard">
     <div :class="styles.disciplinesList">
-      <DisciplinesCardsList :cards="mock" />
+      <DisciplinesCardList :cards="disciplines" />
     </div>
   </div>
 </template>

@@ -7,7 +7,11 @@ import {
   Delete,
   Param,
 } from 'src/common/decorators/decorators';
-import { DepartmentsApi, ExceptionsMessages } from 'src/common/enums/enums';
+import {
+  ApiPath,
+  DepartmentsApi,
+  ExceptionsMessages,
+} from 'src/common/enums/enums';
 import { NotFoundException } from 'src/common/exceptions/excpetions';
 import {
   CreateDepartmentValidationDto,
@@ -16,7 +20,7 @@ import {
 } from 'src/common/validation-dtos/validation-dtos';
 import { DepartmentsService } from 'src/services/services';
 
-@Controller(DepartmentsApi.DEPARTMENTS)
+@Controller(ApiPath.DEPARTMENTS)
 export class DepartmentsController {
   constructor(private departmentsService: DepartmentsService) {}
 

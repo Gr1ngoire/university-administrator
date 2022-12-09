@@ -1,3 +1,3 @@
-import DisciplineCard from "./disciplines-cards-list/disciplines-cards-list.vue";
+import DisciplinesCardList from "./disciplines-cards-list/disciplines-cards-list.vue";
 
-export { DisciplineCard };
+export { DisciplinesCardList };

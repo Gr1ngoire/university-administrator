@@ -1,5 +1,6 @@
 export { DbTablesNames } from './db/db';
 export {
+  ApiPath,
   DepartmentsApi,
   DisciplinesApi,
   FacultiesApi,

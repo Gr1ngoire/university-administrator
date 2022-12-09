@@ -1,13 +1,13 @@
 import type { AppEnvironment } from "./app-environment.enum";
 
-const { ENVIRONMENT, API_PATH } = process.env;
+const { VITE_ENVIRONMENT, VITE_API_PATH } = import.meta.env;
 
 const ENV = {
   API: {
-    PATH: API_PATH as string,
+    PATH: VITE_API_PATH,
   },
   APP: {
-    APPLICATION_ENVIRONMENT: <AppEnvironment>ENVIRONMENT,
+    APPLICATION_ENVIRONMENT: <AppEnvironment>VITE_ENVIRONMENT,
   },
 };
 

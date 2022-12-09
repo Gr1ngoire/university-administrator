@@ -1,7 +1,7 @@
 import { ENV } from "@/common/enums/enums";
 import type { InjectionKey } from "vue";
 import { createLogger, createStore, Store } from "vuex";
-import { module as disciplinesModule } from "./disciplines/module";
+import { disciplines } from "./disciplines/disciplines";
 import type { RootState } from "./root-state";
 
 const isInDevelopmentEnvironment =
@@ -9,8 +9,8 @@ const isInDevelopmentEnvironment =
 
 const key: InjectionKey<Store<RootState>> = Symbol();
 
-const store = createStore<RootState>({
-  modules: { disciplinesModule },
+const store: Store<RootState> = createStore<RootState>({
+  modules: { disciplines },
   strict: isInDevelopmentEnvironment,
   plugins: isInDevelopmentEnvironment ? [createLogger()] : [],
 });

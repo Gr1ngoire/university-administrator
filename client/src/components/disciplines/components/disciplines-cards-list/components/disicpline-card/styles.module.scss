@@ -1,15 +1,24 @@
 .disciplineCard {
   padding: 10px;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+
   border-radius: 10px;
   background: $primary-brand-color;
-
-  @extend %centered-flex-row;
 }
 
 .disicplineName {
+  width: 70%;
   color: $secondary-brand-color;
 }
 
 .actionsSection {
-  @extend %centered-flex-row;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.actionWrapperButton {
+  margin: 5px;
 }

@@ -1,18 +1,29 @@
 .button {
+  cursor: pointer;
+  border-radius: 5px;
   padding: 10px;
+
+  border: solid 1px $thirdly-brand-color;
+
+  &:hover {
+    transition: 0.4s;
+    transform: scale(1.15);
+  }
 }
 
 .submit {
-  background: $thirdly-brand-color;
-  color: $secondary-brand-color;
+  background: $secondary-brand-color;
+  color: $thirdly-brand-color;
 }
 
 .edit {
+  border-color: $highlight-brand-color;
   background: $highlight-brand-color;
   color: $primary-brand-color;
 }
 
 .delete {
+  border-color: $highlight-brand-color;
   background: $primary-brand-color;
-  color: $secondary-brand-color;
+  color: $highlight-brand-color;
 }

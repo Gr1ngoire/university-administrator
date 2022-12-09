@@ -47,8 +47,6 @@ const actions: ActionTree<State, RootState> = {
   }: ActionContext<State, RootState>) {
     const disciplines = await disciplinesService.getAll();
 
-    console.log(disciplines);
-
     commit(Mutations.ADD_DISCIPLINES, disciplines);
   },
 };

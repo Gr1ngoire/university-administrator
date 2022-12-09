@@ -1,5 +1,10 @@
-.disciplinesDashboard {
-  background: $secondary-brand-color;
+.disciplinesDashboardWrapper {
+  width: 100%;
 
   @extend %default-flex-dashboard;
+}
+
+.disciplinesDashboard {
+  width: 100%;
+  background: $secondary-brand-color;
 }

@@ -8,11 +8,7 @@ import { computed } from "vue";
 
 const store = useStore();
 
-console.log(store.state.disciplines.disciplines);
-
 const disciplines = computed(() => store.state.disciplines.disciplines);
-
-console.log(disciplines);
 
 console.log(
   store.dispatch(`disciplines/${DisciplinesActions.GET_ALL_DISICPLINES}`)
@@ -20,9 +16,11 @@ console.log(
 </script>
 
 <template>
-  <div :class="styles.disciplinesDashboard">
-    <div :class="styles.disciplinesList">
-      <DisciplinesCardList :cards="disciplines" />
+  <div :class="styles.disciplinesDashboardWrapper">
+    <div :class="styles.disciplinesDashboard">
+      <div :class="styles.disciplinesList">
+        <DisciplinesCardList :cards="disciplines" />
+      </div>
     </div>
   </div>
 </template>

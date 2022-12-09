@@ -11,13 +11,15 @@ defineProps<Props>();
 </script>
 
 <template>
-  <ul :class="styles.disciplinesCardsList">
-    <li
-      v-for="{ id, name } in cards"
-      :key="id"
-      :class="styles.disciplinesCardsListItem"
-    >
-      <DisciplineCard :name="name" />
-    </li>
-  </ul>
+  <div :class="styles.disciplinesCardsListWrapper">
+    <ul :class="styles.disciplinesCardsList">
+      <li
+        v-for="{ id, name } in cards"
+        :key="id"
+        :class="styles.disciplinesCardsListItem"
+      >
+        <DisciplineCard :name="name" />
+      </li>
+    </ul>
+  </div>
 </template>

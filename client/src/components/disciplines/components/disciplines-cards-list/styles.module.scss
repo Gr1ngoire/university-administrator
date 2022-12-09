@@ -1,5 +1,17 @@
+.disciplinesCardsListWrapper {
+  @extend %centered-flex-row;
+
+  width: 100%;
+}
+
 .disciplinesCardsList {
+  @extend %centered-flex-column;
+
+  width: 40%;
 }
 
 .disciplinesCardsListItem {
+  width: 100%;
+
+  margin-top: 30px;
 }

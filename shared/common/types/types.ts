@@ -16,6 +16,7 @@ export {
   type CreateGroupRequestDto,
   type UpdateGroupRequestDto,
 } from "./groups/groups";
+export { type HttpOptions } from "./http/http";
 export {
   type CreateNewsRequestDto,
   type UpdateNewsRequestDto,

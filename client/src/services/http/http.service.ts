@@ -1,9 +1,21 @@
-import { ContentType, ENV, HttpHeader, HttpMethod } from "@/common/enums/enums";
-import type { HttpOptions } from "@/common/types/types";
+import {
+  ContentType,
+  HttpCode,
+  HttpHeader,
+  HttpMethod,
+} from "@/common/enums/enums";
+import type {
+  AxiosInstance,
+  AxiosResponse,
+  Method,
+  HttpOptions,
+} from "@/common/types/types";
 import { HttpError } from "@/exceptions/exceptions";
+import { AxiosHeaders, type RawAxiosRequestHeaders } from "axios";
+import { axios as axiosService } from "../axios/axios";
 
 class HttpService {
-  constructor(private apiPath: string = ENV.API.PATH) {}
+  constructor(private axiosServ: AxiosInstance = axiosService) {}
 
   public load<T = unknown>(url: string, options: Partial<HttpOptions> = {}) {
     const {
@@ -15,21 +27,36 @@ class HttpService {
     } = options;
     const headers = this.getHeaders(contentType, hasAuth);
 
-    return fetch(this.getUrlWithQueryString(url, queryString), {
-      method,
-      headers,
-      body: payload,
+    return this.axiosServ({
+      url: this.getUrlWithQueryString(url, queryString),
+      method: method as Method,
+      headers: {
+        headers,
+      },
+      data: payload,
     })
       .then(this.checkStatus)
-      .then((res) => this.parseJson<T>(res))
+      .then((res) => res)
       .catch(this.throwError);
+
+    // return fetch(this.getUrlWithQueryString(url, queryString), {
+    //   method,
+    //   headers,
+    //   body: payload,
+    // })
+    //   .then(this.checkStatus)
+    //   .then((res) => this.parseJson<T>(res))
+    //   .catch(this.throwError);
   }
 
-  private getHeaders(contentType?: ContentType, hasAuth?: boolean): Headers {
-    const headers = new Headers();
+  private getHeaders(
+    contentType?: ContentType,
+    hasAuth?: boolean
+  ): AxiosHeaders {
+    const headers = new AxiosHeaders();
 
     if (contentType) {
-      headers.append(HttpHeader.CONTENT_TYPE, contentType);
+      headers.set(HttpHeader.CONTENT_TYPE, contentType);
     }
 
     // this part for auth
@@ -56,11 +83,13 @@ class HttpService {
     return `${url}?${query}`;
   }
 
-  private async checkStatus(response: Response): Promise<Response> {
-    if (!response.ok) {
-      const responseError = await response.json().catch(() => ({
+  private checkStatus(
+    response: AxiosResponse<any, any>
+  ): AxiosResponse<any, any> {
+    if (response.status !== HttpCode.OK) {
+      const responseError = {
         message: response.statusText,
-      }));
+      };
 
       throw new HttpError({
         status: response.status,
@@ -69,10 +98,6 @@ class HttpService {
     }
 
     return response;
-  }
-
-  private parseJson<T>(response: Response): Promise<T> {
-    return response.json();
   }
 
   private throwError(error: Error) {

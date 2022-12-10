@@ -5,10 +5,7 @@
 }
 
 #app {
-  width: 100%;
-  display: flex;
-  justify-content: flex-start;
-
   @extend %centered-flex-column;
-  @extend %default-flex-dashboard;
+
+  width: 100%;
 }

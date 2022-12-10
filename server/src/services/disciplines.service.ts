@@ -23,7 +23,9 @@ export class DisciplinesService {
   async getAll(): Promise<DisciplinesGetAllResponseDto> {
     const disciplinesModels = await this.repository.find();
 
-    return { items: disciplinesModels };
+    return {
+      items: disciplinesModels.map(({ id, name }) => ({ id, name })),
+    };
   }
 
   async getById(id: number): Promise<DisciplinesGetAllItemResponseDto | null> {

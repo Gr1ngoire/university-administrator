@@ -59,7 +59,7 @@ export class SchedulesService {
       throw new BadRequestException(ExceptionsMessages.TEACHER_NOT_FOUND);
     }
 
-    const disciplineInDb = await this.disciplinesService.getById(
+    const disciplineInDb = await this.disciplinesService.getModelById(
       schedule.disciplineId,
     );
 
@@ -107,7 +107,7 @@ export class SchedulesService {
       schedule.disciplineId &&
       schedule.disciplineId !== scheduleToUpdate.disciplineId
     ) {
-      const disciplineToAdd = await this.disciplinesService.getById(
+      const disciplineToAdd = await this.disciplinesService.getModelById(
         schedule.disciplineId,
       );
 

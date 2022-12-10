@@ -10,9 +10,7 @@ const store = useStore();
 
 const disciplines = computed(() => store.state.disciplines.disciplines);
 
-console.log(
-  store.dispatch(`disciplines/${DisciplinesActions.GET_ALL_DISICPLINES}`)
-);
+console.log(store.dispatch(DisciplinesActions.GET_ALL_DISICPLINES));
 </script>
 
 <template>

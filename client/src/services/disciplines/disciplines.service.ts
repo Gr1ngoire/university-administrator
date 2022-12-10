@@ -1,5 +1,8 @@
 import { ApiPath, HttpMethod } from "@/common/enums/enums";
-import type { DisciplinesGetAllItemResponseDto } from "@/common/types/types";
+import type {
+  DisciplinesGetAllItemResponseDto,
+  DisciplinesGetAllResponseDto,
+} from "@/common/types/types";
 import type { Http as HttpService } from "../http/http.service";
 
 type Constructor = {
@@ -17,11 +20,20 @@ class Disciplines {
     this.apiPrefix = apiPrefix;
   }
 
-  public getAll(): Promise<DisciplinesGetAllItemResponseDto> {
-    return this.http.load<DisciplinesGetAllItemResponseDto>(
+  public getAll(): Promise<DisciplinesGetAllResponseDto> {
+    return this.http.load<DisciplinesGetAllResponseDto>(
       `${this.apiPrefix}${ApiPath.DISCIPLINES}`,
       {
         method: HttpMethod.GET,
+      }
+    );
+  }
+
+  public delete(id: number): Promise<number> {
+    return this.http.load<number>(
+      `${this.apiPrefix}${ApiPath.DISCIPLINES}/${id}`,
+      {
+        method: HttpMethod.DELETE,
       }
     );
   }

@@ -6,13 +6,22 @@ import type {
   MutationTree,
 } from "vuex";
 import { DataStatus } from "@/common/enums/enums";
-import { Actions } from "./actions.common";
-import { Mutations } from "./mutations.common";
 import { disciplines as disciplinesService } from "@/services/services";
 import type { RootState } from "../root-state";
 import type { State } from "./state";
 import type { DisciplinesGetAllItemResponseDto } from "shared/common/types/types";
 import { Getters } from "./getters.common";
+
+enum Actions {
+  GET_ALL_DISICPLINES = "getAllDisciplines",
+  DELETE_DISCIPLINE = "deleteDiscipline",
+}
+
+enum Mutations {
+  ADD_DISCIPLINES = "addDisciplines",
+  ADD_DISCIPLINE = "addDiscipline",
+  REMOVE_DISCIPLINE = "removeDiscipline",
+}
 
 const state: State = {
   disciplines: [],
@@ -39,15 +48,30 @@ const mutations: MutationTree<State> = {
   ) {
     state.disciplines.push(newDiscilpline);
   },
+
+  [Mutations.REMOVE_DISCIPLINE](state: State, disciplineId: number) {
+    state.disciplines = state.disciplines.filter(
+      (discipline) => discipline.id !== disciplineId
+    );
+  },
 };
 
 const actions: ActionTree<State, RootState> = {
   async [Actions.GET_ALL_DISICPLINES]({
     commit,
   }: ActionContext<State, RootState>) {
-    const disciplines = await disciplinesService.getAll();
+    const { items } = await disciplinesService.getAll();
 
-    commit(Mutations.ADD_DISCIPLINES, disciplines);
+    commit(Mutations.ADD_DISCIPLINES, items);
+  },
+
+  async [Actions.DELETE_DISCIPLINE](
+    { commit }: ActionContext<State, RootState>,
+    disciplineId: number
+  ) {
+    const id = await disciplinesService.delete(disciplineId);
+
+    commit(Mutations.REMOVE_DISCIPLINE, id);
   },
 };
 

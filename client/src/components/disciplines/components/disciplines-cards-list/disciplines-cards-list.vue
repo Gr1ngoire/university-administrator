@@ -18,7 +18,7 @@ defineProps<Props>();
         :key="id"
         :class="styles.disciplinesCardsListItem"
       >
-        <DisciplineCard :name="name" />
+        <DisciplineCard :name="name" :id="id" />
       </li>
     </ul>
   </div>

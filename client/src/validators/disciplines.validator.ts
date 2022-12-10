@@ -11,8 +11,11 @@ class Discipline extends Abstract<CreateDisciplineRequestDto> {
   }
 
   private validateName(value: string): void {
+    const validatedField = "name";
+
     if (value.length === 0) {
       throw new ValidationError({
+        field: validatedField,
         message: ValidationExceptionMessages.NAME_CAN_NOT_BE_EMPTY,
       });
     }

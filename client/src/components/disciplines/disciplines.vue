@@ -1,10 +1,9 @@
 <script lang="ts" setup>
-import { computed, ref } from "vue";
 import {
   CreateDisciplineForm,
   DisciplinesCardList,
 } from "./components/components";
-import { useStore } from "@/hooks/hooks";
+import { computed, ref, useStore } from "@/hooks/hooks";
 import { DisciplinesActions } from "@/store/actions.common";
 import { Button } from "@/common/components/components";
 

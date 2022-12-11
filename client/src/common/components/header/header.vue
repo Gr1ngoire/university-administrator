@@ -1,9 +1,9 @@
 <script setup lang="ts">
 import { HeaderOption } from "./components/components";
 import { defaultSelectOptions } from "./common/common";
+import { ref } from "@/hooks/hooks";
 
 import styles from "./styles.module.scss";
-import { ref } from "vue";
 
 const selectOptions = ref(defaultSelectOptions);
 

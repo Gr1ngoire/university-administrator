@@ -1,5 +1,5 @@
 <script lang="ts" setup>
-import { computed } from "vue";
+import { computed } from "@/hooks/hooks";
 import styles from "./styles.module.scss";
 
 type InputType = "text" | "number" | "password" | "textarea";
@@ -9,6 +9,7 @@ type Props = {
   name: string;
   errorMessage: string;
   onInput: (event: Event) => void;
+  value?: string;
 };
 
 const props = defineProps<Props>();
@@ -25,7 +26,13 @@ const firstLetterUppercased = computed(() => {
 <template>
   <div :class="styles.inputWrapper">
     <label :class="styles.inputLabel">{{ firstLetterUppercased }}</label>
-    <input :class="styles.input" :type="type" :name="name" @input="onInput" />
-    <label :class="styles.errorLabel">{{ errorMessage }}</label>
+    <input
+      :class="styles.input"
+      :type="type"
+      :name="name"
+      :value="value"
+      @input="onInput"
+    />
+    <label :class="styles.errorLabel">{{ errorMessage }}&nbsp;</label>
   </div>
 </template>

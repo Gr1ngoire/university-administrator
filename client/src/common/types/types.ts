@@ -9,5 +9,6 @@ export {
   type DisciplinesGetAllItemResponseDto,
   type DisciplinesGetAllResponseDto,
   type UpdateDisciplineRequestDto,
+  type UpdateDisciplineRequestParams,
 } from "./disciplines/disciplines";
 export { type HttpOptions } from "./http/http";

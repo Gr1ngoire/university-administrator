@@ -1,3 +1,4 @@
+export { type UpdateDisciplineRequestParams } from "./update-discipline-request-params.type";
 export {
   type CreateDisciplineRequestDto,
   type DisciplinesGetAllItemResponseDto,

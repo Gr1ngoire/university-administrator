@@ -3,6 +3,7 @@ import type {
   CreateDisciplineRequestDto,
   DisciplinesGetAllItemResponseDto,
   DisciplinesGetAllResponseDto,
+  UpdateDisciplineRequestDto,
 } from "@/common/types/types";
 import type { Http as HttpService } from "../http/http.service";
 
@@ -37,6 +38,20 @@ class Disciplines {
       `${this.apiPrefix}${ApiPath.DISCIPLINES}`,
       {
         method: HttpMethod.POST,
+        contentType: ContentType.JSON,
+        payload: new URLSearchParams(payload),
+      }
+    );
+  }
+
+  public update(
+    id: number,
+    payload: UpdateDisciplineRequestDto
+  ): Promise<DisciplinesGetAllItemResponseDto> {
+    return this.http.load<DisciplinesGetAllItemResponseDto>(
+      `${this.apiPrefix}${ApiPath.DISCIPLINES}/${id}`,
+      {
+        method: HttpMethod.PATCH,
         contentType: ContentType.JSON,
         payload: new URLSearchParams(payload),
       }

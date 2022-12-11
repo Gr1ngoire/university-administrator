@@ -1,3 +1,20 @@
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: $thirdly-brand-color;
+}
+
+::-webkit-scrollbar-thumb {
+  background: $primary-brand-color;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: $primary-brand-color;
+}
+
 * {
   box-sizing: border-box;
 }

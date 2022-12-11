@@ -9,11 +9,15 @@ import { DataStatus } from "@/common/enums/enums";
 import { disciplines as disciplinesService } from "@/services/services";
 import type { RootState } from "../root-state";
 import type { State } from "./state";
-import type { DisciplinesGetAllItemResponseDto } from "shared/common/types/types";
+import type {
+  CreateDisciplineRequestDto,
+  DisciplinesGetAllItemResponseDto,
+} from "@/common/types/types";
 import { Getters } from "./getters.common";
 
 enum Actions {
   GET_ALL_DISICPLINES = "getAllDisciplines",
+  CREATE_DISCIPLINE = "createDiscipline",
   DELETE_DISCIPLINE = "deleteDiscipline",
 }
 
@@ -63,6 +67,15 @@ const actions: ActionTree<State, RootState> = {
     const { items } = await disciplinesService.getAll();
 
     commit(Mutations.ADD_DISCIPLINES, items);
+  },
+
+  async [Actions.CREATE_DISCIPLINE](
+    { commit }: ActionContext<State, RootState>,
+    discipline: CreateDisciplineRequestDto
+  ) {
+    const newDiscipline = await disciplinesService.create(discipline);
+
+    commit(Mutations.ADD_DISCIPLINE, newDiscipline);
   },
 
   async [Actions.DELETE_DISCIPLINE](

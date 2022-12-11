@@ -1,9 +1,10 @@
 .button {
   cursor: pointer;
+  border: solid 1px $thirdly-brand-color;
   border-radius: 5px;
   padding: 10px;
-
-  border: solid 1px $thirdly-brand-color;
+  display: flex;
+  align-items: center;
 
   &:hover {
     transition: 0.4s;
@@ -12,8 +13,25 @@
 }
 
 .submit {
+  background: $highlight-brand-color;
+  color: $primary-brand-color;
+  border-color: $primary-brand-color;
+}
+
+.cancel {
   background: $secondary-brand-color;
-  color: $thirdly-brand-color;
+  color: $primary-brand-color;
+  border-color: $primary-brand-color;
+}
+
+.add {
+  background: $secondary-brand-color;
+  color: $primary-brand-color;
+  border-color: $primary-brand-color;
+
+  & > i {
+    margin: 5px 5px 0 0;
+  }
 }
 
 .edit {

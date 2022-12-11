@@ -1,5 +1,6 @@
-import { ApiPath, HttpMethod } from "@/common/enums/enums";
+import { ApiPath, ContentType, HttpMethod } from "@/common/enums/enums";
 import type {
+  CreateDisciplineRequestDto,
   DisciplinesGetAllItemResponseDto,
   DisciplinesGetAllResponseDto,
 } from "@/common/types/types";
@@ -25,6 +26,19 @@ class Disciplines {
       `${this.apiPrefix}${ApiPath.DISCIPLINES}`,
       {
         method: HttpMethod.GET,
+      }
+    );
+  }
+
+  public create(
+    payload: CreateDisciplineRequestDto
+  ): Promise<DisciplinesGetAllItemResponseDto> {
+    return this.http.load<DisciplinesGetAllItemResponseDto>(
+      `${this.apiPrefix}${ApiPath.DISCIPLINES}`,
+      {
+        method: HttpMethod.POST,
+        contentType: ContentType.JSON,
+        payload: new URLSearchParams(payload),
       }
     );
   }

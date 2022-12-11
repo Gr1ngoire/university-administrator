@@ -90,7 +90,10 @@ class Http {
   private checkStatus(
     response: AxiosResponse<any, any>
   ): AxiosResponse<any, any> {
-    if (response.status !== HttpCode.OK) {
+    if (
+      response.status !== HttpCode.OK &&
+      response.status !== HttpCode.CREATED
+    ) {
       const responseError = {
         message: response.statusText,
       };

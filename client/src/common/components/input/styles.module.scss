@@ -10,13 +10,13 @@
   font-size: 1.25rem;
 
   &:focus {
-    transition: 50ms;
+    transition: 25ms;
     border: solid 2px $primary-brand-color;
   }
 }
 
 .inputLabel {
-  padding-left: 10px;
+  padding-left: 8px;
 }
 
 .errorLabel {

@@ -1,0 +1,24 @@
+.disciplineUpdateForm {
+  @extend %centered-flex-row;
+
+  margin-right: 10px;
+  padding: 5px 15px 5px 15px;
+  border-radius: 10px;
+  background: $primary-brand-color;
+}
+
+.disciplineUpdateActionSectionWrapper {
+  width: 100%;
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+}
+
+.disciplineEditInputWrapper {
+  padding: 0 10px 0 10px;
+  width: 100%;
+
+  & label {
+    color: $secondary-brand-color;
+  }
+}

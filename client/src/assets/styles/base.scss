@@ -1,15 +1,36 @@
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: $thirdly-brand-color;
+}
+
+::-webkit-scrollbar-thumb {
+  background: $primary-brand-color;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: $primary-brand-color;
+}
+
 * {
   box-sizing: border-box;
 }
 
 html {
+  @extend %default-flex-dashboard;
+
+  height: 100%;
   width: 100%;
 }
 
 body {
+  @extend %default-flex-dashboard;
+
+  height: 100%;
   width: 100%;
-  display: flex;
-  flex-grow: 1;
   margin: 0;
   padding: 0;
 }
@@ -17,4 +38,26 @@ body {
 a {
   text-decoration: none;
   color: #ffffff;
+}
+
+hr {
+  margin: 0;
+}
+
+button {
+  padding: 0px;
+  margin: 0px;
+  border: none;
+  outline: none;
+}
+
+ul {
+  margin: 0px;
+  padding: 0px;
+  list-style-type: none;
+}
+
+input {
+  border: none;
+  outline: none;
 }

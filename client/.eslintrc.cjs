@@ -19,5 +19,7 @@ module.exports = {
         endOfLine: "auto",
       },
     ],
+    "vue/multi-word-component-names": "off",
+    "@typescript-eslint/no-unused-vars": "error",
   },
 };

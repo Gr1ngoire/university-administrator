@@ -4,6 +4,8 @@ export {
   type UpdateDepartmentRequestDto,
 } from './departments/departments';
 export {
+  type DisciplinesGetAllItemResponseDto,
+  type DisciplinesGetAllResponseDto,
   type CreateDisciplineRequestDto,
   type UpdateDisciplineRequestDto,
 } from './disciplines/disciplines';

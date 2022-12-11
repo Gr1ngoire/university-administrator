@@ -12,11 +12,15 @@ import {
   GetByIdParams,
   UpdateDisciplineValidationDto,
 } from 'src/common/validation-dtos/validation-dtos';
-import { DisciplinesApi, ExceptionsMessages } from 'src/common/enums/enums';
+import {
+  ApiPath,
+  DisciplinesApi,
+  ExceptionsMessages,
+} from 'src/common/enums/enums';
 import { DisciplinesService } from 'src/services/services';
 import { NotFoundException } from 'src/common/exceptions/excpetions';
 
-@Controller(DisciplinesApi.DISCIPLINES)
+@Controller(ApiPath.DISCIPLINES)
 export class DisciplinesController {
   constructor(private disciplinesService: DisciplinesService) {}
 

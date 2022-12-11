@@ -7,7 +7,7 @@ import {
   Delete,
   Param,
 } from 'src/common/decorators/decorators';
-import { ExceptionsMessages, NewsApi } from 'src/common/enums/enums';
+import { ApiPath, ExceptionsMessages, NewsApi } from 'src/common/enums/enums';
 import { NotFoundException } from 'src/common/exceptions/excpetions';
 import {
   CreateNewsValidationDto,
@@ -16,7 +16,7 @@ import {
 } from 'src/common/validation-dtos/validation-dtos';
 import { NewsService } from 'src/services/services';
 
-@Controller(NewsApi.NEWS)
+@Controller(ApiPath.NEWS)
 export class NewsController {
   constructor(private newsService: NewsService) {}
 

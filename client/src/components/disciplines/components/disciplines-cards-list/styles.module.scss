@@ -1,0 +1,19 @@
+.disciplinesCardsListWrapper {
+  @extend %centered-flex-row;
+
+  width: 100%;
+  margin-top: 10px;
+}
+
+.disciplinesCardsList {
+  width: 40%;
+  height: 100%;
+  overflow-y: scroll;
+  height: calc(100vh - 350px);
+}
+
+.disciplinesCardsListItem {
+  width: 100%;
+
+  margin-top: 10px;
+}

@@ -8,7 +8,11 @@ import {
   Param,
 } from 'src/common/decorators/decorators';
 import { NotFoundException } from 'src/common/exceptions/excpetions';
-import { ExceptionsMessages, SchedulesApi } from 'src/common/enums/enums';
+import {
+  ApiPath,
+  ExceptionsMessages,
+  SchedulesApi,
+} from 'src/common/enums/enums';
 import { SchedulesService } from 'src/services/services';
 import {
   CreateScheduleValidationDto,
@@ -16,7 +20,7 @@ import {
   UpdateScheduleValidationDto,
 } from 'src/common/validation-dtos/validation-dtos';
 
-@Controller(SchedulesApi.SCHEDULES)
+@Controller(ApiPath.SCHEDULES)
 export class SchedulesController {
   constructor(private groupsService: SchedulesService) {}
 

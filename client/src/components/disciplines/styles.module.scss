@@ -1,0 +1,30 @@
+.dashboardWrapper {
+  @extend %default-flex-dashboard;
+
+  width: 100%;
+}
+
+.disciplinesDashboard {
+  @extend %centered-flex-column;
+
+  width: 100%;
+  background: $secondary-brand-color;
+}
+
+.createDisciplineForm {
+  width: 42.5%;
+  display: flex;
+  flex-direction: column;
+  margin-top: 30px;
+  padding: 10px;
+}
+
+.toggleDisciplineFormButtonWrapper {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.disciplinesSectionsSeparator {
+  width: 40%;
+  border-color: $primary-brand-color;
+}

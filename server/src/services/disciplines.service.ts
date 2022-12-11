@@ -4,6 +4,8 @@ import { ExceptionsMessages } from 'src/common/enums/enums';
 import { NotFoundException } from 'src/common/exceptions/excpetions';
 import {
   CreateDisciplineRequestDto,
+  DisciplinesGetAllItemResponseDto,
+  DisciplinesGetAllResponseDto,
   UpdateDisciplineRequestDto,
 } from 'src/common/types/types';
 import { Discipline } from 'src/entities/entities';
@@ -14,12 +16,22 @@ export class DisciplinesService {
     @InjectRepository(Discipline) private repository: Repository<Discipline>,
   ) {}
 
-  getAll(): Promise<Discipline[]> {
-    return this.repository.find();
+  getModelById(id: number): Promise<Discipline | null> {
+    return this.repository.findOne({ where: { id } });
   }
 
-  getById(id: number): Promise<Discipline | null> {
-    return this.repository.findOne({ where: { id } });
+  async getAll(): Promise<DisciplinesGetAllResponseDto> {
+    const disciplinesModels = await this.repository.find();
+
+    return {
+      items: disciplinesModels.map(({ id, name }) => ({ id, name })),
+    };
+  }
+
+  async getById(id: number): Promise<DisciplinesGetAllItemResponseDto | null> {
+    const discipline = await this.getModelById(id);
+
+    return discipline as DisciplinesGetAllItemResponseDto;
   }
 
   create(discipline: CreateDisciplineRequestDto): Promise<Discipline> {
@@ -32,7 +44,7 @@ export class DisciplinesService {
     id: number,
     attributes: Partial<UpdateDisciplineRequestDto>,
   ): Promise<Discipline> {
-    const discipline = await this.getById(id);
+    const discipline = await this.getModelById(id);
 
     if (!discipline) {
       throw new NotFoundException(ExceptionsMessages.DISCIPLINE_NOT_FOUD);
@@ -42,13 +54,17 @@ export class DisciplinesService {
     return this.repository.save(discipline);
   }
 
-  async delete(id: number): Promise<Discipline> {
-    const discipline = await this.getById(id);
+  async delete(id: number): Promise<number> {
+    const discipline = await this.getModelById(id);
 
     if (!discipline) {
       throw new NotFoundException(ExceptionsMessages.DISCIPLINE_NOT_FOUD);
     }
 
-    return this.repository.remove(discipline);
+    const { id: idToSend } = discipline;
+
+    await this.repository.remove(discipline);
+
+    return idToSend;
   }
 }

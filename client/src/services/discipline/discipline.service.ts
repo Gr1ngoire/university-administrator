@@ -12,7 +12,7 @@ type Constructor = {
   apiPrefix: string;
 };
 
-class Disciplines {
+class Discipline {
   private http: HttpService;
 
   private apiPrefix: string;
@@ -68,4 +68,4 @@ class Disciplines {
   }
 }
 
-export { Disciplines };
+export { Discipline };

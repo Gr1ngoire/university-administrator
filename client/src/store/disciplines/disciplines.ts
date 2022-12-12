@@ -6,7 +6,7 @@ import type {
   MutationTree,
 } from "vuex";
 import { DataStatus } from "@/common/enums/enums";
-import { disciplines as disciplinesService } from "@/services/services";
+import { discipline as disciplinesService } from "@/services/services";
 import type { RootState } from "../root-state";
 import type { State } from "./state";
 import type {

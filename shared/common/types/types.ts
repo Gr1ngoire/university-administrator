@@ -10,6 +10,8 @@ export {
 } from "./disciplines/disciplines";
 export {
   type CreateFacultyRequestDto,
+  type FacultiesGetAllItemResponseDto,
+  type FacultiesGetAllResponseDto,
   type UpdateFacultyRequestDto,
 } from "./faculties/faculties";
 export {

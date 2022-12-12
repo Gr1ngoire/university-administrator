@@ -14,7 +14,6 @@ import type {
   DisciplinesGetAllItemResponseDto,
   UpdateDisciplineRequestParams,
 } from "@/common/types/types";
-import { Getters } from "./getters.common";
 
 enum Actions {
   GET_ALL_DISICPLINES = "getAllDisciplines",
@@ -35,11 +34,7 @@ const state: State = {
   dataStatus: DataStatus.IDLE,
 };
 
-const getters: GetterTree<State, RootState> = {
-  [Getters.DISCIPLINES](state: State): DisciplinesGetAllItemResponseDto[] {
-    return state.disciplines;
-  },
-};
+const getters: GetterTree<State, RootState> = {};
 
 const mutations: MutationTree<State> = {
   [Mutations.ADD_DISCIPLINES](

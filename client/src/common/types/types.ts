@@ -17,5 +17,6 @@ export {
   type FacultiesGetAllItemResponseDto,
   type FacultiesGetAllResponseDto,
   type UpdateFacultyRequestDto,
+  type UpdateFacultyRequestParams,
 } from "./faculties/faculties";
 export { type HttpOptions } from "./http/http";

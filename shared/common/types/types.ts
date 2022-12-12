@@ -33,5 +33,7 @@ export {
 } from "./students/students";
 export {
   type CreateTeacherRequestDto,
+  type TeachersGetAllItemResponseDto,
+  type TeachersGetAllResponseDto,
   type UpdateTeacherRequestDto,
 } from "./teachers/teachers";

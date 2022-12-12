@@ -20,3 +20,10 @@ export {
   type UpdateFacultyRequestParams,
 } from "./faculties/faculties";
 export { type HttpOptions } from "./http/http";
+export {
+  type CreateTeacherRequestDto,
+  type TeachersGetAllItemResponseDto,
+  type TeachersGetAllResponseDto,
+  type UpdateTeacherRequestDto,
+  type UpdateTeacherRequestParams,
+} from "./teachers/teachers";

@@ -1,4 +1,4 @@
 import App from "./app/app.vue";
-import Disciplines from "./disciplines/disciplines.vue";
+import Administration from "./administration/administration.vue";
 
-export { App, Disciplines };
+export { App, Administration };

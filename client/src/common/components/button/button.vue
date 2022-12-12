@@ -2,12 +2,19 @@
 import styles from "./styles.module.scss";
 
 type ButtonType = "submit" | "click";
-type ActionType = "submit" | "delete" | "edit" | "add" | "cancel";
+type StyleType =
+  | "submit"
+  | "delete"
+  | "edit"
+  | "add"
+  | "cancel"
+  | "panelOption";
 
 type Props = {
-  type: ButtonType;
   name?: string;
-  action?: ActionType;
+  type?: ButtonType;
+  action?: StyleType;
+  focused?: boolean;
   onClick?: () => void;
 };
 
@@ -17,7 +24,9 @@ defineProps<Props>();
 <template>
   <div :class="styles.wrapper">
     <button
-      :class="`${styles.button} ${action && styles[action]}`"
+      :class="`${styles.button} ${action && styles[action]} ${
+        action && focused && styles[`${action}Focused`]
+      }`"
       :type="`${type === 'submit' ? 'submit' : 'button'}`"
       @click="onClick"
     >

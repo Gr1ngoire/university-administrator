@@ -1,11 +1,6 @@
 enum AppRoutes {
-  DEPARTMENTS = "/departments",
-  DISCIPLINES = "/disciplines",
-  FACULTIES = "/faculties",
-  GROUPS = "/groups",
-  NEWS = "/news",
-  SCHEDULES = "/schedules",
-  STUDENTS = "/students",
-  TEACHERS = "/teachers",
+  ADMINISTRATION = "/administration",
+  FAQ = "/faq",
+  SCHEDULE = "/schedule",
 }
 export { AppRoutes };

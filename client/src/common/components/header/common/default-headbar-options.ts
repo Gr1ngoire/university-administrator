@@ -10,50 +10,20 @@ type HeaderSelectOption = {
 const defaultSelectOptions: HeaderSelectOption[] = [
   {
     id: 1,
-    link: AppRoutes.DEPARTMENTS,
-    name: "Departments",
+    link: AppRoutes.SCHEDULE,
+    name: "Schedule",
     isSelected: false,
   },
   {
     id: 2,
-    link: AppRoutes.DISCIPLINES,
-    name: "Disciplines",
+    link: AppRoutes.FAQ,
+    name: "Faq",
     isSelected: false,
   },
   {
     id: 3,
-    link: AppRoutes.FACULTIES,
-    name: "Faculties",
-    isSelected: false,
-  },
-  {
-    id: 4,
-    link: AppRoutes.GROUPS,
-    name: "Groups",
-    isSelected: false,
-  },
-  {
-    id: 5,
-    link: AppRoutes.NEWS,
-    name: "News",
-    isSelected: false,
-  },
-  {
-    id: 6,
-    link: AppRoutes.SCHEDULES,
-    name: "Schedules",
-    isSelected: false,
-  },
-  {
-    id: 7,
-    link: AppRoutes.STUDENTS,
-    name: "Students",
-    isSelected: false,
-  },
-  {
-    id: 8,
-    link: AppRoutes.TEACHERS,
-    name: "Teachers",
+    link: AppRoutes.ADMINISTRATION,
+    name: "Administration",
     isSelected: false,
   },
 ];

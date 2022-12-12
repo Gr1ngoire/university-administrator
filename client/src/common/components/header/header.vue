@@ -8,19 +8,22 @@ import styles from "./styles.module.scss";
 const selectOptions = ref(defaultSelectOptions);
 
 const handleSelectionSwitch = (idToFind: number): void => {
-  const option = selectOptions.value.find(({ id }) => {
-    return id === idToFind;
-  });
+  selectOptions.value.forEach((optionToClear) => {
+    optionToClear.isSelected = false;
 
-  if (option) {
-    option.isSelected = true;
-    selectOptions.value.forEach((optionToClear) => {
-      if (optionToClear.id !== option.id) {
-        optionToClear.isSelected = false;
-      }
-    });
-  }
+    if (optionToClear.id === idToFind) {
+      optionToClear.isSelected = true;
+    }
+  });
 };
+
+selectOptions.value.forEach((option) => {
+  const currentPath = window.location.pathname;
+
+  if (option.link === currentPath) {
+    option.isSelected = true;
+  }
+});
 </script>
 
 <template>

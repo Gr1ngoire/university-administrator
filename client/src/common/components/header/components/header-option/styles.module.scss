@@ -1,9 +1,14 @@
 .headerOption {
+  @extend %centered-flex-column;
+
+  margin-top: 17px;
+  height: 80%;
   padding: 20px;
   background: $primary-brand-color;
   cursor: pointer;
   font-size: 1.1rem;
-  @extend %centered-flex-column;
+  border-top-left-radius: 20px;
+  border-top-right-radius: 20px;
 
   &:hover .underline {
     opacity: 1;

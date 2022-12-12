@@ -4,12 +4,13 @@ import { Disciplines, PanelsList } from "./components/components";
 import { defaultAdministratableOptions } from "./common/common";
 
 import styles from "./styles.module.scss";
+import { ref } from "@/hooks/hooks";
 
-let shownPanel: Component = Disciplines;
+const ShownPanel: Component = ref<Component>(Disciplines);
 
 const handlePanelChoose: (id: number) => () => void =
   (id: number) => (): void => {
-    shownPanel = defaultAdministratableOptions.find(
+    ShownPanel.value = defaultAdministratableOptions.find(
       ({ id: optionId }) => optionId === id
     )?.component as Component;
   };
@@ -17,7 +18,7 @@ const handlePanelChoose: (id: number) => () => void =
 
 <template>
   <div :class="styles.dashboardWrapper">
-    <shownPanel />
+    <ShownPanel />
     <PanelsList :onChoose="handlePanelChoose" />
   </div>
 </template>

@@ -1,5 +1,5 @@
 import type { Component } from "vue";
-import { Disciplines } from "../components/components";
+import { Disciplines, Faculties } from "../components/components";
 
 type AdministratableOption = {
   id: number;
@@ -12,6 +12,11 @@ const defaultAdministratableOptions: AdministratableOption[] = [
     id: 1,
     name: "Disciplines",
     component: Disciplines,
+  },
+  {
+    id: 2,
+    name: "Faculties",
+    component: Faculties,
   },
 ];
 

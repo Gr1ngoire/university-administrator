@@ -6,7 +6,7 @@ import type {
   MutationTree,
 } from "vuex";
 import { DataStatus } from "@/common/enums/enums";
-import { disciplines as disciplinesService } from "@/services/services";
+import { discipline as disciplinesService } from "@/services/services";
 import type { RootState } from "../root-state";
 import type { State } from "./state";
 import type {
@@ -14,7 +14,6 @@ import type {
   DisciplinesGetAllItemResponseDto,
   UpdateDisciplineRequestParams,
 } from "@/common/types/types";
-import { Getters } from "./getters.common";
 
 enum Actions {
   GET_ALL_DISICPLINES = "getAllDisciplines",
@@ -25,9 +24,10 @@ enum Actions {
 
 enum Mutations {
   ADD_DISCIPLINES = "addDisciplines",
-  ADD_DISCIPLINE = "addDiscipline",
+  PUSH_DISCIPLINE = "addDiscipline",
   UPDATE_DISCIPLINE = "updateDiscipline",
   REMOVE_DISCIPLINE = "removeDiscipline",
+  EMPTY_DISCIPLINES = "clearDisciplines",
 }
 
 const state: State = {
@@ -35,11 +35,7 @@ const state: State = {
   dataStatus: DataStatus.IDLE,
 };
 
-const getters: GetterTree<State, RootState> = {
-  [Getters.DISCIPLINES](state: State): DisciplinesGetAllItemResponseDto[] {
-    return state.disciplines;
-  },
-};
+const getters: GetterTree<State, RootState> = {};
 
 const mutations: MutationTree<State> = {
   [Mutations.ADD_DISCIPLINES](
@@ -49,7 +45,7 @@ const mutations: MutationTree<State> = {
     state.disciplines = [...state.disciplines, ...newDiscpiplines];
   },
 
-  [Mutations.ADD_DISCIPLINE](
+  [Mutations.PUSH_DISCIPLINE](
     state: State,
     newDiscilpline: DisciplinesGetAllItemResponseDto
   ) {
@@ -73,6 +69,10 @@ const mutations: MutationTree<State> = {
       (discipline) => discipline.id !== disciplineId
     );
   },
+
+  [Mutations.EMPTY_DISCIPLINES](state: State) {
+    state.disciplines = [];
+  },
 };
 
 const actions: ActionTree<State, RootState> = {
@@ -82,6 +82,7 @@ const actions: ActionTree<State, RootState> = {
     state.dataStatus = DataStatus.PENDING;
     const { items } = await disciplinesService.getAll();
 
+    commit(Mutations.EMPTY_DISCIPLINES);
     commit(Mutations.ADD_DISCIPLINES, items);
     state.dataStatus = DataStatus.FULFILLED;
   },
@@ -93,7 +94,7 @@ const actions: ActionTree<State, RootState> = {
     state.dataStatus = DataStatus.PENDING;
     const newDiscipline = await disciplinesService.create(discipline);
 
-    commit(Mutations.ADD_DISCIPLINE, newDiscipline);
+    commit(Mutations.PUSH_DISCIPLINE, newDiscipline);
     state.dataStatus = DataStatus.FULFILLED;
   },
 

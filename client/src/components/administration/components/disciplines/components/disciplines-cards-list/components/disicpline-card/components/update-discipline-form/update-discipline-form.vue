@@ -5,7 +5,7 @@ import type {
   UpdateDisciplineRequestDto,
 } from "@/common/types/types";
 import { reactive, useStore } from "@/hooks/hooks";
-import { discipline as disciplinesValidator } from "@/validators/validators";
+import { discipline as disciplineValidator } from "@/validators/validators";
 import type { ValidationError } from "@/exceptions/exceptions";
 import { DisciplinesActions } from "@/store/actions.common";
 
@@ -18,12 +18,12 @@ type Props = {
 
 const props = defineProps<Props>();
 
-let disciplineCreationFormState: UpdateDisciplineRequestDto =
+let disciplineUpdateFormState: UpdateDisciplineRequestDto =
   reactive<UpdateDisciplineRequestDto>({
     name: props.initialDiscipline.name,
   });
 
-const disciplineCreationValidationState: Record<string, string> = reactive<
+const disciplineUpdateValidationState: Record<string, string> = reactive<
   Record<string, string>
 >({
   name: "",
@@ -33,10 +33,10 @@ const handleDisicplineUpdateValidation: (
   discipline: UpdateDisciplineRequestDto
 ) => void = (discipline: UpdateDisciplineRequestDto): void => {
   try {
-    disciplinesValidator.validate(discipline);
+    disciplineValidator.validate(discipline);
   } catch (err: unknown) {
     const validationError = err as ValidationError;
-    disciplineCreationValidationState[validationError.field] =
+    disciplineUpdateValidationState[validationError.field] =
       validationError.message;
   }
 };
@@ -45,13 +45,13 @@ const handleDisciplinePropertyChange: (event: Event) => void = (
   event: Event
 ): void => {
   const input = event.target as HTMLInputElement;
-  disciplineCreationFormState = {
-    ...disciplineCreationFormState,
+  disciplineUpdateFormState = {
+    ...disciplineUpdateFormState,
     [input.name]: input.value,
   } as UpdateDisciplineRequestDto;
 
-  disciplineCreationValidationState[input.name] = "";
-  handleDisicplineUpdateValidation(disciplineCreationFormState);
+  disciplineUpdateValidationState[input.name] = "";
+  handleDisicplineUpdateValidation(disciplineUpdateFormState);
 };
 
 const store = useStore();
@@ -59,13 +59,13 @@ const store = useStore();
 const handleSubmit: (event: Event) => void = (event: Event) => {
   event.preventDefault();
   if (
-    Object.values(disciplineCreationValidationState).every(
+    Object.values(disciplineUpdateValidationState).every(
       (el) => el.length === 0
     )
   ) {
     store.dispatch(DisciplinesActions.UPDATE_DISCIPLINE, {
       id: props.initialDiscipline.id,
-      payload: disciplineCreationFormState,
+      payload: disciplineUpdateFormState,
     });
     props.onToggle();
   }
@@ -80,9 +80,9 @@ const handleSubmit: (event: Event) => void = (event: Event) => {
         <Input
           type="text"
           name="name"
-          :value="disciplineCreationFormState.name"
+          :value="disciplineUpdateFormState.name"
           :onInput="handleDisciplinePropertyChange"
-          :errorMessage="disciplineCreationValidationState.name"
+          :errorMessage="disciplineUpdateValidationState.name"
         />
       </div>
       <Button type="click" name="Cancel" action="cancel" :onClick="onToggle" />

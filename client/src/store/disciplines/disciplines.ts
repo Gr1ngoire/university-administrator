@@ -24,9 +24,10 @@ enum Actions {
 
 enum Mutations {
   ADD_DISCIPLINES = "addDisciplines",
-  ADD_DISCIPLINE = "addDiscipline",
+  PUSH_DISCIPLINE = "addDiscipline",
   UPDATE_DISCIPLINE = "updateDiscipline",
   REMOVE_DISCIPLINE = "removeDiscipline",
+  EMPTY_DISCIPLINES = "clearDisciplines",
 }
 
 const state: State = {
@@ -44,7 +45,7 @@ const mutations: MutationTree<State> = {
     state.disciplines = [...state.disciplines, ...newDiscpiplines];
   },
 
-  [Mutations.ADD_DISCIPLINE](
+  [Mutations.PUSH_DISCIPLINE](
     state: State,
     newDiscilpline: DisciplinesGetAllItemResponseDto
   ) {
@@ -68,6 +69,10 @@ const mutations: MutationTree<State> = {
       (discipline) => discipline.id !== disciplineId
     );
   },
+
+  [Mutations.EMPTY_DISCIPLINES](state: State) {
+    state.disciplines = [];
+  },
 };
 
 const actions: ActionTree<State, RootState> = {
@@ -77,6 +82,7 @@ const actions: ActionTree<State, RootState> = {
     state.dataStatus = DataStatus.PENDING;
     const { items } = await disciplinesService.getAll();
 
+    commit(Mutations.EMPTY_DISCIPLINES);
     commit(Mutations.ADD_DISCIPLINES, items);
     state.dataStatus = DataStatus.FULFILLED;
   },
@@ -88,7 +94,7 @@ const actions: ActionTree<State, RootState> = {
     state.dataStatus = DataStatus.PENDING;
     const newDiscipline = await disciplinesService.create(discipline);
 
-    commit(Mutations.ADD_DISCIPLINE, newDiscipline);
+    commit(Mutations.PUSH_DISCIPLINE, newDiscipline);
     state.dataStatus = DataStatus.FULFILLED;
   },
 

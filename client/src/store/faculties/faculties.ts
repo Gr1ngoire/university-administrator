@@ -27,6 +27,7 @@ enum Mutations {
   ADD_FACULTY = "addFaculty",
   UPDATE_FACULTY = "updateFaculty",
   REMOVE_FACULTY = "removeFaculty",
+  CLEAR_FACULTIES = "clearFaculties",
 }
 
 const state: State = {
@@ -68,6 +69,10 @@ const mutations: MutationTree<State> = {
       (discipline) => discipline.id !== disciplineId
     );
   },
+
+  [Mutations.CLEAR_FACULTIES](state: State) {
+    state.faculties = [];
+  },
 };
 
 const actions: ActionTree<State, RootState> = {
@@ -77,6 +82,7 @@ const actions: ActionTree<State, RootState> = {
     state.dataStatus = DataStatus.PENDING;
     const { items } = await facultiesService.getAll();
 
+    commit(Mutations.CLEAR_FACULTIES);
     commit(Mutations.ADD_FACULTIES, items);
     state.dataStatus = DataStatus.FULFILLED;
   },

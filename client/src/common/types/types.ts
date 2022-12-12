@@ -4,7 +4,7 @@ export {
   type Method,
   type RawAxiosRequestHeaders,
 } from "./axios/axios";
-export { type Component } from "./components/components";
+export { type Component, type ToggleState } from "./components/components";
 export {
   type CreateDisciplineRequestDto,
   type DisciplinesGetAllItemResponseDto,

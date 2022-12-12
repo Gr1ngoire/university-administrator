@@ -45,3 +45,32 @@
   background: $primary-brand-color;
   color: $highlight-brand-color;
 }
+
+.panelOption {
+  width: 100%;
+  height: 70px;
+  font-size: 1.5rem;
+  background: $primary-brand-color;
+  color: $highlight-brand-color;
+  border-top-left-radius: 40px;
+  border-bottom-left-radius: 40px;
+  border-top-right-radius: 0;
+  border-bottom-right-radius: 0px;
+  border-top-color: $highlight-brand-color;
+  border-left-color: $highlight-brand-color;
+  border-bottom-color: $highlight-brand-color;
+  border-right-color: none;
+
+  &:hover {
+    transform: none;
+  }
+}
+
+.panelOptionFocused {
+  background: $highlight-brand-color;
+  color: $primary-brand-color;
+  border-top-color: $primary-brand-color;
+  border-left-color: $primary-brand-color;
+  border-bottom-color: $primary-brand-color;
+  border-right-color: none;
+}

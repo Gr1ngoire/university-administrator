@@ -28,30 +28,39 @@ export class DisciplinesService {
     };
   }
 
-  async getById(id: number): Promise<DisciplinesGetAllItemResponseDto | null> {
-    const discipline = await this.getModelById(id);
+  async getById(
+    idToFind: number,
+  ): Promise<DisciplinesGetAllItemResponseDto | null> {
+    const discipline = await this.getModelById(idToFind);
 
-    return discipline as DisciplinesGetAllItemResponseDto;
+    const { id, name } = discipline;
+    return { id, name };
   }
 
-  create(discipline: CreateDisciplineRequestDto): Promise<Discipline> {
+  async create(
+    discipline: CreateDisciplineRequestDto,
+  ): Promise<DisciplinesGetAllItemResponseDto> {
     const newDiscipline = this.repository.create(discipline);
 
-    return this.repository.save(newDiscipline);
+    const createdDiscipline = await this.repository.save(newDiscipline);
+    const { id, name } = createdDiscipline;
+    return { id, name };
   }
 
   async update(
-    id: number,
+    idToUpdate: number,
     attributes: Partial<UpdateDisciplineRequestDto>,
-  ): Promise<Discipline> {
-    const discipline = await this.getModelById(id);
+  ): Promise<DisciplinesGetAllItemResponseDto> {
+    const discipline = await this.getModelById(idToUpdate);
 
     if (!discipline) {
       throw new NotFoundException(ExceptionsMessages.DISCIPLINE_NOT_FOUD);
     }
 
     Object.assign(discipline, attributes);
-    return this.repository.save(discipline);
+    const updatedDiscipline = await this.repository.save(discipline);
+    const { id, name } = updatedDiscipline;
+    return { id, name };
   }
 
   async delete(id: number): Promise<number> {

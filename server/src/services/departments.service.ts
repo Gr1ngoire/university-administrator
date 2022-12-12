@@ -36,7 +36,9 @@ export class DepartmentsService {
   }
 
   async create(department: CreateDepartmentRequestDto): Promise<Department> {
-    const facultyInDb = this.facultiesService.getById(department.facultyId);
+    const facultyInDb = this.facultiesService.getModelById(
+      department.facultyId,
+    );
 
     if (!facultyInDb) {
       throw new BadRequestException(ExceptionsMessages.FACULTY_NOT_FOUND);
@@ -63,7 +65,7 @@ export class DepartmentsService {
       department.facultyId &&
       department.facultyId !== departmentToUpdate.facultyId
     ) {
-      const facultyToJoin = await this.facultiesService.getById(
+      const facultyToJoin = await this.facultiesService.getModelById(
         department.facultyId,
       );
 

@@ -3,6 +3,7 @@ import type { InjectionKey } from "vue";
 import { createLogger, createStore, Store } from "vuex";
 import { disciplines } from "./disciplines/disciplines";
 import { faculties } from "./faculties/faculties";
+import { teachers } from "./teachers/teachers";
 import type { RootState } from "./root-state";
 
 const isInDevelopmentEnvironment =
@@ -11,7 +12,7 @@ const isInDevelopmentEnvironment =
 const key: InjectionKey<Store<RootState>> = Symbol();
 
 const store: Store<RootState> = createStore<RootState>({
-  modules: { disciplines, faculties },
+  modules: { disciplines, faculties, teachers },
   strict: isInDevelopmentEnvironment,
   plugins: isInDevelopmentEnvironment ? [createLogger()] : [],
 });

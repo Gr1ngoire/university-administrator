@@ -14,21 +14,20 @@ type Props = {
 
 const props = defineProps<Props>();
 
-let teacherCreationFormState: CreateTeacherRequestDto =
-  reactive<CreateTeacherRequestDto>({
-    name: "",
-    surname: "",
-    email: "",
-    phone: "",
-  });
+let teacherCreationFormState: CreateTeacherRequestDto = {
+  email: "",
+  phone: "",
+  name: "",
+  surname: "",
+};
 
 const teacherCreationValidationState: Record<string, string> = reactive<
   Record<string, string>
 >({
-  name: "",
-  surname: "",
   email: "",
   phone: "",
+  name: "",
+  surname: "",
 });
 
 const handleTeacherCreationValidation: (
@@ -74,27 +73,31 @@ handleTeacherCreationValidation(teacherCreationFormState);
 <template>
   <form :class="styles.teacherCreationForm" @submit="handleSubmit">
     <Input
-      type="text"
+      type="email"
       name="email"
       :onInput="handleTeacherPropertyChange"
+      :value="teacherCreationFormState.email"
       :errorMessage="teacherCreationValidationState.email"
     />
     <Input
       type="text"
       name="phone"
       :onInput="handleTeacherPropertyChange"
+      :value="teacherCreationFormState.phone"
       :errorMessage="teacherCreationValidationState.phone"
     />
     <Input
       type="text"
       name="name"
       :onInput="handleTeacherPropertyChange"
+      :value="teacherCreationFormState.name"
       :errorMessage="teacherCreationValidationState.name"
     />
     <Input
       type="text"
       name="surname"
       :onInput="handleTeacherPropertyChange"
+      :value="teacherCreationFormState.surname"
       :errorMessage="teacherCreationValidationState.surname"
     />
     <div :class="styles.teacherCreationFormActionSection">

@@ -82,7 +82,7 @@ const handleSubmit: (event: Event) => void = (event: Event) => {
       <div :class="styles.teacherEditFieldsWrapper">
         <div :class="styles.teacherEditInputWrapper">
           <Input
-            type="text"
+            type="email"
             name="email"
             :value="teacherUpdateFormState.email"
             :onInput="handleTeacherPropertyChange"

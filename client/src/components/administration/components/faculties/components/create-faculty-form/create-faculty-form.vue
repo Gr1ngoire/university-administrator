@@ -14,11 +14,10 @@ type Props = {
 
 const props = defineProps<Props>();
 
-let facultyCreationFormState: CreateFacultyRequestDto =
-  reactive<CreateFacultyRequestDto>({
-    name: "",
-    shortName: "",
-  });
+let facultyCreationFormState: CreateFacultyRequestDto = {
+  name: "",
+  shortName: "",
+};
 
 const facultyCreationValidationState: Record<string, string> = reactive<
   Record<string, string>
@@ -73,12 +72,14 @@ handleFacultyCreationValidation(facultyCreationFormState);
       type="text"
       name="name"
       :onInput="handleFacultyPropertyChange"
+      :value="facultyCreationFormState.name"
       :errorMessage="facultyCreationValidationState.name"
     />
     <Input
       type="text"
       name="shortName"
       :onInput="handleFacultyPropertyChange"
+      :value="facultyCreationFormState.shortName"
       :errorMessage="facultyCreationValidationState.shortName"
     />
     <div :class="styles.facultyCreationFormActionSection">

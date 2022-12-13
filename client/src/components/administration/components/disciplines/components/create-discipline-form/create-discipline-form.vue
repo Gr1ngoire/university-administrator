@@ -14,10 +14,9 @@ type Props = {
 
 const props = defineProps<Props>();
 
-let disciplineCreationFormState: CreateDisciplineRequestDto =
-  reactive<CreateDisciplineRequestDto>({
-    name: "",
-  });
+let disciplineCreationFormState: CreateDisciplineRequestDto = {
+  name: "",
+};
 
 const disciplineCreationValidationState: Record<string, string> = reactive<
   Record<string, string>
@@ -76,6 +75,7 @@ handleDisicplineCreationValidation(disciplineCreationFormState);
       type="text"
       name="name"
       :onInput="handleDisciplinePropertyChange"
+      :value="disciplineCreationFormState.name"
       :errorMessage="disciplineCreationValidationState.name"
     />
     <div :class="styles.disciplineCreationFormActionSection">

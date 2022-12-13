@@ -2,7 +2,7 @@
 import { computed } from "@/hooks/hooks";
 import styles from "./styles.module.scss";
 
-type InputType = "text" | "number" | "password" | "textarea";
+type InputType = "text" | "number" | "password" | "email" | "textarea";
 
 type Props = {
   type: InputType;
@@ -33,6 +33,6 @@ const firstLetterUppercased = computed(() => {
       :value="value"
       @input="onInput"
     />
-    <label :class="styles.errorLabel">{{ errorMessage }}&nbsp;</label>
+    <span :class="styles.errorLabel">{{ errorMessage }}&nbsp;</span>
   </div>
 </template>

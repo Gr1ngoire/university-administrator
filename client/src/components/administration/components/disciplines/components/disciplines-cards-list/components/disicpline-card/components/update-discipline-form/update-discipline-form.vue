@@ -18,10 +18,9 @@ type Props = {
 
 const props = defineProps<Props>();
 
-let disciplineUpdateFormState: UpdateDisciplineRequestDto =
-  reactive<UpdateDisciplineRequestDto>({
-    name: props.initialDiscipline.name,
-  });
+let disciplineUpdateFormState: UpdateDisciplineRequestDto = {
+  name: props.initialDiscipline.name,
+};
 
 const disciplineUpdateValidationState: Record<string, string> = reactive<
   Record<string, string>

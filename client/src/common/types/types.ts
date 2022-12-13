@@ -9,6 +9,7 @@ export {
   type CreateDepartmentRequestDto,
   type DepartmentsGetAllItemResponseDto,
   type DepartmentsGetAllResponseDto,
+  type UpdateDepartmentRequestParams,
   type UpdateDepartmentRequestDto,
 } from "./departments/departments";
 export {

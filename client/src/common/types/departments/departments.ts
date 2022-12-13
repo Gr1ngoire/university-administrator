@@ -1,3 +1,4 @@
+export { type UpdateDepartmentRequestParams } from "./update-department-request-params.type";
 export {
   type CreateDepartmentRequestDto,
   type DepartmentsGetAllItemResponseDto,

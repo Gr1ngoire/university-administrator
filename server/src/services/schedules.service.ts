@@ -53,7 +53,9 @@ export class SchedulesService {
   }
 
   async create(schedule: CreateScheduleRequestDto): Promise<Schedule> {
-    const teacherInDb = await this.teachersService.getById(schedule.teacherId);
+    const teacherInDb = await this.teachersService.getModelById(
+      schedule.teacherId,
+    );
 
     if (!teacherInDb) {
       throw new BadRequestException(ExceptionsMessages.TEACHER_NOT_FOUND);
@@ -94,7 +96,7 @@ export class SchedulesService {
       schedule.teacherId &&
       schedule.teacherId !== scheduleToUpdate.teacherId
     ) {
-      const techerToAdd = await this.teachersService.getById(
+      const techerToAdd = await this.teachersService.getModelById(
         schedule.teacherId,
       );
 

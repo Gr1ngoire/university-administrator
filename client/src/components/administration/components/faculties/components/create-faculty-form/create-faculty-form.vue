@@ -50,8 +50,6 @@ const handleFacultyPropertyChange: (event: Event) => void = (
 
   facultyCreationValidationState[input.name] = "";
   handleFacultyCreationValidation(facultyCreationFormState);
-
-  console.log(facultyCreationValidationState);
 };
 
 const store = useStore();

@@ -37,7 +37,7 @@ export class FacultiesService {
   async getById(
     idToFind: number,
   ): Promise<FacultiesGetAllItemResponseDto | null> {
-    const faculty = await this.repository.findOne({ where: { id: idToFind } });
+    const faculty = await this.getModelById(idToFind);
 
     const { id, name, shortName } = faculty;
     return { id, name, shortName };
@@ -64,9 +64,9 @@ export class FacultiesService {
     }
 
     Object.assign(facultyToUpdate, faculty);
-    const updatedRepositore = await this.repository.save(facultyToUpdate);
+    const updatedFaculty = await this.repository.save(facultyToUpdate);
 
-    const { id, name, shortName } = updatedRepositore;
+    const { id, name, shortName } = updatedFaculty;
     return { id, name, shortName };
   }
 

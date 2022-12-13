@@ -1,0 +1,34 @@
+.teacherUpdateForm {
+  @extend %centered-flex-row;
+
+  margin-right: 10px;
+  padding: 5px 15px 5px 15px;
+  border-radius: 10px;
+  background: $primary-brand-color;
+}
+
+.teacherUpdateActionSectionWrapper {
+  @extend %centered-flex-column;
+
+  width: 100%;
+}
+
+.teacherEditFieldsWrapper {
+  @extend %centered-flex-column;
+}
+
+.teacherEditInputWrapper {
+  padding: 0 10px 0 10px;
+  width: 100%;
+
+  & label {
+    color: $secondary-brand-color;
+  }
+}
+
+.teacherActionButtonsWrapper {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 10px;
+}

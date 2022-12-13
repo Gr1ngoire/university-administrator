@@ -1,6 +1,8 @@
 export { type DbClient } from './db/db';
 export {
   type CreateDepartmentRequestDto,
+  type DepartmentsGetAllItemResponseDto,
+  type DepartmentsGetAllResponseDto,
   type UpdateDepartmentRequestDto,
 } from './departments/departments';
 export {

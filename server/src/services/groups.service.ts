@@ -41,7 +41,7 @@ export class GroupsService {
   }
 
   async create(group: CreateGroupRequestDto): Promise<Group> {
-    const departmentInDb = await this.departmentsService.getById(
+    const departmentInDb = await this.departmentsService.getModelById(
       group.departmentId,
     );
 
@@ -70,7 +70,7 @@ export class GroupsService {
       group.departmentId &&
       group.departmentId !== groupToUpdate.departmentId
     ) {
-      const departmentToJoin = await this.departmentsService.getById(
+      const departmentToJoin = await this.departmentsService.getModelById(
         group.departmentId,
       );
 

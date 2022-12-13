@@ -3,4 +3,4 @@ export {
   type DepartmentsGetAllItemResponseDto,
   type DepartmentsGetAllResponseDto,
   type UpdateDepartmentRequestDto,
-} from 'shared/common/types/types';
+} from "shared/common/types/types";

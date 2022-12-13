@@ -6,6 +6,12 @@ export {
 } from "./axios/axios";
 export { type Component, type ToggleState } from "./components/components";
 export {
+  type CreateDepartmentRequestDto,
+  type DepartmentsGetAllItemResponseDto,
+  type DepartmentsGetAllResponseDto,
+  type UpdateDepartmentRequestDto,
+} from "./departments/departments";
+export {
   type CreateDisciplineRequestDto,
   type DisciplinesGetAllItemResponseDto,
   type DisciplinesGetAllResponseDto,

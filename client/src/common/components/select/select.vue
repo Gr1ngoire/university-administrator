@@ -12,6 +12,7 @@ type Props = {
   name: string;
   options: SelectOption[];
   onSelect: (event: Event) => void;
+  defaultOptionId?: number;
 };
 
 const props = defineProps<Props>();
@@ -23,16 +24,18 @@ const firstLetterUppercased = computed(() => {
     .charAt(FIRST_NAME_CHARACTER_INDEX)
     .toUpperCase()}${props.name.slice(SECOND_NAME_CHARACTER_INDEX)}`;
 });
+
+const finalDefaultOptionId = props.defaultOptionId ?? 1;
 </script>
 
 <template>
+  <label :class="styles.selectLabel">{{ firstLetterUppercased }}</label>
   <select :class="styles.select" :name="name" @change="onSelect">
-    <label :class="styles.selectLabel">{{ firstLetterUppercased }}</label>
     <option
       v-for="{ id, name, value } in options"
       :key="id"
       :value="value"
-      :selected="id === 1 ? 'true' : 'false'"
+      :selected="id === finalDefaultOptionId ? true : false"
     >
       {{ name }}
     </option>

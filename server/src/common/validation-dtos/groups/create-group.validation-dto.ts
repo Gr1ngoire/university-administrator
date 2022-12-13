@@ -1,17 +1,19 @@
 import {
   IsNotEmpty,
-  IsNumber,
+  IsInt,
   IsString,
+  Type,
 } from 'src/common/decorators/decorators';
 
 export class CreateGroupValidationDto {
-  @IsNumber()
+  @IsInt()
+  @Type(() => Number)
   departmentId: number;
 
   @IsString()
   @IsNotEmpty()
   name: string;
 
-  @IsNumber()
+  @IsInt()
   course: number;
 }

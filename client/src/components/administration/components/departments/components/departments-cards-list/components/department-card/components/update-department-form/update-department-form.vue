@@ -109,6 +109,7 @@ const handleSubmit: (event: Event) => void = (event: Event) => {
             name="facultyId"
             :options="facultySelectOptions"
             :onSelect="handleDepartmentPropertyChange"
+            :defaultOptionId="initialDepartment.facultyId"
           />
         </div>
       </div>

@@ -16,12 +16,18 @@ const defaultSelectOptions: HeaderSelectOption[] = [
   },
   {
     id: 2,
+    link: AppRoutes.NEWS,
+    name: "News",
+    isSelected: false,
+  },
+  {
+    id: 3,
     link: AppRoutes.FAQ,
     name: "Faq",
     isSelected: false,
   },
   {
-    id: 3,
+    id: 4,
     link: AppRoutes.ADMINISTRATION,
     name: "Administration",
     isSelected: false,

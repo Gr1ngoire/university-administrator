@@ -41,7 +41,7 @@ class Department {
         contentType: ContentType.JSON,
         payload: new URLSearchParams({
           ...payload,
-          facultyId: payload.facultyId.toString(),
+          facultyId: String(payload.facultyId),
         }),
       }
     );
@@ -58,7 +58,7 @@ class Department {
         contentType: ContentType.JSON,
         payload: new URLSearchParams({
           ...payload,
-          facultyId: payload.facultyId.toString(),
+          facultyId: String(payload.facultyId),
         }),
       }
     );

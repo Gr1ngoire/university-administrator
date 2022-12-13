@@ -2,14 +2,16 @@
 import { computed } from "@/hooks/hooks";
 import styles from "./styles.module.scss";
 
-type InputType = "text" | "number" | "password" | "email" | "textarea";
+type SelectOption = {
+  id: number;
+  name: string;
+  value: string;
+};
 
 type Props = {
-  type: InputType;
   name: string;
-  errorMessage: string;
-  onInput: (event: Event) => void;
-  value?: string;
+  options: SelectOption[];
+  onSelect: (event: Event) => void;
 };
 
 const props = defineProps<Props>();
@@ -24,15 +26,15 @@ const firstLetterUppercased = computed(() => {
 </script>
 
 <template>
-  <div :class="styles.inputWrapper">
-    <label :class="styles.inputLabel">{{ firstLetterUppercased }}</label>
-    <input
-      :class="styles.input"
-      :type="type"
-      :name="name"
+  <select :class="styles.select" :name="name" @change="onSelect">
+    <label :class="styles.selectLabel">{{ firstLetterUppercased }}</label>
+    <option
+      v-for="{ id, name, value } in options"
+      :key="id"
       :value="value"
-      @input="onInput"
-    />
-    <span :class="styles.errorSpan">{{ errorMessage }}&nbsp;</span>
-  </div>
+      :selected="id === 1 ? 'true' : 'false'"
+    >
+      {{ name }}
+    </option>
+  </select>
 </template>

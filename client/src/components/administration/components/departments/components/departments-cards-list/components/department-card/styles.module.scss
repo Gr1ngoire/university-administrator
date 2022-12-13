@@ -1,0 +1,35 @@
+.departmentCard {
+  flex-wrap: wrap;
+  justify-content: space-between;
+  margin-right: 10px;
+  padding: 10px;
+  display: flex;
+
+  border-radius: 10px;
+  background: $primary-brand-color;
+}
+
+.departmentName {
+  width: 70%;
+  color: $secondary-brand-color;
+}
+
+.departmentShortName {
+  width: 70%;
+  color: $secondary-brand-color;
+}
+
+.departmentFacultyName {
+  width: 70%;
+  color: $secondary-brand-color;
+}
+
+.actionsSection {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.actionWrapperButton {
+  margin: 5px;
+}

@@ -83,7 +83,7 @@ const actions: ActionTree<State, RootState> = {
     const { items } = await departmentsService.getAll();
 
     commit(Mutations.CLEAR_DEPARTMENTS);
-    commit(Mutations.ADD_DEPARTMENT, items);
+    commit(Mutations.ADD_DEPARTMENTS, items);
     state.dataStatus = DataStatus.FULFILLED;
   },
 

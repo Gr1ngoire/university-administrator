@@ -1,0 +1,15 @@
+.teacherCreationForm {
+  @extend %centered-flex-column;
+
+  background: $primary-brand-color;
+  color: $secondary-brand-color;
+  padding: 15px;
+  border-radius: 10px;
+}
+
+.teacherCreationFormActionSection {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  margin-top: 10px;
+}

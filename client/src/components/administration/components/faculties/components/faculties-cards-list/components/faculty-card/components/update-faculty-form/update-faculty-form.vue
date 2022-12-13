@@ -18,11 +18,10 @@ type Props = {
 
 const props = defineProps<Props>();
 
-let facultyUpdateFormState: UpdateFacultyRequestDto =
-  reactive<UpdateFacultyRequestDto>({
-    name: props.initialFaculty.name,
-    shortName: props.initialFaculty.shortName,
-  });
+let facultyUpdateFormState: UpdateFacultyRequestDto = {
+  name: props.initialFaculty.name,
+  shortName: props.initialFaculty.shortName,
+};
 
 const facultyUpdateValidationState: Record<string, string> = reactive<
   Record<string, string>
@@ -91,7 +90,7 @@ const handleSubmit: (event: Event) => void = (event: Event) => {
             name="shortName"
             :value="facultyUpdateFormState.shortName"
             :onInput="handleFacultyPropertyChange"
-            :errorMessage="facultyUpdateValidationState.name"
+            :errorMessage="facultyUpdateValidationState.shortName"
           />
         </div>
       </div>

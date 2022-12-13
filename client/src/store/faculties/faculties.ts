@@ -54,19 +54,19 @@ const mutations: MutationTree<State> = {
 
   [Mutations.UPDATE_FACULTY](
     state: State,
-    disciplineToUpdate: FacultiesGetAllItemResponseDto
+    facultyToUpdate: FacultiesGetAllItemResponseDto
   ) {
-    state.faculties = state.faculties.map((discipline) => {
-      if (discipline.id === disciplineToUpdate.id) {
-        return disciplineToUpdate;
+    state.faculties = state.faculties.map((faculty) => {
+      if (faculty.id === facultyToUpdate.id) {
+        return facultyToUpdate;
       }
-      return discipline;
+      return faculty;
     });
   },
 
-  [Mutations.REMOVE_FACULTY](state: State, disciplineId: number) {
+  [Mutations.REMOVE_FACULTY](state: State, facultyId: number) {
     state.faculties = state.faculties.filter(
-      (discipline) => discipline.id !== disciplineId
+      (faculty) => faculty.id !== facultyId
     );
   },
 

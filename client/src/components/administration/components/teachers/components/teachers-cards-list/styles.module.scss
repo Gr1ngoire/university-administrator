@@ -1,0 +1,18 @@
+.teachersCardsListWrapper {
+  @extend %centered-flex-row;
+
+  width: 100%;
+  margin-top: 10px;
+}
+
+.teachersCardsList {
+  width: 40%;
+  height: 100%;
+  overflow-y: scroll;
+  height: calc(100vh - 550px);
+}
+
+.teachersCardsListItem {
+  width: 100%;
+  margin-top: 10px;
+}

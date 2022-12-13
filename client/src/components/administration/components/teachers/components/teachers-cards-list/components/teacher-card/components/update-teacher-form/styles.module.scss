@@ -1,4 +1,4 @@
-.facultyUpdateForm {
+.teacherUpdateForm {
   @extend %centered-flex-row;
 
   margin-right: 10px;
@@ -7,19 +7,19 @@
   background: $primary-brand-color;
 }
 
-.facultyUpdateActionSectionWrapper {
+.teacherUpdateActionSectionWrapper {
   @extend %centered-flex-column;
 
   width: 100%;
 }
 
-.facultyEditFieldsWrapper {
+.teacherEditFieldsWrapper {
   @extend %centered-flex-column;
 
   width: 100%;
 }
 
-.facultyEditInputWrapper {
+.teacherEditInputWrapper {
   padding: 0 10px 0 10px;
   width: 100%;
 
@@ -28,7 +28,7 @@
   }
 }
 
-.facultyActionButtonsWrapper {
+.teacherActionButtonsWrapper {
   width: 100%;
   display: flex;
   justify-content: space-between;

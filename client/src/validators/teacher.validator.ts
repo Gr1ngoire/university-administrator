@@ -42,7 +42,7 @@ class Teacher extends Abstract<CreateTeacherRequestDto> {
       });
     }
 
-    const UKRAINIAN_PHONE_FORMAT_VALIDATION = /\+380\d{9}/;
+    const UKRAINIAN_PHONE_FORMAT_VALIDATION = /^\+380\d{9}$/;
     if (!value.match(UKRAINIAN_PHONE_FORMAT_VALIDATION)) {
       throw new ValidationError({
         field: validateField,

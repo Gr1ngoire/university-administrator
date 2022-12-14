@@ -28,7 +28,7 @@ export class GroupsController {
   @Get(GroupsApi.$ID)
   async getById(@Param() params: GetByIdParams) {
     const { id } = params;
-    const group = await this.groupsService.getById(id);
+    const group = await this.groupsService.getModelById(id);
 
     if (!group) {
       throw new NotFoundException(ExceptionsMessages.GROUP_NOT_FOUND);

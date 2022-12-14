@@ -18,6 +18,8 @@ export {
 } from "./faculties/faculties";
 export {
   type CreateGroupRequestDto,
+  type GroupsGetAllItemResponseDto,
+  type GroupsGetAllResponseDto,
   type UpdateGroupRequestDto,
 } from "./groups/groups";
 export { type HttpOptions } from "./http/http";

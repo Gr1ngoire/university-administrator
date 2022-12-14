@@ -69,7 +69,7 @@ export class SchedulesService {
       throw new BadRequestException(ExceptionsMessages.DISCIPLINE_NOT_FOUD);
     }
 
-    const groupInDb = await this.groupsService.getById(schedule.groupId);
+    const groupInDb = await this.groupsService.getModelById(schedule.groupId);
 
     if (!groupInDb) {
       throw new BadRequestException(ExceptionsMessages.GROUP_NOT_FOUND);
@@ -119,7 +119,9 @@ export class SchedulesService {
     }
 
     if (schedule.groupId && schedule.groupId !== scheduleToUpdate.groupId) {
-      const groupToAdd = await this.groupsService.getById(schedule.groupId);
+      const groupToAdd = await this.groupsService.getModelById(
+        schedule.groupId,
+      );
 
       if (!groupToAdd) {
         throw new BadRequestException(ExceptionsMessages.GROUP_NOT_FOUND);

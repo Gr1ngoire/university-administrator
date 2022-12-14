@@ -1,0 +1,28 @@
+.groupsDashboard {
+  @extend %centered-flex-column;
+
+  width: 100%;
+  background: $secondary-brand-color;
+}
+
+.createGroupForm {
+  width: 62.5%;
+  display: flex;
+  flex-direction: column;
+  margin-top: 30px;
+  padding: 10px;
+}
+
+.unableToCreateGroupInfoBlock {
+  @extend %centered-flex-column;
+}
+
+.toggleGroupFormButtonWrapper {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.groupsSectionsSeparator {
+  width: 60%;
+  border-color: $primary-brand-color;
+}

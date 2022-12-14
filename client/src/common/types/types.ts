@@ -26,6 +26,13 @@ export {
   type UpdateFacultyRequestDto,
   type UpdateFacultyRequestParams,
 } from "./faculties/faculties";
+export {
+  type CreateGroupRequestDto,
+  type GroupsGetAllItemResponseDto,
+  type GroupsGetAllResponseDto,
+  type UpdateGroupRequestDto,
+  type UpdateGroupRequestParams,
+} from "./groups/groups";
 export { type HttpOptions } from "./http/http";
 export {
   type CreateTeacherRequestDto,

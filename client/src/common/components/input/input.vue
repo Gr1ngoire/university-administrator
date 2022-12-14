@@ -10,6 +10,8 @@ type Props = {
   errorMessage: string;
   onInput: (event: Event) => void;
   value?: string;
+  max?: number;
+  min?: number;
 };
 
 const props = defineProps<Props>();
@@ -31,6 +33,8 @@ const firstLetterUppercased = computed(() => {
       :type="type"
       :name="name"
       :value="value"
+      :max="max"
+      :min="min"
       @input="onInput"
     />
     <span :class="styles.errorSpan">{{ errorMessage }}&nbsp;</span>

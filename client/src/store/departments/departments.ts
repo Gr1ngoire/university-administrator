@@ -111,10 +111,10 @@ const actions: ActionTree<State, RootState> = {
 
   async [Actions.DELETE_DEPARTMENT](
     { commit }: ActionContext<State, RootState>,
-    teacherId: number
+    departmentId: number
   ) {
     state.dataStatus = DataStatus.PENDING;
-    const id = await departmentsService.delete(teacherId);
+    const id = await departmentsService.delete(departmentId);
 
     commit(Mutations.REMOVE_DEPARTMENT, id);
     state.dataStatus = DataStatus.FULFILLED;

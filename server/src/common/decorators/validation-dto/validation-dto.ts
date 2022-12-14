@@ -8,4 +8,6 @@ export {
   IsNotEmpty,
   IsNumberString,
   IsNumber,
+  Max,
+  Min,
 } from 'class-validator';

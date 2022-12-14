@@ -3,6 +3,8 @@ import {
   IsInt,
   IsString,
   Type,
+  Max,
+  Min,
 } from 'src/common/decorators/decorators';
 
 export class CreateGroupValidationDto {
@@ -15,5 +17,8 @@ export class CreateGroupValidationDto {
   name: string;
 
   @IsInt()
+  @Type(() => Number)
+  @Max(6)
+  @Min(1)
   course: number;
 }

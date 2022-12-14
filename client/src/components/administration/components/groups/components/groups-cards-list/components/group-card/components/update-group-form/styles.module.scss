@@ -1,0 +1,41 @@
+.groupUpdateForm {
+  @extend %centered-flex-row;
+
+  margin-right: 10px;
+  padding: 5px 15px 5px 15px;
+  border-radius: 10px;
+  background: $primary-brand-color;
+}
+
+.groupUpdateActionSectionWrapper {
+  @extend %centered-flex-column;
+
+  width: 100%;
+}
+
+.groupEditFieldsWrapper {
+  @extend %centered-flex-column;
+
+  width: 100%;
+}
+
+.groupEditInputWrapper {
+  padding: 0 10px 0 10px;
+  width: 100%;
+
+  & label {
+    color: $secondary-brand-color;
+  }
+}
+
+.groupEditSelectWrapper {
+  width: 95%;
+  margin-top: 5px;
+}
+
+.groupActionButtonsWrapper {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  margin: 15px 0 10px 0;
+}

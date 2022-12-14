@@ -28,5 +28,7 @@ export {
   IsNotEmpty,
   IsNumberString,
   IsNumber,
+  Max,
+  Min,
   Type,
 } from './validation-dto/validation-dto';

@@ -15,5 +15,6 @@ export class CreateGroupValidationDto {
   name: string;
 
   @IsInt()
+  @Type(() => Number)
   course: number;
 }

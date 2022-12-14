@@ -18,6 +18,7 @@ export class UpdateGroupValidationDto {
   name: string;
 
   @IsInt()
+  @Type(() => Number)
   @IsOptional()
   course: number;
 }

@@ -1,4 +1,6 @@
 enum ValidationExceptionMessages {
+  COURSE_MUST_BELONG_INTERVAL = "Course value must belong the interval between 1 and 6",
+  COURSE_MUST_BE_AN_INTEGER = "Course must be an integer",
   SHORTNAME_CAN_NOT_BE_EMPTY = "Short name can not be empty",
   NAME_CAN_NOT_BE_EMPTY = "Name can not be empty",
   SURNAME_CAN_NOT_BE_EMPTY = "Surname can not be empty",

@@ -57,7 +57,7 @@ export class StudentsService {
       );
     }
 
-    const groupToJoin = await this.groupsService.getById(student.groupId);
+    const groupToJoin = await this.groupsService.getModelById(student.groupId);
 
     if (!groupToJoin) {
       throw new BadRequestException(ExceptionsMessages.GROUP_NOT_FOUND);
@@ -81,7 +81,9 @@ export class StudentsService {
     }
 
     if (student.groupId && student.groupId !== studentToUpdate.groupId) {
-      const groupToJoin = await this.groupsService.getById(student.groupId);
+      const groupToJoin = await this.groupsService.getModelById(
+        student.groupId,
+      );
 
       if (!groupToJoin) {
         throw new BadRequestException(ExceptionsMessages.GROUP_NOT_FOUND);

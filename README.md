@@ -1,6 +1,6 @@
 # Web register
 
-#University managing web application
+## University managing web application
 
 ```mermaid
 erDiagram

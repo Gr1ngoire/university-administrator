@@ -35,7 +35,7 @@ const finalDefaultOptionId = props.defaultOptionId ?? 1;
       v-for="{ id, name, value } in options"
       :key="id"
       :value="value"
-      :selected="id === finalDefaultOptionId ? true : false"
+      :selected="id === finalDefaultOptionId"
     >
       {{ name }}
     </option>

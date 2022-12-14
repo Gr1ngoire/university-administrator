@@ -21,7 +21,7 @@ export class TeachersService {
     @InjectRepository(Teacher) private repository: Repository<Teacher>,
   ) {}
 
-  private getByEmail(email: string): Promise<Teacher | null> {
+  private getModelByEmail(email: string): Promise<Teacher | null> {
     return this.repository.findOne({ where: { email } });
   }
 
@@ -55,7 +55,7 @@ export class TeachersService {
   async create(
     teacher: CreateTeacherRequestDto,
   ): Promise<TeachersGetAllItemResponseDto> {
-    const teacherWithSameEmail = await this.getByEmail(teacher.email);
+    const teacherWithSameEmail = await this.getModelByEmail(teacher.email);
 
     if (teacherWithSameEmail) {
       throw new BadRequestException(
@@ -80,7 +80,7 @@ export class TeachersService {
       throw new NotFoundException(ExceptionsMessages.TEACHER_NOT_FOUND);
     }
 
-    const teacherToCheckByEmail = await this.getByEmail(teacher.email);
+    const teacherToCheckByEmail = await this.getModelByEmail(teacher.email);
 
     if (
       teacherToCheckByEmail &&

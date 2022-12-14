@@ -1,8 +1,9 @@
 import {
+  IsInt,
   IsNotEmpty,
-  IsNumber,
   IsOptional,
   IsString,
+  Type,
 } from 'src/common/decorators/decorators';
 
 export class UpdateScheduleValidationDto {
@@ -11,15 +12,18 @@ export class UpdateScheduleValidationDto {
   @IsOptional()
   name: string;
 
-  @IsNumber()
+  @IsInt()
+  @Type(() => Number)
   @IsOptional()
   teacherId: number;
 
-  @IsNumber()
+  @IsInt()
+  @Type(() => Number)
   @IsOptional()
   disciplineId: number;
 
-  @IsNumber()
+  @IsInt()
+  @Type(() => Number)
   @IsOptional()
   groupId: number;
 

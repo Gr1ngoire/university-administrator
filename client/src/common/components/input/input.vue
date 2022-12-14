@@ -33,6 +33,6 @@ const firstLetterUppercased = computed(() => {
       :value="value"
       @input="onInput"
     />
-    <span :class="styles.errorLabel">{{ errorMessage }}&nbsp;</span>
+    <span :class="styles.errorSpan">{{ errorMessage }}&nbsp;</span>
   </div>
 </template>

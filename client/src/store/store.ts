@@ -1,6 +1,7 @@
 import { ENV } from "@/common/enums/enums";
 import type { InjectionKey } from "vue";
 import { createLogger, createStore, Store } from "vuex";
+import { departments } from "./departments/departments";
 import { disciplines } from "./disciplines/disciplines";
 import { faculties } from "./faculties/faculties";
 import { teachers } from "./teachers/teachers";
@@ -12,7 +13,7 @@ const isInDevelopmentEnvironment =
 const key: InjectionKey<Store<RootState>> = Symbol();
 
 const store: Store<RootState> = createStore<RootState>({
-  modules: { disciplines, faculties, teachers },
+  modules: { departments, disciplines, faculties, teachers },
   strict: isInDevelopmentEnvironment,
   plugins: isInDevelopmentEnvironment ? [createLogger()] : [],
 });

@@ -6,6 +6,8 @@ import {
 } from 'src/common/exceptions/excpetions';
 import {
   CreateDepartmentRequestDto,
+  DepartmentsGetAllItemResponseDto,
+  DepartmentsGetAllResponseDto,
   UpdateDepartmentRequestDto,
 } from 'src/common/types/types';
 import { FacultiesService } from 'src/services/faculties.service';
@@ -18,15 +20,7 @@ export class DepartmentsService {
     private facultiesService: FacultiesService,
   ) {}
 
-  getAll(): Promise<Department[]> {
-    return this.repository.find({
-      relations: {
-        faculty: true,
-      },
-    });
-  }
-
-  getById(id: number): Promise<Department | null> {
+  getModelById(id: number): Promise<Department | null> {
     return this.repository.findOne({
       where: { id },
       relations: {
@@ -35,7 +29,38 @@ export class DepartmentsService {
     });
   }
 
-  async create(department: CreateDepartmentRequestDto): Promise<Department> {
+  async getAll(): Promise<DepartmentsGetAllResponseDto> {
+    const departmentsModels = await this.repository.find({
+      relations: {
+        faculty: true,
+      },
+    });
+
+    return {
+      items: departmentsModels.map(
+        ({ id, name, shortName, facultyId, faculty }) => ({
+          id,
+          name,
+          shortName,
+          facultyId,
+          faculty,
+        }),
+      ),
+    };
+  }
+
+  async getById(
+    idToFind: number,
+  ): Promise<DepartmentsGetAllItemResponseDto | null> {
+    const department = await this.getModelById(idToFind);
+
+    const { id, name, shortName, facultyId, faculty } = department;
+    return { id, name, shortName, facultyId, faculty };
+  }
+
+  async create(
+    department: CreateDepartmentRequestDto,
+  ): Promise<DepartmentsGetAllItemResponseDto> {
     const facultyInDb = this.facultiesService.getModelById(
       department.facultyId,
     );
@@ -54,7 +79,7 @@ export class DepartmentsService {
   async update(
     id: number,
     department: Partial<UpdateDepartmentRequestDto>,
-  ): Promise<Department> {
+  ): Promise<DepartmentsGetAllItemResponseDto> {
     const departmentToUpdate = await this.repository.findOne({ where: { id } });
 
     if (!departmentToUpdate) {
@@ -76,16 +101,21 @@ export class DepartmentsService {
 
     Object.assign(departmentToUpdate, department);
     const updatedDepartment = await this.repository.save(departmentToUpdate);
+
     return this.getById(updatedDepartment.id);
   }
 
-  async delete(id: number): Promise<Department> {
-    const department = await this.getById(id);
+  async delete(id: number): Promise<number> {
+    const department = await this.getModelById(id);
 
     if (!department) {
       throw new NotFoundException(ExceptionsMessages.DEPARTMENT_NOT_FOUND);
     }
 
-    return this.repository.remove(department);
+    const { id: idToSend } = department;
+
+    await this.repository.remove(department);
+
+    return idToSend;
   }
 }

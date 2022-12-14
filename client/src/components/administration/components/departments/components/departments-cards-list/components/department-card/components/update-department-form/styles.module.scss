@@ -1,0 +1,41 @@
+.departmentUpdateForm {
+  @extend %centered-flex-row;
+
+  margin-right: 10px;
+  padding: 5px 15px 5px 15px;
+  border-radius: 10px;
+  background: $primary-brand-color;
+}
+
+.departmentUpdateActionSectionWrapper {
+  @extend %centered-flex-column;
+
+  width: 100%;
+}
+
+.departmentEditFieldsWrapper {
+  @extend %centered-flex-column;
+
+  width: 100%;
+}
+
+.departmentEditInputWrapper {
+  padding: 0 10px 0 10px;
+  width: 100%;
+
+  & label {
+    color: $secondary-brand-color;
+  }
+}
+
+.departmentEditSelectWrapper {
+  width: 95%;
+  margin-top: 5px;
+}
+
+.departmentActionButtonsWrapper {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  margin: 15px 0 10px 0;
+}

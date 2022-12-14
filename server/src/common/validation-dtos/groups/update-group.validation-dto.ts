@@ -1,12 +1,14 @@
 import {
+  IsInt,
   IsNotEmpty,
-  IsNumber,
   IsOptional,
   IsString,
+  Type,
 } from 'src/common/decorators/decorators';
 
 export class UpdateGroupValidationDto {
-  @IsNumber()
+  @IsInt()
+  @Type(() => Number)
   @IsOptional()
   departmentId: number;
 
@@ -15,7 +17,7 @@ export class UpdateGroupValidationDto {
   @IsOptional()
   name: string;
 
-  @IsNumber()
+  @IsInt()
   @IsOptional()
   course: number;
 }

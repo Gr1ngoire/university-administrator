@@ -20,6 +20,7 @@ export {
   AfterRemove,
 } from './entities/entities';
 export {
+  IsInt,
   IsString,
   IsEmail,
   IsOptional,
@@ -27,4 +28,5 @@ export {
   IsNotEmpty,
   IsNumberString,
   IsNumber,
+  Type,
 } from './validation-dto/validation-dto';

@@ -3,11 +3,13 @@ import {
   IsEmail,
   IsPhoneNumber,
   IsNotEmpty,
-  IsNumber,
+  IsInt,
+  Type,
 } from 'src/common/decorators/decorators';
 
 export class CreateStudentValidationDto {
-  @IsNumber()
+  @IsInt()
+  @Type(() => Number)
   groupId: number;
 
   @IsString()

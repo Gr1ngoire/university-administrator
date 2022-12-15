@@ -7,7 +7,7 @@ import type {
 import { reactive, useStore } from "@/hooks/hooks";
 import { discipline as disciplineValidator } from "@/validators/validators";
 import type { ValidationError } from "@/exceptions/exceptions";
-import { DisciplinesActions } from "@/store/actions.common";
+import { AdministrationActions } from "@/store/actions.common";
 
 import styles from "./styles.module.scss";
 
@@ -62,7 +62,7 @@ const handleSubmit: (event: Event) => void = (event: Event) => {
       (el) => el.length === 0
     )
   ) {
-    store.dispatch(DisciplinesActions.UPDATE_DISCIPLINE, {
+    store.dispatch(AdministrationActions.UPDATE_DISCIPLINE, {
       id: props.initialDiscipline.id,
       payload: disciplineUpdateFormState,
     });

@@ -1,24 +1,20 @@
 <script lang="ts" setup>
 import { CreateGroupForm, GroupsCardsList } from "./components/components";
 import { computed, ref, useStore } from "@/hooks/hooks";
-import { GroupsActions, DepartmentsActions } from "@/store/actions.common";
 import { Button } from "@/common/components/components";
 
 import styles from "./styles.module.scss";
 
 const store = useStore();
-const groups = computed(() => store.state.groups.groups);
+const groups = computed(() => store.state.administration.groups);
 const isGroupCrеationPossible = computed(
-  () => store.state.departments.departments.length > 0
+  () => store.state.administration.departments.length > 0
 );
 
 const groupCreationFormShowState = ref<boolean>(false);
 const handleToggle: () => void = (): void => {
   groupCreationFormShowState.value = !groupCreationFormShowState.value;
 };
-
-store.dispatch(DepartmentsActions.GET_ALL_DEPARTMENTS);
-store.dispatch(GroupsActions.GET_ALL_GROUPS);
 </script>
 
 <template>

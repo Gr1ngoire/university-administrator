@@ -7,7 +7,7 @@ import type {
 import { computed, reactive, useStore } from "@/hooks/hooks";
 import { group as groupValidator } from "@/validators/validators";
 import type { ValidationError } from "@/exceptions/exceptions";
-import { GroupsActions } from "@/store/actions.common";
+import { AdministrationActions } from "@/store/actions.common";
 
 import styles from "./styles.module.scss";
 
@@ -19,7 +19,7 @@ type Props = {
 const props = defineProps<Props>();
 
 const store = useStore();
-const departments = computed(() => store.state.departments.departments);
+const departments = computed(() => store.state.administration.departments);
 const departmentSelectOptions = departments.value.map(({ id, name }) => ({
   id,
   name,
@@ -71,7 +71,7 @@ const handleSubmit: (event: Event) => void = (event: Event) => {
   if (
     Object.values(groupUpdateValidationState).every((el) => el.length === 0)
   ) {
-    store.dispatch(GroupsActions.UPDATE_GROUP, {
+    store.dispatch(AdministrationActions.UPDATE_GROUP, {
       id: props.initialGroup.id,
       payload: groupUpdateFormState,
     });
@@ -107,6 +107,7 @@ const handleSubmit: (event: Event) => void = (event: Event) => {
         <div :class="styles.groupEditSelectWrapper">
           <Select
             name="departmentId"
+            nameToDisplay="Department"
             :options="departmentSelectOptions"
             :onSelect="handleGroupPropertyChange"
             :defaultOptionId="initialGroup.departmentId"

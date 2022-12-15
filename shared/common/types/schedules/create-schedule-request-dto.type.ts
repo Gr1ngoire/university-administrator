@@ -1,5 +1,4 @@
 type CreateScheduleRequestDto = {
-  name: string;
   teacherId: number;
   disciplineId: number;
   groupId: number;

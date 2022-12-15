@@ -4,7 +4,7 @@ import type { CreateDepartmentRequestDto } from "@/common/types/types";
 import type { ValidationError } from "@/exceptions/exceptions";
 import { department as departmentValidator } from "@/validators/validators";
 import { computed, reactive, useStore } from "@/hooks/hooks";
-import { DepartmentsActions } from "@/store/actions.common";
+import { AdministrationActions } from "@/store/actions.common";
 
 import styles from "./styles.module.scss";
 
@@ -16,7 +16,7 @@ const props = defineProps<Props>();
 
 const store = useStore();
 
-const faculties = computed(() => store.state.faculties.faculties);
+const faculties = computed(() => store.state.administration.faculties);
 const facultySelectOptions = faculties.value.map(({ id, name }) => ({
   id,
   name,
@@ -72,7 +72,7 @@ const handleSubmit: (event: Event) => void = (event: Event) => {
     )
   ) {
     store.dispatch(
-      DepartmentsActions.CREATE_DEPARTMENT,
+      AdministrationActions.CREATE_DEPARTMENT,
       departmentCreationFormState
     );
     props.onToggle();
@@ -94,6 +94,7 @@ handleDepartmentCreationValidation(departmentCreationFormState);
     <Input
       type="text"
       name="shortName"
+      nameToDisplay="Short name"
       :onInput="handleDepartmentPropertyChange"
       :value="departmentCreationFormState.shortName"
       :errorMessage="departmentCreationValidationState.shortName"
@@ -101,6 +102,7 @@ handleDepartmentCreationValidation(departmentCreationFormState);
     <div :class="styles.selectWrapper">
       <Select
         name="facultyId"
+        nameToDisplay="Faculty"
         :options="facultySelectOptions"
         :onSelect="handleDepartmentPropertyChange"
       />

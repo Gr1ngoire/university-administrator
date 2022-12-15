@@ -13,6 +13,7 @@ type Props = {
   options: SelectOption[];
   onSelect: (event: Event) => void;
   defaultOptionId?: number;
+  nameToDisplay?: string;
 };
 
 const props = defineProps<Props>();
@@ -20,9 +21,12 @@ const props = defineProps<Props>();
 const FIRST_NAME_CHARACTER_INDEX = 0;
 const SECOND_NAME_CHARACTER_INDEX = 1;
 const firstLetterUppercased = computed(() => {
-  return `${props.name
-    .charAt(FIRST_NAME_CHARACTER_INDEX)
-    .toUpperCase()}${props.name.slice(SECOND_NAME_CHARACTER_INDEX)}`;
+  return (
+    props.nameToDisplay ??
+    `${props.name
+      .charAt(FIRST_NAME_CHARACTER_INDEX)
+      .toUpperCase()}${props.name.slice(SECOND_NAME_CHARACTER_INDEX)}`
+  );
 });
 
 const finalDefaultOptionId = props.defaultOptionId ?? 1;

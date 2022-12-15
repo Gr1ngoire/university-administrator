@@ -5,7 +5,7 @@ import type {
   ToggleState,
 } from "@/common/types/types";
 import { reactive, useStore } from "@/hooks/hooks";
-import { DepartmentsActions } from "@/store/actions.common";
+import { AdministrationActions } from "@/store/actions.common";
 import { UpdateDepartmentForm } from "./components/components";
 
 import styles from "./styles.module.scss";
@@ -23,7 +23,7 @@ const props = defineProps<Props>();
 const store = useStore();
 
 const handleDeletion = (): void => {
-  store.dispatch(DepartmentsActions.DELETE_DEPARTMENT, props.id);
+  store.dispatch(AdministrationActions.DELETE_DEPARTMENT, props.id);
 };
 
 const initialFormShowState: ToggleState = { state: false };

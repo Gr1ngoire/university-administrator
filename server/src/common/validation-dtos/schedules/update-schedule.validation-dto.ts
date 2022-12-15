@@ -7,11 +7,6 @@ import {
 } from 'src/common/decorators/decorators';
 
 export class UpdateScheduleValidationDto {
-  @IsString()
-  @IsNotEmpty()
-  @IsOptional()
-  name: string;
-
   @IsInt()
   @Type(() => Number)
   @IsOptional()

@@ -1,20 +1,17 @@
 <script lang="ts" setup>
 import { CreateTeacherForm, TeachersCardsList } from "./components/components";
 import { computed, ref, useStore } from "@/hooks/hooks";
-import { TeachersActions } from "@/store/actions.common";
 import { Button } from "@/common/components/components";
 
 import styles from "./styles.module.scss";
 
 const store = useStore();
-const teachers = computed(() => store.state.teachers.teachers);
+const teachers = computed(() => store.state.administration.teachers);
 
 const teacherCreationFormShowState = ref<boolean>(false);
 const handleToggle: () => void = (): void => {
   teacherCreationFormShowState.value = !teacherCreationFormShowState.value;
 };
-
-store.dispatch(TeachersActions.GET_ALL_TEACHERS);
 </script>
 
 <template>

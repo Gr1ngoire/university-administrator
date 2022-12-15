@@ -4,7 +4,7 @@ import type { CreateDisciplineRequestDto } from "@/common/types/types";
 import type { ValidationError } from "@/exceptions/exceptions";
 import { discipline as disciplinesValidator } from "@/validators/validators";
 import { reactive, useStore } from "@/hooks/hooks";
-import { DisciplinesActions } from "@/store/actions.common";
+import { AdministrationActions } from "@/store/actions.common";
 
 import styles from "./styles.module.scss";
 
@@ -59,7 +59,7 @@ const handleSubmit: (event: Event) => void = (event: Event) => {
     )
   ) {
     store.dispatch(
-      DisciplinesActions.CREATE_DISCIPLINE,
+      AdministrationActions.CREATE_DISCIPLINE,
       disciplineCreationFormState
     );
     props.onToggle();

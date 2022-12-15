@@ -2,6 +2,7 @@ import Departments from "./departments/departments.vue";
 import Disciplines from "./disciplines/disciplines.vue";
 import Faculties from "./faculties/faculties.vue";
 import Groups from "./groups/groups.vue";
+import Schedule from "./schedules/schedules.vue";
 import Students from "./students/students.vue";
 import Teachers from "./teachers/teachers.vue";
 
@@ -13,6 +14,7 @@ export {
   Disciplines,
   Faculties,
   Groups,
+  Schedule,
   Students,
   Teachers,
 };

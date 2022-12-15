@@ -2,7 +2,7 @@
 import { Button } from "@/common/components/components";
 import type { ToggleState } from "@/common/types/types";
 import { reactive, useStore } from "@/hooks/hooks";
-import { FacultiesActions } from "@/store/actions.common";
+import { AdministrationActions } from "@/store/actions.common";
 import { UpdateFacultyForm } from "./components/components";
 
 import styles from "./styles.module.scss";
@@ -18,7 +18,7 @@ const props = defineProps<Props>();
 const store = useStore();
 
 const handleDeletion = (): void => {
-  store.dispatch(FacultiesActions.DELETE_FACULTY, props.id);
+  store.dispatch(AdministrationActions.DELETE_FACULTY, props.id);
 };
 
 const initialFormShowState: ToggleState = { state: false };

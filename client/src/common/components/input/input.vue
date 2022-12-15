@@ -10,6 +10,7 @@ type Props = {
   errorMessage: string;
   onInput: (event: Event) => void;
   value?: string;
+  nameToDisplay?: string;
   max?: number;
   min?: number;
 };
@@ -19,9 +20,12 @@ const props = defineProps<Props>();
 const FIRST_NAME_CHARACTER_INDEX = 0;
 const SECOND_NAME_CHARACTER_INDEX = 1;
 const firstLetterUppercased = computed(() => {
-  return `${props.name
-    .charAt(FIRST_NAME_CHARACTER_INDEX)
-    .toUpperCase()}${props.name.slice(SECOND_NAME_CHARACTER_INDEX)}`;
+  return (
+    props.nameToDisplay ??
+    `${props.name
+      .charAt(FIRST_NAME_CHARACTER_INDEX)
+      .toUpperCase()}${props.name.slice(SECOND_NAME_CHARACTER_INDEX)}`
+  );
 });
 </script>
 

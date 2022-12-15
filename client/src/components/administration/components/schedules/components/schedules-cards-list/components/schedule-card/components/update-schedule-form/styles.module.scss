@@ -1,0 +1,41 @@
+.scheduleUpdateForm {
+  @extend %centered-flex-row;
+
+  margin-right: 10px;
+  padding: 5px 15px 5px 15px;
+  border-radius: 10px;
+  background: $primary-brand-color;
+}
+
+.scheduleUpdateActionSectionWrapper {
+  @extend %centered-flex-column;
+
+  width: 100%;
+}
+
+.scheduleEditFieldsWrapper {
+  @extend %centered-flex-column;
+
+  width: 100%;
+}
+
+.scheduleEditInputWrapper {
+  padding: 0 10px 0 10px;
+  width: 100%;
+
+  & label {
+    color: $secondary-brand-color;
+  }
+}
+
+.scheduleEditSelectWrapper {
+  width: 95%;
+  margin-top: 5px;
+}
+
+.scheduleActionButtonsWrapper {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  margin: 15px 0 10px 0;
+}

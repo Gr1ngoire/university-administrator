@@ -6,10 +6,6 @@ import {
 } from 'src/common/decorators/decorators';
 
 export class CreateScheduleValidationDto {
-  @IsString()
-  @IsNotEmpty()
-  name: string;
-
   @IsInt()
   @Type(() => Number)
   teacherId: number;

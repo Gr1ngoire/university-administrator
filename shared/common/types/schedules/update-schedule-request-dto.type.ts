@@ -1,5 +1,4 @@
 type UpdateScheduleRequestDto = {
-  name: string;
   teacherId: number;
   disciplineId: number;
   groupId: number;

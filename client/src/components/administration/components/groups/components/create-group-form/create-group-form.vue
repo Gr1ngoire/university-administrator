@@ -4,7 +4,7 @@ import type { CreateGroupRequestDto } from "@/common/types/types";
 import type { ValidationError } from "@/exceptions/exceptions";
 import { group as groupValidator } from "@/validators/validators";
 import { computed, reactive, useStore } from "@/hooks/hooks";
-import { GroupsActions } from "@/store/actions.common";
+import { AdministrationActions } from "@/store/actions.common";
 
 import styles from "./styles.module.scss";
 
@@ -16,7 +16,7 @@ const props = defineProps<Props>();
 
 const store = useStore();
 
-const departments = computed(() => store.state.departments.departments);
+const departments = computed(() => store.state.administration.departments);
 const departmentSelectOptions = departments.value.map(({ id, name }) => ({
   id,
   name,
@@ -72,7 +72,7 @@ const handleSubmit: (event: Event) => void = (event: Event) => {
   if (
     Object.values(groupCreationValidationState).every((el) => el.length === 0)
   ) {
-    store.dispatch(GroupsActions.CREATE_GROUP, groupCreationFormState);
+    store.dispatch(AdministrationActions.CREATE_GROUP, groupCreationFormState);
     props.onToggle();
   }
 };
@@ -101,6 +101,7 @@ handleGroupCreationValidation(groupCreationFormState);
     <div :class="styles.selectWrapper">
       <Select
         name="departmentId"
+        nameToDisplay="Department"
         :options="departmentSelectOptions"
         :onSelect="handleGroupPropertyChange"
       />

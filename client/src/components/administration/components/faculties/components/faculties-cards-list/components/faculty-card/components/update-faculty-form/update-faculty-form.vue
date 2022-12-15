@@ -7,7 +7,7 @@ import type {
 import { reactive, useStore } from "@/hooks/hooks";
 import { faculty as facultyValidator } from "@/validators/validators";
 import type { ValidationError } from "@/exceptions/exceptions";
-import { FacultiesActions } from "@/store/actions.common";
+import { AdministrationActions } from "@/store/actions.common";
 
 import styles from "./styles.module.scss";
 
@@ -62,7 +62,7 @@ const handleSubmit: (event: Event) => void = (event: Event) => {
   if (
     Object.values(facultyUpdateValidationState).every((el) => el.length === 0)
   ) {
-    store.dispatch(FacultiesActions.UPDATE_FACULTY, {
+    store.dispatch(AdministrationActions.UPDATE_FACULTY, {
       id: props.initialFaculty.id,
       payload: facultyUpdateFormState,
     });
@@ -88,6 +88,7 @@ const handleSubmit: (event: Event) => void = (event: Event) => {
           <Input
             type="text"
             name="shortName"
+            nameToDisplay="Short name"
             :value="facultyUpdateFormState.shortName"
             :onInput="handleFacultyPropertyChange"
             :errorMessage="facultyUpdateValidationState.shortName"

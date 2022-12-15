@@ -4,6 +4,7 @@ import {
   Disciplines,
   Faculties,
   Groups,
+  Schedule,
   Students,
   Teachers,
 } from "../components/components";
@@ -44,6 +45,11 @@ const defaultAdministratableOptions: AdministratableOption[] = [
     id: 6,
     name: "Students",
     component: Students,
+  },
+  {
+    id: 7,
+    name: "Schedules",
+    component: Schedule,
   },
 ];
 

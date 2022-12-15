@@ -1,20 +1,17 @@
 <script lang="ts" setup>
 import { CreateFacultyForm, FacultiesCardsList } from "./components/components";
 import { computed, ref, useStore } from "@/hooks/hooks";
-import { FacultiesActions } from "@/store/actions.common";
 import { Button } from "@/common/components/components";
 
 import styles from "./styles.module.scss";
 
 const store = useStore();
-const faculties = computed(() => store.state.faculties.faculties);
+const faculties = computed(() => store.state.administration.faculties);
 
 const facultyCreationFormShowState = ref<boolean>(false);
 const handleToggle: () => void = (): void => {
   facultyCreationFormShowState.value = !facultyCreationFormShowState.value;
 };
-
-store.dispatch(FacultiesActions.GET_ALL_FACULTIES);
 </script>
 
 <template>

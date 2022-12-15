@@ -4,7 +4,7 @@ import type { CreateTeacherRequestDto } from "@/common/types/types";
 import type { ValidationError } from "@/exceptions/exceptions";
 import { teacher as teacherValidator } from "@/validators/validators";
 import { reactive, useStore } from "@/hooks/hooks";
-import { TeachersActions } from "@/store/actions.common";
+import { AdministrationActions } from "@/store/actions.common";
 
 import styles from "./styles.module.scss";
 
@@ -62,7 +62,10 @@ const handleSubmit: (event: Event) => void = (event: Event) => {
   if (
     Object.values(teacherCreationValidationState).every((el) => el.length === 0)
   ) {
-    store.dispatch(TeachersActions.CREATE_TEACHER, teacherCreationFormState);
+    store.dispatch(
+      AdministrationActions.CREATE_TEACHER,
+      teacherCreationFormState
+    );
     props.onToggle();
   }
 };

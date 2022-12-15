@@ -35,6 +35,13 @@ export {
 } from "./groups/groups";
 export { type HttpOptions } from "./http/http";
 export {
+  type CreateScheduleRequestDto,
+  type SchedulesGetAllItemResponseDto,
+  type SchedulesGetAllResponseDto,
+  type UpdateScheduleRequestDto,
+  type UpdateScheduleRequestParams,
+} from "./schedules/schedules";
+export {
   type CreateStudentRequestDto,
   type StudentsGetAllItemResponseDto,
   type StudentsGetAllResponseDto,

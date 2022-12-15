@@ -27,6 +27,8 @@ export {
 } from './news/news';
 export {
   type CreateScheduleRequestDto,
+  type SchedulesGetAllItemResponseDto,
+  type SchedulesGetAllResponseDto,
   type UpdateScheduleRequestDto,
 } from './schedules/schedule';
 export {

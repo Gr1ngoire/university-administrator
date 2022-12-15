@@ -8,6 +8,8 @@ enum ValidationExceptionMessages {
   EMAIL_SHOULD_BE_IN_PROPER_FORMAT = "Email should be in proper format",
   PHONE_CAN_NOT_BE_EMPTY = "Phone can not be empty",
   PHONE_SHOULD_BE_IN_PROPER_FORMAT = "Phone should be in proper format",
+  TIME_CAN_NOT_BE_EMPTY = "Time can not be empty",
+  CLASSROOM_CAN_NOT_BE_EMPTY = "Classroom can not be empty",
 }
 
 export { ValidationExceptionMessages };

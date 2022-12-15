@@ -24,6 +24,7 @@ store.dispatch(AdministrationActions.GET_ALL_TEACHERS);
 store.dispatch(AdministrationActions.GET_ALL_DEPARTMENTS);
 store.dispatch(AdministrationActions.GET_ALL_GROUPS);
 store.dispatch(AdministrationActions.GET_ALL_STUDENTS);
+store.dispatch(AdministrationActions.GET_ALL_SCHEDULES);
 </script>
 
 <template>

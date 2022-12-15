@@ -81,6 +81,7 @@ handleFacultyCreationValidation(facultyCreationFormState);
     <Input
       type="text"
       name="shortName"
+      nameToDisplay="Short name"
       :onInput="handleFacultyPropertyChange"
       :value="facultyCreationFormState.shortName"
       :errorMessage="facultyCreationValidationState.shortName"

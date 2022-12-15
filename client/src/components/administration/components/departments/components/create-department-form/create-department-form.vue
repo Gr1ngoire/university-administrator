@@ -94,6 +94,7 @@ handleDepartmentCreationValidation(departmentCreationFormState);
     <Input
       type="text"
       name="shortName"
+      nameToDisplay="Short name"
       :onInput="handleDepartmentPropertyChange"
       :value="departmentCreationFormState.shortName"
       :errorMessage="departmentCreationValidationState.shortName"
@@ -101,6 +102,7 @@ handleDepartmentCreationValidation(departmentCreationFormState);
     <div :class="styles.selectWrapper">
       <Select
         name="facultyId"
+        nameToDisplay="Faculty"
         :options="facultySelectOptions"
         :onSelect="handleDepartmentPropertyChange"
       />

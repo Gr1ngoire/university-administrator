@@ -107,6 +107,7 @@ const handleSubmit: (event: Event) => void = (event: Event) => {
         <div :class="styles.groupEditSelectWrapper">
           <Select
             name="departmentId"
+            nameToDisplay="Department"
             :options="departmentSelectOptions"
             :onSelect="handleGroupPropertyChange"
             :defaultOptionId="initialGroup.departmentId"

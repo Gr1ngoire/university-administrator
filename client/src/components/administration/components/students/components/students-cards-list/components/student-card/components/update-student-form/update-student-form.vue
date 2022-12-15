@@ -111,14 +111,15 @@ const handleSubmit: (event: Event) => void = (event: Event) => {
             :onInput="handleStudentPropertyChange"
             :errorMessage="studentUpdateValidationState.phone"
           />
-          <div :class="styles.studentEditSelectWrapper">
-            <Select
-              name="groupId"
-              :options="groupSelectOptions"
-              :onSelect="handleStudentPropertyChange"
-              :defaultOptionId="initialStudent.groupId"
-            />
-          </div>
+        </div>
+        <div :class="styles.studentEditSelectWrapper">
+          <Select
+            name="groupId"
+            nameToDisplay="Group"
+            :options="groupSelectOptions"
+            :onSelect="handleStudentPropertyChange"
+            :defaultOptionId="initialStudent.groupId"
+          />
         </div>
         <div :class="styles.studentActionButtonsWrapper">
           <Button type="submit" name="Update" action="submit" />

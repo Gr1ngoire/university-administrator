@@ -1,4 +1,4 @@
-.studentUpdateForm {
+.scheduleUpdateForm {
   @extend %centered-flex-row;
 
   margin-right: 10px;
@@ -7,19 +7,19 @@
   background: $primary-brand-color;
 }
 
-.studentUpdateActionSectionWrapper {
+.scheduleUpdateActionSectionWrapper {
   @extend %centered-flex-column;
 
   width: 100%;
 }
 
-.studentEditFieldsWrapper {
+.scheduleEditFieldsWrapper {
   @extend %centered-flex-column;
 
   width: 100%;
 }
 
-.studentEditInputWrapper {
+.scheduleEditInputWrapper {
   padding: 0 10px 0 10px;
   width: 100%;
 
@@ -28,12 +28,12 @@
   }
 }
 
-.studentEditSelectWrapper {
+.scheduleEditSelectWrapper {
   width: 95%;
   margin-top: 5px;
 }
 
-.studentActionButtonsWrapper {
+.scheduleActionButtonsWrapper {
   width: 100%;
   display: flex;
   justify-content: space-between;

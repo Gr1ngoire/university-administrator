@@ -98,6 +98,7 @@ const handleSubmit: (event: Event) => void = (event: Event) => {
           <Input
             type="text"
             name="shortName"
+            nameToDisplay="Short name"
             :value="departmentUpdateFormState.shortName"
             :onInput="handleDepartmentPropertyChange"
             :errorMessage="departmentUpdateValidationState.shortName"
@@ -106,6 +107,7 @@ const handleSubmit: (event: Event) => void = (event: Event) => {
         <div :class="styles.departmentEditSelectWrapper">
           <Select
             name="facultyId"
+            nameToDisplay="Faculty"
             :options="facultySelectOptions"
             :onSelect="handleDepartmentPropertyChange"
             :defaultOptionId="initialDepartment.facultyId"

@@ -88,6 +88,7 @@ const handleSubmit: (event: Event) => void = (event: Event) => {
           <Input
             type="text"
             name="shortName"
+            nameToDisplay="Short name"
             :value="facultyUpdateFormState.shortName"
             :onInput="handleFacultyPropertyChange"
             :errorMessage="facultyUpdateValidationState.shortName"

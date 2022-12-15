@@ -101,6 +101,7 @@ handleGroupCreationValidation(groupCreationFormState);
     <div :class="styles.selectWrapper">
       <Select
         name="departmentId"
+        nameToDisplay="Department"
         :options="departmentSelectOptions"
         :onSelect="handleGroupPropertyChange"
       />

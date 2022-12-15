@@ -17,7 +17,7 @@ const props = defineProps<Props>();
 const store = useStore();
 
 const groups = computed(() => store.state.administration.groups);
-const departmentSelectOptions = groups.value.map(({ id, name }) => ({
+const groupSelectOptions = groups.value.map(({ id, name }) => ({
   id,
   name,
   value: String(id),
@@ -108,7 +108,8 @@ handleStudentCreationValidation(studentCreationFormState);
     <div :class="styles.selectWrapper">
       <Select
         name="groupId"
-        :options="departmentSelectOptions"
+        nameToDisplay="Group"
+        :options="groupSelectOptions"
         :onSelect="handleStudentPropertyChange"
       />
     </div>

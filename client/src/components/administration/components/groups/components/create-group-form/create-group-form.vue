@@ -72,7 +72,7 @@ const handleSubmit: (event: Event) => void = (event: Event) => {
   if (
     Object.values(groupCreationValidationState).every((el) => el.length === 0)
   ) {
-    store.dispatch(GroupsActions.CREATE_GROUPS, groupCreationFormState);
+    store.dispatch(GroupsActions.CREATE_GROUP, groupCreationFormState);
     props.onToggle();
   }
 };

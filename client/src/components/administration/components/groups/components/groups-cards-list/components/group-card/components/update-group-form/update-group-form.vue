@@ -72,7 +72,7 @@ const handleSubmit: (event: Event) => void = (event: Event) => {
   if (
     Object.values(groupUpdateValidationState).every((el) => el.length === 0)
   ) {
-    store.dispatch(GroupsActions.UPDATE_GROUPS, {
+    store.dispatch(GroupsActions.UPDATE_GROUP, {
       id: props.initialGroup.id,
       payload: groupUpdateFormState,
     });

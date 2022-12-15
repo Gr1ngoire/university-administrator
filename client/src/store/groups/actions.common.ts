@@ -1,8 +1,8 @@
 enum Actions {
   GET_ALL_GROUPS = "groups/getAllGroups",
-  CREATE_GROUPS = "groups/createGroup",
-  UPDATE_GROUPS = "groups/updateGroup",
-  DELETE_GROUPS = "groups/deleteGroup",
+  CREATE_GROUP = "groups/createGroup",
+  UPDATE_GROUP = "groups/updateGroup",
+  DELETE_GROUP = "groups/deleteGroup",
 }
 
 export { Actions };

@@ -65,7 +65,9 @@ const mutations: MutationTree<State> = {
   },
 
   [Mutations.REMOVE_STUDENT](state: State, studentId: number) {
-    state.students = state.students.filter((group) => group.id !== studentId);
+    state.students = state.students.filter(
+      (student) => student.id !== studentId
+    );
   },
 
   [Mutations.CLEAR_STUDENTS](state: State) {
@@ -109,10 +111,10 @@ const actions: ActionTree<State, RootState> = {
 
   async [Actions.DELETE_STUDENT](
     { commit }: ActionContext<State, RootState>,
-    groupId: number
+    studentId: number
   ) {
     state.dataStatus = DataStatus.PENDING;
-    const id = await studentsService.delete(groupId);
+    const id = await studentsService.delete(studentId);
 
     commit(Mutations.REMOVE_STUDENT, id);
     state.dataStatus = DataStatus.FULFILLED;

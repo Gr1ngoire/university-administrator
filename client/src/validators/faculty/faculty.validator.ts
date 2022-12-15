@@ -1,10 +1,10 @@
 import { ValidationExceptionMessages } from "@/common/enums/enums";
-import type { CreateDepartmentRequestDto } from "@/common/types/types";
+import type { CreateFacultyRequestDto } from "@/common/types/types";
 import { ValidationError } from "@/exceptions/exceptions";
-import { Abstract } from "./abstract.validator";
+import { Abstract } from "../abstract/abstract.validator";
 
-class Department extends Abstract<CreateDepartmentRequestDto> {
-  validate(toValidate: CreateDepartmentRequestDto): void {
+class Faculty extends Abstract<CreateFacultyRequestDto> {
+  validate(toValidate: CreateFacultyRequestDto): void {
     const { name, shortName } = toValidate;
 
     this.validateName(name);
@@ -34,4 +34,4 @@ class Department extends Abstract<CreateDepartmentRequestDto> {
   }
 }
 
-export { Department };
+export { Faculty };

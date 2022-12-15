@@ -1,16 +1,15 @@
-import { Abstract } from "./abstract.validator";
-import type { CreateTeacherRequestDto } from "@/common/types/types";
+import { Abstract } from "../abstract/abstract.validator";
+import type { CreateStudentRequestDto } from "@/common/types/types";
 import { ValidationError } from "@/exceptions/exceptions";
 import { ValidationExceptionMessages } from "@/common/enums/enums";
 
-class Teacher extends Abstract<CreateTeacherRequestDto> {
-  validate(toValidate: CreateTeacherRequestDto): void {
-    const { name, surname, email, phone } = toValidate;
+class Student extends Abstract<CreateStudentRequestDto> {
+  validate(toValidate: CreateStudentRequestDto): void {
+    const { email, phone, name } = toValidate;
 
     this.validateEmail(email);
     this.validateUkrainianPhone(phone);
     this.validateName(name);
-    this.validateSurname(surname);
   }
 
   private validateEmail(value: string): void {
@@ -61,17 +60,6 @@ class Teacher extends Abstract<CreateTeacherRequestDto> {
       });
     }
   }
-
-  private validateSurname(value: string): void {
-    const validateField = "surname";
-
-    if (value.length === 0) {
-      throw new ValidationError({
-        field: validateField,
-        message: ValidationExceptionMessages.SURNAME_CAN_NOT_BE_EMPTY,
-      });
-    }
-  }
 }
 
-export { Teacher };
+export { Student };

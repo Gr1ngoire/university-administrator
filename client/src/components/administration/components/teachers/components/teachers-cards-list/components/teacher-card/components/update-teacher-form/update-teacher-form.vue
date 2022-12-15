@@ -7,7 +7,7 @@ import type {
 import { reactive, useStore } from "@/hooks/hooks";
 import { teacher as teacherValidator } from "@/validators/validators";
 import type { ValidationError } from "@/exceptions/exceptions";
-import { TeachersActions } from "@/store/actions.common";
+import { AdministrationActions } from "@/store/actions.common";
 
 import styles from "./styles.module.scss";
 
@@ -66,7 +66,7 @@ const handleSubmit: (event: Event) => void = (event: Event) => {
   if (
     Object.values(teacherUpdateValidationState).every((el) => el.length === 0)
   ) {
-    store.dispatch(TeachersActions.UPDATE_TEACHER, {
+    store.dispatch(AdministrationActions.UPDATE_TEACHER, {
       id: props.initialTeacher.id,
       payload: teacherUpdateFormState,
     });

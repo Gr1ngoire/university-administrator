@@ -4,7 +4,7 @@ import type { CreateFacultyRequestDto } from "@/common/types/types";
 import type { ValidationError } from "@/exceptions/exceptions";
 import { faculty as facultyValidator } from "@/validators/validators";
 import { reactive, useStore } from "@/hooks/hooks";
-import { FacultiesActions } from "@/store/actions.common";
+import { AdministrationActions } from "@/store/actions.common";
 
 import styles from "./styles.module.scss";
 
@@ -58,7 +58,10 @@ const handleSubmit: (event: Event) => void = (event: Event) => {
   if (
     Object.values(facultyCreationValidationState).every((el) => el.length === 0)
   ) {
-    store.dispatch(FacultiesActions.CREATE_FACULTY, facultyCreationFormState);
+    store.dispatch(
+      AdministrationActions.CREATE_FACULTY,
+      facultyCreationFormState
+    );
     props.onToggle();
   }
 };

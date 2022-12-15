@@ -7,7 +7,7 @@ import type {
 import { computed, reactive, useStore } from "@/hooks/hooks";
 import { student as studentValidator } from "@/validators/validators";
 import type { ValidationError } from "@/exceptions/exceptions";
-import { StudentsActions } from "@/store/actions.common";
+import { AdministrationActions } from "@/store/actions.common";
 
 import styles from "./styles.module.scss";
 
@@ -19,7 +19,7 @@ type Props = {
 const props = defineProps<Props>();
 
 const store = useStore();
-const groups = computed(() => store.state.groups.groups);
+const groups = computed(() => store.state.administration.groups);
 const groupSelectOptions = groups.value.map(({ id, name }) => ({
   id,
   name,
@@ -72,7 +72,7 @@ const handleSubmit: (event: Event) => void = (event: Event) => {
   if (
     Object.values(studentUpdateValidationState).every((el) => el.length === 0)
   ) {
-    store.dispatch(StudentsActions.UPDATE_STUDENT, {
+    store.dispatch(AdministrationActions.UPDATE_STUDENT, {
       id: props.initialStudent.id,
       payload: studentUpdateFormState,
     });

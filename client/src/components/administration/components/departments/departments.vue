@@ -4,15 +4,14 @@ import {
   DepartmentsCardsList,
 } from "./components/components";
 import { computed, ref, useStore } from "@/hooks/hooks";
-import { DepartmentsActions, FacultiesActions } from "@/store/actions.common";
 import { Button } from "@/common/components/components";
 
 import styles from "./styles.module.scss";
 
 const store = useStore();
-const departments = computed(() => store.state.departments.departments);
+const departments = computed(() => store.state.administration.departments);
 const isDepartmentCrеationPossible = computed(
-  () => store.state.faculties.faculties.length > 0
+  () => store.state.administration.faculties.length > 0
 );
 
 const departmentCreationFormShowState = ref<boolean>(false);
@@ -20,9 +19,6 @@ const handleToggle: () => void = (): void => {
   departmentCreationFormShowState.value =
     !departmentCreationFormShowState.value;
 };
-
-store.dispatch(FacultiesActions.GET_ALL_FACULTIES);
-store.dispatch(DepartmentsActions.GET_ALL_DEPARTMENTS);
 </script>
 
 <template>

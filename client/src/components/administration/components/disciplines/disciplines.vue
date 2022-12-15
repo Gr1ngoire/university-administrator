@@ -4,21 +4,18 @@ import {
   DisciplinesCardList,
 } from "./components/components";
 import { computed, ref, useStore } from "@/hooks/hooks";
-import { DisciplinesActions } from "@/store/actions.common";
 import { Button } from "@/common/components/components";
 
 import styles from "./styles.module.scss";
 
 const store = useStore();
-const disciplines = computed(() => store.state.disciplines.disciplines);
+const disciplines = computed(() => store.state.administration.disciplines);
 
 const disciplineCreationFormShowState = ref<boolean>(false);
 const handleToggle: () => void = (): void => {
   disciplineCreationFormShowState.value =
     !disciplineCreationFormShowState.value;
 };
-
-store.dispatch(DisciplinesActions.GET_ALL_DISICPLINES);
 </script>
 
 <template>

@@ -7,7 +7,7 @@ import type {
 import { computed, reactive, useStore } from "@/hooks/hooks";
 import { department as departmentValidator } from "@/validators/validators";
 import type { ValidationError } from "@/exceptions/exceptions";
-import { DepartmentsActions } from "@/store/actions.common";
+import { AdministrationActions } from "@/store/actions.common";
 
 import styles from "./styles.module.scss";
 
@@ -19,7 +19,7 @@ type Props = {
 const props = defineProps<Props>();
 
 const store = useStore();
-const faculties = computed(() => store.state.faculties.faculties);
+const faculties = computed(() => store.state.administration.faculties);
 const facultySelectOptions = faculties.value.map(({ id, name }) => ({
   id,
   name,
@@ -72,7 +72,7 @@ const handleSubmit: (event: Event) => void = (event: Event) => {
       (el) => el.length === 0
     )
   ) {
-    store.dispatch(DepartmentsActions.UPDATE_DEPARTMENT, {
+    store.dispatch(AdministrationActions.UPDATE_DEPARTMENT, {
       id: props.initialDepartment.id,
       payload: departmentUpdateFormState,
     });

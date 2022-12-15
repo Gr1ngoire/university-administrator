@@ -4,7 +4,7 @@ import type { CreateStudentRequestDto } from "@/common/types/types";
 import type { ValidationError } from "@/exceptions/exceptions";
 import { student as studentValidator } from "@/validators/validators";
 import { computed, reactive, useStore } from "@/hooks/hooks";
-import { StudentsActions } from "@/store/actions.common";
+import { AdministrationActions } from "@/store/actions.common";
 
 import styles from "./styles.module.scss";
 
@@ -16,7 +16,7 @@ const props = defineProps<Props>();
 
 const store = useStore();
 
-const groups = computed(() => store.state.groups.groups);
+const groups = computed(() => store.state.administration.groups);
 const departmentSelectOptions = groups.value.map(({ id, name }) => ({
   id,
   name,
@@ -71,7 +71,10 @@ const handleSubmit: (event: Event) => void = (event: Event) => {
   if (
     Object.values(studentCreationValidationState).every((el) => el.length === 0)
   ) {
-    store.dispatch(StudentsActions.CREATE_STUDENT, studentCreationFormState);
+    store.dispatch(
+      AdministrationActions.CREATE_STUDENT,
+      studentCreationFormState
+    );
     props.onToggle();
   }
 };

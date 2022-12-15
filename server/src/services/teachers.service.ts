@@ -80,16 +80,18 @@ export class TeachersService {
       throw new NotFoundException(ExceptionsMessages.TEACHER_NOT_FOUND);
     }
 
-    const teacherToCheckByEmail = await this.getModelByEmail(teacher.email);
+    if (teacher.email) {
+      const teacherToCheckByEmail = await this.getModelByEmail(teacher.email);
 
-    if (
-      teacherToCheckByEmail &&
-      teacher.email !== teacherToUpdate.email &&
-      idToUpdate !== teacherToCheckByEmail.id
-    ) {
-      throw new BadRequestException(
-        ExceptionsMessages.TEACHER_WITH_SUCH_EMAIL_ALREADY_EXISTS,
-      );
+      if (
+        teacherToCheckByEmail &&
+        teacher.email !== teacherToUpdate.email &&
+        idToUpdate !== teacherToCheckByEmail.id
+      ) {
+        throw new BadRequestException(
+          ExceptionsMessages.TEACHER_WITH_SUCH_EMAIL_ALREADY_EXISTS,
+        );
+      }
     }
 
     Object.assign(teacherToUpdate, teacher);

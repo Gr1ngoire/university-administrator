@@ -7,6 +7,8 @@ import {
 } from 'src/common/exceptions/excpetions';
 import {
   CreateStudentRequestDto,
+  StudentsGetAllItemResponseDto,
+  StudentsGetAllResponseDto,
   UpdateStudentRequestDto,
 } from 'src/common/types/types';
 import { GroupsService } from 'src/services/services';
@@ -23,19 +25,7 @@ export class StudentsService {
     return this.repository.findOne({ where: { email } });
   }
 
-  getAll(): Promise<Student[]> {
-    return this.repository.find({
-      relations: {
-        group: {
-          department: {
-            faculty: true,
-          },
-        },
-      },
-    });
-  }
-
-  getById(id: number): Promise<Student | null> {
+  getModelById(id: number): Promise<Student | null> {
     return this.repository.findOne({
       where: { id },
       relations: {
@@ -48,7 +38,43 @@ export class StudentsService {
     });
   }
 
-  async create(student: CreateStudentRequestDto): Promise<Student> {
+  async getAll(): Promise<StudentsGetAllResponseDto> {
+    const studentsModels = await this.repository.find({
+      relations: {
+        group: {
+          department: {
+            faculty: true,
+          },
+        },
+      },
+    });
+
+    return {
+      items: studentsModels.map(
+        ({ id, name, email, phone, group, groupId }) => ({
+          id,
+          name,
+          email,
+          phone,
+          group,
+          groupId,
+        }),
+      ),
+    };
+  }
+
+  async getById(
+    idToFind: number,
+  ): Promise<StudentsGetAllItemResponseDto | null> {
+    const student = await this.getModelById(idToFind);
+
+    const { id, name, email, phone, groupId, group } = student;
+    return { id, name, email, phone, groupId, group };
+  }
+
+  async create(
+    student: CreateStudentRequestDto,
+  ): Promise<StudentsGetAllItemResponseDto> {
     const studentWithSameEmail = await this.getByEmail(student.email);
 
     if (studentWithSameEmail) {
@@ -66,15 +92,16 @@ export class StudentsService {
     const newStudent = this.repository.create(student);
 
     const createdStudent = await this.repository.save(newStudent);
+    const { id, name, email, phone, group, groupId } = createdStudent;
 
-    return this.getById(createdStudent.id);
+    return { id, name, email, phone, group, groupId };
   }
 
   async update(
     id: number,
     student: Partial<UpdateStudentRequestDto>,
-  ): Promise<Student> {
-    const studentToUpdate = await this.getById(id);
+  ): Promise<StudentsGetAllItemResponseDto> {
+    const studentToUpdate = await this.getModelById(id);
 
     if (!studentToUpdate) {
       throw new NotFoundException(ExceptionsMessages.STUDENT_NOT_FOUND);
@@ -90,29 +117,37 @@ export class StudentsService {
       }
     }
 
-    const studentToCheckByEmail = await this.getByEmail(student.email);
+    if (student.email) {
+      const studentToCheckByEmail = await this.getByEmail(student.email);
 
-    if (
-      studentToCheckByEmail &&
-      student.email !== studentToUpdate.email &&
-      id !== studentToCheckByEmail.id
-    ) {
-      throw new BadRequestException(
-        ExceptionsMessages.STUDENT_WITH_SUCH_EMAIL_ALREADY_EXISTS,
-      );
+      if (
+        studentToCheckByEmail &&
+        student.email !== studentToUpdate.email &&
+        id !== studentToCheckByEmail.id
+      ) {
+        throw new BadRequestException(
+          ExceptionsMessages.STUDENT_WITH_SUCH_EMAIL_ALREADY_EXISTS,
+        );
+      }
     }
 
     Object.assign(studentToUpdate, student);
-    return this.repository.save(studentToUpdate);
+    const updatedStudent = await this.repository.save(studentToUpdate);
+
+    return this.getById(updatedStudent.id);
   }
 
-  async delete(id: number): Promise<Student> {
-    const student = await this.getById(id);
+  async delete(id: number): Promise<number> {
+    const student = await this.getModelById(id);
 
     if (!student) {
       throw new NotFoundException(ExceptionsMessages.STUDENT_NOT_FOUND);
     }
 
-    return this.repository.remove(student);
+    const { id: idToSend } = student;
+
+    await this.repository.remove(student);
+
+    return idToSend;
   }
 }

@@ -32,7 +32,7 @@ export class TeachersController {
   @Get(TeachersApi.$ID)
   async getById(@Param() params: GetByIdParams) {
     const { id } = params;
-    const teacher = await this.teachersService.getModelById(id);
+    const teacher = await this.teachersService.getById(id);
 
     if (!teacher) {
       throw new NotFoundException(ExceptionsMessages.TEACHER_NOT_FOUND);

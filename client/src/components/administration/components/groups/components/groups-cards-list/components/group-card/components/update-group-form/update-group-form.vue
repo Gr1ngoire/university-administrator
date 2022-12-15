@@ -26,12 +26,11 @@ const departmentSelectOptions = departments.value.map(({ id, name }) => ({
   value: String(id),
 }));
 
-let groupUpdateFormState: UpdateGroupRequestDto =
-  reactive<UpdateGroupRequestDto>({
-    name: props.initialGroup.name,
-    course: props.initialGroup.course,
-    departmentId: props.initialGroup.departmentId,
-  });
+let groupUpdateFormState: UpdateGroupRequestDto = {
+  name: props.initialGroup.name,
+  course: props.initialGroup.course,
+  departmentId: props.initialGroup.departmentId,
+};
 
 const groupUpdateValidationState: Record<string, string> = reactive<
   Record<string, string>
@@ -72,7 +71,7 @@ const handleSubmit: (event: Event) => void = (event: Event) => {
   if (
     Object.values(groupUpdateValidationState).every((el) => el.length === 0)
   ) {
-    store.dispatch(GroupsActions.UPDATE_GROUPS, {
+    store.dispatch(GroupsActions.UPDATE_GROUP, {
       id: props.initialGroup.id,
       payload: groupUpdateFormState,
     });

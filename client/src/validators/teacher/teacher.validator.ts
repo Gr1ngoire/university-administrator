@@ -1,4 +1,4 @@
-import { Abstract } from "./abstract.validator";
+import { Abstract } from "../abstract/abstract.validator";
 import type { CreateTeacherRequestDto } from "@/common/types/types";
 import { ValidationError } from "@/exceptions/exceptions";
 import { ValidationExceptionMessages } from "@/common/enums/enums";

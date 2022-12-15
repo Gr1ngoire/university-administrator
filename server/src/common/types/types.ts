@@ -31,6 +31,8 @@ export {
 } from './schedules/schedule';
 export {
   type CreateStudentRequestDto,
+  type StudentsGetAllItemResponseDto,
+  type StudentsGetAllResponseDto,
   type UpdateStudentRequestDto,
 } from './students/students';
 export {

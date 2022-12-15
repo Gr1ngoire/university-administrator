@@ -23,7 +23,7 @@ const props = defineProps<Props>();
 const store = useStore();
 
 const handleDeletion = (): void => {
-  store.dispatch(GroupsActions.DELETE_GROUPS, props.id);
+  store.dispatch(GroupsActions.DELETE_GROUP, props.id);
 };
 
 const initialFormShowState: ToggleState = { state: false };
@@ -41,8 +41,8 @@ const handleEditToggle: () => void = (): void => {
   />
   <div v-else-if="!groupUpdateFormShowState.state" :class="styles.groupCard">
     <p :class="styles.groupName">Name: {{ props.name }}</p>
-    <p :class="styles.groupShortName">Course: {{ props.course }}</p>
-    <p :class="styles.groupFacultyName">
+    <p :class="styles.groupCourse">Course: {{ props.course }}</p>
+    <p :class="styles.groupDepartmentName">
       Department: {{ props.department.name }}
     </p>
     <div :class="styles.actionsSection">

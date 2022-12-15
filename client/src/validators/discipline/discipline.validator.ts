@@ -1,7 +1,7 @@
 import { ValidationExceptionMessages } from "@/common/enums/enums";
 import type { CreateDisciplineRequestDto } from "@/common/types/types";
 import { ValidationError } from "@/exceptions/exceptions";
-import { Abstract } from "./abstract.validator";
+import { Abstract } from "../abstract/abstract.validator";
 
 class Discipline extends Abstract<CreateDisciplineRequestDto> {
   validate(toValidate: CreateDisciplineRequestDto): void {

@@ -32,7 +32,7 @@ export class FacultiesController {
   @Get(FacultiesApi.$ID)
   async getById(@Param() params: GetByIdParams) {
     const { id } = params;
-    const faculty = await this.facultiesService.getModelById(id);
+    const faculty = await this.facultiesService.getById(id);
 
     if (!faculty) {
       throw new NotFoundException(ExceptionsMessages.FACULTY_NOT_FOUND);

@@ -32,7 +32,7 @@ export class DepartmentsController {
   @Get(DepartmentsApi.$ID)
   async getById(@Param() params: GetByIdParams) {
     const { id } = params;
-    const department = await this.departmentsService.getModelById(id);
+    const department = await this.departmentsService.getById(id);
 
     if (!department) {
       throw new NotFoundException(ExceptionsMessages.DEPARTMENT_NOT_FOUND);

@@ -18,13 +18,12 @@ type Props = {
 
 const props = defineProps<Props>();
 
-let teacherUpdateFormState: UpdateTeacherRequestDto =
-  reactive<UpdateTeacherRequestDto>({
-    email: props.initialTeacher.email,
-    phone: props.initialTeacher.phone,
-    name: props.initialTeacher.name,
-    surname: props.initialTeacher.surname,
-  });
+let teacherUpdateFormState: UpdateTeacherRequestDto = {
+  email: props.initialTeacher.email,
+  phone: props.initialTeacher.phone,
+  name: props.initialTeacher.name,
+  surname: props.initialTeacher.surname,
+};
 
 const teacherUpdateValidationState: Record<string, string> = reactive<
   Record<string, string>

@@ -26,12 +26,11 @@ const facultySelectOptions = faculties.value.map(({ id, name }) => ({
   value: String(id),
 }));
 
-let departmentUpdateFormState: UpdateDepartmentRequestDto =
-  reactive<UpdateDepartmentRequestDto>({
-    name: props.initialDepartment.name,
-    shortName: props.initialDepartment.shortName,
-    facultyId: props.initialDepartment.facultyId,
-  });
+let departmentUpdateFormState: UpdateDepartmentRequestDto = {
+  name: props.initialDepartment.name,
+  shortName: props.initialDepartment.shortName,
+  facultyId: props.initialDepartment.facultyId,
+};
 
 const departmentUpdateValidationState: Record<string, string> = reactive<
   Record<string, string>

@@ -1,4 +1,4 @@
-.groupCard {
+.studentCard {
   flex-wrap: wrap;
   justify-content: space-between;
   margin-right: 10px;
@@ -9,17 +9,22 @@
   background: $primary-brand-color;
 }
 
-.groupName {
+.studentName {
   width: 70%;
   color: $secondary-brand-color;
 }
 
-.groupCourse {
+.studentEmail {
   width: 70%;
   color: $secondary-brand-color;
 }
 
-.groupDepartmentName {
+.studentPhone {
+  width: 70%;
+  color: $secondary-brand-color;
+}
+
+.studentGroupName {
   width: 70%;
   color: $secondary-brand-color;
 }

@@ -101,7 +101,7 @@ export class StudentsService {
     id: number,
     student: Partial<UpdateStudentRequestDto>,
   ): Promise<StudentsGetAllItemResponseDto> {
-    const studentToUpdate = await this.getModelById(id);
+    const studentToUpdate = await this.repository.findOne({ where: { id } });
 
     if (!studentToUpdate) {
       throw new NotFoundException(ExceptionsMessages.STUDENT_NOT_FOUND);

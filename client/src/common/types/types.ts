@@ -39,6 +39,7 @@ export {
   type NewsGetAllItemResponseDto,
   type NewsGetAllResponseDto,
   type UpdateNewsRequestDto,
+  type UpdateNewsRequestParams,
 } from "./news/news";
 export {
   type CreateScheduleRequestDto,

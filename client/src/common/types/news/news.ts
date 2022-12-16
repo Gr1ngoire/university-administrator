@@ -1,3 +1,4 @@
+export { type UpdateNewsRequestParams } from "./update-news-request-params.type";
 export {
   type CreateNewsRequestDto,
   type NewsGetAllItemResponseDto,

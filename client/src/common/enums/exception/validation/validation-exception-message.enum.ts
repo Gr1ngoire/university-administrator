@@ -10,6 +10,7 @@ enum ValidationExceptionMessages {
   PHONE_CAN_NOT_BE_EMPTY = "Phone can not be empty",
   PHONE_SHOULD_BE_IN_PROPER_FORMAT = "Phone should be in proper format",
   TIME_CAN_NOT_BE_EMPTY = "Time can not be empty",
+  TIME_FIELD_FORMAT = "Time field format should be DD.MM.YYYY HH:MM",
   TITLE_CAN_NOT_BE_EMPTY = "Title can not be empty",
   CLASSROOM_CAN_NOT_BE_EMPTY = "Classroom can not be empty",
 }

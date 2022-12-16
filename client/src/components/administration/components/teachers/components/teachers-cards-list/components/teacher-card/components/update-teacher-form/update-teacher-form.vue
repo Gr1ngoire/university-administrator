@@ -7,7 +7,7 @@ import type {
 import { reactive, useStore } from "@/hooks/hooks";
 import { teacher as teacherValidator } from "@/validators/validators";
 import type { ValidationError } from "@/exceptions/exceptions";
-import { AdministrationActions } from "@/store/actions.common";
+import { AdministrationActions } from "@/store/actions
 
 import styles from "./styles.module.scss";
 

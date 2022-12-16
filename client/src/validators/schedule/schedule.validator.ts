@@ -20,6 +20,15 @@ class Schedule extends Abstract<CreateScheduleRequestDto> {
         message: ValidationExceptionMessages.TIME_CAN_NOT_BE_EMPTY,
       });
     }
+
+    const SCHEDULE_TIME_VALIDATION =
+      /^([1-9]|1[0-2])\.([1-9]|1[0-9]|2[0-9]|3[0-1])\.([1-9][0-9]*) ([1-9]|1[0-9]|2[0-4]):([1-9]|1[0-9]|2[0-9]|3[0-9]|4[0-9]|5[0-9])$/;
+    if (!value.match(SCHEDULE_TIME_VALIDATION)) {
+      throw new ValidationError({
+        field: validatedField,
+        message: ValidationExceptionMessages.TIME_FIELD_FORMAT,
+      });
+    }
   }
 
   private validateClassroom(value: string): void {

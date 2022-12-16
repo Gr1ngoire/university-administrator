@@ -7,7 +7,7 @@ import type {
 import { reactive, useStore } from "@/hooks/hooks";
 import { news as newsValidator } from "@/validators/validators";
 import type { ValidationError } from "@/exceptions/exceptions";
-import { NewsActions } from "@/store/actions.common";
+import { NewsActions } from "@/store/actions
 
 import styles from "./styles.module.scss";
 

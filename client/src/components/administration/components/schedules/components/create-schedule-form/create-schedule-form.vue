@@ -4,7 +4,7 @@ import type { CreateScheduleRequestDto } from "@/common/types/types";
 import type { ValidationError } from "@/exceptions/exceptions";
 import { schedule as scheduleValidator } from "@/validators/validators";
 import { computed, reactive, useStore } from "@/hooks/hooks";
-import { AdministrationActions } from "@/store/actions
+import { AdministrationActions } from "@/store/actions";
 
 import styles from "./styles.module.scss";
 
@@ -24,9 +24,9 @@ const disciplineSelectOptions = disciplines.value.map(({ id, name }) => ({
 }));
 
 const teachers = computed(() => store.state.administration.teachers);
-const teacherSelectOptions = teachers.value.map(({ id, name }) => ({
+const teacherSelectOptions = teachers.value.map(({ id, name, surname }) => ({
   id,
-  name,
+  name: `${name} ${surname}`,
   value: String(id),
 }));
 

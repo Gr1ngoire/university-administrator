@@ -5,7 +5,7 @@ import { defaultAdministratableOptions } from "./common/common";
 
 import styles from "./styles.module.scss";
 import { ref, useStore } from "@/hooks/hooks";
-import { AdministrationActions } from "@/store/actions
+import { AdministrationActions } from "@/store/actions";
 
 const ShownPanel: Component = ref<Component>(Disciplines);
 

@@ -4,7 +4,7 @@ import type { CreateDisciplineRequestDto } from "@/common/types/types";
 import type { ValidationError } from "@/exceptions/exceptions";
 import { discipline as disciplinesValidator } from "@/validators/validators";
 import { reactive, useStore } from "@/hooks/hooks";
-import { AdministrationActions } from "@/store/actions
+import { AdministrationActions } from "@/store/actions";
 
 import styles from "./styles.module.scss";
 

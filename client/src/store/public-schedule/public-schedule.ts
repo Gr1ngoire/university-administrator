@@ -17,6 +17,7 @@ enum Actions {
 
 enum Mutations {
   ADD_SCHEDULES = "addSchedules",
+  CLEAR_SCHEDULES = "clearSchedules",
 }
 
 enum Getters {
@@ -29,7 +30,36 @@ const state: State = {
 };
 
 const getters: GetterTree<State, RootState> = {
-  [Getters.DAY_OF_WEEK_SCHEDULE_MATRIX]() {},
+  [Getters.DAY_OF_WEEK_SCHEDULE_MATRIX](
+    state: State
+  ): SchedulesGetAllItemResponseDto[][] {
+    const TIME_SPLITTER = " ";
+
+    const sortedSchedulesByDayOfWeek = [...state.schedules].sort(
+      (
+        a: SchedulesGetAllItemResponseDto,
+        b: SchedulesGetAllItemResponseDto
+      ) => {
+        const [aDate] = a.time.split(TIME_SPLITTER);
+        const [bDate] = b.time.split(TIME_SPLITTER);
+        return new Date(aDate).getDay() - new Date(bDate).getDay();
+      }
+    );
+    const result: SchedulesGetAllItemResponseDto[][] = [];
+    let dayOfWeekIndex = 0;
+    const DAY_OF_WEEK_INDEX_LIMIT = 7;
+    while (dayOfWeekIndex < DAY_OF_WEEK_INDEX_LIMIT) {
+      const scheduleRecordsForParticularDayOfWeek =
+        sortedSchedulesByDayOfWeek.filter(({ time }) => {
+          const [date] = time.split(TIME_SPLITTER);
+          return new Date(date).getDay() === dayOfWeekIndex;
+        });
+      result.push(scheduleRecordsForParticularDayOfWeek);
+      dayOfWeekIndex++;
+    }
+
+    return result;
+  },
 };
 
 const mutations: MutationTree<State> = {
@@ -38,6 +68,10 @@ const mutations: MutationTree<State> = {
     schedules: SchedulesGetAllItemResponseDto[]
   ) {
     state.schedules = [...state.schedules, ...schedules];
+  },
+
+  [Mutations.CLEAR_SCHEDULES](state: State) {
+    state.schedules = [];
   },
 };
 
@@ -48,6 +82,7 @@ const actions: ActionTree<State, RootState> = {
     state.dataStatus = DataStatus.PENDING;
     const { items } = await schedulesService.getAll();
 
+    commit(Mutations.CLEAR_SCHEDULES);
     commit(Mutations.ADD_SCHEDULES, items);
     state.dataStatus = DataStatus.FULFILLED;
   },

@@ -4,7 +4,7 @@ import type { CreateNewsRequestDto } from "@/common/types/types";
 import type { ValidationError } from "@/exceptions/exceptions";
 import { news as newsValidator } from "@/validators/validators";
 import { reactive, useStore } from "@/hooks/hooks";
-import { NewsActions } from "@/store/actions
+import { NewsActions } from "@/store/actions";
 
 import styles from "./styles.module.scss";
 

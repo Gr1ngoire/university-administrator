@@ -17,5 +17,5 @@ defineProps<Props>();
   <p :class="styles.scheduleGroup">Group: {{ groupName }}</p>
   <p :class="styles.scheduleTime">Time: {{ time }}</p>
   <p :class="styles.scheduleClassroom">Classroom: {{ classroom }}</p>
-  <p :class="styles.scheduleTeacher">Classroom: {{ teacherName }}</p>
+  <p :class="styles.scheduleTeacher">Teacher: {{ teacherName }}</p>
 </template>

@@ -7,7 +7,7 @@ import type {
 import { computed, reactive, useStore } from "@/hooks/hooks";
 import { department as departmentValidator } from "@/validators/validators";
 import type { ValidationError } from "@/exceptions/exceptions";
-import { AdministrationActions } from "@/store/actions
+import { AdministrationActions } from "@/store/actions";
 
 import styles from "./styles.module.scss";
 

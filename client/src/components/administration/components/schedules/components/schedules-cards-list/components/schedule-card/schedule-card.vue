@@ -7,7 +7,7 @@ import type {
   ToggleState,
 } from "@/common/types/types";
 import { reactive, useStore } from "@/hooks/hooks";
-import { AdministrationActions } from "@/store/actions
+import { AdministrationActions } from "@/store/actions";
 import { UpdateScheduleForm } from "./components/components";
 
 import styles from "./styles.module.scss";
@@ -63,7 +63,7 @@ const handleEditToggle: () => void = (): void => {
       :time="time"
       :classroom="classroom"
       :disciplineName="discipline.name"
-      :teacherName="teacher.name"
+      :teacherName="`${teacher.name} ${teacher.surname}`"
       :groupName="group.name"
     />
     <div :class="styles.actionsSection">

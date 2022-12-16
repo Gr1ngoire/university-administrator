@@ -7,6 +7,8 @@ import {
 } from 'src/common/exceptions/excpetions';
 import {
   CreateGroupRequestDto,
+  GroupsGetAllItemResponseDto,
+  GroupsGetAllResponseDto,
   UpdateGroupRequestDto,
 } from 'src/common/types/types';
 import { DepartmentsService } from 'src/services/services';
@@ -19,17 +21,7 @@ export class GroupsService {
     private departmentsService: DepartmentsService,
   ) {}
 
-  getAll(): Promise<Group[]> {
-    return this.repository.find({
-      relations: {
-        department: {
-          faculty: true,
-        },
-      },
-    });
-  }
-
-  getById(id: number): Promise<Group | null> {
+  getModelById(id: number): Promise<Group | null> {
     return this.repository.findOne({
       where: { id },
       relations: {
@@ -40,8 +32,39 @@ export class GroupsService {
     });
   }
 
-  async create(group: CreateGroupRequestDto): Promise<Group> {
-    const departmentInDb = await this.departmentsService.getById(
+  async getAll(): Promise<GroupsGetAllResponseDto> {
+    const groupsModels = await this.repository.find({
+      relations: {
+        department: {
+          faculty: true,
+        },
+      },
+    });
+
+    return {
+      items: groupsModels.map(
+        ({ id, name, departmentId, department, course }) => ({
+          id,
+          name,
+          departmentId,
+          department,
+          course,
+        }),
+      ),
+    };
+  }
+
+  async getById(idToFind: number): Promise<GroupsGetAllItemResponseDto | null> {
+    const group = await this.getModelById(idToFind);
+
+    const { id, name, departmentId, department, course } = group;
+    return { id, name, departmentId, department, course };
+  }
+
+  async create(
+    group: CreateGroupRequestDto,
+  ): Promise<GroupsGetAllItemResponseDto> {
+    const departmentInDb = await this.departmentsService.getModelById(
       group.departmentId,
     );
 
@@ -59,7 +82,7 @@ export class GroupsService {
   async update(
     id: number,
     group: Partial<UpdateGroupRequestDto>,
-  ): Promise<Group> {
+  ): Promise<GroupsGetAllItemResponseDto> {
     const groupToUpdate = await this.repository.findOne({ where: { id } });
 
     if (!groupToUpdate) {
@@ -70,7 +93,7 @@ export class GroupsService {
       group.departmentId &&
       group.departmentId !== groupToUpdate.departmentId
     ) {
-      const departmentToJoin = await this.departmentsService.getById(
+      const departmentToJoin = await this.departmentsService.getModelById(
         group.departmentId,
       );
 
@@ -81,16 +104,21 @@ export class GroupsService {
 
     Object.assign(groupToUpdate, group);
     const updatedGroup = await this.repository.save(groupToUpdate);
+
     return this.getById(updatedGroup.id);
   }
 
-  async delete(id: number): Promise<Group> {
-    const group = await this.getById(id);
+  async delete(id: number): Promise<number> {
+    const group = await this.getModelById(id);
 
     if (!group) {
       throw new NotFoundException(ExceptionsMessages.GROUP_NOT_FOUND);
     }
 
-    return this.repository.remove(group);
+    const { id: idToSend } = group;
+
+    await this.repository.remove(group);
+
+    return idToSend;
   }
 }

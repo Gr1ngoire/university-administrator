@@ -1,4 +1,6 @@
+export { Type } from 'class-transformer';
 export {
+  IsInt,
   IsString,
   IsEmail,
   IsOptional,
@@ -6,4 +8,7 @@ export {
   IsNotEmpty,
   IsNumberString,
   IsNumber,
+  Max,
+  Matches,
+  Min,
 } from 'class-validator';

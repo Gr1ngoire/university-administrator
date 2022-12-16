@@ -1,0 +1,28 @@
+.studentsDashboard {
+  @extend %centered-flex-column;
+
+  width: 100%;
+  background: $secondary-brand-color;
+}
+
+.createStudentForm {
+  width: 62.5%;
+  display: flex;
+  flex-direction: column;
+  margin-top: 30px;
+  padding: 10px;
+}
+
+.unableToCreateStudentInfoBlock {
+  @extend %centered-flex-column;
+}
+
+.toggleStudentFormButtonWrapper {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.studentsSectionsSeparator {
+  width: 60%;
+  border-color: $primary-brand-color;
+}

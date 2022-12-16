@@ -4,6 +4,8 @@ import { ExceptionsMessages } from 'src/common/enums/enums';
 import { NotFoundException } from 'src/common/exceptions/excpetions';
 import {
   CreateDisciplineRequestDto,
+  DisciplinesGetAllItemResponseDto,
+  DisciplinesGetAllResponseDto,
   UpdateDisciplineRequestDto,
 } from 'src/common/types/types';
 import { Discipline } from 'src/entities/entities';
@@ -14,41 +16,64 @@ export class DisciplinesService {
     @InjectRepository(Discipline) private repository: Repository<Discipline>,
   ) {}
 
-  getAll(): Promise<Discipline[]> {
-    return this.repository.find();
-  }
-
-  getById(id: number): Promise<Discipline | null> {
+  getModelById(id: number): Promise<Discipline | null> {
     return this.repository.findOne({ where: { id } });
   }
 
-  create(discipline: CreateDisciplineRequestDto): Promise<Discipline> {
+  async getAll(): Promise<DisciplinesGetAllResponseDto> {
+    const disciplinesModels = await this.repository.find();
+
+    return {
+      items: disciplinesModels.map(({ id, name }) => ({ id, name })),
+    };
+  }
+
+  async getById(
+    idToFind: number,
+  ): Promise<DisciplinesGetAllItemResponseDto | null> {
+    const discipline = await this.getModelById(idToFind);
+
+    const { id, name } = discipline;
+    return { id, name };
+  }
+
+  async create(
+    discipline: CreateDisciplineRequestDto,
+  ): Promise<DisciplinesGetAllItemResponseDto> {
     const newDiscipline = this.repository.create(discipline);
 
-    return this.repository.save(newDiscipline);
+    const createdDiscipline = await this.repository.save(newDiscipline);
+    const { id, name } = createdDiscipline;
+    return { id, name };
   }
 
   async update(
-    id: number,
+    idToUpdate: number,
     attributes: Partial<UpdateDisciplineRequestDto>,
-  ): Promise<Discipline> {
-    const discipline = await this.getById(id);
+  ): Promise<DisciplinesGetAllItemResponseDto> {
+    const discipline = await this.getModelById(idToUpdate);
 
     if (!discipline) {
       throw new NotFoundException(ExceptionsMessages.DISCIPLINE_NOT_FOUD);
     }
 
     Object.assign(discipline, attributes);
-    return this.repository.save(discipline);
+    const updatedDiscipline = await this.repository.save(discipline);
+    const { id, name } = updatedDiscipline;
+    return { id, name };
   }
 
-  async delete(id: number): Promise<Discipline> {
-    const discipline = await this.getById(id);
+  async delete(id: number): Promise<number> {
+    const discipline = await this.getModelById(id);
 
     if (!discipline) {
       throw new NotFoundException(ExceptionsMessages.DISCIPLINE_NOT_FOUD);
     }
 
-    return this.repository.remove(discipline);
+    const { id: idToSend } = discipline;
+
+    await this.repository.remove(discipline);
+
+    return idToSend;
   }
 }

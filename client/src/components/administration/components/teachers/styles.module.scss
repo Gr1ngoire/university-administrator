@@ -1,0 +1,24 @@
+.teachersDashboard {
+  @extend %centered-flex-column;
+
+  width: 100%;
+  background: $secondary-brand-color;
+}
+
+.createTeacherForm {
+  width: 42.5%;
+  display: flex;
+  flex-direction: column;
+  margin-top: 10px;
+  padding: 10px;
+}
+
+.toggleTeacherFormButtonWrapper {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.teachersSectionsSeparator {
+  width: 40%;
+  border-color: $primary-brand-color;
+}

@@ -1,11 +1,13 @@
 import {
+  IsInt,
   IsNotEmpty,
-  IsNumber,
   IsString,
+  Type,
 } from 'src/common/decorators/decorators';
 
 export class CreateDepartmentValidationDto {
-  @IsNumber()
+  @IsInt()
+  @Type(() => Number)
   facultyId: number;
 
   @IsString()

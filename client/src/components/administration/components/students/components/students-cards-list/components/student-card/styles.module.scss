@@ -1,0 +1,40 @@
+.studentCard {
+  flex-wrap: wrap;
+  justify-content: space-between;
+  margin-right: 10px;
+  padding: 10px;
+  display: flex;
+
+  border-radius: 10px;
+  background: $primary-brand-color;
+}
+
+.studentName {
+  width: 70%;
+  color: $secondary-brand-color;
+}
+
+.studentEmail {
+  width: 70%;
+  color: $secondary-brand-color;
+}
+
+.studentPhone {
+  width: 70%;
+  color: $secondary-brand-color;
+}
+
+.studentGroupName {
+  width: 70%;
+  color: $secondary-brand-color;
+}
+
+.actionsSection {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.actionWrapperButton {
+  margin: 5px;
+}

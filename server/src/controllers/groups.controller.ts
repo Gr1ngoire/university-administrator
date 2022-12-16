@@ -14,9 +14,9 @@ import {
   GetByIdParams,
   UpdateGroupValidationDto,
 } from 'src/common/validation-dtos/validation-dtos';
-import { ExceptionsMessages, GroupsApi } from 'src/common/enums/enums';
+import { ApiPath, ExceptionsMessages, GroupsApi } from 'src/common/enums/enums';
 
-@Controller(GroupsApi.GROUPS)
+@Controller(ApiPath.GROUPS)
 export class GroupsController {
   constructor(private groupsService: GroupsService) {}
 

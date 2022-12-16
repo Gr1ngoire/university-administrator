@@ -1,0 +1,45 @@
+.newsUpdateForm {
+  @extend %centered-flex-row;
+
+  margin-right: 10px;
+  padding: 5px 15px 5px 15px;
+  border-radius: 10px;
+  background: $primary-brand-color;
+}
+
+.newsUpdateActionSectionWrapper {
+  @extend %centered-flex-column;
+
+  width: 100%;
+}
+
+.newsEditFieldsWrapper {
+  @extend %centered-flex-column;
+
+  width: 100%;
+}
+
+.newsEditInputWrapper {
+  padding: 0 10px 0 10px;
+  width: 100%;
+
+  & label {
+    color: $secondary-brand-color;
+  }
+}
+
+.newsEditTextAreaWrapper {
+  padding: 0 10px 0 10px;
+  width: 100%;
+
+  & label {
+    color: $secondary-brand-color;
+  }
+}
+
+.newsActionButtonsWrapper {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  margin: 15px 0 10px 0;
+}

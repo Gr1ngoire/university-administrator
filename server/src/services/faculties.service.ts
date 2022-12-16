@@ -7,6 +7,10 @@ import {
   UpdateFacultyRequestDto,
 } from 'src/common/types/types';
 import { Faculty } from 'src/entities/entities';
+import {
+  FacultiesGetAllItemResponseDto,
+  FacultiesGetAllResponseDto,
+} from 'shared/common/types/types';
 
 @Injectable()
 export class FacultiesService {
@@ -14,38 +18,69 @@ export class FacultiesService {
     @InjectRepository(Faculty) private repository: Repository<Faculty>,
   ) {}
 
-  getAll(): Promise<Faculty[]> {
-    return this.repository.find();
-  }
-
-  getById(id: number): Promise<Faculty | null> {
+  getModelById(id: number): Promise<Faculty | null> {
     return this.repository.findOne({ where: { id } });
   }
 
-  create(faculty: CreateFacultyRequestDto): Promise<Faculty> {
-    const newFaculty = this.repository.create(faculty);
+  async getAll(): Promise<FacultiesGetAllResponseDto> {
+    const facultiesModels = await this.repository.find();
 
-    return this.repository.save(newFaculty);
+    return {
+      items: facultiesModels.map(({ id, name, shortName }) => ({
+        id,
+        name,
+        shortName,
+      })),
+    };
   }
 
-  async update(id: number, faculty: UpdateFacultyRequestDto): Promise<Faculty> {
-    const facultyToUpdate = await this.getById(id);
+  async getById(
+    idToFind: number,
+  ): Promise<FacultiesGetAllItemResponseDto | null> {
+    const faculty = await this.getModelById(idToFind);
+
+    const { id, name, shortName } = faculty;
+    return { id, name, shortName };
+  }
+
+  async create(
+    faculty: CreateFacultyRequestDto,
+  ): Promise<FacultiesGetAllItemResponseDto> {
+    const newFaculty = this.repository.create(faculty);
+
+    const createdFaculty = await this.repository.save(newFaculty);
+    const { id, name, shortName } = createdFaculty;
+    return { id, name, shortName };
+  }
+
+  async update(
+    idToUpdate: number,
+    faculty: UpdateFacultyRequestDto,
+  ): Promise<FacultiesGetAllItemResponseDto> {
+    const facultyToUpdate = await this.getModelById(idToUpdate);
 
     if (!facultyToUpdate) {
       throw new NotFoundException(ExceptionsMessages.FACULTY_NOT_FOUND);
     }
 
     Object.assign(facultyToUpdate, faculty);
-    return this.repository.save(facultyToUpdate);
+    const updatedFaculty = await this.repository.save(facultyToUpdate);
+
+    const { id, name, shortName } = updatedFaculty;
+    return { id, name, shortName };
   }
 
-  async delete(id: number): Promise<Faculty> {
-    const faculty = await this.getById(id);
+  async delete(id: number): Promise<number> {
+    const faculty = await this.getModelById(id);
 
     if (!faculty) {
       throw new NotFoundException(ExceptionsMessages.FACULTY_NOT_FOUND);
     }
 
-    return this.repository.remove(faculty);
+    const { id: idToSend } = faculty;
+
+    await this.repository.remove(faculty);
+
+    return idToSend;
   }
 }

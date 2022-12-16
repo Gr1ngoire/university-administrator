@@ -1,0 +1,19 @@
+.facultiesCardsListWrapper {
+  @extend %centered-flex-row;
+
+  width: 100%;
+  margin-top: 10px;
+}
+
+.facultiesCardsList {
+  margin-left: 15px;
+  width: 42.5%;
+  height: 100%;
+  overflow-y: scroll;
+  height: calc(100vh - 400px);
+}
+
+.facultiesCardsListItem {
+  width: 100%;
+  margin-top: 10px;
+}

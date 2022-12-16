@@ -1,0 +1,27 @@
+.schedulesDashboard {
+  @extend %centered-flex-column;
+
+  width: 100%;
+  background: $secondary-brand-color;
+}
+
+.createScheduleForm {
+  width: 62.5%;
+  display: flex;
+  flex-direction: column;
+  padding: 10px;
+}
+
+.unableToCreateScheduleInfoBlock {
+  @extend %centered-flex-column;
+}
+
+.toggleScheduleFormButtonWrapper {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.schedulesSectionsSeparator {
+  width: 60%;
+  border-color: $primary-brand-color;
+}

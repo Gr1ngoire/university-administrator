@@ -1,0 +1,76 @@
+.button {
+  cursor: pointer;
+  border: solid 1px $thirdly-brand-color;
+  border-radius: 5px;
+  padding: 10px;
+  display: flex;
+  align-items: center;
+
+  &:hover {
+    transition: 0.4s;
+    transform: scale(1.15);
+  }
+}
+
+.submit {
+  background: $highlight-brand-color;
+  color: $primary-brand-color;
+  border-color: $primary-brand-color;
+}
+
+.cancel {
+  background: $secondary-brand-color;
+  color: $primary-brand-color;
+  border-color: $primary-brand-color;
+}
+
+.add {
+  background: $secondary-brand-color;
+  color: $primary-brand-color;
+  border-color: $primary-brand-color;
+
+  & > i {
+    margin: 5px 5px 0 0;
+  }
+}
+
+.edit {
+  border-color: $highlight-brand-color;
+  background: $highlight-brand-color;
+  color: $primary-brand-color;
+}
+
+.delete {
+  border-color: $highlight-brand-color;
+  background: $primary-brand-color;
+  color: $highlight-brand-color;
+}
+
+.panelOption {
+  width: 100%;
+  height: 70px;
+  font-size: 1.5rem;
+  background: $primary-brand-color;
+  color: $highlight-brand-color;
+  border-top-left-radius: 40px;
+  border-bottom-left-radius: 40px;
+  border-top-right-radius: 0;
+  border-bottom-right-radius: 0px;
+  border-top-color: $highlight-brand-color;
+  border-left-color: $highlight-brand-color;
+  border-bottom-color: $highlight-brand-color;
+  border-right-color: none;
+
+  &:hover {
+    transform: none;
+  }
+}
+
+.panelOptionFocused {
+  background: $highlight-brand-color;
+  color: $primary-brand-color;
+  border-top-color: $primary-brand-color;
+  border-left-color: $primary-brand-color;
+  border-bottom-color: $primary-brand-color;
+  border-right-color: none;
+}

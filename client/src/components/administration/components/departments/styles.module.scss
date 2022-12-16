@@ -1,0 +1,28 @@
+.departmentsDashboard {
+  @extend %centered-flex-column;
+
+  width: 100%;
+  background: $secondary-brand-color;
+}
+
+.createDepartmentForm {
+  width: 62.5%;
+  display: flex;
+  flex-direction: column;
+  margin-top: 30px;
+  padding: 10px;
+}
+
+.unableToCreateDepartmentInfoBlock {
+  @extend %centered-flex-column;
+}
+
+.toggleDepartmentFormButtonWrapper {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.departmentsSectionsSeparator {
+  width: 60%;
+  border-color: $primary-brand-color;
+}

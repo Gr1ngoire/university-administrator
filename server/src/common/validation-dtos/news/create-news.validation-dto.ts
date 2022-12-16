@@ -14,7 +14,6 @@ export class CreateNewsValidationDto {
   content: string;
 
   @IsString()
-  @IsNotEmpty()
   @IsOptional()
   imgUrl: string;
 }

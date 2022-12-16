@@ -1,0 +1,12 @@
+@import url("https://fonts.googleapis.com/css2?family=Josefin+Sans&family=Nanum+Gothic+Coding&display=swap");
+
+* {
+  @extend %default-font;
+}
+
+#app {
+  @extend %centered-flex-column;
+
+  width: 100%;
+  background: $secondary-brand-color;
+}

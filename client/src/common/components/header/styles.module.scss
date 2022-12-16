@@ -1,0 +1,9 @@
+.header {
+  width: 100%;
+  background: $primary-brand-color;
+  flex-wrap: wrap;
+  position: sticky;
+  top: 0;
+
+  @extend %centered-flex-row;
+}

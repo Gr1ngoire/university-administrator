@@ -1,0 +1,36 @@
+.facultyUpdateForm {
+  @extend %centered-flex-row;
+
+  margin-right: 10px;
+  padding: 5px 15px 5px 15px;
+  border-radius: 10px;
+  background: $primary-brand-color;
+}
+
+.facultyUpdateActionSectionWrapper {
+  @extend %centered-flex-column;
+
+  width: 100%;
+}
+
+.facultyEditFieldsWrapper {
+  @extend %centered-flex-column;
+
+  width: 100%;
+}
+
+.facultyEditInputWrapper {
+  padding: 0 10px 0 10px;
+  width: 100%;
+
+  & label {
+    color: $secondary-brand-color;
+  }
+}
+
+.facultyActionButtonsWrapper {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  margin: 5px 0 10px 0;
+}

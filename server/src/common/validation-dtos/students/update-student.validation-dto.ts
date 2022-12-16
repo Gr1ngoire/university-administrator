@@ -1,14 +1,16 @@
 import {
   IsEmail,
+  IsInt,
   IsNotEmpty,
-  IsNumber,
   IsOptional,
   IsPhoneNumber,
   IsString,
+  Type,
 } from 'src/common/decorators/decorators';
 
 export class UpdateStudentValidatonDto {
-  @IsNumber()
+  @IsInt()
+  @Type(() => Number)
   @IsOptional()
   groupId: number;
 

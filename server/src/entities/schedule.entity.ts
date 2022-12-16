@@ -31,9 +31,6 @@ export class Schedule {
   createdAt: Date;
 
   @Column()
-  name: string;
-
-  @Column()
   time: string;
 
   @Column()

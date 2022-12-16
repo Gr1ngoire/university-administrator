@@ -8,6 +8,8 @@ import {
 import { Schedule } from 'src/entities/entities';
 import {
   CreateScheduleRequestDto,
+  SchedulesGetAllItemResponseDto,
+  SchedulesGetAllResponseDto,
   UpdateScheduleRequestDto,
 } from 'src/common/types/types';
 import { GroupsService } from './groups.service';
@@ -23,21 +25,7 @@ export class SchedulesService {
     private teachersService: TeachersService,
   ) {}
 
-  getAll(): Promise<Schedule[]> {
-    return this.repository.find({
-      relations: {
-        teacher: true,
-        discipline: true,
-        group: {
-          department: {
-            faculty: true,
-          },
-        },
-      },
-    });
-  }
-
-  getById(id: number): Promise<Schedule | null> {
+  getModelById(id: number): Promise<Schedule | null> {
     return this.repository.findOne({
       where: { id },
       relations: {
@@ -52,14 +40,87 @@ export class SchedulesService {
     });
   }
 
-  async create(schedule: CreateScheduleRequestDto): Promise<Schedule> {
-    const teacherInDb = await this.teachersService.getById(schedule.teacherId);
+  async getAll(): Promise<SchedulesGetAllResponseDto> {
+    const schedulesModels = await this.repository.find({
+      relations: {
+        teacher: true,
+        discipline: true,
+        group: {
+          department: {
+            faculty: true,
+          },
+        },
+      },
+    });
+
+    return {
+      items: schedulesModels.map(
+        ({
+          id,
+          time,
+          classroom,
+          teacherId,
+          teacher,
+          disciplineId,
+          discipline,
+          groupId,
+          group,
+        }) => ({
+          id,
+          time,
+          classroom,
+          teacherId,
+          teacher,
+          disciplineId,
+          discipline,
+          groupId,
+          group,
+        }),
+      ),
+    };
+  }
+
+  async getById(
+    idToFind: number,
+  ): Promise<SchedulesGetAllItemResponseDto | null> {
+    const schedule = await this.getModelById(idToFind);
+
+    const {
+      id,
+      time,
+      classroom,
+      groupId,
+      group,
+      disciplineId,
+      discipline,
+      teacherId,
+      teacher,
+    } = schedule;
+    return {
+      id,
+      time,
+      classroom,
+      groupId,
+      group,
+      disciplineId,
+      discipline,
+      teacherId,
+      teacher,
+    };
+  }
+
+  async create(
+    schedule: CreateScheduleRequestDto,
+  ): Promise<SchedulesGetAllItemResponseDto> {
+    const teacherInDb = await this.teachersService.getModelById(
+      schedule.teacherId,
+    );
 
     if (!teacherInDb) {
       throw new BadRequestException(ExceptionsMessages.TEACHER_NOT_FOUND);
     }
 
-    const disciplineInDb = await this.disciplinesService.getById(
+    const disciplineInDb = await this.disciplinesService.getModelById(
       schedule.disciplineId,
     );
 
@@ -67,7 +128,7 @@ export class SchedulesService {
       throw new BadRequestException(ExceptionsMessages.DISCIPLINE_NOT_FOUD);
     }
 
-    const groupInDb = await this.groupsService.getById(schedule.groupId);
+    const groupInDb = await this.groupsService.getModelById(schedule.groupId);
 
     if (!groupInDb) {
       throw new BadRequestException(ExceptionsMessages.GROUP_NOT_FOUND);
@@ -83,7 +144,7 @@ export class SchedulesService {
   async update(
     id: number,
     schedule: Partial<UpdateScheduleRequestDto>,
-  ): Promise<Schedule> {
+  ): Promise<SchedulesGetAllItemResponseDto> {
     const scheduleToUpdate = await this.repository.findOne({ where: { id } });
 
     if (!scheduleToUpdate) {
@@ -94,7 +155,7 @@ export class SchedulesService {
       schedule.teacherId &&
       schedule.teacherId !== scheduleToUpdate.teacherId
     ) {
-      const techerToAdd = await this.teachersService.getById(
+      const techerToAdd = await this.teachersService.getModelById(
         schedule.teacherId,
       );
 
@@ -107,7 +168,7 @@ export class SchedulesService {
       schedule.disciplineId &&
       schedule.disciplineId !== scheduleToUpdate.disciplineId
     ) {
-      const disciplineToAdd = await this.disciplinesService.getById(
+      const disciplineToAdd = await this.disciplinesService.getModelById(
         schedule.disciplineId,
       );
 
@@ -117,7 +178,9 @@ export class SchedulesService {
     }
 
     if (schedule.groupId && schedule.groupId !== scheduleToUpdate.groupId) {
-      const groupToAdd = await this.groupsService.getById(schedule.groupId);
+      const groupToAdd = await this.groupsService.getModelById(
+        schedule.groupId,
+      );
 
       if (!groupToAdd) {
         throw new BadRequestException(ExceptionsMessages.GROUP_NOT_FOUND);
@@ -126,16 +189,21 @@ export class SchedulesService {
 
     Object.assign(scheduleToUpdate, schedule);
     const updatedSchedule = await this.repository.save(scheduleToUpdate);
+
     return this.getById(updatedSchedule.id);
   }
 
-  async delete(id: number): Promise<Schedule> {
-    const schedule = await this.getById(id);
+  async delete(id: number): Promise<number> {
+    const schedule = await this.getModelById(id);
 
     if (!schedule) {
       throw new NotFoundException(ExceptionsMessages.SCHEDULE_NOT_FOUND);
     }
 
-    return this.repository.remove(schedule);
+    const { id: idToSend } = schedule;
+
+    await this.repository.remove(schedule);
+
+    return idToSend;
   }
 }

@@ -1,0 +1,24 @@
+.facultiesDashboard {
+  @extend %centered-flex-column;
+
+  width: 100%;
+  background: $secondary-brand-color;
+}
+
+.createFacultyForm {
+  width: 42.5%;
+  display: flex;
+  flex-direction: column;
+  margin-top: 30px;
+  padding: 10px;
+}
+
+.toggleFacultyFormButtonWrapper {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.facultiesSectionsSeparator {
+  width: 40%;
+  border-color: $primary-brand-color;
+}

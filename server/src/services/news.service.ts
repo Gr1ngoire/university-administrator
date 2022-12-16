@@ -38,7 +38,10 @@ export class NewsService {
   }
 
   async create(news: CreateNewsRequestDto): Promise<NewsGetAllItemResponseDto> {
-    const freshNews = this.repository.create(news);
+    const freshNews = this.repository.create({
+      ...news,
+      imgUrl: news.imgUrl || null,
+    });
 
     const createdNews = await this.repository.save(freshNews);
     const { id, content, title, imgUrl } = createdNews;
@@ -55,7 +58,10 @@ export class NewsService {
       throw new NotFoundException(ExceptionsMessages.NEWS_NOT_FOUND);
     }
 
-    Object.assign(newsToUpdate, news);
+    Object.assign(newsToUpdate, {
+      ...news,
+      imgUrl: news.imgUrl || null,
+    });
     const updatedNews = await this.repository.save(newsToUpdate);
     const { id, content, title, imgUrl } = updatedNews;
     return { id, content, title, imgUrl };

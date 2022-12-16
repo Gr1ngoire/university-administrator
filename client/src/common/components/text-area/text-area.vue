@@ -2,10 +2,7 @@
 import { computed } from "@/hooks/hooks";
 import styles from "./styles.module.scss";
 
-type InputType = "text" | "number" | "password" | "email";
-
 type Props = {
-  type: InputType;
   name: string;
   errorMessage?: string;
   onInput: (event: Event) => void;
@@ -30,17 +27,15 @@ const firstLetterUppercased = computed(() => {
 </script>
 
 <template>
-  <div :class="styles.inputWrapper">
-    <label :class="styles.inputLabel">{{ firstLetterUppercased }}</label>
-    <input
-      :class="styles.input"
-      :type="type"
+  <div :class="styles.textareaWrapper">
+    <label :class="styles.textareaLabel">{{ firstLetterUppercased }}</label>
+    <textarea
+      :class="styles.textarea"
       :name="name"
       :value="value"
-      :max="max"
-      :min="min"
       @input="onInput"
-    />
+    >
+    </textarea>
     <span :class="styles.errorSpan">{{ errorMessage }}&nbsp;</span>
   </div>
 </template>

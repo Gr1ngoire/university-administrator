@@ -25,6 +25,8 @@ export {
 export { type HttpOptions } from "./http/http";
 export {
   type CreateNewsRequestDto,
+  type NewsGetAllItemResponseDto,
+  type NewsGetAllResponseDto,
   type UpdateNewsRequestDto,
 } from "./news/news";
 export {

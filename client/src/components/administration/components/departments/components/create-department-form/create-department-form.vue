@@ -4,7 +4,7 @@ import type { CreateDepartmentRequestDto } from "@/common/types/types";
 import type { ValidationError } from "@/exceptions/exceptions";
 import { department as departmentValidator } from "@/validators/validators";
 import { computed, reactive, useStore } from "@/hooks/hooks";
-import { AdministrationActions } from "@/store/actions.common";
+import { AdministrationActions } from "@/store/actions";
 
 import styles from "./styles.module.scss";
 

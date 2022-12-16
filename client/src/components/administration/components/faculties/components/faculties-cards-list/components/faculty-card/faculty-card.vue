@@ -2,7 +2,7 @@
 import { Button } from "@/common/components/components";
 import type { ToggleState } from "@/common/types/types";
 import { reactive, useStore } from "@/hooks/hooks";
-import { AdministrationActions } from "@/store/actions.common";
+import { AdministrationActions } from "@/store/actions";
 import { UpdateFacultyForm } from "./components/components";
 
 import styles from "./styles.module.scss";

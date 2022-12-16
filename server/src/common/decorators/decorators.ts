@@ -29,6 +29,7 @@ export {
   IsNumberString,
   IsNumber,
   Max,
+  Matches,
   Min,
   Type,
 } from './validation-dto/validation-dto';

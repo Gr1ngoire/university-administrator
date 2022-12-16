@@ -2,7 +2,7 @@
 import { Button, Image } from "@/common/components/components";
 import type { ToggleState } from "@/common/types/types";
 import { reactive, useStore } from "@/hooks/hooks";
-import { NewsActions } from "@/store/actions.common";
+import { NewsActions } from "@/store/actions";
 import { UpdateNewsForm } from "./components/components";
 
 import styles from "./styles.module.scss";

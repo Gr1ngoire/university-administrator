@@ -1,6 +1,6 @@
 <script lang="ts" setup>
 import { computed, ref, useStore } from "@/hooks/hooks";
-import { NewsActions } from "@/store/actions.common";
+import { NewsActions } from "@/store/actions";
 import { Button } from "@/common/components/components";
 import { CreateNewsForm, NewsCardsList } from "./components/components";
 import styles from "./styles.module.scss";

@@ -7,7 +7,7 @@ import type {
 import { computed, reactive, useStore } from "@/hooks/hooks";
 import { schedule as scheduleValidator } from "@/validators/validators";
 import type { ValidationError } from "@/exceptions/exceptions";
-import { AdministrationActions } from "@/store/actions.common";
+import { AdministrationActions } from "@/store/actions";
 
 import styles from "./styles.module.scss";
 
@@ -28,9 +28,9 @@ const disciplineSelectOptions = disciplines.value.map(({ id, name }) => ({
 }));
 
 const teachers = computed(() => store.state.administration.teachers);
-const teacherSelectOptions = teachers.value.map(({ id, name }) => ({
+const teacherSelectOptions = teachers.value.map(({ id, name, surname }) => ({
   id,
-  name,
+  name: `${name} ${surname}`,
   value: String(id),
 }));
 

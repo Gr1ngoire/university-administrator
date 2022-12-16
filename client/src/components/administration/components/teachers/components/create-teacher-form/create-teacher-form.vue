@@ -4,7 +4,7 @@ import type { CreateTeacherRequestDto } from "@/common/types/types";
 import type { ValidationError } from "@/exceptions/exceptions";
 import { teacher as teacherValidator } from "@/validators/validators";
 import { reactive, useStore } from "@/hooks/hooks";
-import { AdministrationActions } from "@/store/actions.common";
+import { AdministrationActions } from "@/store/actions";
 
 import styles from "./styles.module.scss";
 

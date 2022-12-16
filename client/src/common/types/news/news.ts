@@ -3,4 +3,4 @@ export {
   type NewsGetAllItemResponseDto,
   type NewsGetAllResponseDto,
   type UpdateNewsRequestDto,
-} from 'shared/common/types/types';
+} from "shared/common/types/types";

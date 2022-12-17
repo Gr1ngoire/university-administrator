@@ -20,6 +20,10 @@ const router = createRouter({
       name: "news",
       component: News,
     },
+    {
+      path: AppRoutes.ALL,
+      redirect: AppRoutes.SCHEDULE,
+    },
   ],
 });
 

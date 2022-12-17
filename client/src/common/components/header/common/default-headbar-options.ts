@@ -12,7 +12,7 @@ const defaultSelectOptions: HeaderSelectOption[] = [
     id: 1,
     link: AppRoutes.SCHEDULE,
     name: "Schedule",
-    isSelected: false,
+    isSelected: true,
   },
   {
     id: 2,

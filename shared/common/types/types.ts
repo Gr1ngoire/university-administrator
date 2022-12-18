@@ -47,3 +47,9 @@ export {
   type TeachersGetAllResponseDto,
   type UpdateTeacherRequestDto,
 } from "./teachers/teachers";
+export {
+  type CreateUserRequestDto,
+  type UpdateUserRequestDto,
+  type UsersGetAllResponseDto,
+  type UsersGetAllItemResponseDto,
+} from "./users/users";

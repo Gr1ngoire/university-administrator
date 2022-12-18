@@ -1,4 +1,4 @@
-export { DbTablesNames } from './db/db';
+export { DbTablesNames, UniversityUserRoles } from './db/db';
 export {
   ApiPath,
   DepartmentsApi,

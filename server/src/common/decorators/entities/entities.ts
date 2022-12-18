@@ -5,6 +5,7 @@ export {
   CreateDateColumn,
   Column,
   OneToMany,
+  OneToOne,
   ManyToOne,
   JoinColumn,
   AfterRemove,

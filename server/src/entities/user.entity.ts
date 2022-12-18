@@ -2,16 +2,16 @@ import {
   Column,
   CreateDateColumn,
   Entity,
+  OneToMany,
+  OneToOne,
   PrimaryGeneratedColumn,
   UpdateDateColumn,
-  ManyToOne,
-  JoinColumn,
 } from 'src/common/decorators/decorators';
 import { DbTablesNames } from 'src/common/enums/enums';
-import { Group } from 'src/entities/entities';
+import { Schedule, UserDetails } from './entities';
 
-@Entity({ name: DbTablesNames.STUDENTS })
-export class Student {
+@Entity({ name: DbTablesNames.USERS })
+export class User {
   @PrimaryGeneratedColumn()
   id: number;
 
@@ -30,19 +30,15 @@ export class Student {
   })
   createdAt: Date;
 
-  @Column()
-  name: string;
-
   @Column({ unique: true })
   email: string;
 
   @Column()
-  phone: string;
+  password: string;
 
-  @ManyToOne(() => Group, (group) => group.students, { onDelete: 'CASCADE' })
-  @JoinColumn({ name: 'group_id' })
-  group: Group;
+  @OneToOne(() => UserDetails, (userDetails) => userDetails.user)
+  userDetails: UserDetails;
 
-  @Column({ type: 'number', name: 'group_id' })
-  groupId: number;
+  @OneToMany(() => Schedule, (schedule) => schedule.teacher)
+  schedules: Schedule[];
 }

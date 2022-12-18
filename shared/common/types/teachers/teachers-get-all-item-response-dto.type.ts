@@ -1,9 +1,9 @@
+import { UsersGetAllItemResponseDto } from "../types";
+
 type TeachersGetAllItemResponseDto = {
   id: number;
-  name: string;
-  surname: string;
-  email: string;
-  phone: string;
+  userId: number;
+  user: UsersGetAllItemResponseDto;
 };
 
 export { type TeachersGetAllItemResponseDto };

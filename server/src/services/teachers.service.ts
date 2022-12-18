@@ -33,12 +33,10 @@ export class TeachersService {
     const teachersModels = await this.repository.find();
 
     return {
-      items: teachersModels.map(({ id, email, phone, name, surname }) => ({
+      items: teachersModels.map(({ id, userId, user }) => ({
         id,
-        email,
-        phone,
-        name,
-        surname,
+        userId,
+        user,
       })),
     };
   }

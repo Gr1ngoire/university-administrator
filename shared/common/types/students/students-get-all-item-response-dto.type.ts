@@ -1,12 +1,9 @@
-import { GroupsGetAllItemResponseDto } from "../types";
+import { UsersGetAllItemResponseDto } from "../types";
 
 type StudentsGetAllItemResponseDto = {
   id: number;
-  groupId: number;
-  name: string;
-  email: string;
-  phone: string;
-  group: GroupsGetAllItemResponseDto;
+  userId: number;
+  user: UsersGetAllItemResponseDto;
 };
 
 export { type StudentsGetAllItemResponseDto };

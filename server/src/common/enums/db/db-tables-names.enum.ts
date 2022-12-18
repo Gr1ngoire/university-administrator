@@ -7,6 +7,7 @@ enum DbTablesNames {
   SCHEDULES = 'schedules',
   STUDENTS = 'students',
   TEACHERS = 'teachers',
+  USERS = 'users',
 }
 
 export { DbTablesNames };

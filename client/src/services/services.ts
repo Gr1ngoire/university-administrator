@@ -8,6 +8,7 @@ import { Teacher } from "./teacher/teacher.service";
 import { Department } from "./department/department.service";
 import { Schedule } from "./schedule/schedule.service";
 import { Student } from "./student/student.service";
+import { User } from "./user/user.service";
 
 const apiPrefix = ENV.API.PATH;
 
@@ -20,6 +21,7 @@ const news = new News({ http, apiPrefix });
 const schedule = new Schedule({ http, apiPrefix });
 const student = new Student({ http, apiPrefix });
 const teacher = new Teacher({ http, apiPrefix });
+const user = new User({ http, apiPrefix });
 
 export {
   department,
@@ -30,4 +32,5 @@ export {
   schedule,
   student,
   teacher,
+  user,
 };

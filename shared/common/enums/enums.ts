@@ -6,4 +6,4 @@ export {
   HttpMethod,
   HttpStatusMessage,
 } from "./http/http";
-export { UniversityUserRoles } from "./roles/university-user-roles.enum";
+export { UniversityUserRoles } from "./roles/roles";

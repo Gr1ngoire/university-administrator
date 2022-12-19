@@ -1,5 +1,5 @@
 enum ApiPath {
-  AUTH = '/auth',
+  AUTH = "/auth",
   DEPARTMENTS = "/departments",
   DISCIPLINES = "/disciplines",
   FACULTIES = "/faculties",
@@ -9,6 +9,7 @@ enum ApiPath {
   SCHEDULES = "/schedules",
   STUDENTS = "/students",
   TEACHERS = "/teachers",
+  USERS = "/users",
 }
 
 export { ApiPath };

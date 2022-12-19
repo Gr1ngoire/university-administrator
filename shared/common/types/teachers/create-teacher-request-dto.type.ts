@@ -1,4 +1,5 @@
 type CreateTeacherRequestDto = {
+  departmentId: number;
   userId: number;
 };
 

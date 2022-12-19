@@ -1,12 +1,4 @@
-import {
-  IsEmail,
-  IsInt,
-  IsNotEmpty,
-  IsOptional,
-  IsPhoneNumber,
-  IsString,
-  Type,
-} from 'src/common/decorators/decorators';
+import { IsInt, IsOptional, Type } from 'src/common/decorators/decorators';
 
 export class UpdateStudentValidatonDto {
   @IsInt()
@@ -14,16 +6,8 @@ export class UpdateStudentValidatonDto {
   @IsOptional()
   groupId: number;
 
-  @IsString()
-  @IsNotEmpty()
+  @IsInt()
+  @Type(() => Number)
   @IsOptional()
-  name: string;
-
-  @IsEmail()
-  @IsOptional()
-  email: string;
-
-  @IsPhoneNumber('UA')
-  @IsOptional()
-  phone: string;
+  userId: number;
 }

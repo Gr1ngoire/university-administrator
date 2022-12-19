@@ -3,8 +3,9 @@ type UsersGetAllItemResponseDto = {
   name: string;
   surname: string;
   secondName: string;
-  email: string;
+  role: string;
   phone: string;
+  email: string;
 };
 
 export { type UsersGetAllItemResponseDto };

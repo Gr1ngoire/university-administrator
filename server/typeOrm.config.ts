@@ -8,6 +8,7 @@ import {
   Schedule,
   Student,
   Teacher,
+  User,
 } from 'src/entities/entities';
 import { ENV } from 'src/common/enums/enums';
 
@@ -32,6 +33,7 @@ export default new DataSource({
     Schedule,
     Student,
     Teacher,
+    User,
   ],
   migrations: ['dist/server/src/data/migrations/*.js'],
 });

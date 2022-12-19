@@ -7,3 +7,4 @@ export { NewsApi } from './news/news';
 export { SchedulesApi } from './schedules/schedules';
 export { StudentsApi } from './students/students';
 export { TeachersApi } from './teachers/teachers';
+export { UsersApi } from './users/users';

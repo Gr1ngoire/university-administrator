@@ -2,8 +2,9 @@ type UpdateUserRequestDto = {
   name: string;
   surname: string;
   secondName: string;
-  email: string;
+  role: string;
   phone: string;
+  email: string;
   password: string;
 };
 

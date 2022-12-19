@@ -11,6 +11,7 @@ import {
   Schedule,
   Student,
   Teacher,
+  User,
 } from 'src/entities/entities';
 import { AppService } from 'src/services/services';
 import { DepartmentsModule } from './departments.module';
@@ -21,6 +22,7 @@ import { NewsModule } from './news.module';
 import { SchedulesModule } from './schedules.module';
 import { StudentsModule } from './students.module';
 import { TeachersModule } from './teachers.module';
+import { UsersModule } from './users.module';
 
 const { TYPE, HOST, PORT, USERNAME, PASSWORD, NAME } = ENV.DB;
 @Module({
@@ -36,6 +38,7 @@ const { TYPE, HOST, PORT, USERNAME, PASSWORD, NAME } = ENV.DB;
         Student,
         Schedule,
         Teacher,
+        User,
       ],
       host: HOST,
       port: PORT,
@@ -53,8 +56,9 @@ const { TYPE, HOST, PORT, USERNAME, PASSWORD, NAME } = ENV.DB;
     GroupsModule,
     NewsModule,
     StudentsModule,
-    SchedulesModule,
     TeachersModule,
+    SchedulesModule,
+    UsersModule,
   ],
   controllers: [AppController],
   providers: [AppService],

@@ -24,6 +24,7 @@ export {
   IsInt,
   IsString,
   IsEmail,
+  IsEnum,
   IsOptional,
   IsPhoneNumber,
   IsNotEmpty,

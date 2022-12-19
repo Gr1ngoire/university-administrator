@@ -28,3 +28,7 @@ export {
   CreateTeacherValidationDto,
   UpdateTeacherValidationDto,
 } from './teachers/teachers';
+export {
+  CreateUserValidationDto,
+  UpdateUserValidationDto,
+} from './users/users';

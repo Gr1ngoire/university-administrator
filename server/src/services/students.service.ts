@@ -11,24 +11,23 @@ import {
   StudentsGetAllResponseDto,
   UpdateStudentRequestDto,
 } from 'src/common/types/types';
-import { GroupsService } from 'src/services/services';
 import { Student } from 'src/entities/entities';
+import { UsersService } from './users.service';
+import { GroupsService } from './groups.service';
 
 @Injectable()
 export class StudentsService {
   constructor(
     @InjectRepository(Student) private repository: Repository<Student>,
+    private usersService: UsersService,
     private groupsService: GroupsService,
   ) {}
-
-  private getByEmail(email: string): Promise<Student | null> {
-    return this.repository.findOne({ where: { email } });
-  }
 
   getModelById(id: number): Promise<Student | null> {
     return this.repository.findOne({
       where: { id },
       relations: {
+        user: true,
         group: {
           department: {
             faculty: true,
@@ -41,6 +40,7 @@ export class StudentsService {
   async getAll(): Promise<StudentsGetAllResponseDto> {
     const studentsModels = await this.repository.find({
       relations: {
+        user: true,
         group: {
           department: {
             faculty: true,
@@ -50,16 +50,13 @@ export class StudentsService {
     });
 
     return {
-      items: studentsModels.map(
-        ({ id, name, email, phone, group, groupId }) => ({
-          id,
-          name,
-          email,
-          phone,
-          group,
-          groupId,
-        }),
-      ),
+      items: studentsModels.map(({ id, userId, user, groupId, group }) => ({
+        id,
+        userId,
+        user,
+        groupId,
+        group,
+      })),
     };
   }
 
@@ -68,38 +65,36 @@ export class StudentsService {
   ): Promise<StudentsGetAllItemResponseDto | null> {
     const student = await this.getModelById(idToFind);
 
-    const { id, name, email, phone, groupId, group } = student;
-    return { id, name, email, phone, groupId, group };
+    const { id, userId, user, groupId, group } = student;
+    return { id, userId, user, groupId, group };
   }
 
   async create(
     student: CreateStudentRequestDto,
   ): Promise<StudentsGetAllItemResponseDto> {
-    const studentWithSameEmail = await this.getByEmail(student.email);
-
-    if (studentWithSameEmail) {
-      throw new BadRequestException(
-        ExceptionsMessages.STUDENT_WITH_SUCH_EMAIL_ALREADY_EXISTS,
-      );
-    }
-
     const groupToJoin = await this.groupsService.getModelById(student.groupId);
 
     if (!groupToJoin) {
-      throw new BadRequestException(ExceptionsMessages.GROUP_NOT_FOUND);
+      throw new BadRequestException(ExceptionsMessages.GROUP_DOES_NOT_EXIST);
+    }
+
+    const userInDb = await this.usersService.getModelById(student.userId);
+
+    if (!userInDb) {
+      throw new BadRequestException(ExceptionsMessages.USER_DOES_NOT_EXIST);
     }
 
     const newStudent = this.repository.create(student);
 
     const createdStudent = await this.repository.save(newStudent);
-    const { id, name, email, phone, group, groupId } = createdStudent;
+    const { id, userId, user, groupId, group } = createdStudent;
 
-    return { id, name, email, phone, group, groupId };
+    return { id, userId, user, groupId, group };
   }
 
-  async update(
+  async updateGroup(
     id: number,
-    student: Partial<UpdateStudentRequestDto>,
+    student: UpdateStudentRequestDto,
   ): Promise<StudentsGetAllItemResponseDto> {
     const studentToUpdate = await this.repository.findOne({ where: { id } });
 
@@ -107,27 +102,13 @@ export class StudentsService {
       throw new NotFoundException(ExceptionsMessages.STUDENT_NOT_FOUND);
     }
 
-    if (student.groupId && student.groupId !== studentToUpdate.groupId) {
+    if (student.groupId !== studentToUpdate.groupId) {
       const groupToJoin = await this.groupsService.getModelById(
         student.groupId,
       );
 
       if (!groupToJoin) {
-        throw new BadRequestException(ExceptionsMessages.GROUP_NOT_FOUND);
-      }
-    }
-
-    if (student.email) {
-      const studentToCheckByEmail = await this.getByEmail(student.email);
-
-      if (
-        studentToCheckByEmail &&
-        student.email !== studentToUpdate.email &&
-        id !== studentToCheckByEmail.id
-      ) {
-        throw new BadRequestException(
-          ExceptionsMessages.STUDENT_WITH_SUCH_EMAIL_ALREADY_EXISTS,
-        );
+        throw new BadRequestException(ExceptionsMessages.GROUP_DOES_NOT_EXIST);
       }
     }
 

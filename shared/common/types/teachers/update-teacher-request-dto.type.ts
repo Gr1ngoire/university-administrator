@@ -1,5 +1,5 @@
 type UpdateTeacherRequestDto = {
-  userId: number;
+  departmentId: number;
 };
 
 export { type UpdateTeacherRequestDto };

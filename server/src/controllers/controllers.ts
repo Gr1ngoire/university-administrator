@@ -7,3 +7,4 @@ export { NewsController } from './news.controller';
 export { SchedulesController } from './schedules.controller';
 export { StudentsController } from './students.controller';
 export { TeachersController } from './teachers.controller';
+export { UsersController } from './users.controller';

@@ -10,10 +10,11 @@ import {
   DepartmentsGetAllResponseDto,
   UpdateDepartmentRequestDto,
 } from 'src/common/types/types';
-import { FacultiesService } from 'src/services/faculties.service';
+import { FacultiesService } from './faculties.service';
 import { Department } from 'src/entities/entities';
-import { InjectRepository } from 'src/common/decorators/decorators';
+import { Injectable, InjectRepository } from 'src/common/decorators/decorators';
 
+@Injectable()
 export class DepartmentsService {
   constructor(
     @InjectRepository(Department) private repository: Repository<Department>,

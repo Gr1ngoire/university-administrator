@@ -53,7 +53,7 @@ export class StudentsController {
   ) {
     const { id } = params;
 
-    return this.studentsService.update(id, student);
+    return this.studentsService.updateGroup(id, student);
   }
 
   @Delete(StudentsApi.$ID)

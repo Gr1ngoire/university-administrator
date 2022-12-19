@@ -7,3 +7,4 @@ export { NewsService } from './news.service';
 export { SchedulesService } from './schedules.service';
 export { StudentsService } from './students.service';
 export { TeachersService } from './teachers.service';
+export { UsersService } from './users.service';

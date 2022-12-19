@@ -1,4 +1,4 @@
-import { Faculty, Group } from 'src/entities/entities';
+import { Faculty, Group, Teacher } from 'src/entities/entities';
 import {
   Entity,
   PrimaryGeneratedColumn,
@@ -39,6 +39,9 @@ export class Department {
 
   @OneToMany(() => Group, (group) => group.department)
   groups: Group[];
+
+  @OneToMany(() => Teacher, (teacher) => teacher.department)
+  teachers: Teacher[];
 
   @ManyToOne(() => Faculty, (faculty) => faculty.departments, {
     onDelete: 'CASCADE',

@@ -53,7 +53,7 @@ export class TeachersController {
   ) {
     const { id } = params;
 
-    return this.teachersService.update(id, teacher);
+    return this.teachersService.updateDepartment(id, teacher);
   }
 
   @Delete(TeachersApi.$ID)

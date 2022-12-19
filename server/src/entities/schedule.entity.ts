@@ -8,7 +8,7 @@ import {
   JoinColumn,
 } from 'src/common/decorators/decorators';
 import { DbTablesNames } from 'src/common/enums/enums';
-import { Discipline, Group, User } from './entities';
+import { Discipline, Group, Teacher } from './entities';
 
 @Entity({ name: DbTablesNames.SCHEDULES })
 export class Schedule {
@@ -36,11 +36,11 @@ export class Schedule {
   @Column()
   classroom: string;
 
-  @ManyToOne(() => User, (teacher) => teacher.schedules, {
+  @ManyToOne(() => Teacher, (teacher) => teacher.schedules, {
     onDelete: 'CASCADE',
   })
   @JoinColumn({ name: 'teacher_id' })
-  teacher: User;
+  teacher: Teacher;
 
   @Column({ type: 'number', name: 'teacher_id' })
   teacherId: number;

@@ -3,15 +3,18 @@ import {
   CreateDateColumn,
   Entity,
   JoinColumn,
+  ManyToOne,
+  OneToMany,
   OneToOne,
   PrimaryGeneratedColumn,
   UpdateDateColumn,
 } from 'src/common/decorators/decorators';
-import { DbTablesNames, UniversityUserRoles } from 'src/common/enums/enums';
+import { DbTablesNames } from 'src/common/enums/enums';
+import { Department, Schedule } from 'src/entities/entities';
 import { User } from './user.entity';
 
-@Entity({ name: DbTablesNames.USERS })
-export class UserDetails {
+@Entity({ name: DbTablesNames.TEACHERS })
+export class Teacher {
   @PrimaryGeneratedColumn()
   id: number;
 
@@ -30,29 +33,22 @@ export class UserDetails {
   })
   createdAt: Date;
 
-  @Column()
-  name: string;
-
-  @Column()
-  surname: string;
-
-  @Column({ name: 'column_name' })
-  secondName: string;
-
-  @Column()
-  phone: string;
-
-  @Column({
-    type: 'enum',
-    enum: UniversityUserRoles,
-    default: UniversityUserRoles.STUDENT,
-  })
-  role: string;
-
-  @OneToOne(() => User, (user) => user.userDetails, { onDelete: 'CASCADE' })
+  @OneToOne(() => User, (user) => user.teacher, { onDelete: 'CASCADE' })
   @JoinColumn({ name: 'user_id' })
   user: User;
 
   @Column({ type: 'number', name: 'user_id' })
   userId: number;
+
+  @ManyToOne(() => Department, (department) => department.teachers, {
+    onDelete: 'CASCADE',
+  })
+  @JoinColumn({ name: 'department_id' })
+  department: Department;
+
+  @Column({ type: 'number', name: 'department_id' })
+  departmentId: number;
+
+  @OneToMany(() => Schedule, (schedule) => schedule.teacher)
+  schedules: Schedule[];
 }

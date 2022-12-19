@@ -32,7 +32,7 @@ export class UsersService {
 
     return {
       items: usersModels.map(
-        ({ id, name, surname, secondName, role, phone, email }) => ({
+        ({ id, name, surname, secondName, role, phone, email, password }) => ({
           id,
           name,
           surname,
@@ -40,6 +40,7 @@ export class UsersService {
           role,
           phone,
           email,
+          password,
         }),
       ),
     };
@@ -48,8 +49,9 @@ export class UsersService {
   async getById(idToFind: number): Promise<UsersGetAllItemResponseDto | null> {
     const user = await this.getModelById(idToFind);
 
-    const { id, name, surname, secondName, role, phone, email } = user;
-    return { id, name, surname, secondName, role, phone, email };
+    const { id, name, surname, secondName, role, phone, email, password } =
+      user;
+    return { id, name, surname, secondName, role, phone, email, password };
   }
 
   async create(
@@ -66,9 +68,10 @@ export class UsersService {
     const newStudent = this.repository.create(user);
 
     const createdUser = await this.repository.save(newStudent);
-    const { id, name, surname, secondName, role, phone, email } = createdUser;
+    const { id, name, surname, secondName, role, phone, email, password } =
+      createdUser;
 
-    return { id, name, surname, secondName, role, phone, email };
+    return { id, name, surname, secondName, role, phone, email, password };
   }
 
   async update(

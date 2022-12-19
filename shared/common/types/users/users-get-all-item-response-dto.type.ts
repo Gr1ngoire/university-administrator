@@ -6,6 +6,7 @@ type UsersGetAllItemResponseDto = {
   role: string;
   phone: string;
   email: string;
+  password: string;
 };
 
 export { type UsersGetAllItemResponseDto };

@@ -44,9 +44,8 @@ const handleToggle: () => void = (): void => {
       v-else-if="!isScheduleCrеationPossible"
       :class="styles.unableToCreateScheduleInfoBlock"
     >
-      There are not enough entities to create a group, to create a schedule
-      record you need at least one discipline, at least on teacher and at least
-      one student
+      There are not enough entities to create a schedule record, you need at
+      least one discipline, at least on teacher and at least one student
     </div>
     <hr
       v-if="studentCreationFormShowState"

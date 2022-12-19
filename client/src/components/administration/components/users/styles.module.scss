@@ -1,0 +1,28 @@
+.departmentsDashboard {
+  @extend %centered-flex-column;
+
+  width: 100%;
+  background: $secondary-brand-color;
+}
+
+.createUserForm {
+  width: 62.5%;
+  display: flex;
+  flex-direction: column;
+  margin-top: 30px;
+  padding: 10px;
+}
+
+.unableToCreateUserInfoBlock {
+  @extend %centered-flex-column;
+}
+
+.toggleUserFormButtonWrapper {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.usersSectionsSeparator {
+  width: 60%;
+  border-color: $primary-brand-color;
+}

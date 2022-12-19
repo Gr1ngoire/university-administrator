@@ -27,6 +27,10 @@ enum Actions {
   CREATE_TEACHER = "administration/createTeacher",
   UPDATE_TEACHER = "administration/updateTeacher",
   DELETE_TEACHER = "administration/deleteTeacher",
+  GET_ALL_USERS = "administration/getAllUsers",
+  CREATE_USER = "administration/createUser",
+  UPDATE_USER = "administration/updateUser",
+  DELETE_USER = "administration/deleteUser",
 }
 
 export { Actions };

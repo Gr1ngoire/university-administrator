@@ -7,6 +7,7 @@ import type {
   SchedulesGetAllItemResponseDto,
   StudentsGetAllItemResponseDto,
   TeachersGetAllItemResponseDto,
+  UsersGetAllItemResponseDto,
 } from "@/common/types/types";
 
 type State = {
@@ -17,6 +18,7 @@ type State = {
   schedules: SchedulesGetAllItemResponseDto[];
   students: StudentsGetAllItemResponseDto[];
   teachers: TeachersGetAllItemResponseDto[];
+  users: UsersGetAllItemResponseDto[];
   dataStatus: DataStatus;
 };
 

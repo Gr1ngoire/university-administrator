@@ -67,4 +67,5 @@ export {
   type UpdateUserRequestDto,
   type UsersGetAllResponseDto,
   type UsersGetAllItemResponseDto,
+  type UpdateUserRequestParams,
 } from "./users/users";

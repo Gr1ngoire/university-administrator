@@ -1,9 +1,7 @@
 <script lang="ts" setup>
-import { Button, Input, Select } from "@/common/components/components";
+import { Button, Select } from "@/common/components/components";
 import type { CreateStudentRequestDto } from "@/common/types/types";
-import type { ValidationError } from "@/exceptions/exceptions";
-import { student as studentValidator } from "@/validators/validators";
-import { computed, reactive, useStore } from "@/hooks/hooks";
+import { computed, useStore } from "@/hooks/hooks";
 import { AdministrationActions } from "@/store/actions";
 
 import styles from "./styles.module.scss";
@@ -16,6 +14,15 @@ const props = defineProps<Props>();
 
 const store = useStore();
 
+const users = computed(() => store.state.administration.users);
+const userSelectOptions = users.value.map(
+  ({ id, name, surname, secondName }) => ({
+    id,
+    name: `${surname} ${name} ${secondName}`,
+    value: String(id),
+  })
+);
+
 const groups = computed(() => store.state.administration.groups);
 const groupSelectOptions = groups.value.map(({ id, name }) => ({
   id,
@@ -23,33 +30,12 @@ const groupSelectOptions = groups.value.map(({ id, name }) => ({
   value: String(id),
 }));
 
+const [DEFAULT_USER] = users.value;
 const [DEFAULT_GROUP] = groups.value;
 
 let studentCreationFormState: CreateStudentRequestDto = {
-  name: "",
-  email: "",
-  phone: "",
+  userId: DEFAULT_USER.id,
   groupId: DEFAULT_GROUP.id,
-};
-
-const studentCreationValidationState: Record<string, string> = reactive<
-  Record<string, string>
->({
-  name: "",
-  email: "",
-  phone: "",
-});
-
-const handleStudentCreationValidation: (
-  student: CreateStudentRequestDto
-) => void = (student: CreateStudentRequestDto): void => {
-  try {
-    studentValidator.validate(student);
-  } catch (err: unknown) {
-    const validationError = err as ValidationError;
-    studentCreationValidationState[validationError.field] =
-      validationError.message;
-  }
 };
 
 const handleStudentPropertyChange: (event: Event) => void = (
@@ -58,53 +44,30 @@ const handleStudentPropertyChange: (event: Event) => void = (
   const input = event.target as HTMLInputElement;
   studentCreationFormState = {
     ...studentCreationFormState,
-    [input.name]:
-      input.name === "groupId" ? parseInt(input.value) : input.value,
+    [input.name]: parseInt(input.value),
   } as CreateStudentRequestDto;
-
-  studentCreationValidationState[input.name] = "";
-  handleStudentCreationValidation(studentCreationFormState);
 };
 
 const handleSubmit: (event: Event) => void = (event: Event) => {
   event.preventDefault();
-  if (
-    Object.values(studentCreationValidationState).every((el) => el.length === 0)
-  ) {
-    store.dispatch(
-      AdministrationActions.CREATE_STUDENT,
-      studentCreationFormState
-    );
-    props.onToggle();
-  }
+  store.dispatch(
+    AdministrationActions.CREATE_STUDENT,
+    studentCreationFormState
+  );
+  props.onToggle();
 };
-
-handleStudentCreationValidation(studentCreationFormState);
 </script>
 
 <template>
   <form :class="styles.studentCreationForm" @submit="handleSubmit">
-    <Input
-      type="text"
-      name="name"
-      :onInput="handleStudentPropertyChange"
-      :value="studentCreationFormState.name"
-      :errorMessage="studentCreationValidationState.name"
-    />
-    <Input
-      type="email"
-      name="email"
-      :onInput="handleStudentPropertyChange"
-      :value="studentCreationFormState.email"
-      :errorMessage="studentCreationValidationState.email"
-    />
-    <Input
-      type="text"
-      name="phone"
-      :onInput="handleStudentPropertyChange"
-      :value="studentCreationFormState.phone"
-      :errorMessage="studentCreationValidationState.phone"
-    />
+    <div :class="styles.selectWrapper">
+      <Select
+        name="userId"
+        nameToDisplay="User"
+        :options="userSelectOptions"
+        :onSelect="handleStudentPropertyChange"
+      />
+    </div>
     <div :class="styles.selectWrapper">
       <Select
         name="groupId"

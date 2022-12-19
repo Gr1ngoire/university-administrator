@@ -13,6 +13,10 @@
   padding: 10px;
 }
 
+.unableToCreateTeacherInfoBlock {
+  @extend %centered-flex-column;
+}
+
 .toggleTeacherFormButtonWrapper {
   display: flex;
   justify-content: flex-end;

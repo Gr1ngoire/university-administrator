@@ -19,13 +19,9 @@
   width: 100%;
 }
 
-.teacherEditInputWrapper {
-  padding: 0 10px 0 10px;
-  width: 100%;
-
-  & label {
-    color: $secondary-brand-color;
-  }
+.teacherEditSelectWrapper {
+  width: 95%;
+  margin-top: 5px;
 }
 
 .teacherActionButtonsWrapper {

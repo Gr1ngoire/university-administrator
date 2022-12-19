@@ -3,6 +3,7 @@ import { Button } from "@/common/components/components";
 import type {
   GroupsGetAllItemResponseDto,
   ToggleState,
+  UsersGetAllItemResponseDto,
 } from "@/common/types/types";
 import { reactive, useStore } from "@/hooks/hooks";
 import { AdministrationActions } from "@/store/actions";
@@ -12,9 +13,9 @@ import styles from "./styles.module.scss";
 
 type Props = {
   id: number;
-  name: string;
-  email: string;
-  phone: string;
+  fullName: string;
+  userId: number;
+  user: UsersGetAllItemResponseDto;
   groupId: number;
   group: GroupsGetAllItemResponseDto;
 };
@@ -37,16 +38,18 @@ const handleEditToggle: () => void = (): void => {
 <template>
   <UpdateStudentForm
     v-if="studentUpdateFormShowState.state"
-    :initialStudent="{ id, name, email, phone, groupId, group }"
+    :id="id"
+    :fullName="fullName"
+    :groupId="groupId"
     :onToggle="handleEditToggle"
   />
   <div
     v-else-if="!studentUpdateFormShowState.state"
     :class="styles.studentCard"
   >
-    <p :class="styles.studentName">Name: {{ props.name }}</p>
-    <p :class="styles.studentEmail">Email: {{ props.email }}</p>
-    <p :class="styles.studentPhone">Phone: {{ props.phone }}</p>
+    <p :class="styles.studentFullName">Full name: {{ props.fullName }}</p>
+    <p :class="styles.studentEmail">Email: {{ props.user.email }}</p>
+    <p :class="styles.studentPhone">Phone: {{ props.user.phone }}</p>
     <p :class="styles.studentGroupName">Group: {{ props.group.name }}</p>
     <div :class="styles.actionsSection">
       <div :class="styles.actionWrapperButton">

@@ -1,6 +1,10 @@
 <script setup lang="ts">
 import { Button } from "@/common/components/components";
-import type { ToggleState } from "@/common/types/types";
+import type {
+  DepartmentsGetAllItemResponseDto,
+  ToggleState,
+  UsersGetAllItemResponseDto,
+} from "@/common/types/types";
 import { reactive, useStore } from "@/hooks/hooks";
 import { AdministrationActions } from "@/store/actions";
 import { UpdateTeacherForm } from "./components/components";
@@ -9,10 +13,11 @@ import styles from "./styles.module.scss";
 
 type Props = {
   id: number;
-  email: string;
-  phone: string;
-  name: string;
-  surname: string;
+  fullName: string;
+  userId: number;
+  user: UsersGetAllItemResponseDto;
+  departmentId: number;
+  department: DepartmentsGetAllItemResponseDto;
 };
 
 const props = defineProps<Props>();
@@ -33,17 +38,21 @@ const handleEditToggle: () => void = (): void => {
 <template>
   <UpdateTeacherForm
     v-if="teacherUpdateFormShowState.state"
-    :initialTeacher="{ id, email, phone, name, surname }"
+    :id="id"
+    :fullName="fullName"
+    :departmentId="departmentId"
     :onToggle="handleEditToggle"
   />
   <div
     v-else-if="!teacherUpdateFormShowState.state"
     :class="styles.teacherCard"
   >
-    <p :class="styles.teacherEmail">Email: {{ props.email }}</p>
-    <p :class="styles.teacherPhone">Phone: {{ props.phone }}</p>
-    <p :class="styles.teacherName">Name: {{ props.name }}</p>
-    <p :class="styles.teacherSurname">Surname: {{ props.surname }}</p>
+    <p :class="styles.teacherFullName">Full name: {{ props.fullName }}</p>
+    <p :class="styles.teacherEmail">Email: {{ props.user.email }}</p>
+    <p :class="styles.teacherPhone">Phone: {{ props.user.phone }}</p>
+    <p :class="styles.studentDepartmentName">
+      Department: {{ props.department.name }}
+    </p>
     <div :class="styles.actionsSection">
       <div :class="styles.actionWrapperButton">
         <Button type="click" action="edit" :onClick="handleEditToggle" />

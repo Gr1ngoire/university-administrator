@@ -17,14 +17,31 @@ import { User } from 'src/entities/entities';
 export class UsersService {
   constructor(@InjectRepository(User) private repository: Repository<User>) {}
 
-  private getByEmail(email: string): Promise<User | null> {
-    return this.repository.findOne({ where: { email } });
-  }
-
   getModelById(id: number): Promise<User | null> {
     return this.repository.findOne({
       where: { id },
     });
+  }
+
+  async getByEmail(
+    emailToLookFor: string,
+  ): Promise<UsersGetAllItemResponseDto | null> {
+    const userInDb = await this.repository.findOne({
+      where: { email: emailToLookFor },
+    });
+
+    const { id, name, surname, secondName, role, phone, email, password } =
+      userInDb;
+    return {
+      id,
+      name,
+      surname,
+      secondName,
+      role,
+      phone,
+      email,
+      password,
+    };
   }
 
   async getAll(): Promise<UsersGetAllResponseDto> {

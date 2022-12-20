@@ -1,3 +1,4 @@
+export { type SignInRequestDto, type SignUpRequestDto } from "./auth/auth";
 export {
   type CreateDepartmentRequestDto,
   type DepartmentsGetAllItemResponseDto,

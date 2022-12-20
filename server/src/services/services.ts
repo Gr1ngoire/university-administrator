@@ -1,4 +1,6 @@
 export { AppService } from './app.service';
+export { BcryptService } from './bcrypt.service';
+export { AuthService } from './auth.service';
 export { DepartmentsService } from './departments.service';
 export { DisciplinesService } from './disciplines.service';
 export { FacultiesService } from './faculties.service';

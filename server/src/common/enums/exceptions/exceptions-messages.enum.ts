@@ -5,6 +5,7 @@ enum ExceptionsMessages {
   FACULTY_NOT_FOUND = 'Faculty not found',
   GROUP_NOT_FOUND = 'Group not found',
   GROUP_DOES_NOT_EXIST = 'Group does not exist',
+  INVALID_EMAIL_OR_PASSWORD = 'Invalid email or password',
   INVALID_ID_FORMAT = 'Invalid id format',
   NEWS_NOT_FOUND = 'News not found',
   SCHEDULE_NOT_FOUND = 'Schedule not found',

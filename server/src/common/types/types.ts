@@ -1,3 +1,4 @@
+export {type SignInRequestDto, type SignUpRequestDto} from './auth/auth'
 export { type DbClient } from './db/db';
 export {
   type CreateDepartmentRequestDto,
@@ -45,7 +46,9 @@ export {
   type TeachersGetAllResponseDto,
   type UpdateTeacherRequestDto,
 } from './teachers/teachers';
-export {type CreateUserRequestDto,
+export {
+  type CreateUserRequestDto,
   type UpdateUserRequestDto,
   type UsersGetAllResponseDto,
-  type UsersGetAllItemResponseDto} from './users/users'
+  type UsersGetAllItemResponseDto
+} from './users/users'

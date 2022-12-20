@@ -1,4 +1,5 @@
 export { AppController } from './app.controller';
+export { AuthController } from './auth.controller';
 export { DepartmentsController } from './departments.controller';
 export { DisciplinesController } from './disciplines.controller';
 export { FacultiesController } from './faculties.controller';

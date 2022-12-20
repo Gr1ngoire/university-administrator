@@ -1,4 +1,5 @@
 export { ApiPath } from 'shared/common/enums/enums';
+export { AuthApi } from './auth/auth';
 export { DepartmentsApi } from './departments/departments';
 export { DisciplinesApi } from './disciplines/disciplines';
 export { FacultiesApi } from './faculties/faculties';

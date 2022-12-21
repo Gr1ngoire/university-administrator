@@ -1,12 +1,12 @@
 import {
   GroupsGetAllItemResponseDto,
-  UsersGetAllItemResponseDto,
+  UsersGetAllItemAdminResponseDto,
 } from "../types";
 
 type StudentsGetAllItemResponseDto = {
   id: number;
   userId: number;
-  user: UsersGetAllItemResponseDto;
+  user: UsersGetAllItemAdminResponseDto;
   groupId: number;
   group: GroupsGetAllItemResponseDto;
 };

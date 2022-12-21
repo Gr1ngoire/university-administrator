@@ -1,11 +1,12 @@
-type CreateUserRequestDto = {
+type UserWithGrantDto = {
+  id: number;
   name: string;
   surname: string;
   secondName: string;
   role: string;
   phone: string;
   email: string;
-  password: string;
+  // grant: admin || user
 };
 
-export { type CreateUserRequestDto };
+export { type UserWithGrantDto };

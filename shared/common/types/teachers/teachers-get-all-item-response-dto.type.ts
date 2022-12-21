@@ -1,12 +1,12 @@
 import {
   DepartmentsGetAllItemResponseDto,
-  UsersGetAllItemResponseDto,
+  UsersGetAllItemAdminResponseDto,
 } from "../types";
 
 type TeachersGetAllItemResponseDto = {
   id: number;
   userId: number;
-  user: UsersGetAllItemResponseDto;
+  user: UsersGetAllItemAdminResponseDto;
   departmentId: number;
   department: DepartmentsGetAllItemResponseDto;
 };

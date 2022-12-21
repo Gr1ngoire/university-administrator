@@ -1,7 +1,11 @@
 export { type UpdateUserRequestParams } from "./update-user-request-params.type";
 export {
-  type CreateUserRequestDto,
   type UpdateUserRequestDto,
-  type UsersGetAllResponseDto,
-  type UsersGetAllItemResponseDto,
+  type UsersGetAllAdminResponseDto,
+  type UsersGetAllItemAdminResponseDto,
+  type UserSignInRequestDto,
+  type UserSignInResponseDto,
+  type UserSignUpRequestDto,
+  type UserSignUpResponseDto,
+  type UserWithGrantDto,
 } from "shared/common/types/types";

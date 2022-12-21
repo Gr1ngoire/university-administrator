@@ -63,9 +63,13 @@ export {
   type UpdateTeacherRequestParams,
 } from "./teachers/teachers";
 export {
-  type CreateUserRequestDto,
   type UpdateUserRequestDto,
-  type UsersGetAllResponseDto,
-  type UsersGetAllItemResponseDto,
   type UpdateUserRequestParams,
+  type UsersGetAllAdminResponseDto,
+  type UsersGetAllItemAdminResponseDto,
+  type UserSignInRequestDto,
+  type UserSignInResponseDto,
+  type UserSignUpRequestDto,
+  type UserSignUpResponseDto,
+  type UserWithGrantDto,
 } from "./users/users";

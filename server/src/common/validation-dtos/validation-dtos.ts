@@ -29,6 +29,7 @@ export {
   UpdateTeacherValidationDto,
 } from './teachers/teachers';
 export {
-  CreateUserValidationDto,
   UpdateUserValidationDto,
+  UserSignInValidationDto,
+  UserSignUpValidationDto,
 } from './users/users';

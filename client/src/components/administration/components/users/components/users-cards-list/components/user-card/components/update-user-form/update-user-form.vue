@@ -1,7 +1,7 @@
 <script lang="ts" setup>
 import { Button, Input } from "@/common/components/components";
 import type {
-  UsersGetAllItemResponseDto,
+  UsersGetAllItemAdminResponseDto,
   UpdateUserRequestDto,
 } from "@/common/types/types";
 import { reactive, useStore } from "@/hooks/hooks";
@@ -12,7 +12,7 @@ import { AdministrationActions } from "@/store/actions";
 import styles from "./styles.module.scss";
 
 type Props = {
-  initialUser: UsersGetAllItemResponseDto;
+  initialUser: UsersGetAllItemAdminResponseDto;
   onToggle: () => void;
 };
 

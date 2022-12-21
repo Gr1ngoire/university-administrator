@@ -1,5 +1,6 @@
 import { ENV } from "@/common/enums/enums";
 import { Http } from "./http/http.service";
+import { Auth } from "./auth/auth.service";
 import { Discipline } from "./discipline/discipline.service";
 import { Faculty } from "./faculty/faculty.service";
 import { Group } from "./group/group.service";
@@ -13,6 +14,8 @@ import { User } from "./user/user.service";
 const apiPrefix = ENV.API.PATH;
 
 const http = new Http();
+
+const auth = new Auth({ http, apiPrefix });
 const department = new Department({ http, apiPrefix });
 const discipline = new Discipline({ http, apiPrefix });
 const faculty = new Faculty({ http, apiPrefix });
@@ -24,6 +27,7 @@ const teacher = new Teacher({ http, apiPrefix });
 const user = new User({ http, apiPrefix });
 
 export {
+  auth,
   department,
   discipline,
   faculty,

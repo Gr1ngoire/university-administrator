@@ -1,23 +1,40 @@
 import { AppRoutes } from "@/common/enums/enums";
 import { createRouter, createWebHistory } from "vue-router";
-import { Administration, News, PublicSchedule } from "../components/components";
+import {
+  Administration,
+  News,
+  PublicSchedule,
+  SignIn,
+  SignUp,
+} from "../components/components";
+import { pathSlashStripper } from "./helpers/path-slash-stripper.helper";
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
   routes: [
     {
+      path: AppRoutes.SIGN_IN,
+      name: pathSlashStripper(AppRoutes.SIGN_IN),
+      component: SignIn,
+    },
+    {
+      path: AppRoutes.SIGN_UP,
+      name: pathSlashStripper(AppRoutes.SIGN_UP),
+      component: SignUp,
+    },
+    {
       path: AppRoutes.SCHEDULE,
-      name: "schedule",
+      name: pathSlashStripper(AppRoutes.SCHEDULE),
       component: PublicSchedule,
     },
     {
       path: AppRoutes.ADMINISTRATION,
-      name: "administration",
+      name: pathSlashStripper(AppRoutes.ADMINISTRATION),
       component: Administration,
     },
     {
       path: AppRoutes.NEWS,
-      name: "news",
+      name: pathSlashStripper(AppRoutes.NEWS),
       component: News,
     },
     {

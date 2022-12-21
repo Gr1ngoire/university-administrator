@@ -1,4 +1,4 @@
-export { ApiPath } from "./api/api";
+export { ApiPath, AuthApi } from "./api/api";
 export { ContentType } from "./file/file";
 export {
   HttpCode,

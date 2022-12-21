@@ -1,3 +1,4 @@
+import { SignIn, SignUp } from "./auth/auth";
 import { Department } from "./department/department.validator";
 import { Discipline } from "./discipline/discipline.validator";
 import { Faculty } from "./faculty/faculty.validator";
@@ -13,5 +14,17 @@ const group = new Group();
 const news = new News();
 const schedule = new Schedule();
 const user = new User();
+const signIn = new SignIn(user);
+const signUp = new SignUp(user);
 
-export { department, discipline, faculty, group, news, schedule, user };
+export {
+  department,
+  discipline,
+  faculty,
+  group,
+  news,
+  schedule,
+  signIn,
+  signUp,
+  user,
+};

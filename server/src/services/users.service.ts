@@ -6,10 +6,10 @@ import {
   NotFoundException,
 } from 'src/common/exceptions/excpetions';
 import {
-  CreateUserRequestDto,
+  UserSignUpRequestDto,
   UpdateUserRequestDto,
-  UsersGetAllItemResponseDto,
-  UsersGetAllResponseDto,
+  UsersGetAllItemAdminResponseDto,
+  UsersGetAllAdminResponseDto,
 } from 'src/common/types/types';
 import { User } from 'src/entities/entities';
 
@@ -25,7 +25,7 @@ export class UsersService {
 
   async getByEmail(
     emailToLookFor: string,
-  ): Promise<UsersGetAllItemResponseDto | null> {
+  ): Promise<UsersGetAllItemAdminResponseDto | null> {
     const userInDb = await this.repository.findOne({
       where: { email: emailToLookFor },
     });
@@ -44,7 +44,7 @@ export class UsersService {
     };
   }
 
-  async getAll(): Promise<UsersGetAllResponseDto> {
+  async getAll(): Promise<UsersGetAllAdminResponseDto> {
     const usersModels = await this.repository.find();
 
     return {
@@ -63,7 +63,9 @@ export class UsersService {
     };
   }
 
-  async getById(idToFind: number): Promise<UsersGetAllItemResponseDto | null> {
+  async getById(
+    idToFind: number,
+  ): Promise<UsersGetAllItemAdminResponseDto | null> {
     const user = await this.getModelById(idToFind);
 
     const { id, name, surname, secondName, role, phone, email, password } =
@@ -72,8 +74,8 @@ export class UsersService {
   }
 
   async create(
-    user: CreateUserRequestDto,
-  ): Promise<UsersGetAllItemResponseDto> {
+    user: UserSignUpRequestDto,
+  ): Promise<UsersGetAllItemAdminResponseDto> {
     const userWithSameEmail = await this.getByEmail(user.email);
 
     if (userWithSameEmail) {
@@ -94,7 +96,7 @@ export class UsersService {
   async update(
     id: number,
     user: Partial<UpdateUserRequestDto>,
-  ): Promise<UsersGetAllItemResponseDto> {
+  ): Promise<UsersGetAllItemAdminResponseDto> {
     const userToUpdate = await this.repository.findOne({ where: { id } });
 
     if (!userToUpdate) {

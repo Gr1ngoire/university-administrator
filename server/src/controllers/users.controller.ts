@@ -2,7 +2,6 @@ import {
   Body,
   Controller,
   Get,
-  Post,
   Patch,
   Delete,
   Param,
@@ -10,7 +9,6 @@ import {
 import { ApiPath, ExceptionsMessages, UsersApi } from 'src/common/enums/enums';
 import { NotFoundException } from 'src/common/exceptions/excpetions';
 import {
-  CreateUserValidationDto,
   GetByIdParams,
   UpdateUserValidationDto,
 } from 'src/common/validation-dtos/validation-dtos';
@@ -35,11 +33,6 @@ export class UsersController {
     }
 
     return teacher;
-  }
-
-  @Post(UsersApi.ROOT)
-  create(@Body() user: CreateUserValidationDto) {
-    return this.usersService.create(user);
   }
 
   @Patch(UsersApi.$ID)

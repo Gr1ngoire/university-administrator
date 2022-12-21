@@ -20,6 +20,38 @@ class User extends Abstract<CreateUserRequestDto> {
     this.validatePassword(password);
   }
 
+  validateEmail(value: string): void {
+    const validateField = "email";
+
+    if (value.length === 0) {
+      throw new ValidationError({
+        field: validateField,
+        message: ValidationExceptionMessages.EMAIL_CAN_NOT_BE_EMPTY,
+      });
+    }
+
+    const EMAIL_FORMAT_VALIDATION = /\w+@\w+\.\w+/;
+    if (!value.match(EMAIL_FORMAT_VALIDATION)) {
+      throw new ValidationError({
+        field: validateField,
+        message: ValidationExceptionMessages.EMAIL_SHOULD_BE_IN_PROPER_FORMAT,
+      });
+    }
+  }
+
+  validatePassword(value: string): void {
+    const validateField = "password";
+
+    const PASSWORD_VALIDATION =
+      /^(?=.*[!&#%])(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[a-zA-Z]).{8,16}$/;
+    if (!value.match(PASSWORD_VALIDATION)) {
+      throw new ValidationError({
+        field: validateField,
+        message: ValidationExceptionMessages.PASSWORD_FORMAT,
+      });
+    }
+  }
+
   private validateName(value: string): void {
     const validatedField = "name";
 
@@ -68,25 +100,6 @@ class User extends Abstract<CreateUserRequestDto> {
     }
   }
 
-  private validateEmail(value: string): void {
-    const validateField = "email";
-
-    if (value.length === 0) {
-      throw new ValidationError({
-        field: validateField,
-        message: ValidationExceptionMessages.EMAIL_CAN_NOT_BE_EMPTY,
-      });
-    }
-
-    const EMAIL_FORMAT_VALIDATION = /\w+@\w+\.\w+/;
-    if (!value.match(EMAIL_FORMAT_VALIDATION)) {
-      throw new ValidationError({
-        field: validateField,
-        message: ValidationExceptionMessages.EMAIL_SHOULD_BE_IN_PROPER_FORMAT,
-      });
-    }
-  }
-
   private validateUkrainianPhone(value: string): void {
     const validateField = "phone";
 
@@ -102,19 +115,6 @@ class User extends Abstract<CreateUserRequestDto> {
       throw new ValidationError({
         field: validateField,
         message: ValidationExceptionMessages.PHONE_SHOULD_BE_IN_PROPER_FORMAT,
-      });
-    }
-  }
-
-  private validatePassword(value: string): void {
-    const validateField = "password";
-
-    const PASSWORD_VALIDATION =
-      /^(?=.*[!&#%])(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[a-zA-Z]).{8,16}$/;
-    if (!value.match(PASSWORD_VALIDATION)) {
-      throw new ValidationError({
-        field: validateField,
-        message: ValidationExceptionMessages.PASSWORD_FORMAT,
       });
     }
   }

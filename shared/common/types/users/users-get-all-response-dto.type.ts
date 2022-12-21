@@ -1,7 +1,7 @@
-import type { UsersGetAllItemResponseDto } from "./users-get-all-item-response-dto.type";
+import type { UsersGetAllItemAdminResponseDto } from "./users-get-all-item-admin-response-dto.type";
 
-type UsersGetAllResponseDto = {
-  items: UsersGetAllItemResponseDto[];
+type UsersGetAllAdminResponseDto = {
+  items: UsersGetAllItemAdminResponseDto[];
 };
 
-export { type UsersGetAllResponseDto };
+export { type UsersGetAllAdminResponseDto };

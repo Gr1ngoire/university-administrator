@@ -1,4 +1,4 @@
-type UsersGetAllItemResponseDto = {
+type UsersGetAllItemAdminResponseDto = {
   id: number;
   name: string;
   surname: string;
@@ -9,4 +9,4 @@ type UsersGetAllItemResponseDto = {
   password: string;
 };
 
-export { type UsersGetAllItemResponseDto };
+export { type UsersGetAllItemAdminResponseDto };

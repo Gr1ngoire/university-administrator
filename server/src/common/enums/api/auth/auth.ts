@@ -1,1 +1,1 @@
-export { AuthApi } from './auth-api.enum';
+export { AuthApi } from 'shared/common/enums/enums';

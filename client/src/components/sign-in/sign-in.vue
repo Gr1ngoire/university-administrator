@@ -8,10 +8,14 @@ import styles from "./styles.module.scss";
 
 <template>
   <div :class="styles.formWrapper">
-    <SignInForm />
-    <p>
-      Do not you have an account?
-      <RouterLink :to="AppRoutes.SIGN_UP">Sign up</RouterLink>
-    </p>
+    <div :class="styles.formSectionWrapper">
+      <SignInForm />
+      <p :class="styles.signInToSignUpSwitchParagraph">
+        Do not you have an account?
+        <RouterLink :to="AppRoutes.SIGN_UP"
+          ><span :class="styles.switchLink">Sign up</span></RouterLink
+        >
+      </p>
+    </div>
   </div>
 </template>

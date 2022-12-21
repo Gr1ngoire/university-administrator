@@ -10,7 +10,7 @@ import styles from "./styles.module.scss";
   <div :class="styles.formWrapper">
     <div :class="styles.formSectionWrapper">
       <SignUpForm />
-      <p :class="styles.signUpToSignUnSwitchParagraph">
+      <p :class="styles.signUpToSignInSwitchParagraph">
         Do you already have an account?
         <RouterLink :to="AppRoutes.SIGN_IN"
           ><span :class="styles.switchLink">Sign in</span></RouterLink

@@ -7,9 +7,10 @@ import type {
 import { reactive, useRouter, useStore } from "@/hooks/hooks";
 import { AuthActions } from "@/store/actions";
 import { signIn as signInValidator } from "@/validators/validators";
+import { Input, Button } from "@/common/components/components";
+import { AppRoutes } from "@/common/enums/enums";
 
 import styles from "./styles.module.scss";
-import { AppRoutes } from "@/common/enums/enums";
 
 const router = useRouter();
 const store = useStore();
@@ -61,26 +62,28 @@ const handleSubmit: (event: Event) => void = (event: Event) => {
 
 <template>
   <form :class="styles.signInForm" @submit="handleSubmit">
-    <div :class="styles.signInInputWrapper">
-      <Input
-        type="text"
-        name="email"
-        :value="signInFormState.email"
-        :onInput="handleSignInPropertyChange"
-        :errorMessage="signInValidationState.email"
-      />
-    </div>
-    <div :class="styles.signInInputWrapper">
-      <Input
-        type="text"
-        name="password"
-        :value="signInFormState.password"
-        :onInput="handleSignInPropertyChange"
-        :errorMessage="signInValidationState.password"
-      />
-    </div>
-    <div :class="styles.userActionButtonsWrapper">
-      <Button type="submit" name="Sign Up" action="submit" />
+    <div :class="styles.signInActionSectionWrapper">
+      <div :class="styles.signInInputWrapper">
+        <Input
+          type="text"
+          name="email"
+          :value="signInFormState.email"
+          :onInput="handleSignInPropertyChange"
+          :errorMessage="signInValidationState.email"
+        />
+      </div>
+      <div :class="styles.signInInputWrapper">
+        <Input
+          type="text"
+          name="password"
+          :value="signInFormState.password"
+          :onInput="handleSignInPropertyChange"
+          :errorMessage="signInValidationState.password"
+        />
+      </div>
+      <div :class="styles.signInActionButtonsWrapper">
+        <Button type="submit" name="Sign Up" action="submit" />
+      </div>
     </div>
   </form>
 </template>

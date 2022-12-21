@@ -1,4 +1,15 @@
 .signInForm {
+  width: 100%;
+  padding: 20px;
+}
+
+.signInInputWrapper {
+  & label {
+    color: $secondary-brand-color;
+  }
+}
+
+.signInActionButtonsWrapper {
   display: flex;
-  flex-direction: column;
+  justify-content: center;
 }

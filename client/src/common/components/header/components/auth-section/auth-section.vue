@@ -6,8 +6,15 @@ import type { UserWithGrantDto } from "shared/common/types/types";
 
 import styles from "./styles.module.scss";
 import { AuthActions } from "@/store/actions";
-import router from "@/router";
+import { useRouter } from "@/hooks/hooks";
 
+type Props = {
+  onClick: () => void;
+};
+
+defineProps<Props>();
+
+const router = useRouter();
 const store = useStore();
 
 const user = computed<UserWithGrantDto | null>(
@@ -26,6 +33,13 @@ const logout = () => {
       <p>{{ (user.surname, user.name, user.secondName) }}</p>
       <Button :onClick="logout">Log out</Button>
     </div>
-    <RouterLink v-else :to="AppRoutes.SIGN_UP" />
+    <RouterLink
+      v-else
+      :class="styles.signInWrapper"
+      :to="AppRoutes.SIGN_UP"
+      @click="onClick"
+    >
+      <p :class="styles.signUpParagraph">Sign In/Up</p>
+    </RouterLink>
   </div>
 </template>

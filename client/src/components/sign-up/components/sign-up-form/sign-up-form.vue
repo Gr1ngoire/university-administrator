@@ -1,13 +1,15 @@
 <script lang="ts" setup>
 import type { ValidationError } from "@/exceptions/exceptions";
 import type { UserSignUpRequestDto } from "src/common/types/types";
-import { reactive, useStore } from "@/hooks/hooks";
-import router from "@/router";
+import { reactive, useRouter, useStore } from "@/hooks/hooks";
 import { AuthActions } from "@/store/actions";
 import { signUp as signUpValidator } from "@/validators/validators";
+import { Input, Button } from "@/common/components/components";
 
 import styles from "./styles.module.scss";
+import { AppRoutes } from "@/common/enums/enums";
 
+const router = useRouter();
 const store = useStore();
 
 let signUpFormState: UserSignUpRequestDto = {
@@ -60,7 +62,7 @@ const handleSubmit: (event: Event) => void = (event: Event) => {
   event.preventDefault();
   if (Object.values(signUpValidationState).every((el) => el.length === 0)) {
     store.dispatch(AuthActions.SIGN_UP, signUpFormState);
-    router.push("schedule");
+    router.push({ name: AppRoutes.SCHEDULE });
   }
 };
 </script>
@@ -68,73 +70,71 @@ const handleSubmit: (event: Event) => void = (event: Event) => {
 <template>
   <form :class="styles.signUpForm" @submit="handleSubmit">
     <div :class="styles.signUpActionSectionWrapper">
-      <div :class="styles.signUpFieldsWrapper">
-        <div :class="styles.signUpInputWrapper">
-          <Input
-            type="text"
-            name="name"
-            :value="signUpFormState.name"
-            :onInput="handleSignUpPropertyChange"
-            :errorMessage="signUpValidationState.name"
-          />
-        </div>
-        <div :class="styles.signUpInputWrapper">
-          <Input
-            type="text"
-            name="surname"
-            :value="signUpFormState.surname"
-            :onInput="handleSignUpPropertyChange"
-            :errorMessage="signUpValidationState.surname"
-          />
-        </div>
-        <div :class="styles.signUpInputWrapper">
-          <Input
-            type="text"
-            name="secondName"
-            nameToDisplay="Second name"
-            :value="signUpFormState.secondName"
-            :onInput="handleSignUpPropertyChange"
-            :errorMessage="signUpValidationState.secondName"
-          />
-        </div>
-        <div :class="styles.signUpInputWrapper">
-          <Input
-            type="text"
-            name="role"
-            :value="signUpFormState.role"
-            :onInput="handleSignUpPropertyChange"
-            :errorMessage="signUpValidationState.role"
-          />
-        </div>
-        <div :class="styles.signUpInputWrapper">
-          <Input
-            type="text"
-            name="phone"
-            :value="signUpFormState.phone"
-            :onInput="handleSignUpPropertyChange"
-            :errorMessage="signUpValidationState.phone"
-          />
-        </div>
-        <div :class="styles.signUpInputWrapper">
-          <Input
-            type="text"
-            name="email"
-            :value="signUpFormState.email"
-            :onInput="handleSignUpPropertyChange"
-            :errorMessage="signUpValidationState.email"
-          />
-        </div>
-        <div :class="styles.signUpInputWrapper">
-          <Input
-            type="text"
-            name="password"
-            :value="signUpFormState.password"
-            :onInput="handleSignUpPropertyChange"
-            :errorMessage="signUpValidationState.password"
-          />
-        </div>
+      <div :class="styles.signUpInputWrapper">
+        <Input
+          type="text"
+          name="name"
+          :value="signUpFormState.name"
+          :onInput="handleSignUpPropertyChange"
+          :errorMessage="signUpValidationState.name"
+        />
       </div>
-      <div :class="styles.userActionButtonsWrapper">
+      <div :class="styles.signUpInputWrapper">
+        <Input
+          type="text"
+          name="surname"
+          :value="signUpFormState.surname"
+          :onInput="handleSignUpPropertyChange"
+          :errorMessage="signUpValidationState.surname"
+        />
+      </div>
+      <div :class="styles.signUpInputWrapper">
+        <Input
+          type="text"
+          name="secondName"
+          nameToDisplay="Second name"
+          :value="signUpFormState.secondName"
+          :onInput="handleSignUpPropertyChange"
+          :errorMessage="signUpValidationState.secondName"
+        />
+      </div>
+      <div :class="styles.signUpInputWrapper">
+        <Input
+          type="text"
+          name="role"
+          :value="signUpFormState.role"
+          :onInput="handleSignUpPropertyChange"
+          :errorMessage="signUpValidationState.role"
+        />
+      </div>
+      <div :class="styles.signUpInputWrapper">
+        <Input
+          type="text"
+          name="phone"
+          :value="signUpFormState.phone"
+          :onInput="handleSignUpPropertyChange"
+          :errorMessage="signUpValidationState.phone"
+        />
+      </div>
+      <div :class="styles.signUpInputWrapper">
+        <Input
+          type="text"
+          name="email"
+          :value="signUpFormState.email"
+          :onInput="handleSignUpPropertyChange"
+          :errorMessage="signUpValidationState.email"
+        />
+      </div>
+      <div :class="styles.signUpInputWrapper">
+        <Input
+          type="text"
+          name="password"
+          :value="signUpFormState.password"
+          :onInput="handleSignUpPropertyChange"
+          :errorMessage="signUpValidationState.password"
+        />
+      </div>
+      <div :class="styles.signUpActionButtonsWrapper">
         <Button type="submit" name="Sign Up" action="submit" />
       </div>
     </div>

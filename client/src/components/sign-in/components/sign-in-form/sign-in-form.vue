@@ -4,13 +4,14 @@ import type {
   UserSignInRequestDto,
   UserSignUpRequestDto,
 } from "src/common/types/types";
-import { reactive, useStore } from "@/hooks/hooks";
-import router from "@/router";
+import { reactive, useRouter, useStore } from "@/hooks/hooks";
 import { AuthActions } from "@/store/actions";
 import { signIn as signInValidator } from "@/validators/validators";
 
 import styles from "./styles.module.scss";
+import { AppRoutes } from "@/common/enums/enums";
 
+const router = useRouter();
 const store = useStore();
 
 let signInFormState: UserSignInRequestDto = {
@@ -53,37 +54,33 @@ const handleSubmit: (event: Event) => void = (event: Event) => {
   event.preventDefault();
   if (Object.values(signInValidationState).every((el) => el.length === 0)) {
     store.dispatch(AuthActions.SIGN_UP, signInFormState);
-    router.push("schedule");
+    router.push(AppRoutes.SCHEDULE);
   }
 };
 </script>
 
 <template>
-  <form :class="styles.signUpForm" @submit="handleSubmit">
-    <div :class="styles.signUpActionSectionWrapper">
-      <div :class="styles.signUpFieldsWrapper">
-        <div :class="styles.signUpInputWrapper">
-          <Input
-            type="text"
-            name="email"
-            :value="signInFormState.email"
-            :onInput="handleSignInPropertyChange"
-            :errorMessage="signInValidationState.email"
-          />
-        </div>
-        <div :class="styles.signUpInputWrapper">
-          <Input
-            type="text"
-            name="password"
-            :value="signInFormState.password"
-            :onInput="handleSignInPropertyChange"
-            :errorMessage="signInValidationState.password"
-          />
-        </div>
-      </div>
-      <div :class="styles.userActionButtonsWrapper">
-        <Button type="submit" name="Sign Up" action="submit" />
-      </div>
+  <form :class="styles.signInForm" @submit="handleSubmit">
+    <div :class="styles.signInInputWrapper">
+      <Input
+        type="text"
+        name="email"
+        :value="signInFormState.email"
+        :onInput="handleSignInPropertyChange"
+        :errorMessage="signInValidationState.email"
+      />
+    </div>
+    <div :class="styles.signInInputWrapper">
+      <Input
+        type="text"
+        name="password"
+        :value="signInFormState.password"
+        :onInput="handleSignInPropertyChange"
+        :errorMessage="signInValidationState.password"
+      />
+    </div>
+    <div :class="styles.userActionButtonsWrapper">
+      <Button type="submit" name="Sign Up" action="submit" />
     </div>
   </form>
 </template>

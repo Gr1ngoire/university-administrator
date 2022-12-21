@@ -6,7 +6,10 @@ import type {
   MutationTree,
 } from "vuex";
 import { DataStatus } from "@/common/enums/enums";
-import { auth as authService } from "@/services/services";
+import {
+  auth as authService,
+  storage as storageService,
+} from "@/services/services";
 import type { RootState } from "../root-state";
 import type { State } from "./state";
 import type {
@@ -49,7 +52,8 @@ const actions: ActionTree<State, RootState> = {
     signinDto: UserSignInRequestDto
   ) {
     state.dataStatus = DataStatus.PENDING;
-    const { user } = await authService.signIn(signinDto);
+    const { token, user } = await authService.signIn(signinDto);
+    storageService.setToken(token);
 
     commit(Mutations.SET_USER, user);
     state.dataStatus = DataStatus.FULFILLED;
@@ -60,7 +64,8 @@ const actions: ActionTree<State, RootState> = {
     signUpDto: UserSignUpRequestDto
   ) {
     state.dataStatus = DataStatus.PENDING;
-    const { user } = await authService.signUp(signUpDto);
+    const { token, user } = await authService.signUp(signUpDto);
+    storageService.setToken(token);
 
     commit(Mutations.SET_USER, user);
     state.dataStatus = DataStatus.FULFILLED;
@@ -70,6 +75,7 @@ const actions: ActionTree<State, RootState> = {
     state.dataStatus = DataStatus.PENDING;
 
     commit(Mutations.CLEAR_USER);
+    storageService.clearToken();
     state.dataStatus = DataStatus.FULFILLED;
   },
 };

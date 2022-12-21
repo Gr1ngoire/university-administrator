@@ -8,6 +8,7 @@ import { News } from "./news/news.service";
 import { Teacher } from "./teacher/teacher.service";
 import { Department } from "./department/department.service";
 import { Schedule } from "./schedule/schedule.service";
+import { Storage } from "./storage/storage.service";
 import { Student } from "./student/student.service";
 import { User } from "./user/user.service";
 
@@ -22,6 +23,7 @@ const faculty = new Faculty({ http, apiPrefix });
 const group = new Group({ http, apiPrefix });
 const news = new News({ http, apiPrefix });
 const schedule = new Schedule({ http, apiPrefix });
+const storage = new Storage();
 const student = new Student({ http, apiPrefix });
 const teacher = new Teacher({ http, apiPrefix });
 const user = new User({ http, apiPrefix });
@@ -34,6 +36,7 @@ export {
   group,
   news,
   schedule,
+  storage,
   student,
   teacher,
   user,

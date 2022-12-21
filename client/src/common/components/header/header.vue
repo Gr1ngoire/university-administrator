@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { HeaderOption } from "./components/components";
+import { AuthSection, HeaderOption } from "./components/components";
 import { defaultSelectOptions } from "./common/common";
 import { ref } from "@/hooks/hooks";
 
@@ -37,4 +37,5 @@ selectOptions.value.forEach((option) => {
       :onClick="() => handleSelectionSwitch(id)"
     />
   </div>
+  <AuthSection />
 </template>

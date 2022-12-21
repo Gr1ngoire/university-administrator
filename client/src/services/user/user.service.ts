@@ -1,8 +1,7 @@
 import { ApiPath, ContentType, HttpMethod } from "@/common/enums/enums";
 import type {
-  CreateUserRequestDto,
-  UsersGetAllItemResponseDto,
-  UsersGetAllResponseDto,
+  UsersGetAllItemAdminResponseDto,
+  UsersGetAllAdminResponseDto,
   UpdateUserRequestDto,
 } from "@/common/types/types";
 import type { Http as HttpService } from "../http/http.service";
@@ -22,8 +21,8 @@ class User {
     this.apiPrefix = apiPrefix;
   }
 
-  public getAll(): Promise<UsersGetAllResponseDto> {
-    return this.http.load<UsersGetAllResponseDto>(
+  public getAll(): Promise<UsersGetAllAdminResponseDto> {
+    return this.http.load<UsersGetAllAdminResponseDto>(
       `${this.apiPrefix}${ApiPath.USERS}`,
       {
         method: HttpMethod.GET,
@@ -31,24 +30,11 @@ class User {
     );
   }
 
-  public create(
-    payload: CreateUserRequestDto
-  ): Promise<UsersGetAllItemResponseDto> {
-    return this.http.load<UsersGetAllItemResponseDto>(
-      `${this.apiPrefix}${ApiPath.USERS}`,
-      {
-        method: HttpMethod.POST,
-        contentType: ContentType.JSON,
-        payload: new URLSearchParams(payload),
-      }
-    );
-  }
-
   public update(
     id: number,
     payload: UpdateUserRequestDto
-  ): Promise<UsersGetAllItemResponseDto> {
-    return this.http.load<UsersGetAllItemResponseDto>(
+  ): Promise<UsersGetAllItemAdminResponseDto> {
+    return this.http.load<UsersGetAllItemAdminResponseDto>(
       `${this.apiPrefix}${ApiPath.USERS}/${id}`,
       {
         method: HttpMethod.PATCH,

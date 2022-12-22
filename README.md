@@ -2,6 +2,8 @@
 
 ## University managing web application
 
+### This application allows you to manage the university schedule and all realted entities with it (like students, teachers, etc.)
+
 ```mermaid
 erDiagram
 

@@ -129,7 +129,7 @@ handleSignUpValidation(signUpFormState);
       </div>
       <div :class="styles.signUpInputWrapper">
         <Input
-          type="text"
+          type="password"
           name="password"
           :value="signUpFormState.password"
           :onInput="handleSignUpPropertyChange"

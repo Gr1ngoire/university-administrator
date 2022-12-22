@@ -76,7 +76,7 @@ handleSignInValidation(signInFormState);
       </div>
       <div :class="styles.signInInputWrapper">
         <Input
-          type="text"
+          type="password"
           name="password"
           :value="signInFormState.password"
           :onInput="handleSignInPropertyChange"

@@ -1,6 +1,5 @@
 import { AppRoutes } from "@/common/enums/enums";
 import { createRouter, createWebHistory } from "vue-router";
-import { AuthorizationWrapper } from "@/common/components/components";
 import {
   Administration,
   News,
@@ -8,7 +7,7 @@ import {
   SignIn,
   SignUp,
 } from "../components/components";
-import { pathSlashStripper } from "./helpers/path-slash-stripper.helper";
+import { isAuthenticated, pathSlashStripper } from "./helpers/helpers";
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -29,23 +28,35 @@ const router = createRouter({
       component: PublicSchedule,
     },
     {
-      path: AppRoutes.ADMINISTRATION,
-      name: pathSlashStripper(AppRoutes.ADMINISTRATION),
-      component: AuthorizationWrapper,
-      props: {
-        children: Administration,
-      },
-    },
-    {
       path: AppRoutes.NEWS,
       name: pathSlashStripper(AppRoutes.NEWS),
       component: News,
+    },
+    {
+      path: AppRoutes.ADMINISTRATION,
+      name: pathSlashStripper(AppRoutes.ADMINISTRATION),
+      component: Administration,
     },
     {
       path: AppRoutes.ALL,
       redirect: AppRoutes.SCHEDULE,
     },
   ],
+});
+
+router.beforeEach(async (to) => {
+  if (!isAuthenticated()) {
+    switch (to.path) {
+      case AppRoutes.ADMINISTRATION:
+        return { path: AppRoutes.SIGN_UP };
+
+      case AppRoutes.FAQ:
+        return { path: AppRoutes.SIGN_UP };
+
+      default:
+        break;
+    }
+  }
 });
 
 export default router;

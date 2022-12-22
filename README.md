@@ -22,6 +22,18 @@ erDiagram
       varchar short_name
   }
 
+  users {
+    int id PK
+      dateTime created_at
+      dateTime updated_at
+      varchar name
+      varchar surname
+      varchar secondName
+      varchar phone
+      varchar email
+      varchar password
+  }
+
   departments }|--o| faculties: faculty_id
   departments {
     int id PK

@@ -70,6 +70,7 @@ export class TeachersService {
   async create(
     teacher: CreateTeacherRequestDto,
   ): Promise<TeachersGetAllItemResponseDto> {
+    const { userId, departmentId } = teacher;
     const userInDb = await this.usersService.getModelById(teacher.userId);
 
     if (!userInDb) {
@@ -77,18 +78,26 @@ export class TeachersService {
     }
 
     const departmentToJoin = await this.departmentsService.getModelById(
-      teacher.departmentId,
+      departmentId,
     );
 
     if (!departmentToJoin) {
       throw new BadRequestException(ExceptionsMessages.DEPARTMENT_NOT_FOUND);
     }
 
+    const teacherInDb = await this.repository.findOne({ where: { userId } });
+
+    if (teacherInDb) {
+      throw new BadRequestException(
+        ExceptionsMessages.SUCH_TEACHER_ALREADY_EXISTS,
+      );
+    }
+
     const newTeacher = this.repository.create(teacher);
 
     const createdTeacher = await this.repository.save(newTeacher);
-    const { id, userId, user, departmentId, department } = createdTeacher;
-    return { id, userId, user, departmentId, department };
+
+    return this.getById(createdTeacher.id);
   }
 
   async updateDepartment(
@@ -101,23 +110,20 @@ export class TeachersService {
       throw new NotFoundException(ExceptionsMessages.TEACHER_NOT_FOUND);
     }
 
-    if (teacher.departmentId !== teacherToUpdate.departmentId) {
-      const departmentToJoin = await this.departmentsService.getModelById(
-        teacher.departmentId,
-      );
+    const departmentToJoin = await this.departmentsService.getModelById(
+      teacher.departmentId,
+    );
 
-      if (!departmentToJoin) {
-        throw new BadRequestException(
-          ExceptionsMessages.DEPARTMENT_DOES_NOT_EXIST,
-        );
-      }
+    if (!departmentToJoin) {
+      throw new BadRequestException(
+        ExceptionsMessages.DEPARTMENT_DOES_NOT_EXIST,
+      );
     }
 
     Object.assign(teacherToUpdate, teacher);
     const updatedTeacher = await this.repository.save(teacherToUpdate);
 
-    const { id, userId, user, departmentId, department } = updatedTeacher;
-    return { id, userId, user, departmentId, department };
+    return this.getById(updatedTeacher.id);
   }
 
   async delete(id: number): Promise<number> {

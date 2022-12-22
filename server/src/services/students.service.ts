@@ -72,24 +72,34 @@ export class StudentsService {
   async create(
     student: CreateStudentRequestDto,
   ): Promise<StudentsGetAllItemResponseDto> {
-    const groupToJoin = await this.groupsService.getModelById(student.groupId);
+    const { userId, groupId } = student;
+    const groupToJoin = await this.groupsService.getModelById(groupId);
 
     if (!groupToJoin) {
       throw new BadRequestException(ExceptionsMessages.GROUP_DOES_NOT_EXIST);
     }
 
-    const userInDb = await this.usersService.getModelById(student.userId);
+    const userInDb = await this.usersService.getModelById(userId);
 
     if (!userInDb) {
       throw new BadRequestException(ExceptionsMessages.USER_DOES_NOT_EXIST);
     }
 
+    const studentInDb = await this.repository.findOne({
+      where: { userId },
+    });
+
+    if (studentInDb) {
+      throw new BadRequestException(
+        ExceptionsMessages.SUCH_STUDENT_ALREADY_EXISTS,
+      );
+    }
+
     const newStudent = this.repository.create(student);
 
     const createdStudent = await this.repository.save(newStudent);
-    const { id, userId, user, groupId, group } = createdStudent;
 
-    return { id, userId, user, groupId, group };
+    return this.getById(createdStudent.id);
   }
 
   async updateGroup(

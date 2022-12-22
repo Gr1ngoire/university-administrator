@@ -10,10 +10,12 @@ enum ExceptionsMessages {
   NEWS_NOT_FOUND = 'News not found',
   SCHEDULE_NOT_FOUND = 'Schedule not found',
   STUDENT_NOT_FOUND = 'Student not found',
+  SUCH_STUDENT_ALREADY_EXISTS = 'Such student already exists',
+  SUCH_TEACHER_ALREADY_EXISTS = 'Such teacher already exists',
   USER_IS_UNUTHORIZED = 'User is unuthorised',
   USER_NOT_FOUND = 'User not found',
   USER_DOES_NOT_EXIST = 'User does not exist',
-  USER_WITH_SUCH_EMAIL_ALREADY_EXISTS = 'Student with such email already exists',
+  USER_WITH_SUCH_EMAIL_ALREADY_EXISTS = 'User with such email already exists',
   TEACHER_NOT_FOUND = 'Teacher not found',
   TEACHER_WITH_SUCH_EMAIL_ALREADY_EXISTS = 'Teacher with such email already exists',
 }

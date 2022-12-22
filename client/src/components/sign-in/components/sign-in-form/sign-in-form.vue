@@ -6,7 +6,7 @@ import type {
 } from "src/common/types/types";
 import { reactive, useRouter, useStore } from "@/hooks/hooks";
 import { AuthActions } from "@/store/actions";
-import { signIn as signInValidator } from "@/validators/validators";
+import { userSignIn as signInValidator } from "@/validators/validators";
 import { Input, Button } from "@/common/components/components";
 import { AppRoutes } from "@/common/enums/enums";
 

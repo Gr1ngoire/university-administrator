@@ -5,7 +5,7 @@ import type {
   UpdateUserRequestDto,
 } from "@/common/types/types";
 import { reactive, useStore } from "@/hooks/hooks";
-import { user as userValidator } from "@/validators/validators";
+import { userUpdate as userUpdateValidator } from "@/validators/validators";
 import type { ValidationError } from "@/exceptions/exceptions";
 import { AdministrationActions } from "@/store/actions";
 
@@ -24,7 +24,6 @@ let userUpdateFormState: UpdateUserRequestDto = {
   name: props.initialUser.name,
   surname: props.initialUser.surname,
   secondName: props.initialUser.secondName,
-  role: props.initialUser.role,
   phone: props.initialUser.phone,
   email: props.initialUser.email,
   password: props.initialUser.password,
@@ -46,7 +45,7 @@ const handleUserUpdateValidation: (user: UpdateUserRequestDto) => void = (
   user: UpdateUserRequestDto
 ): void => {
   try {
-    userValidator.validate(user);
+    userUpdateValidator.validate(user);
   } catch (err: unknown) {
     const validationError = err as ValidationError;
     userUpdateValidationState[validationError.field] = validationError.message;
@@ -108,15 +107,6 @@ const handleSubmit: (event: Event) => void = (event: Event) => {
             :value="userUpdateFormState.secondName"
             :onInput="handleUserPropertyChange"
             :errorMessage="userUpdateValidationState.secondName"
-          />
-        </div>
-        <div :class="styles.userEditInputWrapper">
-          <Input
-            type="text"
-            name="role"
-            :value="userUpdateFormState.role"
-            :onInput="handleUserPropertyChange"
-            :errorMessage="userUpdateValidationState.role"
           />
         </div>
         <div :class="styles.userEditInputWrapper">

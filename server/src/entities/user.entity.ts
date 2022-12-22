@@ -6,7 +6,7 @@ import {
   PrimaryGeneratedColumn,
   UpdateDateColumn,
 } from 'src/common/decorators/decorators';
-import { DbTablesNames, UniversityUserRoles } from 'src/common/enums/enums';
+import { DbTablesNames } from 'src/common/enums/enums';
 import { Student, Teacher } from './entities';
 
 @Entity({ name: DbTablesNames.USERS })
@@ -40,13 +40,6 @@ export class User {
 
   @Column()
   phone: string;
-
-  @Column({
-    type: 'enum',
-    enum: UniversityUserRoles,
-    default: UniversityUserRoles.STUDENT,
-  })
-  role: string;
 
   @Column({ unique: true })
   email: string;

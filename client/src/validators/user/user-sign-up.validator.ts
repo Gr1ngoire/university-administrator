@@ -1,20 +1,15 @@
 import { Abstract } from "../abstract/abstract.validator";
-import type { CreateUserRequestDto } from "@/common/types/types";
+import type { UserSignUpRequestDto } from "@/common/types/types";
 import { ValidationError } from "@/exceptions/exceptions";
-import {
-  UniversityUserRoles,
-  ValidationExceptionMessages,
-} from "@/common/enums/enums";
+import { ValidationExceptionMessages } from "@/common/enums/enums";
 
-class User extends Abstract<CreateUserRequestDto> {
-  validate(toValidate: CreateUserRequestDto): void {
-    const { name, surname, secondName, role, email, phone, password } =
-      toValidate;
+class UserSignUp extends Abstract<UserSignUpRequestDto> {
+  validate(toValidate: UserSignUpRequestDto): void {
+    const { name, surname, secondName, email, phone, password } = toValidate;
 
     this.validateName(name);
     this.validateSurname(surname);
     this.validateSecondName(secondName);
-    this.validateRole(role);
     this.validateEmail(email);
     this.validateUkrainianPhone(phone);
     this.validatePassword(password);
@@ -85,21 +80,6 @@ class User extends Abstract<CreateUserRequestDto> {
     }
   }
 
-  private validateRole(value: string): void {
-    const validateField = "role";
-
-    const possibleRoles = Object.values(
-      UniversityUserRoles as Record<string, string>
-    );
-
-    if (!possibleRoles.includes(value)) {
-      throw new ValidationError({
-        field: validateField,
-        message: ValidationExceptionMessages.ROLE_MUST_BE_STUDENT_OR_TEACHER,
-      });
-    }
-  }
-
   private validateUkrainianPhone(value: string): void {
     const validateField = "phone";
 
@@ -120,4 +100,4 @@ class User extends Abstract<CreateUserRequestDto> {
   }
 }
 
-export { User };
+export { UserSignUp };

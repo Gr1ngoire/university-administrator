@@ -1,11 +1,12 @@
-import { SignIn, SignUp } from "./auth/auth";
 import { Department } from "./department/department.validator";
 import { Discipline } from "./discipline/discipline.validator";
 import { Faculty } from "./faculty/faculty.validator";
 import { Group } from "./group/group.validator";
 import { News } from "./news/news.validator";
 import { Schedule } from "./schedule/schedule.validator";
-import { User } from "./user/user.validator";
+import { UserSignIn } from "./user/user-sign-in.validator";
+import { UserSignUp } from "./user/user-sign-up.validator";
+import { UserUpdate } from "./user/user-update.validator";
 
 const department = new Department();
 const discipline = new Discipline();
@@ -13,9 +14,9 @@ const faculty = new Faculty();
 const group = new Group();
 const news = new News();
 const schedule = new Schedule();
-const user = new User();
-const signIn = new SignIn(user);
-const signUp = new SignUp(user);
+const userUpdate = new UserUpdate();
+const userSignIn = new UserSignIn();
+const userSignUp = new UserSignUp();
 
 export {
   department,
@@ -24,7 +25,7 @@ export {
   group,
   news,
   schedule,
-  signIn,
-  signUp,
-  user,
+  userSignIn,
+  userSignUp,
+  userUpdate,
 };

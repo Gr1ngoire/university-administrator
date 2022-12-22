@@ -1,2 +1,1 @@
-export { isAuthenticated } from "./is-authenticated.helper";
-export { pathSlashStripper } from "./path-slash-stripper.helper";
+export { pathSlashStripper } from "./path-slash-stripper/path-slash-stripper.helper";

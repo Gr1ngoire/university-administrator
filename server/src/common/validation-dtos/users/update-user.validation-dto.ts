@@ -1,12 +1,10 @@
 import {
   IsEmail,
-  IsEnum,
   IsNotEmpty,
   IsOptional,
   IsPhoneNumber,
   IsString,
 } from 'src/common/decorators/decorators';
-import { UniversityUserRoles } from 'src/common/enums/enums';
 
 export class UpdateUserValidationDto {
   @IsString()
@@ -27,10 +25,6 @@ export class UpdateUserValidationDto {
   @IsPhoneNumber('UA')
   @IsOptional()
   phone: string;
-
-  @IsEnum(UniversityUserRoles)
-  @IsOptional()
-  role: string;
 
   @IsEmail()
   @IsOptional()

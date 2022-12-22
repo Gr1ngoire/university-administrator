@@ -1,9 +1,13 @@
 import { CanActivate, ExecutionContext } from '@nestjs/common';
-import { JwtService } from '@nestjs/jwt';
 import { Observable } from 'rxjs';
 import { Injectable } from 'src/common/decorators/decorators';
-import { ExceptionsMessages } from 'src/common/enums/enums';
+import { ENV, ExceptionsMessages } from 'src/common/enums/enums';
 import { UnauthorizedException } from 'src/common/exceptions/excpetions';
+import { JwtService } from 'src/services/services';
+
+const {
+  JWT: { JWT_PRIVATE_KEY },
+} = ENV;
 
 @Injectable()
 export class JwtAuthGuard implements CanActivate {
@@ -23,10 +27,11 @@ export class JwtAuthGuard implements CanActivate {
         });
       }
 
-      const user = this.jwtService.verify(token);
-      req.user = user;
+      this.jwtService.verify(token, { secret: JWT_PRIVATE_KEY });
+
       return true;
     } catch (e) {
+      console.log(e);
       throw new UnauthorizedException({
         message: ExceptionsMessages.USER_IS_UNUTHORIZED,
       });

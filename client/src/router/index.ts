@@ -1,4 +1,5 @@
 import { AppRoutes } from "@/common/enums/enums";
+import { isAuthenticated } from "@/common/helpers/helpers";
 import { createRouter, createWebHistory } from "vue-router";
 import {
   Administration,
@@ -7,7 +8,7 @@ import {
   SignIn,
   SignUp,
 } from "../components/components";
-import { isAuthenticated, pathSlashStripper } from "./helpers/helpers";
+import { pathSlashStripper } from "./helpers/helpers";
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -44,7 +45,7 @@ const router = createRouter({
   ],
 });
 
-router.beforeEach(async (to) => {
+router.beforeEach((to) => {
   if (!isAuthenticated()) {
     switch (to.path) {
       case AppRoutes.ADMINISTRATION:

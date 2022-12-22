@@ -3,7 +3,7 @@ import type { ValidationError } from "@/exceptions/exceptions";
 import type { UserSignUpRequestDto } from "src/common/types/types";
 import { reactive, useRouter, useStore } from "@/hooks/hooks";
 import { AuthActions } from "@/store/actions";
-import { signUp as signUpValidator } from "@/validators/validators";
+import { userSignUp as signUpValidator } from "@/validators/validators";
 import { Input, Button } from "@/common/components/components";
 
 import styles from "./styles.module.scss";
@@ -16,7 +16,6 @@ let signUpFormState: UserSignUpRequestDto = {
   name: "",
   surname: "",
   secondName: "",
-  role: "",
   phone: "",
   email: "",
   password: "",
@@ -28,7 +27,6 @@ const signUpValidationState: Record<string, string> = reactive<
   name: "",
   surname: "",
   secondName: "",
-  role: "",
   phone: "",
   email: "",
   password: "",
@@ -98,15 +96,6 @@ handleSignUpValidation(signUpFormState);
           :value="signUpFormState.secondName"
           :onInput="handleSignUpPropertyChange"
           :errorMessage="signUpValidationState.secondName"
-        />
-      </div>
-      <div :class="styles.signUpInputWrapper">
-        <Input
-          type="text"
-          name="role"
-          :value="signUpFormState.role"
-          :onInput="handleSignUpPropertyChange"
-          :errorMessage="signUpValidationState.role"
         />
       </div>
       <div :class="styles.signUpInputWrapper">

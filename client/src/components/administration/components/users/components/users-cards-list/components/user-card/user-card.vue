@@ -13,7 +13,6 @@ type Props = {
   name: string;
   surname: string;
   secondName: string;
-  role: string;
   phone: string;
   email: string;
   password: string;
@@ -42,7 +41,6 @@ const handleEditToggle: () => void = (): void => {
       name,
       surname,
       secondName,
-      role,
       phone,
       email,
       password,
@@ -53,7 +51,6 @@ const handleEditToggle: () => void = (): void => {
     <p :class="styles.userName">Name: {{ props.name }}</p>
     <p :class="styles.userSurname">Surname: {{ props.surname }}</p>
     <p :class="styles.userSecondName">Second name: {{ props.secondName }}</p>
-    <p :class="styles.userRole">Role: {{ props.role }}</p>
     <p :class="styles.userPhone">Phone: {{ props.phone }}</p>
     <p :class="styles.userEmail">Email: {{ props.email }}</p>
     <p :class="styles.userPassword">

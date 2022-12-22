@@ -34,14 +34,12 @@ export class UsersService {
       return null;
     }
 
-    const { id, name, surname, secondName, role, phone, email, password } =
-      userInDb;
+    const { id, name, surname, secondName, phone, email, password } = userInDb;
     return {
       id,
       name,
       surname,
       secondName,
-      role,
       phone,
       email,
       password,
@@ -53,12 +51,11 @@ export class UsersService {
 
     return {
       items: usersModels.map(
-        ({ id, name, surname, secondName, role, phone, email, password }) => ({
+        ({ id, name, surname, secondName, phone, email, password }) => ({
           id,
           name,
           surname,
           secondName,
-          role,
           phone,
           email,
           password,
@@ -72,9 +69,8 @@ export class UsersService {
   ): Promise<UsersGetAllItemAdminResponseDto | null> {
     const user = await this.getModelById(idToFind);
 
-    const { id, name, surname, secondName, role, phone, email, password } =
-      user;
-    return { id, name, surname, secondName, role, phone, email, password };
+    const { id, name, surname, secondName, phone, email, password } = user;
+    return { id, name, surname, secondName, phone, email, password };
   }
 
   async create(
@@ -91,10 +87,10 @@ export class UsersService {
     const newStudent = this.repository.create(user);
 
     const createdUser = await this.repository.save(newStudent);
-    const { id, name, surname, secondName, role, phone, email, password } =
+    const { id, name, surname, secondName, phone, email, password } =
       createdUser;
 
-    return { id, name, surname, secondName, role, phone, email, password };
+    return { id, name, surname, secondName, phone, email, password };
   }
 
   async update(

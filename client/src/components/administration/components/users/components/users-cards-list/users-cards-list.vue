@@ -1,10 +1,10 @@
 <script lang="ts" setup>
-import type { UsersGetAllItemResponseDto } from "@/common/types/types";
+import type { UsersGetAllItemAdminResponseDto } from "@/common/types/types";
 import { UserCard } from "./components/components";
 import styles from "./styles.module.scss";
 
 type Props = {
-  cards: UsersGetAllItemResponseDto[];
+  cards: UsersGetAllItemAdminResponseDto[];
 };
 
 defineProps<Props>();
@@ -19,7 +19,6 @@ defineProps<Props>();
           name,
           surname,
           secondName,
-          role,
           phone,
           email,
           password,
@@ -32,7 +31,6 @@ defineProps<Props>();
           :name="name"
           :surname="surname"
           :secondName="secondName"
-          :role="role"
           :phone="phone"
           :email="email"
           :password="password"

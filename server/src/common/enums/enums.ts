@@ -15,4 +15,3 @@ export {
 export { AppEnvironment, ENV } from './app/app';
 export { ControllerParams } from './controllers-params/controllers-params';
 export { ExceptionsMessages } from './exceptions/excpetions';
-export { UniversityUserRoles } from './roles/roles';

@@ -3,7 +3,6 @@ type UserWithGrantDto = {
   name: string;
   surname: string;
   secondName: string;
-  role: string;
   phone: string;
   email: string;
   // grant: admin || user

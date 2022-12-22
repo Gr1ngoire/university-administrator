@@ -1,1 +1,1 @@
-export { ApiPath } from "shared/common/enums/enums";
+export { ApiPath, AuthApi } from "shared/common/enums/enums";

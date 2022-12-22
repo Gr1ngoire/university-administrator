@@ -1,9 +1,13 @@
 export { AppService } from './app.service';
+export { BcryptService } from './bcrypt.service';
+export { AuthService } from './auth.service';
 export { DepartmentsService } from './departments.service';
 export { DisciplinesService } from './disciplines.service';
 export { FacultiesService } from './faculties.service';
 export { GroupsService } from './groups.service';
+export { JwtService } from './jwt.service';
 export { NewsService } from './news.service';
 export { SchedulesService } from './schedules.service';
 export { StudentsService } from './students.service';
 export { TeachersService } from './teachers.service';
+export { UsersService } from './users.service';

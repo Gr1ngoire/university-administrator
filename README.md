@@ -2,6 +2,8 @@
 
 ## University managing web application
 
+### This application allows you to manage the university schedule and all realted entities with it (like students, teachers, etc.)
+
 ```mermaid
 erDiagram
 
@@ -20,17 +22,19 @@ erDiagram
       varchar short_name
   }
 
-  teachers {
-      int id PK
+  users {
+    int id PK
       dateTime created_at
       dateTime updated_at
       varchar name
       varchar surname
-      varchar email
+      varchar secondName
       varchar phone
+      varchar email
+      varchar password
   }
 
-  departments }|--|| faculties: faculty_id
+  departments }|--o| faculties: faculty_id
   departments {
     int id PK
       dateTime created_at
@@ -40,7 +44,7 @@ erDiagram
     int faculty_id FK
   }
 
-  groups }|--|| departments: department_id
+  groups }|--o| departments: department_id
   groups {
         int id PK
       dateTime created_at
@@ -50,20 +54,29 @@ erDiagram
       int department_id FK
   }
 
-  students }|--|| groups: group_id
+  teachers ||--o| users: user_id
+  teachers }|--o| departments: department_id
+  teachers {
+      int id PK
+      dateTime created_at
+      dateTime updated_at
+      int user_id FK
+      int department_id FK
+  }
+
+  students ||--o| users: user_id
+  students }|--o| groups: group_id
   students {
         int id PK
       dateTime created_at
       dateTime updated_at
-      varchar name
-      varchar email
-      varchar phone
+      int user_id FK
       int group_id FK
   }
 
-  schedules }|--|| teachers: teacher_id
-  schedules }|--|| disciplines: discipline_id
-  schedules }|--|| groups: group_id
+  schedules }|--o| teachers: teacher_id
+  schedules }|--o| disciplines: discipline_id
+  schedules }|--o| groups: group_id
   schedules {
         int id PK
       dateTime created_at

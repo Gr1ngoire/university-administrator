@@ -4,6 +4,7 @@ import { NewsActions } from "@/store/actions";
 import { Button } from "@/common/components/components";
 import { CreateNewsForm, NewsCardsList } from "./components/components";
 import styles from "./styles.module.scss";
+import { isAuthenticated } from "@/common/helpers/helpers";
 
 const store = useStore();
 const news = computed(() => store.state.news.news);
@@ -19,7 +20,7 @@ store.dispatch(NewsActions.GET_ALL_NEWS);
 <template>
   <div :class="styles.dashboardWrapper">
     <NewsCardsList :cards="news" />
-    <div :class="styles.createNewsForm">
+    <div v-if="isAuthenticated()" :class="styles.createNewsForm">
       <CreateNewsForm
         v-if="newsCreationFormShowState"
         :onToggle="handleToggle"

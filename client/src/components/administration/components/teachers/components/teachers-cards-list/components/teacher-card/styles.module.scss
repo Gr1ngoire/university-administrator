@@ -9,6 +9,11 @@
   background: $primary-brand-color;
 }
 
+.teacherFullName {
+  width: 70%;
+  color: $secondary-brand-color;
+}
+
 .teacherEmail {
   width: 70%;
   color: $secondary-brand-color;
@@ -19,12 +24,7 @@
   color: $secondary-brand-color;
 }
 
-.teacherName {
-  width: 70%;
-  color: $secondary-brand-color;
-}
-
-.teacherSurname {
+.teacherDepartmentName {
   width: 70%;
   color: $secondary-brand-color;
 }

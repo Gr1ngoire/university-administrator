@@ -39,7 +39,10 @@ class Teacher {
       {
         method: HttpMethod.POST,
         contentType: ContentType.JSON,
-        payload: new URLSearchParams(payload),
+        payload: new URLSearchParams({
+          userId: String(payload.userId),
+          departmentId: String(payload.departmentId),
+        }),
       }
     );
   }
@@ -53,7 +56,9 @@ class Teacher {
       {
         method: HttpMethod.PATCH,
         contentType: ContentType.JSON,
-        payload: new URLSearchParams(payload),
+        payload: new URLSearchParams({
+          departmentId: String(payload.departmentId),
+        }),
       }
     );
   }

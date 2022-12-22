@@ -14,6 +14,7 @@ import {
   schedule as schedulesService,
   student as studentsService,
   teacher as teachersService,
+  user as usersService,
 } from "@/services/services";
 import type { RootState } from "../root-state";
 import type { State } from "./state";
@@ -39,6 +40,9 @@ import type {
   CreateTeacherRequestDto,
   TeachersGetAllItemResponseDto,
   UpdateTeacherRequestParams,
+  UsersGetAllItemResponseDto,
+  CreateUserRequestDto,
+  UpdateUserRequestParams,
 } from "@/common/types/types";
 
 enum Actions {
@@ -70,6 +74,10 @@ enum Actions {
   CREATE_TEACHER = "createTeacher",
   UPDATE_TEACHER = "updateTeacher",
   DELETE_TEACHER = "deleteTeacher",
+  GET_ALL_USERS = "getAllUsers",
+  CREATE_USER = "createUser",
+  UPDATE_USER = "updateUser",
+  DELETE_USER = "deleteUser",
 }
 
 enum Mutations {
@@ -108,6 +116,11 @@ enum Mutations {
   UPDATE_TEACHER = "updateTeacher",
   REMOVE_TEACHER = "removeTeacher",
   CLEAR_TEACHERS = "clearTeachers",
+  ADD_USERS = "addUsers",
+  ADD_USER = "addUser",
+  UPDATE_USER = "updateUser",
+  REMOVE_USER = "removeUser",
+  CLEAR_USERS = "clearUsers",
 }
 
 const state: State = {
@@ -118,6 +131,7 @@ const state: State = {
   schedules: [],
   students: [],
   teachers: [],
+  users: [],
   dataStatus: DataStatus.IDLE,
 };
 
@@ -369,6 +383,34 @@ const mutations: MutationTree<State> = {
 
   [Mutations.CLEAR_TEACHERS](state: State) {
     state.teachers = [];
+  },
+
+  [Mutations.ADD_USERS](state: State, newUsers: UsersGetAllItemResponseDto[]) {
+    state.users = [...state.users, ...newUsers];
+  },
+
+  [Mutations.ADD_USER](state: State, newUser: UsersGetAllItemResponseDto) {
+    state.users.push(newUser);
+  },
+
+  [Mutations.UPDATE_USER](
+    state: State,
+    userToUpdate: UsersGetAllItemResponseDto
+  ) {
+    state.users = state.users.map((user) => {
+      if (user.id === userToUpdate.id) {
+        return userToUpdate;
+      }
+      return user;
+    });
+  },
+
+  [Mutations.REMOVE_USER](state: State, userId: number) {
+    state.users = state.users.filter((user) => user.id !== userId);
+  },
+
+  [Mutations.CLEAR_USERS](state: State) {
+    state.users = [];
   },
 };
 
@@ -676,6 +718,48 @@ const actions: ActionTree<State, RootState> = {
     const id = await teachersService.delete(teacherId);
 
     commit(Mutations.REMOVE_TEACHER, id);
+    state.dataStatus = DataStatus.FULFILLED;
+  },
+
+  async [Actions.GET_ALL_USERS]({ commit }: ActionContext<State, RootState>) {
+    state.dataStatus = DataStatus.PENDING;
+    const { items } = await usersService.getAll();
+
+    commit(Mutations.CLEAR_USERS);
+    commit(Mutations.ADD_USERS, items);
+    state.dataStatus = DataStatus.FULFILLED;
+  },
+
+  async [Actions.CREATE_USER](
+    { commit }: ActionContext<State, RootState>,
+    user: CreateUserRequestDto
+  ) {
+    state.dataStatus = DataStatus.PENDING;
+    const newUser = await usersService.create(user);
+
+    commit(Mutations.ADD_USER, newUser);
+    state.dataStatus = DataStatus.FULFILLED;
+  },
+
+  async [Actions.UPDATE_USER](
+    { commit }: ActionContext<State, RootState>,
+    { id, payload }: UpdateUserRequestParams
+  ) {
+    state.dataStatus = DataStatus.PENDING;
+    const updatedUser = await usersService.update(id, payload);
+
+    commit(Mutations.UPDATE_USER, updatedUser);
+    state.dataStatus = DataStatus.FULFILLED;
+  },
+
+  async [Actions.DELETE_USER](
+    { commit }: ActionContext<State, RootState>,
+    userId: number
+  ) {
+    state.dataStatus = DataStatus.PENDING;
+    const id = await usersService.delete(userId);
+
+    commit(Mutations.REMOVE_USER, id);
     state.dataStatus = DataStatus.FULFILLED;
   },
 };

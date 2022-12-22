@@ -1,9 +1,7 @@
 <script lang="ts" setup>
-import { Button, Input } from "@/common/components/components";
+import { Button, Select } from "@/common/components/components";
 import type { CreateTeacherRequestDto } from "@/common/types/types";
-import type { ValidationError } from "@/exceptions/exceptions";
-import { teacher as teacherValidator } from "@/validators/validators";
-import { reactive, useStore } from "@/hooks/hooks";
+import { computed, useStore } from "@/hooks/hooks";
 import { AdministrationActions } from "@/store/actions";
 
 import styles from "./styles.module.scss";
@@ -14,32 +12,30 @@ type Props = {
 
 const props = defineProps<Props>();
 
+const store = useStore();
+
+const users = computed(() => store.state.administration.users);
+const userSelectOptions = users.value.map(
+  ({ id, name, surname, secondName }) => ({
+    id,
+    name: `${surname} ${name} ${secondName}`,
+    value: String(id),
+  })
+);
+
+const departments = computed(() => store.state.administration.departments);
+const departmentSelectOptions = departments.value.map(({ id, name }) => ({
+  id,
+  name,
+  value: String(id),
+}));
+
+const [DEFAULT_USER] = users.value;
+const [DEFAULT_DEPARTMENT] = departments.value;
+
 let teacherCreationFormState: CreateTeacherRequestDto = {
-  email: "",
-  phone: "",
-  name: "",
-  surname: "",
-};
-
-const teacherCreationValidationState: Record<string, string> = reactive<
-  Record<string, string>
->({
-  email: "",
-  phone: "",
-  name: "",
-  surname: "",
-});
-
-const handleTeacherCreationValidation: (
-  teacher: CreateTeacherRequestDto
-) => void = (teacher: CreateTeacherRequestDto): void => {
-  try {
-    teacherValidator.validate(teacher);
-  } catch (err: unknown) {
-    const validationError = err as ValidationError;
-    teacherCreationValidationState[validationError.field] =
-      validationError.message;
-  }
+  userId: DEFAULT_USER.id,
+  departmentId: DEFAULT_DEPARTMENT.id,
 };
 
 const handleTeacherPropertyChange: (event: Event) => void = (
@@ -48,61 +44,38 @@ const handleTeacherPropertyChange: (event: Event) => void = (
   const input = event.target as HTMLInputElement;
   teacherCreationFormState = {
     ...teacherCreationFormState,
-    [input.name]: input.value,
+    [input.name]: parseInt(input.value),
   } as CreateTeacherRequestDto;
-
-  teacherCreationValidationState[input.name] = "";
-  handleTeacherCreationValidation(teacherCreationFormState);
 };
-
-const store = useStore();
 
 const handleSubmit: (event: Event) => void = (event: Event) => {
   event.preventDefault();
-  if (
-    Object.values(teacherCreationValidationState).every((el) => el.length === 0)
-  ) {
-    store.dispatch(
-      AdministrationActions.CREATE_TEACHER,
-      teacherCreationFormState
-    );
-    props.onToggle();
-  }
+  store.dispatch(
+    AdministrationActions.CREATE_TEACHER,
+    teacherCreationFormState
+  );
+  props.onToggle();
 };
-
-handleTeacherCreationValidation(teacherCreationFormState);
 </script>
 
 <template>
   <form :class="styles.teacherCreationForm" @submit="handleSubmit">
-    <Input
-      type="email"
-      name="email"
-      :onInput="handleTeacherPropertyChange"
-      :value="teacherCreationFormState.email"
-      :errorMessage="teacherCreationValidationState.email"
-    />
-    <Input
-      type="text"
-      name="phone"
-      :onInput="handleTeacherPropertyChange"
-      :value="teacherCreationFormState.phone"
-      :errorMessage="teacherCreationValidationState.phone"
-    />
-    <Input
-      type="text"
-      name="name"
-      :onInput="handleTeacherPropertyChange"
-      :value="teacherCreationFormState.name"
-      :errorMessage="teacherCreationValidationState.name"
-    />
-    <Input
-      type="text"
-      name="surname"
-      :onInput="handleTeacherPropertyChange"
-      :value="teacherCreationFormState.surname"
-      :errorMessage="teacherCreationValidationState.surname"
-    />
+    <div :class="styles.selectWrapper">
+      <Select
+        name="userId"
+        nameToDisplay="User"
+        :options="userSelectOptions"
+        :onSelect="handleTeacherPropertyChange"
+      />
+    </div>
+    <div :class="styles.selectWrapper">
+      <Select
+        name="departmentId"
+        nameToDisplay="Department"
+        :options="departmentSelectOptions"
+        :onSelect="handleTeacherPropertyChange"
+      />
+    </div>
     <div :class="styles.teacherCreationFormActionSection">
       <Button type="submit" name="Add" action="submit" />
       <Button type="click" name="Cancel" action="cancel" :onClick="onToggle" />

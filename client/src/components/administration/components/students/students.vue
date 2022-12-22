@@ -8,7 +8,9 @@ import styles from "./styles.module.scss";
 const store = useStore();
 const students = computed(() => store.state.administration.students);
 const isStudentCrеationPossible = computed(
-  () => store.state.administration.groups.length > 0
+  () =>
+    store.state.administration.users.length > 0 &&
+    store.state.administration.groups.length > 0
 );
 
 const studentCreationFormShowState = ref<boolean>(false);
@@ -38,7 +40,7 @@ const handleToggle: () => void = (): void => {
       v-else-if="!isStudentCrеationPossible"
       :class="styles.unableToCreateStudentInfoBlock"
     >
-      There are no groups, you can not create any students
+      There are no users or groups, you can not create any students
     </div>
     <hr
       v-if="studentCreationFormShowState"

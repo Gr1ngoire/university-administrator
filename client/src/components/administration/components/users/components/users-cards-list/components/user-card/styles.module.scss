@@ -1,0 +1,50 @@
+.userCard {
+  flex-wrap: wrap;
+  justify-content: space-between;
+  margin-right: 10px;
+  padding: 10px;
+  display: flex;
+
+  border-radius: 10px;
+  background: $primary-brand-color;
+}
+
+.userName {
+  width: 70%;
+  color: $secondary-brand-color;
+}
+
+.userSurname {
+  width: 70%;
+  color: $secondary-brand-color;
+}
+
+.userSecondName {
+  width: 70%;
+  color: $secondary-brand-color;
+}
+
+.userPhone {
+  width: 70%;
+  color: $secondary-brand-color;
+}
+
+.userEmail {
+  width: 70%;
+  color: $secondary-brand-color;
+}
+
+.userPassword {
+  width: 70%;
+  color: $secondary-brand-color;
+}
+
+.actionsSection {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.actionWrapperButton {
+  margin: 5px;
+}

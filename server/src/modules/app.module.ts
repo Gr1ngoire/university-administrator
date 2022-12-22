@@ -11,8 +11,10 @@ import {
   Schedule,
   Student,
   Teacher,
+  User,
 } from 'src/entities/entities';
 import { AppService } from 'src/services/services';
+import { AuthModule } from './auth.module';
 import { DepartmentsModule } from './departments.module';
 import { DisciplinesModule } from './disciplines.module';
 import { FacultiesModule } from './faculties.module';
@@ -21,6 +23,7 @@ import { NewsModule } from './news.module';
 import { SchedulesModule } from './schedules.module';
 import { StudentsModule } from './students.module';
 import { TeachersModule } from './teachers.module';
+import { UsersModule } from './users.module';
 
 const { TYPE, HOST, PORT, USERNAME, PASSWORD, NAME } = ENV.DB;
 @Module({
@@ -36,6 +39,7 @@ const { TYPE, HOST, PORT, USERNAME, PASSWORD, NAME } = ENV.DB;
         Student,
         Schedule,
         Teacher,
+        User,
       ],
       host: HOST,
       port: PORT,
@@ -47,14 +51,16 @@ const { TYPE, HOST, PORT, USERNAME, PASSWORD, NAME } = ENV.DB;
       logging: true,
       // synchronize: ENV.APP.NODE_ENV === 'development',
     }),
+    AuthModule,
     DepartmentsModule,
     DisciplinesModule,
     FacultiesModule,
     GroupsModule,
     NewsModule,
     StudentsModule,
-    SchedulesModule,
     TeachersModule,
+    SchedulesModule,
+    UsersModule,
   ],
   controllers: [AppController],
   providers: [AppService],

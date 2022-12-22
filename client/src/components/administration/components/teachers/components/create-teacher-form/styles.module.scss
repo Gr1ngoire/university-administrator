@@ -7,6 +7,15 @@
   border-radius: 10px;
 }
 
+.selectWrapper {
+  width: 100%;
+  margin-top: 5px;
+
+  & label {
+    color: $secondary-brand-color;
+  }
+}
+
 .teacherCreationFormActionSection {
   width: 100%;
   display: flex;

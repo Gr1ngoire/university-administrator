@@ -6,3 +6,4 @@ export { News } from './news.entity';
 export { Schedule } from './schedule.entity';
 export { Student } from './student.entity';
 export { Teacher } from './teacher.entity';
+export { User } from './user.entity';

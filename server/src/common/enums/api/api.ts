@@ -1,4 +1,5 @@
 export { ApiPath } from 'shared/common/enums/enums';
+export { AuthApi } from './auth/auth';
 export { DepartmentsApi } from './departments/departments';
 export { DisciplinesApi } from './disciplines/disciplines';
 export { FacultiesApi } from './faculties/faculties';
@@ -7,3 +8,4 @@ export { NewsApi } from './news/news';
 export { SchedulesApi } from './schedules/schedules';
 export { StudentsApi } from './students/students';
 export { TeachersApi } from './teachers/teachers';
+export { UsersApi } from './users/users';

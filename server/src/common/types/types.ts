@@ -41,5 +41,17 @@ export {
 } from './students/students';
 export {
   type CreateTeacherRequestDto,
+  type TeachersGetAllItemResponseDto,
+  type TeachersGetAllResponseDto,
   type UpdateTeacherRequestDto,
 } from './teachers/teachers';
+export {
+  type UpdateUserRequestDto, 
+type UsersGetAllAdminResponseDto,
+type UsersGetAllItemAdminResponseDto,
+type UserSignInRequestDto,
+type UserSignInResponseDto,
+type UserSignUpRequestDto,
+type UserSignUpResponseDto,
+type UserWithGrantDto
+} from './users/users'

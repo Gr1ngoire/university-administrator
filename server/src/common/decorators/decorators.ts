@@ -4,6 +4,7 @@ export {
   Controller,
   Delete,
   Get,
+  Headers,
   Param,
   Patch,
   Post,
@@ -15,10 +16,12 @@ export {
   CreateDateColumn,
   Column,
   OneToMany,
+  OneToOne,
   ManyToOne,
   JoinColumn,
   AfterRemove,
 } from './entities/entities';
+export { UseGuards } from './guards/guards';
 export {
   IsInt,
   IsString,

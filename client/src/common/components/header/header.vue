@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { HeaderOption } from "./components/components";
+import { AuthSection, HeaderOption } from "./components/components";
 import { defaultSelectOptions } from "./common/common";
 import { ref } from "@/hooks/hooks";
 
@@ -17,6 +17,12 @@ const handleSelectionSwitch = (idToFind: number): void => {
   });
 };
 
+const handleSignUpToggle = () => {
+  selectOptions.value.forEach((optionToClear) => {
+    optionToClear.isSelected = false;
+  });
+};
+
 selectOptions.value.forEach((option) => {
   const currentPath = window.location.pathname;
 
@@ -28,13 +34,17 @@ selectOptions.value.forEach((option) => {
 
 <template>
   <div :class="styles.header">
-    <HeaderOption
-      v-for="{ id, link, isSelected, name } in selectOptions"
-      :key="id"
-      :link="link"
-      :isSelected="isSelected"
-      :name="name"
-      :onClick="() => handleSelectionSwitch(id)"
-    />
+    <div :class="styles.headerOptionsWrapper">
+      <HeaderOption
+        v-for="{ id, link, isSelected, name, requiresAuth } in selectOptions"
+        :key="id"
+        :link="link"
+        :isSelected="isSelected"
+        :name="name"
+        :onClick="() => handleSelectionSwitch(id)"
+        :requiresAuth="requiresAuth"
+      />
+    </div>
+    <AuthSection :onClick="handleSignUpToggle" />
   </div>
 </template>

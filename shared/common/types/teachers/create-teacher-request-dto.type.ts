@@ -1,8 +1,6 @@
 type CreateTeacherRequestDto = {
-  name: string;
-  surname: string;
-  email: string;
-  phone: string;
+  departmentId: number;
+  userId: number;
 };
 
 export { type CreateTeacherRequestDto };

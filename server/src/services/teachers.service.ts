@@ -7,39 +7,54 @@ import {
 } from 'src/common/exceptions/excpetions';
 import {
   CreateTeacherRequestDto,
+  TeachersGetAllItemResponseDto,
+  TeachersGetAllResponseDto,
   UpdateTeacherRequestDto,
 } from 'src/common/types/types';
 import { Teacher } from 'src/entities/entities';
-import {
-  TeachersGetAllItemResponseDto,
-  TeachersGetAllResponseDto,
-} from 'shared/common/types/types';
+import { UsersService } from './users.service';
+import { DepartmentsService } from './departments.service';
 
 @Injectable()
 export class TeachersService {
   constructor(
     @InjectRepository(Teacher) private repository: Repository<Teacher>,
+    private usersService: UsersService,
+    private departmentsService: DepartmentsService,
   ) {}
 
-  private getModelByEmail(email: string): Promise<Teacher | null> {
-    return this.repository.findOne({ where: { email } });
-  }
-
   getModelById(id: number): Promise<Teacher | null> {
-    return this.repository.findOne({ where: { id } });
+    return this.repository.findOne({
+      where: { id },
+      relations: {
+        user: true,
+        department: {
+          faculty: true,
+        },
+      },
+    });
   }
 
   async getAll(): Promise<TeachersGetAllResponseDto> {
-    const teachersModels = await this.repository.find();
+    const teachersModels = await this.repository.find({
+      relations: {
+        user: true,
+        department: {
+          faculty: true,
+        },
+      },
+    });
 
     return {
-      items: teachersModels.map(({ id, email, phone, name, surname }) => ({
-        id,
-        email,
-        phone,
-        name,
-        surname,
-      })),
+      items: teachersModels.map(
+        ({ id, userId, user, departmentId, department }) => ({
+          id,
+          userId,
+          user,
+          departmentId,
+          department,
+        }),
+      ),
     };
   }
 
@@ -48,31 +63,46 @@ export class TeachersService {
   ): Promise<TeachersGetAllItemResponseDto | null> {
     const teacher = await this.getModelById(idToFind);
 
-    const { id, email, phone, name, surname } = teacher;
-    return { id, email, phone, name, surname };
+    const { id, userId, user, departmentId, department } = teacher;
+    return { id, userId, user, departmentId, department };
   }
 
   async create(
     teacher: CreateTeacherRequestDto,
   ): Promise<TeachersGetAllItemResponseDto> {
-    const teacherWithSameEmail = await this.getModelByEmail(teacher.email);
+    const { userId, departmentId } = teacher;
+    const userInDb = await this.usersService.getModelById(teacher.userId);
 
-    if (teacherWithSameEmail) {
+    if (!userInDb) {
+      throw new BadRequestException(ExceptionsMessages.USER_NOT_FOUND);
+    }
+
+    const departmentToJoin = await this.departmentsService.getModelById(
+      departmentId,
+    );
+
+    if (!departmentToJoin) {
+      throw new BadRequestException(ExceptionsMessages.DEPARTMENT_NOT_FOUND);
+    }
+
+    const teacherInDb = await this.repository.findOne({ where: { userId } });
+
+    if (teacherInDb) {
       throw new BadRequestException(
-        ExceptionsMessages.TEACHER_WITH_SUCH_EMAIL_ALREADY_EXISTS,
+        ExceptionsMessages.SUCH_TEACHER_ALREADY_EXISTS,
       );
     }
 
     const newTeacher = this.repository.create(teacher);
 
     const createdTeacher = await this.repository.save(newTeacher);
-    const { id, email, phone, name, surname } = createdTeacher;
-    return { id, email, phone, name, surname };
+
+    return this.getById(createdTeacher.id);
   }
 
-  async update(
+  async updateDepartment(
     idToUpdate: number,
-    teacher: Partial<UpdateTeacherRequestDto>,
+    teacher: UpdateTeacherRequestDto,
   ): Promise<TeachersGetAllItemResponseDto> {
     const teacherToUpdate = await this.getModelById(idToUpdate);
 
@@ -80,25 +110,20 @@ export class TeachersService {
       throw new NotFoundException(ExceptionsMessages.TEACHER_NOT_FOUND);
     }
 
-    if (teacher.email) {
-      const teacherToCheckByEmail = await this.getModelByEmail(teacher.email);
+    const departmentToJoin = await this.departmentsService.getModelById(
+      teacher.departmentId,
+    );
 
-      if (
-        teacherToCheckByEmail &&
-        teacher.email !== teacherToUpdate.email &&
-        idToUpdate !== teacherToCheckByEmail.id
-      ) {
-        throw new BadRequestException(
-          ExceptionsMessages.TEACHER_WITH_SUCH_EMAIL_ALREADY_EXISTS,
-        );
-      }
+    if (!departmentToJoin) {
+      throw new BadRequestException(
+        ExceptionsMessages.DEPARTMENT_DOES_NOT_EXIST,
+      );
     }
 
     Object.assign(teacherToUpdate, teacher);
     const updatedTeacher = await this.repository.save(teacherToUpdate);
 
-    const { id, email, phone, name, surname } = updatedTeacher;
-    return { id, email, phone, name, surname };
+    return this.getById(updatedTeacher.id);
   }
 
   async delete(id: number): Promise<number> {

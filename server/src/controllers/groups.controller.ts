@@ -6,6 +6,7 @@ import {
   Post,
   Delete,
   Param,
+  UseGuards,
 } from 'src/common/decorators/decorators';
 import { NotFoundException } from 'src/common/exceptions/excpetions';
 import { GroupsService } from 'src/services/services';
@@ -15,7 +16,9 @@ import {
   UpdateGroupValidationDto,
 } from 'src/common/validation-dtos/validation-dtos';
 import { ApiPath, ExceptionsMessages, GroupsApi } from 'src/common/enums/enums';
+import { JwtAuthGuard } from 'src/guards/guards';
 
+@UseGuards(JwtAuthGuard)
 @Controller(ApiPath.GROUPS)
 export class GroupsController {
   constructor(private groupsService: GroupsService) {}

@@ -6,6 +6,7 @@ import {
   Param,
   Patch,
   Post,
+  UseGuards,
 } from 'src/common/decorators/decorators';
 import {
   ApiPath,
@@ -18,8 +19,10 @@ import {
   GetByIdParams,
   UpdateFacultyValidationDto,
 } from 'src/common/validation-dtos/validation-dtos';
+import { JwtAuthGuard } from 'src/guards/guards';
 import { FacultiesService } from 'src/services/faculties.service';
 
+@UseGuards(JwtAuthGuard)
 @Controller(ApiPath.FACULTIES)
 export class FacultiesController {
   constructor(private facultiesService: FacultiesService) {}

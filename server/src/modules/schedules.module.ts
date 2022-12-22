@@ -8,20 +8,24 @@ import {
   Group,
   Schedule,
   Teacher,
+  User,
 } from 'src/entities/entities';
 import {
   DepartmentsService,
   DisciplinesService,
   FacultiesService,
   GroupsService,
+  JwtService,
   SchedulesService,
   TeachersService,
+  UsersService,
 } from 'src/services/services';
 import { DepartmentsModule } from './departments.module';
 import { DisciplinesModule } from './disciplines.module';
 import { FacultiesModule } from './faculties.module';
 import { GroupsModule } from './groups.module';
 import { TeachersModule } from './teachers.module';
+import { UsersModule } from './users.module';
 
 @Module({
   imports: [
@@ -32,12 +36,14 @@ import { TeachersModule } from './teachers.module';
       Group,
       Department,
       Faculty,
+      User,
     ]),
     TeachersModule,
     DisciplinesModule,
     GroupsModule,
     DepartmentsModule,
     FacultiesModule,
+    UsersModule,
   ],
   controllers: [SchedulesController],
   providers: [
@@ -47,6 +53,8 @@ import { TeachersModule } from './teachers.module';
     GroupsService,
     DepartmentsService,
     FacultiesService,
+    UsersService,
+    JwtService,
   ],
 })
 export class SchedulesModule {}

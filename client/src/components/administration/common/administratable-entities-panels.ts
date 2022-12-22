@@ -4,9 +4,10 @@ import {
   Disciplines,
   Faculties,
   Groups,
-  Schedule,
+  Schedules,
   Students,
   Teachers,
+  Users,
 } from "../components/components";
 
 type AdministratableOption = {
@@ -28,13 +29,13 @@ const defaultAdministratableOptions: AdministratableOption[] = [
   },
   {
     id: 3,
-    name: "Teachers",
-    component: Teachers,
+    name: "Departments",
+    component: Departments,
   },
   {
     id: 4,
-    name: "Departments",
-    component: Departments,
+    name: "Teachers",
+    component: Teachers,
   },
   {
     id: 5,
@@ -49,7 +50,12 @@ const defaultAdministratableOptions: AdministratableOption[] = [
   {
     id: 7,
     name: "Schedules",
-    component: Schedule,
+    component: Schedules,
+  },
+  {
+    id: 8,
+    name: "Users",
+    component: Users,
   },
 ];
 

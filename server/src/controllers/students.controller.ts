@@ -6,6 +6,7 @@ import {
   Patch,
   Delete,
   Param,
+  UseGuards,
 } from 'src/common/decorators/decorators';
 import {
   ApiPath,
@@ -18,8 +19,10 @@ import {
   GetByIdParams,
   UpdateStudentValidatonDto,
 } from 'src/common/validation-dtos/validation-dtos';
+import { JwtAuthGuard } from 'src/guards/guards';
 import { StudentsService } from 'src/services/services';
 
+@UseGuards(JwtAuthGuard)
 @Controller(ApiPath.STUDENTS)
 export class StudentsController {
   constructor(private studentsService: StudentsService) {}
@@ -53,7 +56,7 @@ export class StudentsController {
   ) {
     const { id } = params;
 
-    return this.studentsService.update(id, student);
+    return this.studentsService.updateGroup(id, student);
   }
 
   @Delete(StudentsApi.$ID)

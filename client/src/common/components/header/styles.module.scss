@@ -1,9 +1,16 @@
 .header {
+  @extend %centered-flex-row;
+
   width: 100%;
   background: $primary-brand-color;
   flex-wrap: wrap;
+  justify-content: space-between;
+  padding: 0px 10px;
   position: sticky;
   top: 0;
+}
 
-  @extend %centered-flex-row;
+.headerOptionsWrapper {
+  display: flex;
+  justify-content: center;
 }

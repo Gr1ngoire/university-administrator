@@ -1,4 +1,5 @@
 export { AppController } from './app.controller';
+export { AuthController } from './auth.controller';
 export { DepartmentsController } from './departments.controller';
 export { DisciplinesController } from './disciplines.controller';
 export { FacultiesController } from './faculties.controller';
@@ -7,3 +8,4 @@ export { NewsController } from './news.controller';
 export { SchedulesController } from './schedules.controller';
 export { StudentsController } from './students.controller';
 export { TeachersController } from './teachers.controller';
+export { UsersController } from './users.controller';

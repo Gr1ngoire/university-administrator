@@ -40,7 +40,7 @@ class Student {
         method: HttpMethod.POST,
         contentType: ContentType.JSON,
         payload: new URLSearchParams({
-          ...payload,
+          userId: String(payload.userId),
           groupId: String(payload.groupId),
         }),
       }
@@ -57,7 +57,6 @@ class Student {
         method: HttpMethod.PATCH,
         contentType: ContentType.JSON,
         payload: new URLSearchParams({
-          ...payload,
           groupId: String(payload.groupId),
         }),
       }

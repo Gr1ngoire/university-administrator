@@ -1,6 +1,7 @@
 export { DbTablesNames } from './db/db';
 export {
   ApiPath,
+  AuthApi,
   DepartmentsApi,
   DisciplinesApi,
   FacultiesApi,
@@ -9,6 +10,7 @@ export {
   SchedulesApi,
   StudentsApi,
   TeachersApi,
+  UsersApi,
 } from './api/api';
 export { AppEnvironment, ENV } from './app/app';
 export { ControllerParams } from './controllers-params/controllers-params';

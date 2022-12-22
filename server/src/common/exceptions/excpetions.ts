@@ -1,1 +1,5 @@
-export { BadRequestException, NotFoundException } from '@nestjs/common';
+export {
+  BadRequestException,
+  NotFoundException,
+  UnauthorizedException,
+} from '@nestjs/common';

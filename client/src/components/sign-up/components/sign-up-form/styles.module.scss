@@ -1,0 +1,15 @@
+.signUpForm {
+  width: 100%;
+  padding: 20px;
+}
+
+.signUpInputWrapper {
+  & label {
+    color: $secondary-brand-color;
+  }
+}
+
+.signUpActionButtonsWrapper {
+  display: flex;
+  justify-content: center;
+}

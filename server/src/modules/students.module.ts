@@ -12,6 +12,7 @@ import {
   DepartmentsService,
   FacultiesService,
   GroupsService,
+  JwtService,
   StudentsService,
   UsersService,
 } from 'src/services/services';
@@ -35,6 +36,7 @@ import { UsersModule } from './users.module';
     DepartmentsService,
     FacultiesService,
     UsersService,
+    JwtService,
   ],
 })
 export class StudentsModule {}

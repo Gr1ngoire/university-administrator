@@ -5,6 +5,7 @@ import {
   Patch,
   Delete,
   Param,
+  UseGuards,
 } from 'src/common/decorators/decorators';
 import { ApiPath, ExceptionsMessages, UsersApi } from 'src/common/enums/enums';
 import { NotFoundException } from 'src/common/exceptions/excpetions';
@@ -12,8 +13,10 @@ import {
   GetByIdParams,
   UpdateUserValidationDto,
 } from 'src/common/validation-dtos/validation-dtos';
+import { JwtAuthGuard } from 'src/guards/guards';
 import { UsersService } from 'src/services/services';
 
+@UseGuards(JwtAuthGuard)
 @Controller(ApiPath.USERS)
 export class UsersController {
   constructor(private usersService: UsersService) {}

@@ -6,6 +6,7 @@ import {
   TeachersService,
   FacultiesService,
   UsersService,
+  JwtService,
 } from 'src/services/services';
 import { Module } from 'src/common/decorators/decorators';
 import { DepartmentsModule } from './departments.module';
@@ -25,6 +26,7 @@ import { UsersModule } from './users.module';
     DepartmentsService,
     FacultiesService,
     UsersService,
+    JwtService,
   ],
 })
 export class TeachersModule {}

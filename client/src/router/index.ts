@@ -1,5 +1,6 @@
 import { AppRoutes } from "@/common/enums/enums";
 import { createRouter, createWebHistory } from "vue-router";
+import { AuthorizationWrapper } from "@/common/components/components";
 import {
   Administration,
   News,
@@ -30,7 +31,10 @@ const router = createRouter({
     {
       path: AppRoutes.ADMINISTRATION,
       name: pathSlashStripper(AppRoutes.ADMINISTRATION),
-      component: Administration,
+      component: AuthorizationWrapper,
+      props: {
+        children: Administration,
+      },
     },
     {
       path: AppRoutes.NEWS,

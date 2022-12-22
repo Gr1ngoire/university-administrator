@@ -6,6 +6,7 @@ import {
   Param,
   Patch,
   Delete,
+  UseGuards,
 } from 'src/common/decorators/decorators';
 import {
   CreateDisciplineValidationDto,
@@ -19,7 +20,9 @@ import {
 } from 'src/common/enums/enums';
 import { DisciplinesService } from 'src/services/services';
 import { NotFoundException } from 'src/common/exceptions/excpetions';
+import { JwtAuthGuard } from 'src/guards/guards';
 
+@UseGuards(JwtAuthGuard)
 @Controller(ApiPath.DISCIPLINES)
 export class DisciplinesController {
   constructor(private disciplinesService: DisciplinesService) {}

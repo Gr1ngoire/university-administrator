@@ -5,6 +5,7 @@
   padding: 10px;
   display: flex;
   align-items: center;
+  justify-content: center;
 
   &:hover {
     transition: 0.4s;
@@ -73,4 +74,10 @@
   border-left-color: $primary-brand-color;
   border-bottom-color: $primary-brand-color;
   border-right-color: none;
+}
+
+.logout {
+  border-color: $highlight-brand-color;
+  background: $primary-brand-color;
+  color: $highlight-brand-color;
 }

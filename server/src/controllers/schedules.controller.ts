@@ -6,6 +6,7 @@ import {
   Patch,
   Delete,
   Param,
+  UseGuards,
 } from 'src/common/decorators/decorators';
 import { NotFoundException } from 'src/common/exceptions/excpetions';
 import {
@@ -19,20 +20,22 @@ import {
   GetByIdParams,
   UpdateScheduleValidationDto,
 } from 'src/common/validation-dtos/validation-dtos';
+import { JwtAuthGuard } from 'src/guards/jwt-auth.guard';
 
 @Controller(ApiPath.SCHEDULES)
 export class SchedulesController {
-  constructor(private groupsService: SchedulesService) {}
+  constructor(private scheduleService: SchedulesService) {}
 
   @Get(SchedulesApi.ROOT)
   getAll() {
-    return this.groupsService.getAll();
+    return this.scheduleService.getAll();
   }
 
+  @UseGuards(JwtAuthGuard)
   @Get(SchedulesApi.$ID)
   async getById(@Param() params: GetByIdParams) {
     const { id } = params;
-    const schedule = await this.groupsService.getById(id);
+    const schedule = await this.scheduleService.getById(id);
 
     if (!schedule) {
       throw new NotFoundException(ExceptionsMessages.SCHEDULE_NOT_FOUND);
@@ -41,11 +44,13 @@ export class SchedulesController {
     return schedule;
   }
 
+  @UseGuards(JwtAuthGuard)
   @Post(SchedulesApi.ROOT)
-  create(@Body() group: CreateScheduleValidationDto) {
-    return this.groupsService.create(group);
+  create(@Body() schedule: CreateScheduleValidationDto) {
+    return this.scheduleService.create(schedule);
   }
 
+  @UseGuards(JwtAuthGuard)
   @Patch(SchedulesApi.$ID)
   update(
     @Param() params: GetByIdParams,
@@ -53,13 +58,14 @@ export class SchedulesController {
   ) {
     const { id } = params;
 
-    return this.groupsService.update(id, group);
+    return this.scheduleService.update(id, group);
   }
 
+  @UseGuards(JwtAuthGuard)
   @Delete(SchedulesApi.$ID)
   delete(@Param() params: GetByIdParams) {
     const { id } = params;
 
-    return this.groupsService.delete(id);
+    return this.scheduleService.delete(id);
   }
 }

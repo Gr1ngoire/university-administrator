@@ -62,9 +62,11 @@ const handleSubmit: (event: Event) => void = (event: Event) => {
   event.preventDefault();
   if (Object.values(signUpValidationState).every((el) => el.length === 0)) {
     store.dispatch(AuthActions.SIGN_UP, signUpFormState);
-    router.push({ name: AppRoutes.SCHEDULE });
+    router.push(AppRoutes.SCHEDULE);
   }
 };
+
+handleSignUpValidation(signUpFormState);
 </script>
 
 <template>

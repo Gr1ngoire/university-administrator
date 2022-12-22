@@ -1,11 +1,11 @@
 .authSectionWrapper {
-  height: 80%;
-  margin-bottom: 17px;
+  height: 100%;
 }
 
-.signInWrapper {
+.signInUpWrapper {
   @extend %centered-flex-column;
 
+  height: 80;
   padding: 20px;
   color: $secondary-brand-color;
   background: $primary-brand-color;
@@ -24,6 +24,14 @@
   }
 }
 
+.userSection {
+  margin-top: 8px;
+  border-top-left-radius: 10px;
+  border-top-right-radius: 10px;
+  padding: 10px;
+  background: $highlight-brand-color;
+}
+
 .signUpParagraph {
   margin: 0px;
   color: $secondary-brand-color;
@@ -35,5 +43,14 @@
 
   .signUpParagraph {
     color: $primary-brand-color;
+  }
+}
+
+.logoutButtonWrapper {
+  width: 100%;
+  margin-top: 5px;
+
+  & button {
+    width: 100%;
   }
 }

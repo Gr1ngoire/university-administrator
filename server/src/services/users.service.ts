@@ -30,6 +30,10 @@ export class UsersService {
       where: { email: emailToLookFor },
     });
 
+    if (!userInDb) {
+      return null;
+    }
+
     const { id, name, surname, secondName, role, phone, email, password } =
       userInDb;
     return {

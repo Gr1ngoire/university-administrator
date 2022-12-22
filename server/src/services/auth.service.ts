@@ -1,9 +1,9 @@
-import { JwtService } from '@nestjs/jwt';
 import {
   UsersGetAllItemAdminResponseDto,
   UserSignInRequestDto,
   UserSignInResponseDto,
   UserSignUpRequestDto,
+  UserWithGrantDto,
 } from 'src/common/types/types';
 import { Injectable } from 'src/common/decorators/decorators';
 import { UsersService } from './users.service';
@@ -13,11 +13,16 @@ import {
   UnauthorizedException,
 } from 'src/common/exceptions/excpetions';
 import { ExceptionsMessages } from 'src/common/enums/enums';
-import { User } from 'src/entities/user.entity';
+import { JwtService } from './jwt.service';
 
 type UserValidationParams = {
   email: string;
   password: string;
+};
+
+type UserTokenData = {
+  id: number;
+  email: string;
 };
 
 @Injectable()
@@ -34,7 +39,7 @@ export class AuthService {
     const userInDb = await this.checkUser(userDto);
     const { id, name, surname, secondName, role, phone, email } = userInDb;
     return {
-      token: this.generateToken(userInDb),
+      token: this.generateToken({ id, email }),
       user: { id, name, surname, secondName, role, phone, email },
     };
   }
@@ -73,8 +78,22 @@ export class AuthService {
     };
   }
 
-  private generateToken(user: Pick<User, 'id' | 'email'>): string {
-    const { id, email } = user;
+  async getCurrentUser(bearerToken: string): Promise<UserWithGrantDto | null> {
+    try {
+      const [, token] = bearerToken.split(' ');
+      const { id } = this.jwtService.decode(token) as UserTokenData;
+      const userInDb = await this.userService.getById(id);
+
+      return userInDb;
+    } catch {
+      throw new UnauthorizedException({
+        message: ExceptionsMessages.USER_IS_UNUTHORIZED,
+      });
+    }
+  }
+
+  private generateToken(userData: UserTokenData): string {
+    const { id, email } = userData;
     return this.jwtService.sign({ id, email });
   }
 

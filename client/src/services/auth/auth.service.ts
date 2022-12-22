@@ -9,6 +9,7 @@ import type {
   UserSignInResponseDto,
   UserSignUpRequestDto,
   UserSignUpResponseDto,
+  UserWithGrantDto,
 } from "@/common/types/types";
 import type { Http as HttpService } from "../http/http.service";
 
@@ -18,33 +19,45 @@ type Constructor = {
 };
 
 class Auth {
-  private http: HttpService;
+  #http: HttpService;
 
-  private apiPrefix: string;
+  #apiPrefix: string;
 
   constructor({ http, apiPrefix }: Constructor) {
-    this.http = http;
-    this.apiPrefix = apiPrefix;
+    this.#http = http;
+    this.#apiPrefix = apiPrefix;
   }
 
   public signIn(payload: UserSignInRequestDto): Promise<UserSignInResponseDto> {
-    return this.http.load<UserSignUpResponseDto>(
-      `${this.apiPrefix}${ApiPath.AUTH}${AuthApi.SIGN_IN}`,
+    return this.#http.load<UserSignUpResponseDto>(
+      `${this.#apiPrefix}${ApiPath.AUTH}${AuthApi.SIGN_IN}`,
       {
         method: HttpMethod.POST,
         contentType: ContentType.JSON,
         payload: new URLSearchParams(payload),
+        hasAuth: false,
       }
     );
   }
 
   public signUp(payload: UserSignUpRequestDto): Promise<UserSignUpResponseDto> {
-    return this.http.load<UserSignUpResponseDto>(
-      `${this.apiPrefix}${ApiPath.AUTH}${AuthApi.SIGN_UP}`,
+    return this.#http.load<UserSignUpResponseDto>(
+      `${this.#apiPrefix}${ApiPath.AUTH}${AuthApi.SIGN_UP}`,
       {
         method: HttpMethod.POST,
         contentType: ContentType.JSON,
         payload: new URLSearchParams(payload),
+        hasAuth: false,
+      }
+    );
+  }
+
+  public getCurrentUser(): Promise<UserWithGrantDto> {
+    return this.#http.load<UserWithGrantDto>(
+      `${this.#apiPrefix}${ApiPath.AUTH}${AuthApi.CURRENT_USER}`,
+      {
+        method: HttpMethod.GET,
+        contentType: ContentType.JSON,
       }
     );
   }

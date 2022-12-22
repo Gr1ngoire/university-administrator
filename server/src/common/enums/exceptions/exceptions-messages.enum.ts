@@ -10,6 +10,7 @@ enum ExceptionsMessages {
   NEWS_NOT_FOUND = 'News not found',
   SCHEDULE_NOT_FOUND = 'Schedule not found',
   STUDENT_NOT_FOUND = 'Student not found',
+  USER_IS_UNUTHORIZED = 'User is unuthorised',
   USER_NOT_FOUND = 'User not found',
   USER_DOES_NOT_EXIST = 'User does not exist',
   USER_WITH_SUCH_EMAIL_ALREADY_EXISTS = 'Student with such email already exists',

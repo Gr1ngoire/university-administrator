@@ -21,6 +21,7 @@ import type {
 enum Actions {
   SIGN_IN = "signIn",
   SIGN_UP = "signUp",
+  GET_CURRENT_USER = "getCurrentUser",
   LOG_OUT = "logOut",
 }
 
@@ -66,6 +67,16 @@ const actions: ActionTree<State, RootState> = {
     state.dataStatus = DataStatus.PENDING;
     const { token, user } = await authService.signUp(signUpDto);
     storageService.setToken(token);
+
+    commit(Mutations.SET_USER, user);
+    state.dataStatus = DataStatus.FULFILLED;
+  },
+
+  async [Actions.GET_CURRENT_USER]({
+    commit,
+  }: ActionContext<State, RootState>) {
+    state.dataStatus = DataStatus.PENDING;
+    const user = await authService.getCurrentUser();
 
     commit(Mutations.SET_USER, user);
     state.dataStatus = DataStatus.FULFILLED;

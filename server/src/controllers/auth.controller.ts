@@ -1,5 +1,11 @@
 import { ApiPath } from 'shared/common/enums/enums';
-import { Body, Controller, Post } from 'src/common/decorators/decorators';
+import {
+  Body,
+  Controller,
+  Get,
+  Headers,
+  Post,
+} from 'src/common/decorators/decorators';
 import { AuthApi } from 'src/common/enums/enums';
 import {
   UserSignInValidationDto,
@@ -10,6 +16,11 @@ import { AuthService } from 'src/services/auth.service';
 @Controller(ApiPath.AUTH)
 export class AuthController {
   constructor(private authService: AuthService) {}
+
+  @Get(AuthApi.CURRENT_USER)
+  currentUser(@Headers('authorization') authHeader: string) {
+    return this.authService.getCurrentUser(authHeader);
+  }
 
   @Post(AuthApi.SIGN_UP)
   signUp(@Body() userDto: UserSignUpValidationDto) {

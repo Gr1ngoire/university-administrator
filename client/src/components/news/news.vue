@@ -7,6 +7,7 @@ import styles from "./styles.module.scss";
 
 const store = useStore();
 const news = computed(() => store.state.news.news);
+const currentUser = computed(() => store.state.auth.currentUser);
 
 const newsCreationFormShowState = ref<boolean>(false);
 const handleToggle: () => void = (): void => {
@@ -19,7 +20,7 @@ store.dispatch(NewsActions.GET_ALL_NEWS);
 <template>
   <div :class="styles.dashboardWrapper">
     <NewsCardsList :cards="news" />
-    <div :class="styles.createNewsForm">
+    <div v-if="currentUser" :class="styles.createNewsForm">
       <CreateNewsForm
         v-if="newsCreationFormShowState"
         :onToggle="handleToggle"

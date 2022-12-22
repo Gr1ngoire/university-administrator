@@ -7,6 +7,10 @@ class Storage {
     this.deleteValue("token");
   }
 
+  public getItem(name: string): string | null {
+    return localStorage.getItem(name);
+  }
+
   private setValue(name: string, value: string): void {
     localStorage.setItem(name, value);
   }

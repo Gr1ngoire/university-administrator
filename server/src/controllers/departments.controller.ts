@@ -6,6 +6,7 @@ import {
   Post,
   Delete,
   Param,
+  UseGuards,
 } from 'src/common/decorators/decorators';
 import {
   ApiPath,
@@ -18,8 +19,10 @@ import {
   UpdateDepartmentValidationDto,
   GetByIdParams,
 } from 'src/common/validation-dtos/validation-dtos';
+import { JwtAuthGuard } from 'src/guards/guards';
 import { DepartmentsService } from 'src/services/services';
 
+@UseGuards(JwtAuthGuard)
 @Controller(ApiPath.DEPARTMENTS)
 export class DepartmentsController {
   constructor(private departmentsService: DepartmentsService) {}

@@ -14,6 +14,7 @@ import {
   User,
 } from 'src/entities/entities';
 import { AppService } from 'src/services/services';
+import { AuthModule } from './auth.module';
 import { DepartmentsModule } from './departments.module';
 import { DisciplinesModule } from './disciplines.module';
 import { FacultiesModule } from './faculties.module';
@@ -50,6 +51,7 @@ const { TYPE, HOST, PORT, USERNAME, PASSWORD, NAME } = ENV.DB;
       logging: true,
       // synchronize: ENV.APP.NODE_ENV === 'development',
     }),
+    AuthModule,
     DepartmentsModule,
     DisciplinesModule,
     FacultiesModule,

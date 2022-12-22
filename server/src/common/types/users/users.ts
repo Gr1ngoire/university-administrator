@@ -4,4 +4,4 @@ export {type UpdateUserRequestDto,
     type UserSignInRequestDto,
     type UserSignInResponseDto,
     type UserSignUpRequestDto,
-    type UserSignUpResponseDto,} from 'shared/common/types/types'
+    type UserSignUpResponseDto, type UserWithGrantDto} from 'shared/common/types/types'

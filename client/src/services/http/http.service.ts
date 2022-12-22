@@ -3,6 +3,7 @@ import {
   HttpCode,
   HttpHeader,
   HttpMethod,
+  StorageKey,
 } from "@/common/enums/enums";
 import type {
   AxiosInstance,
@@ -12,11 +13,22 @@ import type {
   HttpOptions,
 } from "@/common/types/types";
 import { HttpError } from "@/exceptions/exceptions";
-import { AxiosHeaders } from "axios";
-import { axios as axiosService } from "../axios/axios";
+import { AxiosHeaders, type AxiosRequestConfig } from "axios";
+import type { Storage } from "../storage/storage.service";
+
+type Constructor = {
+  axiosService: AxiosInstance;
+  storage: Storage;
+};
 
 class Http {
-  constructor(private axiosServ: AxiosInstance = axiosService) {}
+  #axiosService: AxiosInstance;
+  #storage: Storage;
+
+  constructor({ axiosService, storage }: Constructor) {
+    this.#axiosService = axiosService;
+    this.#storage = storage;
+  }
 
   public load<T = unknown>(
     url: string,
@@ -33,7 +45,7 @@ class Http {
       headers: this.getHeaders(contentType, hasAuth),
     };
 
-    return this.axiosServ({
+    return this.#axiosService({
       url: this.getUrlWithQueryString(url, queryString),
       method: method as Method,
       headers,
@@ -42,15 +54,6 @@ class Http {
       .then(this.checkStatus)
       .then((res) => res.data as T)
       .catch(this.throwError);
-
-    // return fetch(this.getUrlWithQueryString(url, queryString), {
-    //   method,
-    //   headers,
-    //   body: payload,
-    // })
-    //   .then(this.checkStatus)
-    //   .then((res) => this.parseJson<T>(res))
-    //   .catch(this.throwError);
   }
 
   private getHeaders(
@@ -63,11 +66,15 @@ class Http {
       headers.set(HttpHeader.CONTENT_TYPE, contentType);
     }
 
-    // this part for auth
-    // if (hasAuth) {
-    // const token = this.#storage.getItem(StorageKey.TOKEN);
-    // headers.append(HttpHeader.AUTHORIZATION, `Bearer ${token}`);
-    // }
+    if (hasAuth) {
+      const token = this.#storage.getItem(StorageKey.TOKEN);
+      this.#axiosService.interceptors.request.use(
+        (config: AxiosRequestConfig<any>) => {
+          config.headers![HttpHeader.AUTHORIZATION] = `Bearer ${token}`;
+          return config;
+        }
+      );
+    }
 
     return headers;
   }

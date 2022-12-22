@@ -6,6 +6,7 @@ import {
   Patch,
   Delete,
   Param,
+  UseGuards,
 } from 'src/common/decorators/decorators';
 import {
   ApiPath,
@@ -18,8 +19,10 @@ import {
   GetByIdParams,
   UpdateTeacherValidationDto,
 } from 'src/common/validation-dtos/validation-dtos';
+import { JwtAuthGuard } from 'src/guards/guards';
 import { TeachersService } from 'src/services/services';
 
+@UseGuards(JwtAuthGuard)
 @Controller(ApiPath.TEACHERS)
 export class TeachersController {
   constructor(private teachersService: TeachersService) {}

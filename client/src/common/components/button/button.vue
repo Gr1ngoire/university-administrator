@@ -8,7 +8,8 @@ type StyleType =
   | "edit"
   | "add"
   | "cancel"
-  | "panelOption";
+  | "panelOption"
+  | "logout";
 
 type Props = {
   name?: string;
@@ -76,7 +77,7 @@ defineProps<Props>();
           />
         </svg>
       </i>
-      {{ name }}
+      <label>{{ name }}</label>
     </button>
   </div>
 </template>

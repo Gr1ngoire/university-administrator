@@ -3,6 +3,7 @@ export {
   Controller,
   Delete,
   Get,
+  Headers,
   Param,
   Patch,
   Post,

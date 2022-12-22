@@ -54,10 +54,12 @@ const handleSignInPropertyChange: (event: Event) => void = (
 const handleSubmit: (event: Event) => void = (event: Event) => {
   event.preventDefault();
   if (Object.values(signInValidationState).every((el) => el.length === 0)) {
-    store.dispatch(AuthActions.SIGN_UP, signInFormState);
+    store.dispatch(AuthActions.SIGN_IN, signInFormState);
     router.push(AppRoutes.SCHEDULE);
   }
 };
+
+handleSignInValidation(signInFormState);
 </script>
 
 <template>
@@ -82,7 +84,7 @@ const handleSubmit: (event: Event) => void = (event: Event) => {
         />
       </div>
       <div :class="styles.signInActionButtonsWrapper">
-        <Button type="submit" name="Sign Up" action="submit" />
+        <Button type="submit" name="Sign In" action="submit" />
       </div>
     </div>
   </form>

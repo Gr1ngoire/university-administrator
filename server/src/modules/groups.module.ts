@@ -6,6 +6,7 @@ import {
   DepartmentsService,
   FacultiesService,
   GroupsService,
+  JwtService,
 } from 'src/services/services';
 import { DepartmentsModule } from './departments.module';
 import { FacultiesModule } from './faculties.module';
@@ -17,6 +18,6 @@ import { FacultiesModule } from './faculties.module';
     FacultiesModule,
   ],
   controllers: [GroupsController],
-  providers: [GroupsService, DepartmentsService, FacultiesService],
+  providers: [GroupsService, DepartmentsService, FacultiesService, JwtService],
 })
 export class GroupsModule {}

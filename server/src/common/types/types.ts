@@ -53,4 +53,5 @@ type UserSignInRequestDto,
 type UserSignInResponseDto,
 type UserSignUpRequestDto,
 type UserSignUpResponseDto,
+type UserWithGrantDto
 } from './users/users'

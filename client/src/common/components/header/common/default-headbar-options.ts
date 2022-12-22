@@ -5,6 +5,7 @@ type HeaderSelectOption = {
   link: string;
   name: string;
   isSelected: boolean;
+  requiresAuth: boolean;
 };
 
 const defaultSelectOptions: HeaderSelectOption[] = [
@@ -12,25 +13,29 @@ const defaultSelectOptions: HeaderSelectOption[] = [
     id: 1,
     link: AppRoutes.SCHEDULE,
     name: "Schedule",
-    isSelected: true,
+    isSelected: false,
+    requiresAuth: false,
   },
   {
     id: 2,
     link: AppRoutes.NEWS,
     name: "News",
     isSelected: false,
+    requiresAuth: false,
   },
   {
     id: 3,
     link: AppRoutes.FAQ,
     name: "Faq",
     isSelected: false,
+    requiresAuth: true,
   },
   {
     id: 4,
     link: AppRoutes.ADMINISTRATION,
     name: "Administration",
     isSelected: false,
+    requiresAuth: true,
   },
 ];
 

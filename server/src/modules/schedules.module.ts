@@ -15,6 +15,7 @@ import {
   DisciplinesService,
   FacultiesService,
   GroupsService,
+  JwtService,
   SchedulesService,
   TeachersService,
   UsersService,
@@ -53,6 +54,7 @@ import { UsersModule } from './users.module';
     DepartmentsService,
     FacultiesService,
     UsersService,
+    JwtService,
   ],
 })
 export class SchedulesModule {}

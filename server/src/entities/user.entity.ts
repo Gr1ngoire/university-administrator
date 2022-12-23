@@ -3,11 +3,13 @@ import {
   CreateDateColumn,
   Entity,
   OneToMany,
+  OneToOne,
   PrimaryGeneratedColumn,
   UpdateDateColumn,
 } from 'src/common/decorators/decorators';
 import { DbTablesNames } from 'src/common/enums/enums';
 import { Student, Teacher } from './entities';
+import { Grant } from './grant.entity';
 
 @Entity({ name: DbTablesNames.USERS })
 export class User {
@@ -35,7 +37,7 @@ export class User {
   @Column()
   surname: string;
 
-  @Column({ name: 'column_name' })
+  @Column({ name: 'second_name' })
   secondName: string;
 
   @Column()
@@ -52,4 +54,10 @@ export class User {
 
   @OneToMany(() => Teacher, (teacher) => teacher.user)
   teacher: Teacher;
+
+  @OneToOne(() => Grant, (grant) => grant.granted)
+  grant: Grant;
+
+  @OneToMany(() => Grant, (grant) => grant.granter)
+  grants: Grant[];
 }

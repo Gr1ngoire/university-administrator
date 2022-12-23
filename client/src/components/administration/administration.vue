@@ -2,12 +2,13 @@
 import type { Component } from "@/common/types/types";
 import { Disciplines, PanelsList } from "./components/components";
 import { defaultAdministratableOptions } from "./common/common";
-
-import styles from "./styles.module.scss";
-import { ref, useStore } from "@/hooks/hooks";
+import { shallowRef, useStore } from "@/hooks/hooks";
 import { AdministrationActions } from "@/store/actions";
 
-const ShownPanel: Component = ref<Component>(Disciplines);
+import "./transitions.scss";
+import styles from "./styles.module.scss";
+
+const ShownPanel: Component = shallowRef<Component>(Disciplines);
 
 const handlePanelChoose: (id: number) => () => void =
   (id: number) => (): void => {
@@ -30,7 +31,9 @@ store.dispatch(AdministrationActions.GET_ALL_USERS);
 
 <template>
   <div :class="styles.dashboardWrapper">
-    <ShownPanel />
+    <Transition name="panel">
+      <ShownPanel v-show="ShownPanel" />
+    </Transition>
     <PanelsList :onChoose="handlePanelChoose" />
   </div>
 </template>

@@ -1,0 +1,9 @@
+.panel-enter-active,
+.panel-leave-active {
+  transition: opacity 0.5s ease-in;
+}
+
+.panel-enter-from,
+.panel-leave-to {
+  opacity: 0;
+}

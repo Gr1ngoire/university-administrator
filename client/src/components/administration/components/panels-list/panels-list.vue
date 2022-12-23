@@ -1,9 +1,9 @@
 <script lang="ts" setup>
 import { PanelListOption } from "./components/components";
 import { defaultPanelOptions } from "./common/common";
+import { reactive } from "@/hooks/hooks";
 
 import styles from "./styles.module.scss";
-import { reactive } from "@/hooks/hooks";
 
 type Props = {
   onChoose: (id: number) => () => void;
@@ -29,11 +29,13 @@ const handlePanelOptionSwitch: (id: number) => () => void =
 <template>
   <ul :class="styles.panelsList">
     <li v-for="{ id, name, isSelected } in options" :key="id">
-      <PanelListOption
-        :name="name"
-        :isSelected="isSelected"
-        :onChoose="handlePanelOptionSwitch(id)"
-      />
+      <Transition name="panel-option">
+        <PanelListOption
+          :name="name"
+          :isSelected="isSelected"
+          :onChoose="handlePanelOptionSwitch(id)"
+        />
+      </Transition>
     </li>
   </ul>
 </template>

@@ -77,7 +77,7 @@ defineProps<Props>();
           />
         </svg>
       </i>
-      <label>{{ name }}</label>
+      <label :class="styles.buttonInnerLabel">{{ name }}</label>
     </button>
   </div>
 </template>

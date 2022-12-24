@@ -15,6 +15,12 @@ export {
   type CreateFacultyRequestDto,
   type UpdateFacultyRequestDto,
 } from './faculties/faculties';
+export {  
+  type CreateGrantRequestDto,
+  type UpdateGrantRequestDto,
+  type GrantsGetAllAdminResponseDto,
+  type GrantsGetAllItemAdminResponseDto,
+} from './grants/grants'
 export {
   type CreateGroupRequestDto,
   type GroupsGetAllItemResponseDto,

@@ -55,7 +55,7 @@ export class User {
   @OneToMany(() => Teacher, (teacher) => teacher.user)
   teacher: Teacher;
 
-  @OneToOne(() => Grant, (grant) => grant.granted)
+  @OneToOne(() => Grant, (grant) => grant.user)
   grant: Grant;
 
   @OneToMany(() => Grant, (grant) => grant.granter)

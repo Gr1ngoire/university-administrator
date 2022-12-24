@@ -95,7 +95,7 @@ erDiagram
     dateTime created_at
     dateTime updated_at
     int user_id FK
-    varchar grant
+    enum grant
     int granter_id FK
   }
 

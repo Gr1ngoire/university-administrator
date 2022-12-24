@@ -23,6 +23,7 @@ export {
 } from './entities/entities';
 export { UseGuards } from './guards/guards';
 export {
+  IsEnum,
   IsInt,
   IsString,
   IsEmail,

@@ -1,4 +1,4 @@
-import { DbTablesNames } from 'src/common/enums/enums';
+import { DbTablesNames, Grants } from 'src/common/enums/enums';
 import {
   Entity,
   PrimaryGeneratedColumn,
@@ -33,15 +33,21 @@ export class Grant {
 
   @OneToOne(() => User, (granted) => granted.grant, { onDelete: 'CASCADE' })
   @JoinColumn({ name: 'user_id' })
-  granted: User;
+  user: User;
 
   @Column({ type: 'number', name: 'user_id' })
   userId: number;
 
-  @ManyToOne(() => User, (granter) => granter.grants, { onDelete: 'CASCADE' })
-  @JoinColumn({ name: 'granter_id' })
-  granter: User;
+  @Column({ type: 'enum', enum: Grants, default: Grants.USER })
+  grant: Grants;
 
-  @Column({ type: 'number', name: 'granter_id' })
-  granterId: number;
+  @ManyToOne(() => User, (granter) => granter.grants, {
+    onDelete: 'CASCADE',
+    nullable: true,
+  })
+  @JoinColumn({ name: 'granter_id' })
+  granter: User | null;
+
+  @Column({ type: 'number', name: 'granter_id', nullable: true })
+  granterId: number | null;
 }

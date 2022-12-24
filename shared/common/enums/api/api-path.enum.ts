@@ -4,6 +4,7 @@ enum ApiPath {
   DISCIPLINES = "/disciplines",
   FACULTIES = "/faculties",
   FAQ = "/faq",
+  GRANTS = "/grants",
   GROUPS = "/groups",
   NEWS = "/news",
   SCHEDULES = "/schedules",

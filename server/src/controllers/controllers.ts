@@ -3,6 +3,7 @@ export { AuthController } from './auth.controller';
 export { DepartmentsController } from './departments.controller';
 export { DisciplinesController } from './disciplines.controller';
 export { FacultiesController } from './faculties.controller';
+export { GrantsController } from './grants.controller';
 export { GroupsController } from './groups.controller';
 export { NewsController } from './news.controller';
 export { SchedulesController } from './schedules.controller';

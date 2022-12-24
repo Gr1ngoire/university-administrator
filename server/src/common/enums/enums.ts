@@ -5,6 +5,7 @@ export {
   DepartmentsApi,
   DisciplinesApi,
   FacultiesApi,
+  GrantsApi,
   GroupsApi,
   NewsApi,
   SchedulesApi,
@@ -15,3 +16,4 @@ export {
 export { AppEnvironment, ENV } from './app/app';
 export { ControllerParams } from './controllers-params/controllers-params';
 export { ExceptionsMessages } from './exceptions/excpetions';
+export { Grants } from './grants/grants';

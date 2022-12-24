@@ -1,8 +1,9 @@
 import { CanActivate, ExecutionContext } from '@nestjs/common';
 import { Observable } from 'rxjs';
 import { Injectable } from 'src/common/decorators/decorators';
-import { ENV, ExceptionsMessages } from 'src/common/enums/enums';
+import { ENV, ExceptionsMessages, Grants } from 'src/common/enums/enums';
 import { UnauthorizedException } from 'src/common/exceptions/excpetions';
+import { UserTokenData } from 'src/common/types/types';
 import { JwtService } from 'src/services/services';
 
 const {
@@ -10,7 +11,7 @@ const {
 } = ENV;
 
 @Injectable()
-export class JwtAuthGuard implements CanActivate {
+export class AdminRoleGuard implements CanActivate {
   constructor(private jwtService: JwtService) {}
 
   canActivate(
@@ -27,10 +28,16 @@ export class JwtAuthGuard implements CanActivate {
         });
       }
 
-      this.jwtService.verify(token, { secret: JWT_PRIVATE_KEY });
+      const userData: UserTokenData = this.jwtService.verify<UserTokenData>(
+        token,
+        {
+          secret: JWT_PRIVATE_KEY,
+        },
+      );
 
-      return true;
+      return userData.grant === Grants.ADMIN;
     } catch (e) {
+      console.log(e);
       throw new UnauthorizedException({
         message: ExceptionsMessages.USER_IS_UNUTHORIZED,
       });

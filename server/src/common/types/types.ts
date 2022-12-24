@@ -52,6 +52,7 @@ export {
   type UpdateTeacherRequestDto,
 } from './teachers/teachers';
 export {
+  type UserTokenData,
   type UpdateUserRequestDto, 
 type UsersGetAllAdminResponseDto,
 type UsersGetAllItemAdminResponseDto,

@@ -4,6 +4,7 @@ import { StudentsController } from 'src/controllers/controllers';
 import {
   Department,
   Faculty,
+  Grant,
   Group,
   Student,
   User,
@@ -11,6 +12,7 @@ import {
 import {
   DepartmentsService,
   FacultiesService,
+  GrantsService,
   GroupsService,
   JwtService,
   StudentsService,
@@ -18,13 +20,22 @@ import {
 } from 'src/services/services';
 import { DepartmentsModule } from './departments.module';
 import { FacultiesModule } from './faculties.module';
+import { GrantsModule } from './grants.module';
 import { GroupsModule } from './groups.module';
 import { UsersModule } from './users.module';
 
 @Module({
   imports: [
-    TypeOrmModule.forFeature([Student, User, Group, Department, Faculty]),
+    TypeOrmModule.forFeature([
+      Student,
+      User,
+      Grant,
+      Group,
+      Department,
+      Faculty,
+    ]),
     UsersModule,
+    GrantsModule,
     GroupsModule,
     DepartmentsModule,
     FacultiesModule,
@@ -36,6 +47,7 @@ import { UsersModule } from './users.module';
     DepartmentsService,
     FacultiesService,
     UsersService,
+    GrantsService,
     JwtService,
   ],
 })

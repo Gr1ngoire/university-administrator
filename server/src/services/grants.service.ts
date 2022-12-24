@@ -1,5 +1,9 @@
 import { Repository } from 'typeorm';
-import { Injectable, InjectRepository } from 'src/common/decorators/decorators';
+import {
+  Injectable,
+  InjectRepository,
+  Inject,
+} from 'src/common/decorators/decorators';
 import { ExceptionsMessages, Grants } from 'src/common/enums/enums';
 import {
   BadRequestException,
@@ -13,11 +17,13 @@ import {
 } from 'src/common/types/types';
 import { Grant } from 'src/entities/entities';
 import { UsersService } from './users.service';
+import { forwardRef } from '@nestjs/common';
 
 @Injectable()
 export class GrantsService {
   constructor(
     @InjectRepository(Grant) private repository: Repository<Grant>,
+    @Inject(forwardRef(() => UsersService))
     private usersService: UsersService,
   ) {}
 
@@ -34,6 +40,11 @@ export class GrantsService {
   async isUserAdmin(userId: number): Promise<boolean> {
     const { grant } = await this.repository.findOne({ where: { userId } });
     return grant === Grants.ADMIN;
+  }
+
+  async getUserGrant(userId: number): Promise<Grants> {
+    const { grant } = await this.repository.findOne({ where: { userId } });
+    return grant;
   }
 
   async getAll(): Promise<GrantsGetAllAdminResponseDto> {

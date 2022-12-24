@@ -15,10 +15,10 @@ import {
   CreateGrantValidationDto,
   UpdateGrantValidationDto,
 } from 'src/common/validation-dtos/validation-dtos';
-import { JwtAuthGuard } from 'src/guards/guards';
+import { AdminRoleGuard, JwtAuthGuard } from 'src/guards/guards';
 import { GrantsService } from 'src/services/services';
 
-@UseGuards(JwtAuthGuard)
+@UseGuards(JwtAuthGuard, AdminRoleGuard)
 @Controller(ApiPath.DEPARTMENTS)
 export class GrantsController {
   constructor(private grantsService: GrantsService) {}

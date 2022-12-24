@@ -3,6 +3,7 @@ import {
   UserSignInRequestDto,
   UserSignInResponseDto,
   UserSignUpRequestDto,
+  UserTokenData,
   UserWithGrantDto,
 } from 'src/common/types/types';
 import { Injectable } from 'src/common/decorators/decorators';
@@ -14,15 +15,11 @@ import {
 } from 'src/common/exceptions/excpetions';
 import { ExceptionsMessages } from 'src/common/enums/enums';
 import { JwtService } from './jwt.service';
+import { GrantsService } from './grants.service';
 
 type UserValidationParams = {
   email: string;
   password: string;
-};
-
-type UserTokenData = {
-  id: number;
-  email: string;
 };
 
 @Injectable()
@@ -31,6 +28,7 @@ export class AuthService {
     private userService: UsersService,
     private jwtService: JwtService,
     private bcryptService: BcryptService,
+    private grantsService: GrantsService,
   ) {}
 
   private PASSWORD_SALT_ROUNDS = 5;
@@ -38,8 +36,9 @@ export class AuthService {
   async signIn(userDto: UserSignInRequestDto): Promise<UserSignInResponseDto> {
     const userInDb = await this.checkUser(userDto);
     const { id, name, surname, secondName, phone, email } = userInDb;
+    const grant = await this.grantsService.getUserGrant(id);
     return {
-      token: this.generateToken({ id, email }),
+      token: this.generateToken({ id, email, grant }),
       user: { id, name, surname, secondName, phone, email },
     };
   }
@@ -71,8 +70,10 @@ export class AuthService {
       email: newUserEmail,
     } = newUser;
 
+    const grant = await this.grantsService.getUserGrant(id);
+
     return {
-      token: this.generateToken({ id, email: newUserEmail }),
+      token: this.generateToken({ id, email: newUserEmail, grant }),
       user: { id, name, surname, secondName, phone, email: newUserEmail },
     };
   }
@@ -99,8 +100,8 @@ export class AuthService {
   }
 
   private generateToken(userData: UserTokenData): string {
-    const { id, email } = userData;
-    return this.jwtService.sign({ id, email });
+    const { id, email, grant } = userData;
+    return this.jwtService.sign({ id, email, grant });
   }
 
   private async checkUser(

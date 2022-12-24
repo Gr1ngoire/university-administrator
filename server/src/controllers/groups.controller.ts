@@ -16,9 +16,9 @@ import {
   UpdateGroupValidationDto,
 } from 'src/common/validation-dtos/validation-dtos';
 import { ApiPath, ExceptionsMessages, GroupsApi } from 'src/common/enums/enums';
-import { AdminRoleGuard, JwtAuthGuard } from 'src/guards/guards';
+import { AdminRoleGuard } from 'src/guards/guards';
 
-@UseGuards(JwtAuthGuard, AdminRoleGuard)
+@UseGuards(AdminRoleGuard)
 @Controller(ApiPath.GROUPS)
 export class GroupsController {
   constructor(private groupsService: GroupsService) {}

@@ -20,9 +20,9 @@ import {
 } from 'src/common/enums/enums';
 import { DisciplinesService } from 'src/services/services';
 import { NotFoundException } from 'src/common/exceptions/excpetions';
-import { AdminRoleGuard, JwtAuthGuard } from 'src/guards/guards';
+import { AdminRoleGuard } from 'src/guards/guards';
 
-@UseGuards(JwtAuthGuard, AdminRoleGuard)
+@UseGuards(AdminRoleGuard)
 @Controller(ApiPath.DISCIPLINES)
 export class DisciplinesController {
   constructor(private disciplinesService: DisciplinesService) {}

@@ -19,10 +19,10 @@ import {
   GetByIdParams,
   UpdateStudentValidatonDto,
 } from 'src/common/validation-dtos/validation-dtos';
-import { AdminRoleGuard, JwtAuthGuard } from 'src/guards/guards';
+import { AdminRoleGuard } from 'src/guards/guards';
 import { StudentsService } from 'src/services/services';
 
-@UseGuards(JwtAuthGuard, AdminRoleGuard)
+@UseGuards(AdminRoleGuard)
 @Controller(ApiPath.STUDENTS)
 export class StudentsController {
   constructor(private studentsService: StudentsService) {}

@@ -2,7 +2,10 @@ import { CanActivate, ExecutionContext } from '@nestjs/common';
 import { Observable } from 'rxjs';
 import { Injectable } from 'src/common/decorators/decorators';
 import { ENV, ExceptionsMessages, Grants } from 'src/common/enums/enums';
-import { UnauthorizedException } from 'src/common/exceptions/excpetions';
+import {
+  ForbiddenException,
+  UnauthorizedException,
+} from 'src/common/exceptions/excpetions';
 import { UserTokenData } from 'src/common/types/types';
 import { JwtService } from 'src/services/services';
 
@@ -35,9 +38,14 @@ export class AdminRoleGuard implements CanActivate {
         },
       );
 
-      return userData.grant === Grants.ADMIN;
+      if (!(userData.grant === Grants.ADMIN)) {
+        throw new ForbiddenException({
+          message: ExceptionsMessages.YOU_MUST_BE_ADMIN_TO_ACCESS_THIS_RESOURCE,
+        });
+      }
+
+      return true;
     } catch (e) {
-      console.log(e);
       throw new UnauthorizedException({
         message: ExceptionsMessages.USER_IS_UNUTHORIZED,
       });

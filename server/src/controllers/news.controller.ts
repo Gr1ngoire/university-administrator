@@ -15,7 +15,7 @@ import {
   GetByIdParams,
   UpdateNewsValidationDto,
 } from 'src/common/validation-dtos/validation-dtos';
-import { AdminRoleGuard, JwtAuthGuard } from 'src/guards/guards';
+import { AdminRoleGuard } from 'src/guards/guards';
 import { NewsService } from 'src/services/services';
 
 @Controller(ApiPath.NEWS)
@@ -27,7 +27,7 @@ export class NewsController {
     return this.newsService.getAll();
   }
 
-  @UseGuards(JwtAuthGuard, AdminRoleGuard)
+  @UseGuards(AdminRoleGuard)
   @Get(NewsApi.$ID)
   async getById(@Param() params: GetByIdParams) {
     const { id } = params;
@@ -40,13 +40,13 @@ export class NewsController {
     return news;
   }
 
-  @UseGuards(JwtAuthGuard, AdminRoleGuard)
+  @UseGuards(AdminRoleGuard)
   @Post(NewsApi.ROOT)
   create(@Body() news: CreateNewsValidationDto) {
     return this.newsService.create(news);
   }
 
-  @UseGuards(JwtAuthGuard, AdminRoleGuard)
+  @UseGuards(AdminRoleGuard)
   @Patch(NewsApi.$ID)
   update(
     @Param() params: GetByIdParams,
@@ -57,7 +57,7 @@ export class NewsController {
     return this.newsService.update(id, news);
   }
 
-  @UseGuards(JwtAuthGuard, AdminRoleGuard)
+  @UseGuards(AdminRoleGuard)
   @Delete(NewsApi.$ID)
   delete(@Param() params: GetByIdParams) {
     const { id } = params;

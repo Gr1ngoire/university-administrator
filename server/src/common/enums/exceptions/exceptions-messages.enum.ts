@@ -22,6 +22,7 @@ enum ExceptionsMessages {
   USER_WITH_SUCH_EMAIL_ALREADY_EXISTS = 'User with such email already exists',
   TEACHER_NOT_FOUND = 'Teacher not found',
   TEACHER_WITH_SUCH_EMAIL_ALREADY_EXISTS = 'Teacher with such email already exists',
+  YOU_MUST_BE_ADMIN_TO_ACCESS_THIS_RESOURCE = 'You must be admin to access this resource',
 }
 
 export { ExceptionsMessages };

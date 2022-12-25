@@ -128,7 +128,10 @@ export class GrantsService {
       throw new BadRequestException(ExceptionsMessages.GRANTER_DOES_NOT_EXIST);
     }
 
-    if (grant.granterId !== grantToUpdate.granterId) {
+    if (
+      grantToUpdate.granterId &&
+      grant.granterId !== grantToUpdate.granterId
+    ) {
       throw new BadRequestException(
         ExceptionsMessages.GRANT_CAN_BE_UPDATED_ONLY_BY_THE_ADMIN_IT_WAS_CREATED,
       );

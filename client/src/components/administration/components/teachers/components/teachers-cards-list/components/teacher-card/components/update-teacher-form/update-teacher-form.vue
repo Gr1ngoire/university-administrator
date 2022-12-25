@@ -51,6 +51,7 @@ const handleSubmit: (event: Event) => void = (event: Event) => {
   <form :class="styles.teacherUpdateForm" @submit="handleSubmit">
     <div :class="styles.teacherUpdateActionSectionWrapper">
       <div :class="styles.teacherEditFieldsWrapper">
+        <h1 :class="styles.teacherFullName">{{ fullName }}</h1>
         <div :class="styles.teacherEditSelectWrapper">
           <Select
             name="departmentId"

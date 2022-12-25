@@ -1,0 +1,29 @@
+.grantsDashboard {
+  @extend %centered-flex-column;
+
+  width: 100%;
+  background: $secondary-brand-color;
+}
+
+.createGrantForm {
+  width: 62.5%;
+  display: flex;
+  flex-direction: column;
+  margin-top: 30px;
+  padding: 10px;
+}
+
+.unableToCreateGrantInfoBlock {
+  @extend %centered-flex-column;
+  width: 80%;
+}
+
+.toggleGrantFormButtonWrapper {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.grantsSectionsSeparator {
+  width: 60%;
+  border-color: $primary-brand-color;
+}

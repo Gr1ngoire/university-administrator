@@ -1,0 +1,22 @@
+.grantsCardsListWrapper {
+  @extend %centered-flex-row;
+
+  width: 100%;
+  margin-top: 10px;
+}
+
+.grantsCardsList {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  width: 62.5%;
+  height: 100%;
+  margin-left: 15px;
+  overflow-y: scroll;
+  height: calc(100vh - 550px);
+}
+
+.grantsCardsListItem {
+  width: 100%;
+  margin-top: 10px;
+}

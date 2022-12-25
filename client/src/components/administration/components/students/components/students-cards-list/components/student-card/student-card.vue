@@ -3,7 +3,7 @@ import { Button } from "@/common/components/components";
 import type {
   GroupsGetAllItemResponseDto,
   ToggleState,
-  UsersGetAllItemResponseDto,
+  UsersGetAllItemAdminResponseDto,
 } from "@/common/types/types";
 import { reactive, useStore } from "@/hooks/hooks";
 import { AdministrationActions } from "@/store/actions";
@@ -15,7 +15,7 @@ type Props = {
   id: number;
   fullName: string;
   userId: number;
-  user: UsersGetAllItemResponseDto;
+  user: UsersGetAllItemAdminResponseDto;
   groupId: number;
   group: GroupsGetAllItemResponseDto;
 };

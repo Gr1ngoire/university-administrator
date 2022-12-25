@@ -65,7 +65,7 @@ enum Actions {
   CREATE_GRANT = "createGrant",
   UPDATE_GRANT = "updateGrant",
   DELETE_GRANT = "deleteGrant",
-  GET_ALL_GROUPS = "getAllGrants",
+  GET_ALL_GROUPS = "getAllGroups",
   CREATE_GROUP = "createGroup",
   UPDATE_GROUP = "updateGroup",
   DELETE_GROUP = "deleteGroup",

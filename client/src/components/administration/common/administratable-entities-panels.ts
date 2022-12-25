@@ -3,6 +3,7 @@ import {
   Departments,
   Disciplines,
   Faculties,
+  Grants,
   Groups,
   Schedules,
   Students,
@@ -56,6 +57,11 @@ const defaultAdministratableOptions: AdministratableOption[] = [
     id: 8,
     name: "Users",
     component: Users,
+  },
+  {
+    id: 9,
+    name: "Grants",
+    component: Grants,
   },
 ];
 

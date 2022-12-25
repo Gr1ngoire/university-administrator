@@ -27,6 +27,7 @@ store.dispatch(AdministrationActions.GET_ALL_GROUPS);
 store.dispatch(AdministrationActions.GET_ALL_STUDENTS);
 store.dispatch(AdministrationActions.GET_ALL_SCHEDULES);
 store.dispatch(AdministrationActions.GET_ALL_USERS);
+store.dispatch(AdministrationActions.GET_ALL_GRANTS);
 </script>
 
 <template>

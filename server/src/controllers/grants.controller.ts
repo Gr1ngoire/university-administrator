@@ -19,7 +19,7 @@ import { AdminRoleGuard } from 'src/guards/guards';
 import { GrantsService } from 'src/services/services';
 
 @UseGuards(AdminRoleGuard)
-@Controller(ApiPath.DEPARTMENTS)
+@Controller(ApiPath.GRANTS)
 export class GrantsController {
   constructor(private grantsService: GrantsService) {}
 

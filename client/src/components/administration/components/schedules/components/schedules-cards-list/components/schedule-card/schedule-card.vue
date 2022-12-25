@@ -63,7 +63,7 @@ const handleEditToggle: () => void = (): void => {
       :time="time"
       :classroom="classroom"
       :disciplineName="discipline.name"
-      :teacherName="`${teacher.name} ${teacher.surname}`"
+      :teacherName="`${teacher.user.name} ${teacher.user.surname}`"
       :groupName="group.name"
     />
     <div :class="styles.actionsSection">

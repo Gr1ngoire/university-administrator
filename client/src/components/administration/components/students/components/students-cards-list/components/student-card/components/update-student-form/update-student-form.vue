@@ -51,7 +51,7 @@ const handleSubmit: (event: Event) => void = (event: Event) => {
   <form :class="styles.studentUpdateForm" @submit="handleSubmit">
     <div :class="styles.studentUpdateActionSectionWrapper">
       <div :class="styles.studentEditFieldsWrapper">
-        <h1>{{ fullName }}</h1>
+        <h1 :class="styles.studentFullName">{{ fullName }}</h1>
         <div :class="styles.studentEditSelectWrapper">
           <Select
             name="groupId"

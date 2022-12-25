@@ -29,7 +29,10 @@ export class SchedulesService {
     return this.repository.findOne({
       where: { id },
       relations: {
-        teacher: true,
+        teacher: {
+          user: true,
+          department: true,
+        },
         discipline: true,
         group: {
           department: {
@@ -43,7 +46,10 @@ export class SchedulesService {
   async getAll(): Promise<SchedulesGetAllResponseDto> {
     const schedulesModels = await this.repository.find({
       relations: {
-        teacher: true,
+        teacher: {
+          user: true,
+          department: true,
+        },
         discipline: true,
         group: {
           department: {

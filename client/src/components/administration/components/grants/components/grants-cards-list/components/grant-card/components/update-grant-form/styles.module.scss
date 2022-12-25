@@ -1,4 +1,4 @@
-.teacherUpdateForm {
+.grantUpdateForm {
   @extend %centered-flex-row;
 
   margin-right: 10px;
@@ -7,30 +7,30 @@
   background: $primary-brand-color;
 }
 
-.teacherUpdateActionSectionWrapper {
+.grantUpdateActionSectionWrapper {
   @extend %centered-flex-column;
 
   width: 100%;
 }
 
-.teacherEditFieldsWrapper {
+.grantEditFieldsWrapper {
   @extend %centered-flex-column;
 
   width: 100%;
 }
 
-.teacherFullName {
+.grantedFullName {
   color: $secondary-brand-color;
 }
 
-.teacherEditSelectWrapper {
+.grantEditSelectWrapper {
   width: 95%;
   margin-top: 5px;
 }
 
-.teacherActionButtonsWrapper {
+.grantActionButtonsWrapper {
   width: 100%;
   display: flex;
   justify-content: space-between;
-  margin: 5px 0 10px 0;
+  margin: 15px 0 10px 0;
 }

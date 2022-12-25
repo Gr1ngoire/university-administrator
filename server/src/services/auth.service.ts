@@ -39,7 +39,7 @@ export class AuthService {
     const grant = await this.grantsService.getUserGrant(id);
     return {
       token: this.generateToken({ id, email, grant }),
-      user: { id, name, surname, secondName, phone, email },
+      user: { id, name, surname, secondName, phone, email, grant },
     };
   }
 
@@ -74,14 +74,22 @@ export class AuthService {
 
     return {
       token: this.generateToken({ id, email: newUserEmail, grant }),
-      user: { id, name, surname, secondName, phone, email: newUserEmail },
+      user: {
+        id,
+        name,
+        surname,
+        secondName,
+        phone,
+        email: newUserEmail,
+        grant,
+      },
     };
   }
 
   async getCurrentUser(bearerToken: string): Promise<UserWithGrantDto | null> {
     try {
       const [, token] = bearerToken.split(' ');
-      const { id } = this.jwtService.decode(token) as UserTokenData;
+      const { id, grant } = this.jwtService.decode(token) as UserTokenData;
       const {
         id: foundUserId,
         name,
@@ -91,7 +99,15 @@ export class AuthService {
         email,
       } = await this.userService.getById(id);
 
-      return { id: foundUserId, name, surname, secondName, phone, email };
+      return {
+        id: foundUserId,
+        name,
+        surname,
+        secondName,
+        phone,
+        email,
+        grant,
+      };
     } catch {
       throw new UnauthorizedException({
         message: ExceptionsMessages.USER_IS_UNUTHORIZED,

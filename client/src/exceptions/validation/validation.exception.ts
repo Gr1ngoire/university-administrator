@@ -1,14 +1,12 @@
-import { HttpError } from "../exceptions";
-
 type Constructor = {
   field: string;
   message?: string;
   cause?: unknown;
 };
 
-const DEFAULT_VALIDATION_ERROR_MESSAGE = "Validation error!";
+const DEFAULT_VALIDATION_ERROR_MESSAGE = "Validation error";
 
-class ValidationError extends HttpError {
+class ValidationError extends Error {
   public field: string;
   public cause: unknown;
 
@@ -17,7 +15,7 @@ class ValidationError extends HttpError {
     message = DEFAULT_VALIDATION_ERROR_MESSAGE,
     cause,
   }: Constructor) {
-    super({ message, cause });
+    super(message);
     this.field = field;
     this.cause = cause;
   }

@@ -3,22 +3,24 @@ import type {
   DepartmentsGetAllItemResponseDto,
   DisciplinesGetAllItemResponseDto,
   FacultiesGetAllItemResponseDto,
+  GrantsGetAllItemAdminResponseDto,
   GroupsGetAllItemResponseDto,
   SchedulesGetAllItemResponseDto,
   StudentsGetAllItemResponseDto,
   TeachersGetAllItemResponseDto,
-  UsersGetAllItemResponseDto,
+  UsersGetAllItemAdminResponseDto,
 } from "@/common/types/types";
 
 type State = {
   departments: DepartmentsGetAllItemResponseDto[];
   disciplines: DisciplinesGetAllItemResponseDto[];
   faculties: FacultiesGetAllItemResponseDto[];
+  grants: GrantsGetAllItemAdminResponseDto[];
   groups: GroupsGetAllItemResponseDto[];
   schedules: SchedulesGetAllItemResponseDto[];
   students: StudentsGetAllItemResponseDto[];
   teachers: TeachersGetAllItemResponseDto[];
-  users: UsersGetAllItemResponseDto[];
+  users: UsersGetAllItemAdminResponseDto[];
   dataStatus: DataStatus;
 };
 

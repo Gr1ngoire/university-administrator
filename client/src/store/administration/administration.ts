@@ -10,6 +10,7 @@ import {
   department as departmentsService,
   discipline as disciplinesService,
   faculty as facultiesService,
+  grant as grantsService,
   group as groupsService,
   schedule as schedulesService,
   student as studentsService,
@@ -40,9 +41,11 @@ import type {
   CreateTeacherRequestDto,
   TeachersGetAllItemResponseDto,
   UpdateTeacherRequestParams,
-  UsersGetAllItemResponseDto,
-  CreateUserRequestDto,
+  UsersGetAllItemAdminResponseDto,
   UpdateUserRequestParams,
+  GrantsGetAllItemAdminResponseDto,
+  CreateGrantRequestDto,
+  UpdateGrantRequestParams,
 } from "@/common/types/types";
 
 enum Actions {
@@ -58,7 +61,11 @@ enum Actions {
   CREATE_FACULTY = "createFaculty",
   UPDATE_FACULTY = "updateFaculty",
   DELETE_FACULTY = "deleteFaculty",
-  GET_ALL_GROUPS = "getAllGroups",
+  GET_ALL_GRANTS = "getAllGrants",
+  CREATE_GRANT = "createGrant",
+  UPDATE_GRANT = "updateGrant",
+  DELETE_GRANT = "deleteGrant",
+  GET_ALL_GROUPS = "getAllGrants",
   CREATE_GROUP = "createGroup",
   UPDATE_GROUP = "updateGroup",
   DELETE_GROUP = "deleteGroup",
@@ -75,7 +82,6 @@ enum Actions {
   UPDATE_TEACHER = "updateTeacher",
   DELETE_TEACHER = "deleteTeacher",
   GET_ALL_USERS = "getAllUsers",
-  CREATE_USER = "createUser",
   UPDATE_USER = "updateUser",
   DELETE_USER = "deleteUser",
 }
@@ -90,12 +96,17 @@ enum Mutations {
   PUSH_DISCIPLINE = "addDiscipline",
   UPDATE_DISCIPLINE = "updateDiscipline",
   REMOVE_DISCIPLINE = "removeDiscipline",
-  EMPTY_DISCIPLINES = "clearDisciplines",
+  CLEAR_DISCIPLINES = "clearDisciplines",
   ADD_FACULTIES = "addFaculties",
   ADD_FACULTY = "addFaculty",
   UPDATE_FACULTY = "updateFaculty",
   REMOVE_FACULTY = "removeFaculty",
   CLEAR_FACULTIES = "clearFaculties",
+  ADD_GRANTS = "addGrants",
+  ADD_GRANT = "addGrant",
+  UPDATE_GRANT = "updateGrant",
+  REMOVE_GRANT = "removeGrant",
+  CLEAR_GRANTS = "clearGrants",
   ADD_GROUPS = "addGroups",
   ADD_GROUP = "addGroup",
   UPDATE_GROUP = "updateGroup",
@@ -127,6 +138,7 @@ const state: State = {
   departments: [],
   disciplines: [],
   faculties: [],
+  grants: [],
   groups: [],
   schedules: [],
   students: [],
@@ -206,7 +218,7 @@ const mutations: MutationTree<State> = {
     );
   },
 
-  [Mutations.EMPTY_DISCIPLINES](state: State) {
+  [Mutations.CLEAR_DISCIPLINES](state: State) {
     state.disciplines = [];
   },
 
@@ -244,6 +256,40 @@ const mutations: MutationTree<State> = {
 
   [Mutations.CLEAR_FACULTIES](state: State) {
     state.faculties = [];
+  },
+
+  [Mutations.ADD_GRANTS](
+    state: State,
+    newGrants: GrantsGetAllItemAdminResponseDto[]
+  ) {
+    state.grants = [...state.grants, ...newGrants];
+  },
+
+  [Mutations.ADD_GRANT](
+    state: State,
+    newGrant: GrantsGetAllItemAdminResponseDto
+  ) {
+    state.grants.push(newGrant);
+  },
+
+  [Mutations.UPDATE_GRANT](
+    state: State,
+    grantToUpdate: GrantsGetAllItemAdminResponseDto
+  ) {
+    state.grants = state.grants.map((grant) => {
+      if (grant.id === grantToUpdate.id) {
+        return grantToUpdate;
+      }
+      return grant;
+    });
+  },
+
+  [Mutations.REMOVE_GRANT](state: State, grantId: number) {
+    state.grants = state.grants.filter((grant) => grant.id !== grantId);
+  },
+
+  [Mutations.CLEAR_GRANTS](state: State) {
+    state.grants = [];
   },
 
   [Mutations.ADD_GROUPS](
@@ -385,17 +431,16 @@ const mutations: MutationTree<State> = {
     state.teachers = [];
   },
 
-  [Mutations.ADD_USERS](state: State, newUsers: UsersGetAllItemResponseDto[]) {
+  [Mutations.ADD_USERS](
+    state: State,
+    newUsers: UsersGetAllItemAdminResponseDto[]
+  ) {
     state.users = [...state.users, ...newUsers];
-  },
-
-  [Mutations.ADD_USER](state: State, newUser: UsersGetAllItemResponseDto) {
-    state.users.push(newUser);
   },
 
   [Mutations.UPDATE_USER](
     state: State,
-    userToUpdate: UsersGetAllItemResponseDto
+    userToUpdate: UsersGetAllItemAdminResponseDto
   ) {
     state.users = state.users.map((user) => {
       if (user.id === userToUpdate.id) {
@@ -465,7 +510,7 @@ const actions: ActionTree<State, RootState> = {
     state.dataStatus = DataStatus.PENDING;
     const { items } = await disciplinesService.getAll();
 
-    commit(Mutations.EMPTY_DISCIPLINES);
+    commit(Mutations.CLEAR_DISCIPLINES);
     commit(Mutations.ADD_DISCIPLINES, items);
     state.dataStatus = DataStatus.FULFILLED;
   },
@@ -544,6 +589,48 @@ const actions: ActionTree<State, RootState> = {
     const id = await facultiesService.delete(facultyId);
 
     commit(Mutations.REMOVE_FACULTY, id);
+    state.dataStatus = DataStatus.FULFILLED;
+  },
+
+  async [Actions.GET_ALL_GRANTS]({ commit }: ActionContext<State, RootState>) {
+    state.dataStatus = DataStatus.PENDING;
+    const { items } = await grantsService.getAll();
+
+    commit(Mutations.CLEAR_GRANTS);
+    commit(Mutations.ADD_GRANTS, items);
+    state.dataStatus = DataStatus.FULFILLED;
+  },
+
+  async [Actions.CREATE_GRANT](
+    { commit }: ActionContext<State, RootState>,
+    grant: CreateGrantRequestDto
+  ) {
+    state.dataStatus = DataStatus.PENDING;
+    const newGrant = await grantsService.create(grant);
+
+    commit(Mutations.ADD_GRANT, newGrant);
+    state.dataStatus = DataStatus.FULFILLED;
+  },
+
+  async [Actions.UPDATE_GRANT](
+    { commit }: ActionContext<State, RootState>,
+    { id, payload }: UpdateGrantRequestParams
+  ) {
+    state.dataStatus = DataStatus.PENDING;
+    const updatedGrant = await grantsService.update(id, payload);
+
+    commit(Mutations.UPDATE_GRANT, updatedGrant);
+    state.dataStatus = DataStatus.FULFILLED;
+  },
+
+  async [Actions.DELETE_GRANT](
+    { commit }: ActionContext<State, RootState>,
+    grantId: number
+  ) {
+    state.dataStatus = DataStatus.PENDING;
+    const id = await grantsService.delete(grantId);
+
+    commit(Mutations.REMOVE_GRANT, id);
     state.dataStatus = DataStatus.FULFILLED;
   },
 
@@ -727,17 +814,6 @@ const actions: ActionTree<State, RootState> = {
 
     commit(Mutations.CLEAR_USERS);
     commit(Mutations.ADD_USERS, items);
-    state.dataStatus = DataStatus.FULFILLED;
-  },
-
-  async [Actions.CREATE_USER](
-    { commit }: ActionContext<State, RootState>,
-    user: CreateUserRequestDto
-  ) {
-    state.dataStatus = DataStatus.PENDING;
-    const newUser = await usersService.create(user);
-
-    commit(Mutations.ADD_USER, newUser);
     state.dataStatus = DataStatus.FULFILLED;
   },
 

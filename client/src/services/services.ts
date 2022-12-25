@@ -23,7 +23,7 @@ const auth = new Auth({ http, apiPrefix });
 const department = new Department({ http, apiPrefix });
 const discipline = new Discipline({ http, apiPrefix });
 const faculty = new Faculty({ http, apiPrefix });
-const grants = new Grant({ http, apiPrefix });
+const grant = new Grant({ http, apiPrefix });
 const group = new Group({ http, apiPrefix });
 const news = new News({ http, apiPrefix });
 const schedule = new Schedule({ http, apiPrefix });
@@ -36,7 +36,7 @@ export {
   department,
   discipline,
   faculty,
-  grants,
+  grant,
   group,
   news,
   schedule,

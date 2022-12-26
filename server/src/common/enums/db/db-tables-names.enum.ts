@@ -2,6 +2,7 @@ enum DbTablesNames {
   DEPARTMENTS = 'departments',
   DISCIPLINES = 'disciplines',
   FACULTIES = 'faculties',
+  FAQ = 'faq',
   GRANTS = 'grants',
   GROUPS = 'groups',
   NEWS = 'news',

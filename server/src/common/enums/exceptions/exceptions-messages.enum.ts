@@ -1,4 +1,5 @@
 enum ExceptionsMessages {
+  AUTHOR_NOT_FOUND = 'Author not found',
   DEPARTMENT_NOT_FOUND = 'Department not found',
   DEPARTMENT_DOES_NOT_EXIST = 'Department does not exist',
   DISCIPLINE_NOT_FOUD = 'Discipline not found',

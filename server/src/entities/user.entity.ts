@@ -9,6 +9,7 @@ import {
 } from 'src/common/decorators/decorators';
 import { DbTablesNames } from 'src/common/enums/enums';
 import { Student, Teacher } from './entities';
+import { FaqMessage } from './faq-message.entity';
 import { Grant } from './grant.entity';
 
 @Entity({ name: DbTablesNames.USERS })
@@ -60,4 +61,7 @@ export class User {
 
   @OneToMany(() => Grant, (grant) => grant.granter)
   grants: Grant[];
+
+  @OneToMany(() => FaqMessage, (faq) => faq.author)
+  faqMessages: FaqMessage[];
 }

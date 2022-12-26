@@ -4,6 +4,7 @@ export { AuthService } from './auth.service';
 export { DepartmentsService } from './departments.service';
 export { DisciplinesService } from './disciplines.service';
 export { FacultiesService } from './faculties.service';
+export { FaqMessagesService } from './faq-messages.service';
 export { GrantsService } from './grants.service';
 export { GroupsService } from './groups.service';
 export { JwtService } from './jwt.service';

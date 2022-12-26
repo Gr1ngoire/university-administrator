@@ -17,6 +17,11 @@ export {
   type UpdateFacultyRequestDto,
 } from "./faculties/faculties";
 export {
+  type CreateFaqMessageRequestDto,
+  type FaqMessagesGetAllItemResponseDto,
+  type FaqMessagesGetAllResponseDto,
+} from "./faq-messages/faq-messages";
+export {
   type CreateGrantRequestDto,
   type UpdateGrantRequestDto,
   type GrantsGetAllAdminResponseDto,

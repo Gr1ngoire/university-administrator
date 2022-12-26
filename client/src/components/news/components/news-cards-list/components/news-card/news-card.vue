@@ -1,6 +1,7 @@
 <script setup lang="ts">
-import { Button, Image } from "@/common/components/components";
 import type { ToggleState } from "@/common/types/types";
+import { Button, Image } from "@/common/components/components";
+import { isAdmin } from "@/common/helpers/helpers";
 import { reactive, useStore } from "@/hooks/hooks";
 import { NewsActions } from "@/store/actions";
 import { UpdateNewsForm } from "./components/components";
@@ -41,7 +42,7 @@ const handleEditToggle: () => void = (): void => {
     </div>
     <p :class="styles.newsTitle">{{ props.title }}</p>
     <p :class="styles.newsContent">{{ props.content }}</p>
-    <div :class="styles.actionsSection">
+    <div v-if="isAdmin()" :class="styles.actionsSection">
       <div :class="styles.actionWrapperButton">
         <Button type="click" action="edit" :onClick="handleEditToggle" />
       </div>

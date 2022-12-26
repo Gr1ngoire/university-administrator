@@ -1,0 +1,9 @@
+.app-enter-active,
+.app-leave-active {
+  transition: opacity 0.5s ease;
+}
+
+.app-enter-from,
+.app-leave-to {
+  opacity: 0;
+}

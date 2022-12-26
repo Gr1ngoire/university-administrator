@@ -1,4 +1,4 @@
-export { Injectable, Module, InjectRepository } from './common/common';
+export { Injectable, Inject, Module, InjectRepository } from './common/common';
 export {
   Body,
   Controller,
@@ -23,6 +23,7 @@ export {
 } from './entities/entities';
 export { UseGuards } from './guards/guards';
 export {
+  IsEnum,
   IsInt,
   IsString,
   IsEmail,

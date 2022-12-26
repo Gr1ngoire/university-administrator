@@ -1,6 +1,11 @@
+import { forwardRef } from '@nestjs/common';
 import { Repository } from 'typeorm';
-import { Injectable, InjectRepository } from 'src/common/decorators/decorators';
-import { ExceptionsMessages } from 'src/common/enums/enums';
+import {
+  Injectable,
+  InjectRepository,
+  Inject,
+} from 'src/common/decorators/decorators';
+import { ExceptionsMessages, Grants } from 'src/common/enums/enums';
 import {
   BadRequestException,
   NotFoundException,
@@ -12,10 +17,15 @@ import {
   UsersGetAllAdminResponseDto,
 } from 'src/common/types/types';
 import { User } from 'src/entities/entities';
+import { GrantsService } from './grants.service';
 
 @Injectable()
 export class UsersService {
-  constructor(@InjectRepository(User) private repository: Repository<User>) {}
+  constructor(
+    @InjectRepository(User) private repository: Repository<User>,
+    @Inject(forwardRef(() => GrantsService))
+    private grantsService: GrantsService,
+  ) {}
 
   getModelById(id: number): Promise<User | null> {
     return this.repository.findOne({
@@ -89,6 +99,12 @@ export class UsersService {
     const createdUser = await this.repository.save(newStudent);
     const { id, name, surname, secondName, phone, email, password } =
       createdUser;
+
+    await this.grantsService.create({
+      userId: id,
+      grant: Grants.USER,
+      granterId: null,
+    });
 
     return { id, name, surname, secondName, phone, email, password };
   }

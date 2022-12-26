@@ -5,6 +5,7 @@ import {
   Department,
   Discipline,
   Faculty,
+  Grant,
   Group,
   Schedule,
   Teacher,
@@ -14,6 +15,7 @@ import {
   DepartmentsService,
   DisciplinesService,
   FacultiesService,
+  GrantsService,
   GroupsService,
   JwtService,
   SchedulesService,
@@ -23,6 +25,7 @@ import {
 import { DepartmentsModule } from './departments.module';
 import { DisciplinesModule } from './disciplines.module';
 import { FacultiesModule } from './faculties.module';
+import { GrantsModule } from './grants.module';
 import { GroupsModule } from './groups.module';
 import { TeachersModule } from './teachers.module';
 import { UsersModule } from './users.module';
@@ -37,6 +40,7 @@ import { UsersModule } from './users.module';
       Department,
       Faculty,
       User,
+      Grant,
     ]),
     TeachersModule,
     DisciplinesModule,
@@ -44,6 +48,7 @@ import { UsersModule } from './users.module';
     DepartmentsModule,
     FacultiesModule,
     UsersModule,
+    GrantsModule,
   ],
   controllers: [SchedulesController],
   providers: [
@@ -54,6 +59,7 @@ import { UsersModule } from './users.module';
     DepartmentsService,
     FacultiesService,
     UsersService,
+    GrantsService,
     JwtService,
   ],
 })

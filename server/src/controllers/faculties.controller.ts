@@ -19,10 +19,10 @@ import {
   GetByIdParams,
   UpdateFacultyValidationDto,
 } from 'src/common/validation-dtos/validation-dtos';
-import { JwtAuthGuard } from 'src/guards/guards';
+import { AdminRoleGuard } from 'src/guards/guards';
 import { FacultiesService } from 'src/services/faculties.service';
 
-@UseGuards(JwtAuthGuard)
+@UseGuards(AdminRoleGuard)
 @Controller(ApiPath.FACULTIES)
 export class FacultiesController {
   constructor(private facultiesService: FacultiesService) {}

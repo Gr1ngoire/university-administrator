@@ -19,10 +19,10 @@ import {
   UpdateDepartmentValidationDto,
   GetByIdParams,
 } from 'src/common/validation-dtos/validation-dtos';
-import { JwtAuthGuard } from 'src/guards/guards';
+import { AdminRoleGuard } from 'src/guards/guards';
 import { DepartmentsService } from 'src/services/services';
 
-@UseGuards(JwtAuthGuard)
+@UseGuards(AdminRoleGuard)
 @Controller(ApiPath.DEPARTMENTS)
 export class DepartmentsController {
   constructor(private departmentsService: DepartmentsService) {}

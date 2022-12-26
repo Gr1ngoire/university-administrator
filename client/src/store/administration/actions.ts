@@ -11,6 +11,10 @@ enum Actions {
   CREATE_FACULTY = "administration/createFaculty",
   UPDATE_FACULTY = "administration/updateFaculty",
   DELETE_FACULTY = "administration/deleteFaculty",
+  GET_ALL_GRANTS = "administration/getAllGrants",
+  CREATE_GRANT = "administration/createGrant",
+  UPDATE_GRANT = "administration/updateGrant",
+  DELETE_GRANT = "administration/deleteGrant",
   GET_ALL_GROUPS = "administration/getAllGroups",
   CREATE_GROUP = "administration/createGroup",
   UPDATE_GROUP = "administration/updateGroup",
@@ -28,7 +32,6 @@ enum Actions {
   UPDATE_TEACHER = "administration/updateTeacher",
   DELETE_TEACHER = "administration/deleteTeacher",
   GET_ALL_USERS = "administration/getAllUsers",
-  CREATE_USER = "administration/createUser",
   UPDATE_USER = "administration/updateUser",
   DELETE_USER = "administration/deleteUser",
 }

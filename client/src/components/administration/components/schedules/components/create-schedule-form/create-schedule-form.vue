@@ -24,9 +24,9 @@ const disciplineSelectOptions = disciplines.value.map(({ id, name }) => ({
 }));
 
 const teachers = computed(() => store.state.administration.teachers);
-const teacherSelectOptions = teachers.value.map(({ id, name, surname }) => ({
+const teacherSelectOptions = teachers.value.map(({ id, user }) => ({
   id,
-  name: `${name} ${surname}`,
+  name: `${user.name} ${user.surname}`,
   value: String(id),
 }));
 

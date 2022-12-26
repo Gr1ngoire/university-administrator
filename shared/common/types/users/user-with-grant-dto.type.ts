@@ -1,3 +1,5 @@
+import type { Grants } from "shared/common/enums/enums";
+
 type UserWithGrantDto = {
   id: number;
   name: string;
@@ -5,7 +7,7 @@ type UserWithGrantDto = {
   secondName: string;
   phone: string;
   email: string;
-  // grant: admin || user
+  grant: Grants;
 };
 
 export { type UserWithGrantDto };

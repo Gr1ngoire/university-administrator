@@ -3,6 +3,7 @@ export { AuthApi } from './auth/auth';
 export { DepartmentsApi } from './departments/departments';
 export { DisciplinesApi } from './disciplines/disciplines';
 export { FacultiesApi } from './faculties/faculties';
+export { GrantsApi } from './grants/grants';
 export { GroupsApi } from './groups/groups';
 export { NewsApi } from './news/news';
 export { SchedulesApi } from './schedules/schedules';

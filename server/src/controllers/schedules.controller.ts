@@ -20,7 +20,7 @@ import {
   GetByIdParams,
   UpdateScheduleValidationDto,
 } from 'src/common/validation-dtos/validation-dtos';
-import { JwtAuthGuard } from 'src/guards/jwt-auth.guard';
+import { AdminRoleGuard } from 'src/guards/guards';
 
 @Controller(ApiPath.SCHEDULES)
 export class SchedulesController {
@@ -31,7 +31,7 @@ export class SchedulesController {
     return this.scheduleService.getAll();
   }
 
-  @UseGuards(JwtAuthGuard)
+  @UseGuards(AdminRoleGuard)
   @Get(SchedulesApi.$ID)
   async getById(@Param() params: GetByIdParams) {
     const { id } = params;
@@ -44,13 +44,13 @@ export class SchedulesController {
     return schedule;
   }
 
-  @UseGuards(JwtAuthGuard)
+  @UseGuards(AdminRoleGuard)
   @Post(SchedulesApi.ROOT)
   create(@Body() schedule: CreateScheduleValidationDto) {
     return this.scheduleService.create(schedule);
   }
 
-  @UseGuards(JwtAuthGuard)
+  @UseGuards(AdminRoleGuard)
   @Patch(SchedulesApi.$ID)
   update(
     @Param() params: GetByIdParams,
@@ -61,7 +61,7 @@ export class SchedulesController {
     return this.scheduleService.update(id, group);
   }
 
-  @UseGuards(JwtAuthGuard)
+  @UseGuards(AdminRoleGuard)
   @Delete(SchedulesApi.$ID)
   delete(@Param() params: GetByIdParams) {
     const { id } = params;

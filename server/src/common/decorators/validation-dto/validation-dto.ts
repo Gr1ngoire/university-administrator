@@ -1,5 +1,6 @@
 export { Type } from 'class-transformer';
 export {
+  IsEnum,
   IsInt,
   IsString,
   IsEmail,

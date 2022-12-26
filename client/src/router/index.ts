@@ -1,5 +1,5 @@
 import { AppRoutes } from "@/common/enums/enums";
-import { isAuthenticated } from "@/common/helpers/helpers";
+import { isAdmin, isAuthenticated } from "@/common/helpers/helpers";
 import { createRouter, createWebHistory } from "vue-router";
 import {
   Administration,
@@ -52,6 +52,16 @@ router.beforeEach((to) => {
         return { path: AppRoutes.SIGN_UP };
 
       case AppRoutes.FAQ:
+        return { path: AppRoutes.SIGN_UP };
+
+      default:
+        break;
+    }
+  }
+
+  if (isAuthenticated() && !isAdmin()) {
+    switch (to.path) {
+      case AppRoutes.ADMINISTRATION:
         return { path: AppRoutes.SIGN_UP };
 
       default:

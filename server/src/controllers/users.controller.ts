@@ -13,10 +13,10 @@ import {
   GetByIdParams,
   UpdateUserValidationDto,
 } from 'src/common/validation-dtos/validation-dtos';
-import { JwtAuthGuard } from 'src/guards/guards';
+import { AdminRoleGuard } from 'src/guards/guards';
 import { UsersService } from 'src/services/services';
 
-@UseGuards(JwtAuthGuard)
+@UseGuards(AdminRoleGuard)
 @Controller(ApiPath.USERS)
 export class UsersController {
   constructor(private usersService: UsersService) {}

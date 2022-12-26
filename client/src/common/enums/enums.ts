@@ -8,6 +8,7 @@ export {
 } from "./app/app";
 export { ValidationExceptionMessages } from "./exception/exception";
 export { ContentType } from "./file/file";
+export { Grants } from "./grants/grants";
 export {
   HttpCode,
   HttpHeader,

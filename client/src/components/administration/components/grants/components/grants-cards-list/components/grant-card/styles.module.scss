@@ -1,0 +1,45 @@
+.grantCard {
+  flex-wrap: wrap;
+  justify-content: space-between;
+  margin-right: 10px;
+  padding: 10px;
+  display: flex;
+
+  border-radius: 10px;
+  background: $primary-brand-color;
+}
+
+.grantFullName {
+  width: 70%;
+  color: $secondary-brand-color;
+}
+
+.grantEmail {
+  width: 70%;
+  color: $secondary-brand-color;
+}
+
+.grantPhone {
+  width: 70%;
+  color: $secondary-brand-color;
+}
+
+.grantGrantName {
+  width: 70%;
+  color: $secondary-brand-color;
+}
+
+.grantGrantedBy {
+  width: 70%;
+  color: $secondary-brand-color;
+}
+
+.actionsSection {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.actionWrapperButton {
+  margin: 5px;
+}

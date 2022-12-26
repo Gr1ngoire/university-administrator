@@ -78,7 +78,7 @@ erDiagram
   schedules }|--o| disciplines: discipline_id
   schedules }|--o| groups: group_id
   schedules {
-        int id PK
+      int id PK
       dateTime created_at
       dateTime updated_at
       varchar time
@@ -86,6 +86,17 @@ erDiagram
       int teacher_id FK
       int discipline_id FK
       int group_id FK
+  }
+
+  grants ||--o| users: user_id
+  grants }|--o| users: granter_id
+  grants {
+    int id PK
+    dateTime created_at
+    dateTime updated_at
+    int user_id FK
+    enum grant
+    int granter_id FK
   }
 
 ```

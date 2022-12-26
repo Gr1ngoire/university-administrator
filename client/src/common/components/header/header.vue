@@ -36,13 +36,21 @@ selectOptions.value.forEach((option) => {
   <div :class="styles.header">
     <div :class="styles.headerOptionsWrapper">
       <HeaderOption
-        v-for="{ id, link, isSelected, name, requiresAuth } in selectOptions"
+        v-for="{
+          id,
+          link,
+          isSelected,
+          name,
+          requiresAuth,
+          requiresAdmin,
+        } in selectOptions"
         :key="id"
         :link="link"
         :isSelected="isSelected"
         :name="name"
         :onClick="() => handleSelectionSwitch(id)"
         :requiresAuth="requiresAuth"
+        :requiresAdmin="requiresAdmin"
       />
     </div>
     <AuthSection :onClick="handleSignUpToggle" />

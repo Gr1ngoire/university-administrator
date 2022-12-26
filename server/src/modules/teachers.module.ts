@@ -1,5 +1,11 @@
 import { TypeOrmModule } from '@nestjs/typeorm';
-import { Department, Faculty, Teacher, User } from 'src/entities/entities';
+import {
+  Department,
+  Faculty,
+  Grant,
+  Teacher,
+  User,
+} from 'src/entities/entities';
 import { TeachersController } from 'src/controllers/controllers';
 import {
   DepartmentsService,
@@ -7,18 +13,21 @@ import {
   FacultiesService,
   UsersService,
   JwtService,
+  GrantsService,
 } from 'src/services/services';
 import { Module } from 'src/common/decorators/decorators';
 import { DepartmentsModule } from './departments.module';
 import { FacultiesModule } from './faculties.module';
 import { UsersModule } from './users.module';
+import { GrantsModule } from './grants.module';
 
 @Module({
   imports: [
-    TypeOrmModule.forFeature([Teacher, Department, Faculty, User]),
+    TypeOrmModule.forFeature([Teacher, Department, Faculty, User, Grant]),
     DepartmentsModule,
     FacultiesModule,
     UsersModule,
+    GrantsModule,
   ],
   controllers: [TeachersController],
   providers: [
@@ -26,6 +35,7 @@ import { UsersModule } from './users.module';
     DepartmentsService,
     FacultiesService,
     UsersService,
+    GrantsService,
     JwtService,
   ],
 })

@@ -6,6 +6,7 @@ type HeaderSelectOption = {
   name: string;
   isSelected: boolean;
   requiresAuth: boolean;
+  requiresAdmin: boolean;
 };
 
 const defaultSelectOptions: HeaderSelectOption[] = [
@@ -15,6 +16,7 @@ const defaultSelectOptions: HeaderSelectOption[] = [
     name: "Schedule",
     isSelected: false,
     requiresAuth: false,
+    requiresAdmin: false,
   },
   {
     id: 2,
@@ -22,6 +24,7 @@ const defaultSelectOptions: HeaderSelectOption[] = [
     name: "News",
     isSelected: false,
     requiresAuth: false,
+    requiresAdmin: false,
   },
   {
     id: 3,
@@ -29,6 +32,7 @@ const defaultSelectOptions: HeaderSelectOption[] = [
     name: "Faq",
     isSelected: false,
     requiresAuth: true,
+    requiresAdmin: false,
   },
   {
     id: 4,
@@ -36,6 +40,7 @@ const defaultSelectOptions: HeaderSelectOption[] = [
     name: "Administration",
     isSelected: false,
     requiresAuth: true,
+    requiresAdmin: true,
   },
 ];
 

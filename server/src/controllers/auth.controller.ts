@@ -1,3 +1,4 @@
+import { JwtAuthGuard } from 'src/guards/guards';
 import { ApiPath } from 'shared/common/enums/enums';
 import {
   Body,
@@ -5,6 +6,7 @@ import {
   Get,
   Headers,
   Post,
+  UseGuards,
 } from 'src/common/decorators/decorators';
 import { AuthApi } from 'src/common/enums/enums';
 import {
@@ -17,6 +19,7 @@ import { AuthService } from 'src/services/auth.service';
 export class AuthController {
   constructor(private authService: AuthService) {}
 
+  @UseGuards(JwtAuthGuard)
   @Get(AuthApi.CURRENT_USER)
   currentUser(@Headers('authorization') authHeader: string) {
     return this.authService.getCurrentUser(authHeader);

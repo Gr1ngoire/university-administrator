@@ -3,7 +3,7 @@ import { Button } from "@/common/components/components";
 import type {
   DepartmentsGetAllItemResponseDto,
   ToggleState,
-  UsersGetAllItemResponseDto,
+  UsersGetAllItemAdminResponseDto,
 } from "@/common/types/types";
 import { reactive, useStore } from "@/hooks/hooks";
 import { AdministrationActions } from "@/store/actions";
@@ -15,7 +15,7 @@ type Props = {
   id: number;
   fullName: string;
   userId: number;
-  user: UsersGetAllItemResponseDto;
+  user: UsersGetAllItemAdminResponseDto;
   departmentId: number;
   department: DepartmentsGetAllItemResponseDto;
 };
@@ -50,7 +50,7 @@ const handleEditToggle: () => void = (): void => {
     <p :class="styles.teacherFullName">Full name: {{ props.fullName }}</p>
     <p :class="styles.teacherEmail">Email: {{ props.user.email }}</p>
     <p :class="styles.teacherPhone">Phone: {{ props.user.phone }}</p>
-    <p :class="styles.studentDepartmentName">
+    <p :class="styles.teacherDepartmentName">
       Department: {{ props.department.name }}
     </p>
     <div :class="styles.actionsSection">

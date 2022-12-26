@@ -3,6 +3,9 @@ enum ExceptionsMessages {
   DEPARTMENT_DOES_NOT_EXIST = 'Department does not exist',
   DISCIPLINE_NOT_FOUD = 'Discipline not found',
   FACULTY_NOT_FOUND = 'Faculty not found',
+  GRANTER_DOES_NOT_EXIST = 'Granter does not exist',
+  GRANT_RECORD_NOT_FOUND = 'Grant record not found',
+  GRANT_CAN_BE_UPDATED_ONLY_BY_THE_ADMIN_IT_WAS_CREATED = 'Grant can be updated only by the admin it was created',
   GROUP_NOT_FOUND = 'Group not found',
   GROUP_DOES_NOT_EXIST = 'Group does not exist',
   INVALID_EMAIL_OR_PASSWORD = 'Invalid email or password',
@@ -12,12 +15,14 @@ enum ExceptionsMessages {
   STUDENT_NOT_FOUND = 'Student not found',
   SUCH_STUDENT_ALREADY_EXISTS = 'Such student already exists',
   SUCH_TEACHER_ALREADY_EXISTS = 'Such teacher already exists',
+  SUCH_USER_IS_ALREADY_GRANTED = 'Such user is already granted, please edit exisitng grant record',
   USER_IS_UNUTHORIZED = 'User is unuthorised',
   USER_NOT_FOUND = 'User not found',
   USER_DOES_NOT_EXIST = 'User does not exist',
   USER_WITH_SUCH_EMAIL_ALREADY_EXISTS = 'User with such email already exists',
   TEACHER_NOT_FOUND = 'Teacher not found',
   TEACHER_WITH_SUCH_EMAIL_ALREADY_EXISTS = 'Teacher with such email already exists',
+  YOU_MUST_BE_ADMIN_TO_ACCESS_THIS_RESOURCE = 'You must be admin to access this resource',
 }
 
 export { ExceptionsMessages };

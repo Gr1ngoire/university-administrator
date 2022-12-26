@@ -1,9 +1,5 @@
-import { ApiPath, ContentType, HttpMethod } from "@/common/enums/enums";
-import type {
-  UsersGetAllItemAdminResponseDto,
-  UsersGetAllAdminResponseDto,
-  UpdateUserRequestDto,
-} from "@/common/types/types";
+import { ApiPath, HttpMethod } from "@/common/enums/enums";
+import type { UsersGetAllAdminResponseDto } from "@/common/types/types";
 import type { Http as HttpService } from "../http/http.service";
 
 type Constructor = {
@@ -26,20 +22,6 @@ class User {
       `${this.apiPrefix}${ApiPath.USERS}`,
       {
         method: HttpMethod.GET,
-      }
-    );
-  }
-
-  public update(
-    id: number,
-    payload: UpdateUserRequestDto
-  ): Promise<UsersGetAllItemAdminResponseDto> {
-    return this.http.load<UsersGetAllItemAdminResponseDto>(
-      `${this.apiPrefix}${ApiPath.USERS}/${id}`,
-      {
-        method: HttpMethod.PATCH,
-        contentType: ContentType.JSON,
-        payload: new URLSearchParams(payload),
       }
     );
   }

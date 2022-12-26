@@ -1,4 +1,4 @@
-import type { Grants } from "shared/common/enums/enums";
+import type { Grants } from "../../enums/enums";
 
 type UserWithGrantDto = {
   id: number;

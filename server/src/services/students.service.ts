@@ -82,7 +82,7 @@ export class StudentsService {
     const userInDb = await this.usersService.getModelById(userId);
 
     if (!userInDb) {
-      throw new BadRequestException(ExceptionsMessages.USER_DOES_NOT_EXIST);
+      throw new BadRequestException(ExceptionsMessages.USER_NOT_FOUND);
     }
 
     const studentInDb = await this.repository.findOne({

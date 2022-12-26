@@ -6,7 +6,6 @@ import type {
 } from "@/common/types/types";
 import { reactive, useStore } from "@/hooks/hooks";
 import { AdministrationActions } from "@/store/actions";
-import { passwordEncoder } from "./common/common";
 import { UpdateUserForm } from "./components/components";
 
 import styles from "./styles.module.scss";
@@ -42,9 +41,6 @@ const handleEditToggle: () => void = (): void => {
     <p :class="styles.userSecondName">Second name: {{ user.secondName }}</p>
     <p :class="styles.userPhone">Phone: {{ user.phone }}</p>
     <p :class="styles.userEmail">Email: {{ user.email }}</p>
-    <p :class="styles.userPassword">
-      Password: {{ passwordEncoder(user.password) }}
-    </p>
     <div :class="styles.actionsSection">
       <div :class="styles.actionWrapperButton">
         <Button type="click" action="edit" :onClick="handleEditToggle" />

@@ -5,10 +5,12 @@ import {
   HttpMethod,
 } from "@/common/enums/enums";
 import type {
+  UsersGetAllItemAdminResponseDto,
   UserSignInRequestDto,
   UserSignInResponseDto,
   UserSignUpRequestDto,
   UserSignUpResponseDto,
+  UpdateUserRequestDto,
   UserWithGrantDto,
 } from "@/common/types/types";
 import type { Http as HttpService } from "../http/http.service";
@@ -58,6 +60,20 @@ class Auth {
       {
         method: HttpMethod.GET,
         contentType: ContentType.JSON,
+      }
+    );
+  }
+
+  public updateUser(
+    id: number,
+    payload: UpdateUserRequestDto
+  ): Promise<UsersGetAllItemAdminResponseDto> {
+    return this.#http.load<UsersGetAllItemAdminResponseDto>(
+      `${this.#apiPrefix}${ApiPath.AUTH}${AuthApi.EDIT_USER}/${id}`,
+      {
+        method: HttpMethod.PATCH,
+        contentType: ContentType.JSON,
+        payload: new URLSearchParams(payload),
       }
     );
   }

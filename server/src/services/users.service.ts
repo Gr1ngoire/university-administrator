@@ -33,9 +33,7 @@ export class UsersService {
     });
   }
 
-  async getByEmail(
-    emailToLookFor: string,
-  ): Promise<UsersGetAllItemAdminResponseDto | null> {
+  async getByEmail(emailToLookFor: string): Promise<User | null> {
     const userInDb = await this.repository.findOne({
       where: { email: emailToLookFor },
     });
@@ -44,16 +42,7 @@ export class UsersService {
       return null;
     }
 
-    const { id, name, surname, secondName, phone, email, password } = userInDb;
-    return {
-      id,
-      name,
-      surname,
-      secondName,
-      phone,
-      email,
-      password,
-    };
+    return userInDb;
   }
 
   async getAll(): Promise<UsersGetAllAdminResponseDto> {
@@ -61,14 +50,13 @@ export class UsersService {
 
     return {
       items: usersModels.map(
-        ({ id, name, surname, secondName, phone, email, password }) => ({
+        ({ id, name, surname, secondName, phone, email }) => ({
           id,
           name,
           surname,
           secondName,
           phone,
           email,
-          password,
         }),
       ),
     };
@@ -79,8 +67,8 @@ export class UsersService {
   ): Promise<UsersGetAllItemAdminResponseDto | null> {
     const user = await this.getModelById(idToFind);
 
-    const { id, name, surname, secondName, phone, email, password } = user;
-    return { id, name, surname, secondName, phone, email, password };
+    const { id, name, surname, secondName, phone, email } = user;
+    return { id, name, surname, secondName, phone, email };
   }
 
   async create(
@@ -94,11 +82,10 @@ export class UsersService {
       );
     }
 
-    const newStudent = this.repository.create(user);
+    const newUser = this.repository.create(user);
 
-    const createdUser = await this.repository.save(newStudent);
-    const { id, name, surname, secondName, phone, email, password } =
-      createdUser;
+    const createdUser = await this.repository.save(newUser);
+    const { id, name, surname, secondName, phone, email } = createdUser;
 
     await this.grantsService.create({
       userId: id,
@@ -106,7 +93,7 @@ export class UsersService {
       granterId: null,
     });
 
-    return { id, name, surname, secondName, phone, email, password };
+    return { id, name, surname, secondName, phone, email };
   }
 
   async update(

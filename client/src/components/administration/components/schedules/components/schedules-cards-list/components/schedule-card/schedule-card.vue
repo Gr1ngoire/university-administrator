@@ -1,9 +1,7 @@
 <script setup lang="ts">
 import { Button, ScheduleDisplayCard } from "@/common/components/components";
 import type {
-  DisciplinesGetAllItemResponseDto,
-  GroupsGetAllItemResponseDto,
-  TeachersGetAllItemResponseDto,
+  SchedulesGetAllItemResponseDto,
   ToggleState,
 } from "@/common/types/types";
 import { reactive, useStore } from "@/hooks/hooks";
@@ -13,15 +11,7 @@ import { UpdateScheduleForm } from "./components/components";
 import styles from "./styles.module.scss";
 
 type Props = {
-  id: number;
-  time: string;
-  classroom: string;
-  disciplineId: number;
-  discipline: DisciplinesGetAllItemResponseDto;
-  teacherId: number;
-  teacher: TeachersGetAllItemResponseDto;
-  groupId: number;
-  group: GroupsGetAllItemResponseDto;
+  scheduleRecord: SchedulesGetAllItemResponseDto;
 };
 
 const props = defineProps<Props>();
@@ -29,7 +19,10 @@ const props = defineProps<Props>();
 const store = useStore();
 
 const handleDeletion = (): void => {
-  store.dispatch(AdministrationActions.DELETE_SCHEDULE, props.id);
+  store.dispatch(
+    AdministrationActions.DELETE_SCHEDULE,
+    props.scheduleRecord.id
+  );
 };
 
 const initialFormShowState: ToggleState = { state: false };
@@ -42,17 +35,7 @@ const handleEditToggle: () => void = (): void => {
 <template>
   <UpdateScheduleForm
     v-if="scheduleUpdateFormShowState.state"
-    :initialSchedule="{
-      id,
-      time,
-      classroom,
-      disciplineId,
-      discipline,
-      teacherId,
-      teacher,
-      groupId,
-      group,
-    }"
+    :initialSchedule="scheduleRecord"
     :onToggle="handleEditToggle"
   />
   <div
@@ -60,11 +43,11 @@ const handleEditToggle: () => void = (): void => {
     :class="styles.scheduleCard"
   >
     <ScheduleDisplayCard
-      :time="time"
-      :classroom="classroom"
-      :disciplineName="discipline.name"
-      :teacherName="`${teacher.user.name} ${teacher.user.surname}`"
-      :groupName="group.name"
+      :time="scheduleRecord.time"
+      :classroom="scheduleRecord.classroom"
+      :disciplineName="scheduleRecord.discipline.name"
+      :teacherName="`${scheduleRecord.teacher.user.name} ${scheduleRecord.teacher.user.surname}`"
+      :groupName="scheduleRecord.group.name"
     />
     <div :class="styles.actionsSection">
       <div :class="styles.actionWrapperButton">

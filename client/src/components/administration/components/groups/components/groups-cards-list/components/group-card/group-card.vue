@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { Button } from "@/common/components/components";
 import type {
-  DepartmentsGetAllItemResponseDto,
+  GroupsGetAllItemResponseDto,
   ToggleState,
 } from "@/common/types/types";
 import { reactive, useStore } from "@/hooks/hooks";
@@ -11,11 +11,7 @@ import { UpdateGroupForm } from "./components/components";
 import styles from "./styles.module.scss";
 
 type Props = {
-  id: number;
-  name: string;
-  course: number;
-  departmentId: number;
-  department: DepartmentsGetAllItemResponseDto;
+  group: GroupsGetAllItemResponseDto;
 };
 
 const props = defineProps<Props>();
@@ -23,7 +19,7 @@ const props = defineProps<Props>();
 const store = useStore();
 
 const handleDeletion = (): void => {
-  store.dispatch(AdministrationActions.DELETE_GROUP, props.id);
+  store.dispatch(AdministrationActions.DELETE_GROUP, props.group.id);
 };
 
 const initialFormShowState: ToggleState = { state: false };
@@ -36,14 +32,14 @@ const handleEditToggle: () => void = (): void => {
 <template>
   <UpdateGroupForm
     v-if="groupUpdateFormShowState.state"
-    :initialGroup="{ id, name, course, departmentId, department }"
+    :initialGroup="group"
     :onToggle="handleEditToggle"
   />
   <div v-else-if="!groupUpdateFormShowState.state" :class="styles.groupCard">
-    <p :class="styles.groupName">Name: {{ props.name }}</p>
-    <p :class="styles.groupCourse">Course: {{ props.course }}</p>
+    <p :class="styles.groupName">Name: {{ group.name }}</p>
+    <p :class="styles.groupCourse">Course: {{ group.course }}</p>
     <p :class="styles.groupDepartmentName">
-      Department: {{ props.department.name }}
+      Department: {{ group.department.name }}
     </p>
     <div :class="styles.actionsSection">
       <div :class="styles.actionWrapperButton">

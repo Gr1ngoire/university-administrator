@@ -1,5 +1,8 @@
 <script setup lang="ts">
-import type { ToggleState } from "@/common/types/types";
+import type {
+  NewsGetAllItemResponseDto,
+  ToggleState,
+} from "@/common/types/types";
 import { Button, Image } from "@/common/components/components";
 import { isAdmin } from "@/common/helpers/helpers";
 import { reactive, useStore } from "@/hooks/hooks";
@@ -9,10 +12,7 @@ import { UpdateNewsForm } from "./components/components";
 import styles from "./styles.module.scss";
 
 type Props = {
-  id: number;
-  title: string;
-  content: string;
-  imgUrl: string | null;
+  news: NewsGetAllItemResponseDto;
 };
 
 const props = defineProps<Props>();
@@ -20,7 +20,7 @@ const props = defineProps<Props>();
 const store = useStore();
 
 const handleDeletion = (): void => {
-  store.dispatch(NewsActions.DELETE_NEWS, props.id);
+  store.dispatch(NewsActions.DELETE_NEWS, props.news.id);
 };
 
 const initialFormShowState: ToggleState = { state: false };
@@ -33,15 +33,15 @@ const handleEditToggle: () => void = (): void => {
 <template>
   <UpdateNewsForm
     v-if="newsUpdateFormShowState.state"
-    :initialNews="{ id, title, content, imgUrl }"
+    :initialNews="news"
     :onToggle="handleEditToggle"
   />
   <div v-else-if="!newsUpdateFormShowState.state" :class="styles.newsCard">
     <div :class="styles.newsImageWrapper">
-      <Image v-if="imgUrl" :imgPath="imgUrl" />
+      <Image v-if="news.imgUrl" :imgPath="news.imgUrl" />
     </div>
-    <p :class="styles.newsTitle">{{ props.title }}</p>
-    <p :class="styles.newsContent">{{ props.content }}</p>
+    <p :class="styles.newsTitle">{{ news.title }}</p>
+    <p :class="styles.newsContent">{{ news.content }}</p>
     <div v-if="isAdmin()" :class="styles.actionsSection">
       <div :class="styles.actionWrapperButton">
         <Button type="click" action="edit" :onClick="handleEditToggle" />

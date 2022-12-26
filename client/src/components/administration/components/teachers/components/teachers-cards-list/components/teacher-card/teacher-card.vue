@@ -1,9 +1,8 @@
 <script setup lang="ts">
 import { Button } from "@/common/components/components";
 import type {
-  DepartmentsGetAllItemResponseDto,
+  TeachersGetAllItemResponseDto,
   ToggleState,
-  UsersGetAllItemAdminResponseDto,
 } from "@/common/types/types";
 import { reactive, useStore } from "@/hooks/hooks";
 import { AdministrationActions } from "@/store/actions";
@@ -12,12 +11,7 @@ import { UpdateTeacherForm } from "./components/components";
 import styles from "./styles.module.scss";
 
 type Props = {
-  id: number;
-  fullName: string;
-  userId: number;
-  user: UsersGetAllItemAdminResponseDto;
-  departmentId: number;
-  department: DepartmentsGetAllItemResponseDto;
+  teacher: TeachersGetAllItemResponseDto;
 };
 
 const props = defineProps<Props>();
@@ -25,7 +19,7 @@ const props = defineProps<Props>();
 const store = useStore();
 
 const handleDeletion = (): void => {
-  store.dispatch(AdministrationActions.DELETE_TEACHER, props.id);
+  store.dispatch(AdministrationActions.DELETE_TEACHER, props.teacher.id);
 };
 
 const initialFormShowState: ToggleState = { state: false };
@@ -38,20 +32,23 @@ const handleEditToggle: () => void = (): void => {
 <template>
   <UpdateTeacherForm
     v-if="teacherUpdateFormShowState.state"
-    :id="id"
-    :fullName="fullName"
-    :departmentId="departmentId"
+    :initialTeacher="teacher"
     :onToggle="handleEditToggle"
   />
   <div
     v-else-if="!teacherUpdateFormShowState.state"
     :class="styles.teacherCard"
   >
-    <p :class="styles.teacherFullName">Full name: {{ props.fullName }}</p>
-    <p :class="styles.teacherEmail">Email: {{ props.user.email }}</p>
-    <p :class="styles.teacherPhone">Phone: {{ props.user.phone }}</p>
+    <p :class="styles.teacherFullName">
+      Full name:
+      {{
+        `${teacher.user.surname} ${teacher.user.name} ${teacher.user.secondName}`
+      }}
+    </p>
+    <p :class="styles.teacherEmail">Email: {{ teacher.user.email }}</p>
+    <p :class="styles.teacherPhone">Phone: {{ teacher.user.phone }}</p>
     <p :class="styles.teacherDepartmentName">
-      Department: {{ props.department.name }}
+      Department: {{ teacher.department.name }}
     </p>
     <div :class="styles.actionsSection">
       <div :class="styles.actionWrapperButton">

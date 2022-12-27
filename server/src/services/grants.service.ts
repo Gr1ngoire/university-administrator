@@ -85,7 +85,7 @@ export class GrantsService {
     const userToGrant = await this.usersService.getModelById(userId);
 
     if (!userToGrant) {
-      throw new BadRequestException(ExceptionsMessages.USER_DOES_NOT_EXIST);
+      throw new BadRequestException(ExceptionsMessages.USER_NOT_FOUND);
     }
 
     const granterInDb = await this.usersService.getModelById(granterId);

@@ -2,6 +2,7 @@ import { DataSource } from 'typeorm';
 import {
   Department,
   Discipline,
+  FaqMessage,
   Faculty,
   Grant,
   Group,
@@ -28,6 +29,7 @@ export default new DataSource({
   entities: [
     Department,
     Discipline,
+    FaqMessage,
     Faculty,
     Grant,
     Group,

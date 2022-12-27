@@ -8,11 +8,11 @@ type Props = {
   type: InputType;
   name: string;
   errorMessage?: string;
-  onInput: (event: Event) => void;
   value?: string;
   nameToDisplay?: string;
   max?: number;
   min?: number;
+  onInput: (event: Event) => void;
 };
 
 const props = defineProps<Props>();

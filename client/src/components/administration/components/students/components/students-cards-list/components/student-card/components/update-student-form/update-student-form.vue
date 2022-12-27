@@ -1,15 +1,16 @@
 <script lang="ts" setup>
 import { Button, Select } from "@/common/components/components";
-import type { UpdateStudentRequestDto } from "@/common/types/types";
+import type {
+  StudentsGetAllItemResponseDto,
+  UpdateStudentRequestDto,
+} from "@/common/types/types";
 import { computed, useStore } from "@/hooks/hooks";
 import { AdministrationActions } from "@/store/actions";
 
 import styles from "./styles.module.scss";
 
 type Props = {
-  id: number;
-  fullName: string;
-  groupId: number;
+  initialStudent: StudentsGetAllItemResponseDto;
   onToggle: () => void;
 };
 
@@ -24,7 +25,7 @@ const groupSelectOptions = groups.value.map(({ id, name }) => ({
 }));
 
 let studentUpdateFormState: UpdateStudentRequestDto = {
-  groupId: props.groupId,
+  groupId: props.initialStudent.groupId,
 };
 
 const handleStudentPropertyChange: (event: Event) => void = (
@@ -40,7 +41,7 @@ const handleStudentPropertyChange: (event: Event) => void = (
 const handleSubmit: (event: Event) => void = (event: Event) => {
   event.preventDefault();
   store.dispatch(AdministrationActions.UPDATE_STUDENT, {
-    id: props.id,
+    id: props.initialStudent.id,
     payload: studentUpdateFormState,
   });
   props.onToggle();
@@ -51,14 +52,18 @@ const handleSubmit: (event: Event) => void = (event: Event) => {
   <form :class="styles.studentUpdateForm" @submit="handleSubmit">
     <div :class="styles.studentUpdateActionSectionWrapper">
       <div :class="styles.studentEditFieldsWrapper">
-        <h1 :class="styles.studentFullName">{{ fullName }}</h1>
+        <h1 :class="styles.studentFullName">
+          {{
+            `${initialStudent.user.surname} ${initialStudent.user.name} ${initialStudent.user.secondName}`
+          }}
+        </h1>
         <div :class="styles.studentEditSelectWrapper">
           <Select
             name="groupId"
             nameToDisplay="Group"
             :options="groupSelectOptions"
             :onSelect="handleStudentPropertyChange"
-            :defaultOptionId="groupId"
+            :defaultOptionId="initialStudent.groupId"
           />
         </div>
         <div :class="styles.studentActionButtonsWrapper">

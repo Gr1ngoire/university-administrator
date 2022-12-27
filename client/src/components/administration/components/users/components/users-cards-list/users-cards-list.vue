@@ -1,6 +1,7 @@
 <script lang="ts" setup>
 import type { UsersGetAllItemAdminResponseDto } from "@/common/types/types";
 import { UserCard } from "./components/components";
+
 import styles from "./styles.module.scss";
 
 type Props = {
@@ -14,27 +15,11 @@ defineProps<Props>();
   <div :class="styles.usersCardsListWrapper">
     <ul :class="styles.usersCardsList">
       <li
-        v-for="{
-          id,
-          name,
-          surname,
-          secondName,
-          phone,
-          email,
-          password,
-        } in cards"
-        :key="id"
+        v-for="card in cards"
+        :key="card.id"
         :class="styles.usersCardsListItem"
       >
-        <UserCard
-          :id="id"
-          :name="name"
-          :surname="surname"
-          :secondName="secondName"
-          :phone="phone"
-          :email="email"
-          :password="password"
-        />
+        <UserCard :user="card" />
       </li>
     </ul>
   </div>

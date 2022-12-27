@@ -12,13 +12,6 @@ defineProps<Props>();
 
 <template>
   <div :class="styles.newsCardsListWrapper">
-    <NewsCard
-      v-for="{ id, title, content, imgUrl } in cards"
-      :key="id"
-      :id="id"
-      :title="title"
-      :content="content"
-      :imgUrl="imgUrl"
-    />
+    <NewsCard v-for="card in cards" :key="card.id" :news="card" />
   </div>
 </template>

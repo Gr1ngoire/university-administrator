@@ -1,4 +1,5 @@
 enum ExceptionsMessages {
+  AUTHOR_NOT_FOUND = 'Author not found',
   DEPARTMENT_NOT_FOUND = 'Department not found',
   DEPARTMENT_DOES_NOT_EXIST = 'Department does not exist',
   DISCIPLINE_NOT_FOUD = 'Discipline not found',
@@ -18,7 +19,6 @@ enum ExceptionsMessages {
   SUCH_USER_IS_ALREADY_GRANTED = 'Such user is already granted, please edit exisitng grant record',
   USER_IS_UNUTHORIZED = 'User is unuthorised',
   USER_NOT_FOUND = 'User not found',
-  USER_DOES_NOT_EXIST = 'User does not exist',
   USER_WITH_SUCH_EMAIL_ALREADY_EXISTS = 'User with such email already exists',
   TEACHER_NOT_FOUND = 'Teacher not found',
   TEACHER_WITH_SUCH_EMAIL_ALREADY_EXISTS = 'Teacher with such email already exists',

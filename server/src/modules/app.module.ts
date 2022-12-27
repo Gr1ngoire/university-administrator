@@ -5,6 +5,7 @@ import { AppController } from 'src/controllers/controllers';
 import {
   Department,
   Discipline,
+  FaqMessage,
   Faculty,
   Grant,
   Group,
@@ -19,6 +20,7 @@ import { AuthModule } from './auth.module';
 import { DepartmentsModule } from './departments.module';
 import { DisciplinesModule } from './disciplines.module';
 import { FacultiesModule } from './faculties.module';
+import { FaqMessagesModule } from './faq-messages.module';
 import { GroupsModule } from './groups.module';
 import { NewsModule } from './news.module';
 import { SchedulesModule } from './schedules.module';
@@ -34,6 +36,7 @@ const { TYPE, HOST, PORT, USERNAME, PASSWORD, NAME } = ENV.DB;
       entities: [
         Department,
         Discipline,
+        FaqMessage,
         Faculty,
         Grant,
         Group,
@@ -56,6 +59,7 @@ const { TYPE, HOST, PORT, USERNAME, PASSWORD, NAME } = ENV.DB;
     AuthModule,
     DepartmentsModule,
     DisciplinesModule,
+    FaqMessagesModule,
     FacultiesModule,
     GroupsModule,
     NewsModule,

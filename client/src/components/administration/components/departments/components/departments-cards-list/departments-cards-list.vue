@@ -14,17 +14,11 @@ defineProps<Props>();
   <div :class="styles.departmentsCardsListWrapper">
     <ul :class="styles.departmentsCardsList">
       <li
-        v-for="{ id, name, shortName, facultyId, faculty } in cards"
-        :key="id"
+        v-for="card in cards"
+        :key="card.id"
         :class="styles.departmentsCardsListItem"
       >
-        <DepartmentCard
-          :id="id"
-          :name="name"
-          :shortName="shortName"
-          :facultyId="facultyId"
-          :faculty="faculty"
-        />
+        <DepartmentCard :department="card" />
       </li>
     </ul>
   </div>

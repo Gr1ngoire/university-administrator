@@ -26,7 +26,7 @@ let userUpdateFormState: UpdateUserRequestDto = {
   secondName: props.initialUser.secondName,
   phone: props.initialUser.phone,
   email: props.initialUser.email,
-  password: props.initialUser.password,
+  password: "",
 };
 
 const userUpdateValidationState: Record<string, string> = reactive<
@@ -129,8 +129,9 @@ const handleSubmit: (event: Event) => void = (event: Event) => {
         </div>
         <div :class="styles.userEditInputWrapper">
           <Input
-            type="text"
+            type="password"
             name="password"
+            nameToDisplay="New password"
             :value="userUpdateFormState.password"
             :onInput="handleUserPropertyChange"
             :errorMessage="userUpdateValidationState.password"

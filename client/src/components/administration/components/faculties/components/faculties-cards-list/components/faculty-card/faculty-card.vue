@@ -1,6 +1,9 @@
 <script setup lang="ts">
 import { Button } from "@/common/components/components";
-import type { ToggleState } from "@/common/types/types";
+import type {
+  FacultiesGetAllItemResponseDto,
+  ToggleState,
+} from "@/common/types/types";
 import { reactive, useStore } from "@/hooks/hooks";
 import { AdministrationActions } from "@/store/actions";
 import { UpdateFacultyForm } from "./components/components";
@@ -8,9 +11,7 @@ import { UpdateFacultyForm } from "./components/components";
 import styles from "./styles.module.scss";
 
 type Props = {
-  id: number;
-  name: string;
-  shortName: string;
+  faculty: FacultiesGetAllItemResponseDto;
 };
 
 const props = defineProps<Props>();
@@ -18,7 +19,7 @@ const props = defineProps<Props>();
 const store = useStore();
 
 const handleDeletion = (): void => {
-  store.dispatch(AdministrationActions.DELETE_FACULTY, props.id);
+  store.dispatch(AdministrationActions.DELETE_FACULTY, props.faculty.id);
 };
 
 const initialFormShowState: ToggleState = { state: false };
@@ -31,15 +32,15 @@ const handleEditToggle: () => void = (): void => {
 <template>
   <UpdateFacultyForm
     v-if="facultyUpdateFormShowState.state"
-    :initialFaculty="{ id, name, shortName }"
+    :initialFaculty="faculty"
     :onToggle="handleEditToggle"
   />
   <div
     v-else-if="!facultyUpdateFormShowState.state"
     :class="styles.facultyCard"
   >
-    <p :class="styles.facultyShortName">Short name: {{ props.shortName }}</p>
-    <p :class="styles.facultyName">Name: {{ props.name }}</p>
+    <p :class="styles.facultyShortName">Short name: {{ faculty.shortName }}</p>
+    <p :class="styles.facultyName">Name: {{ faculty.name }}</p>
     <div :class="styles.actionsSection">
       <div :class="styles.actionWrapperButton">
         <Button type="click" action="edit" :onClick="handleEditToggle" />

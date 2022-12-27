@@ -99,4 +99,13 @@ erDiagram
     int granter_id FK
   }
 
+  faq_messages }|--o| users: author_id
+  faq_messages {
+    int id PK
+    dateTime created_at
+    dateTime updated_at
+    varchar message
+    int author_id FK
+  }
+
 ```

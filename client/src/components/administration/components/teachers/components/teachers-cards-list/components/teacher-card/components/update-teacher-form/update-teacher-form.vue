@@ -1,15 +1,16 @@
 <script lang="ts" setup>
 import { Button, Select } from "@/common/components/components";
-import type { UpdateTeacherRequestDto } from "@/common/types/types";
+import type {
+  TeachersGetAllItemResponseDto,
+  UpdateTeacherRequestDto,
+} from "@/common/types/types";
 import { computed, useStore } from "@/hooks/hooks";
 import { AdministrationActions } from "@/store/actions";
 
 import styles from "./styles.module.scss";
 
 type Props = {
-  id: number;
-  fullName: string;
-  departmentId: number;
+  initialTeacher: TeachersGetAllItemResponseDto;
   onToggle: () => void;
 };
 
@@ -24,7 +25,7 @@ const departmentSelectOptions = departments.value.map(({ id, name }) => ({
 }));
 
 let teacherUpdateFormState: UpdateTeacherRequestDto = {
-  departmentId: props.departmentId,
+  departmentId: props.initialTeacher.departmentId,
 };
 
 const handleTeacherPropertyChange: (event: Event) => void = (
@@ -40,7 +41,7 @@ const handleTeacherPropertyChange: (event: Event) => void = (
 const handleSubmit: (event: Event) => void = (event: Event) => {
   event.preventDefault();
   store.dispatch(AdministrationActions.UPDATE_TEACHER, {
-    id: props.id,
+    id: props.initialTeacher.id,
     payload: teacherUpdateFormState,
   });
   props.onToggle();
@@ -51,14 +52,18 @@ const handleSubmit: (event: Event) => void = (event: Event) => {
   <form :class="styles.teacherUpdateForm" @submit="handleSubmit">
     <div :class="styles.teacherUpdateActionSectionWrapper">
       <div :class="styles.teacherEditFieldsWrapper">
-        <h1 :class="styles.teacherFullName">{{ fullName }}</h1>
+        <h1 :class="styles.teacherFullName">
+          {{
+            `${initialTeacher.user.surname} ${initialTeacher.user.name} ${initialTeacher.user.secondName}`
+          }}
+        </h1>
         <div :class="styles.teacherEditSelectWrapper">
           <Select
             name="departmentId"
             nameToDisplay="Group"
             :options="departmentSelectOptions"
             :onSelect="handleTeacherPropertyChange"
-            :defaultOptionId="departmentId"
+            :defaultOptionId="initialTeacher.departmentId"
           />
         </div>
       </div>

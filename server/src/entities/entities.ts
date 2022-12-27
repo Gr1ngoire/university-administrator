@@ -1,6 +1,7 @@
 export { Department } from './department.entity';
 export { Discipline } from './discipline.entity';
 export { Faculty } from './faculty.entity';
+export { FaqMessage } from './faq-message.entity';
 export { Grant } from './grant.entity';
 export { Group } from './group.entity';
 export { News } from './news.entity';

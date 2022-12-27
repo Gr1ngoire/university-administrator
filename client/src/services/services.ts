@@ -4,6 +4,7 @@ import { Auth } from "./auth/auth.service";
 import { axios as axiosService } from "./axios/axios";
 import { Discipline } from "./discipline/discipline.service";
 import { Faculty } from "./faculty/faculty.service";
+import { FaqMessage } from "./faq-messages/faq-messages.service";
 import { Grant } from "./grant/grant.service";
 import { Group } from "./group/group.service";
 import { News } from "./news/news.service";
@@ -23,6 +24,7 @@ const auth = new Auth({ http, apiPrefix });
 const department = new Department({ http, apiPrefix });
 const discipline = new Discipline({ http, apiPrefix });
 const faculty = new Faculty({ http, apiPrefix });
+const faqMessage = new FaqMessage({ http, apiPrefix });
 const grant = new Grant({ http, apiPrefix });
 const group = new Group({ http, apiPrefix });
 const news = new News({ http, apiPrefix });
@@ -36,6 +38,7 @@ export {
   department,
   discipline,
   faculty,
+  faqMessage,
   grant,
   group,
   news,

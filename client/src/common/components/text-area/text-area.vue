@@ -4,12 +4,13 @@ import styles from "./styles.module.scss";
 
 type Props = {
   name: string;
+  placeholder?: string;
   errorMessage?: string;
-  onInput: (event: Event) => void;
   value?: string;
   nameToDisplay?: string;
   max?: number;
   min?: number;
+  onInput: (event: Event) => void;
 };
 
 const props = defineProps<Props>();
@@ -33,6 +34,7 @@ const firstLetterUppercased = computed(() => {
       :class="styles.textarea"
       :name="name"
       :value="value"
+      :placeholder="placeholder"
       @input="onInput"
     >
     </textarea>

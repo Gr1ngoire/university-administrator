@@ -33,22 +33,17 @@ const handleEditToggle: () => void = (): void => {
 <template>
   <UpdateGrantForm
     v-if="grantUpdateFormShowState.state"
-    :id="grantRecord.id"
-    :fullName="fullName"
-    :granterId="grantRecord.granterId"
-    :grant="grantRecord.grant"
+    :initialGrant="grantRecord"
     :onToggle="handleEditToggle"
   />
   <div v-else-if="!grantUpdateFormShowState.state" :class="styles.grantCard">
-    <p :class="styles.grantFullName">Full name: {{ props.fullName }}</p>
-    <p :class="styles.grantEmail">Email: {{ props.grantRecord.user.email }}</p>
-    <p :class="styles.grantPhone">Phone: {{ props.grantRecord.user.phone }}</p>
-    <p :class="styles.grantGrantName">Grant: {{ props.grantRecord.grant }}</p>
+    <p :class="styles.grantFullName">Full name: {{ fullName }}</p>
+    <p :class="styles.grantEmail">Email: {{ grantRecord.user.email }}</p>
+    <p :class="styles.grantPhone">Phone: {{ grantRecord.user.phone }}</p>
+    <p :class="styles.grantGrantName">Grant: {{ grantRecord.grant }}</p>
     <p :class="styles.grantGrantedBy">
       Granted by:
-      {{
-        props.grantRecord.granter ? props.grantRecord.granter.name : "Initial"
-      }}
+      {{ grantRecord.granter ? grantRecord.granter.name : "Initial" }}
     </p>
     <div :class="styles.actionsSection">
       <div :class="styles.actionWrapperButton">

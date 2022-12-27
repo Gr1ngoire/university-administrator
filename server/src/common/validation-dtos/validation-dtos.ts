@@ -11,6 +11,7 @@ export {
   CreateFacultyValidationDto,
   UpdateFacultyValidationDto,
 } from './faculties/faculties';
+export { CreateFaqMessageValidationDto } from './faqMessages/create-faq-message.validation-dto';
 export {
   CreateGrantValidationDto,
   UpdateGrantValidationDto,

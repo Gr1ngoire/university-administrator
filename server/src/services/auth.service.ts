@@ -1,4 +1,5 @@
 import {
+  UpdateUserRequestDto,
   UsersGetAllItemAdminResponseDto,
   UserSignInRequestDto,
   UserSignInResponseDto,
@@ -9,10 +10,7 @@ import {
 import { Injectable } from 'src/common/decorators/decorators';
 import { UsersService } from './users.service';
 import { BcryptService } from './bcrypt.service';
-import {
-  BadRequestException,
-  UnauthorizedException,
-} from 'src/common/exceptions/excpetions';
+import { UnauthorizedException } from 'src/common/exceptions/excpetions';
 import { ExceptionsMessages } from 'src/common/enums/enums';
 import { JwtService } from './jwt.service';
 import { GrantsService } from './grants.service';
@@ -44,17 +42,8 @@ export class AuthService {
   }
 
   async signUp(userDto: UserSignUpRequestDto): Promise<UserSignInResponseDto> {
-    const { email, password } = userDto;
-    const userInDb = await this.userService.getByEmail(email);
-
-    if (userInDb) {
-      throw new BadRequestException({
-        message: ExceptionsMessages.USER_WITH_SUCH_EMAIL_ALREADY_EXISTS,
-      });
-    }
-
     const hashedPassword = await this.bcryptService.hashPassword(
-      password,
+      userDto.password,
       this.PASSWORD_SALT_ROUNDS,
     );
     const newUser = await this.userService.create({
@@ -83,6 +72,39 @@ export class AuthService {
         email: newUserEmail,
         grant,
       },
+    };
+  }
+
+  async updateUser(
+    id: number,
+    userDto: UpdateUserRequestDto,
+  ): Promise<UsersGetAllItemAdminResponseDto> {
+    const hashedPassword = await this.bcryptService.hashPassword(
+      userDto.password,
+      this.PASSWORD_SALT_ROUNDS,
+    );
+
+    const updatedUser = await this.userService.update(id, {
+      ...userDto,
+      password: hashedPassword,
+    });
+
+    const {
+      id: updatedUserId,
+      name,
+      surname,
+      secondName,
+      phone,
+      email: newUserEmail,
+    } = updatedUser;
+
+    return {
+      id: updatedUserId,
+      name,
+      surname,
+      secondName,
+      phone,
+      email: newUserEmail,
     };
   }
 

@@ -7,6 +7,7 @@ import type {
 } from "vuex";
 import { DataStatus } from "@/common/enums/enums";
 import {
+  auth as authService,
   department as departmentsService,
   discipline as disciplinesService,
   faculty as facultiesService,
@@ -822,7 +823,7 @@ const actions: ActionTree<State, RootState> = {
     { id, payload }: UpdateUserRequestParams
   ) {
     state.dataStatus = DataStatus.PENDING;
-    const updatedUser = await usersService.update(id, payload);
+    const updatedUser = await authService.updateUser(id, payload);
 
     commit(Mutations.UPDATE_USER, updatedUser);
     state.dataStatus = DataStatus.FULFILLED;

@@ -5,6 +5,7 @@ enum ValidationExceptionMessages {
   COURSE_MUST_BELONG_INTERVAL = "Course value must belong the interval between 1 and 6",
   EMAIL_CAN_NOT_BE_EMPTY = "Email can not be empty",
   EMAIL_SHOULD_BE_IN_PROPER_FORMAT = "Email should be in proper format",
+  MESSAGE_CAN_NOT_BE_EMPTY = "Message can not be empty",
   NAME_CAN_NOT_BE_EMPTY = "Name can not be empty",
   PASSWORD_FORMAT = "Password must be at least 8 characters in length and maximum 16 characters. Pasword must contain at least one digit, at least on upper cased letter and at least one lower cased letter",
   PHONE_CAN_NOT_BE_EMPTY = "Phone can not be empty",

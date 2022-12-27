@@ -8,6 +8,7 @@ import { FaqMessage } from "./faq-messages/faq-messages.service";
 import { Grant } from "./grant/grant.service";
 import { Group } from "./group/group.service";
 import { News } from "./news/news.service";
+import { Notification } from "./notification/notification.service";
 import { Teacher } from "./teacher/teacher.service";
 import { Department } from "./department/department.service";
 import { Schedule } from "./schedule/schedule.service";
@@ -18,6 +19,7 @@ import { User } from "./user/user.service";
 const apiPrefix = ENV.API.PATH;
 
 const storage = new Storage();
+const notification = new Notification();
 const http = new Http({ storage, axiosService });
 
 const auth = new Auth({ http, apiPrefix });
@@ -42,6 +44,7 @@ export {
   grant,
   group,
   news,
+  notification,
   schedule,
   storage,
   student,

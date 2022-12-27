@@ -7,7 +7,7 @@
       "@/*": ["./src/*"],
       "shared/*": ["../shared/*"]
     },
-    "types": ["node"]
+    "types": ["node", "vue3-toastify/global"]
   },
 
   "references": [

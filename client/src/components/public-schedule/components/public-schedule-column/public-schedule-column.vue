@@ -26,7 +26,7 @@ defineProps<Props>();
           :time="time"
           :classroom="classroom"
           :disciplineName="discipline.name"
-          :teacherName="`${teacher.name} ${teacher.surname}`"
+          :teacherName="`${teacher.user.name} ${teacher.user.name}`"
           :groupName="group.name"
         />
       </li>

@@ -5,6 +5,7 @@ import {
   HttpMethod,
   StorageKey,
 } from "@/common/enums/enums";
+import { notification as notificationService } from "../services";
 import type {
   AxiosInstance,
   AxiosResponse,
@@ -14,7 +15,12 @@ import type {
 } from "@/common/types/types";
 import { HttpError } from "@/exceptions/exceptions";
 import { AxiosHeaders, type AxiosRequestConfig } from "axios";
+import type { AxiosError } from "axios";
 import type { Storage } from "../storage/storage.service";
+
+type ErrorData = {
+  message: string;
+};
 
 type Constructor = {
   axiosService: AxiosInstance;
@@ -53,7 +59,12 @@ class Http {
     })
       .then(this.checkStatus)
       .then((res) => res.data as T)
-      .catch(this.throwError);
+      .catch((err) => {
+        notificationService.error(
+          ((err as AxiosError).response?.data as ErrorData).message
+        );
+        this.displayError(err);
+      });
   }
 
   private getHeaders(
@@ -114,8 +125,8 @@ class Http {
     return response;
   }
 
-  private throwError(error: Error): never {
-    throw error;
+  private displayError(err: Error): never {
+    throw err;
   }
 }
 

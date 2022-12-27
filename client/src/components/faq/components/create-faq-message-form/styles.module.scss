@@ -1,0 +1,21 @@
+.faqMessageForm {
+  width: 98%;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+
+  & button {
+    width: 100px;
+    height: 55px;
+    margin-top: 5px;
+  }
+
+  & span {
+    padding-left: 10px;
+    color: red;
+  }
+}
+
+.faqMessageTextAreaWrapper {
+  width: 80%;
+}

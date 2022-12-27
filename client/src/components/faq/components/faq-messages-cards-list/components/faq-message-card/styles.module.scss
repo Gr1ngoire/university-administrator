@@ -1,0 +1,43 @@
+.faqMessageCardWrapper {
+  width: 100%;
+  display: flex;
+  padding: 10px;
+}
+
+.adminWrapper {
+  display: flex;
+  justify-content: flex-start;
+}
+
+.userWrapper {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.faqMessageCard {
+  padding: 15px;
+  width: 50%;
+}
+
+.adminCard {
+  border: solid 2px $highlight-brand-color;
+  border-top-left-radius: 15px;
+  border-top-right-radius: 15px;
+  border-bottom-right-radius: 15px;
+  background: $primary-brand-color;
+  color: $highlight-brand-color;
+}
+
+.userCard {
+  border: solid 2px $primary-brand-color;
+  border-top-left-radius: 15px;
+  border-top-right-radius: 15px;
+  border-bottom-left-radius: 15px;
+  background: $thirdly-brand-color;
+  color: $primary-brand-color;
+}
+
+.faqMessageMessageInfoWrapper {
+  display: flex;
+  justify-content: space-between;
+}

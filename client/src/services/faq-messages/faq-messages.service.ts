@@ -23,7 +23,7 @@ class FaqMessage {
 
   public getAll(): Promise<FaqMessagesGetAllResponseDto> {
     return this.http.load<FaqMessagesGetAllResponseDto>(
-      `${this.apiPrefix}${ApiPath.STUDENTS}`,
+      `${this.apiPrefix}${ApiPath.FAQ}`,
       {
         method: HttpMethod.GET,
       }

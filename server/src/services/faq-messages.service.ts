@@ -18,18 +18,34 @@ export class FaqMessagesService {
   ) {}
 
   getModelById(id: number): Promise<FaqMessage | null> {
-    return this.repository.findOne({ where: { id } });
+    return this.repository.findOne({
+      where: { id },
+      relations: {
+        author: {
+          grant: true,
+        },
+      },
+    });
   }
 
   async getAll(): Promise<FaqMessagesGetAllResponseDto> {
-    const faqMessagesModels = await this.repository.find();
+    const faqMessagesModels = await this.repository.find({
+      relations: {
+        author: {
+          grant: true,
+        },
+      },
+    });
     return {
       items: faqMessagesModels.map(
         ({ id, createdAt, message, author, authorId }) => ({
           id,
           createdAt: String(createdAt),
           message,
-          author,
+          author: {
+            ...author,
+            grant: author.grant.grant,
+          },
           authorId,
         }),
       ),
@@ -42,7 +58,13 @@ export class FaqMessagesService {
     const faqMessage = await this.getModelById(idToFind);
 
     const { id, createdAt, message, authorId, author } = faqMessage;
-    return { id, createdAt: String(createdAt), message, authorId, author };
+    return {
+      id,
+      createdAt: String(createdAt),
+      message,
+      authorId,
+      author: { ...author, grant: author.grant.grant },
+    };
   }
 
   async create(
@@ -58,8 +80,8 @@ export class FaqMessagesService {
 
     const newFaqMessage = this.repository.create(faqMessage);
 
-    const createdNews = await this.repository.save(newFaqMessage);
-    const { id, createdAt, message, authorId, author } = createdNews;
-    return { id, createdAt: String(createdAt), message, authorId, author };
+    const createdFaqMessageModel = await this.repository.save(newFaqMessage);
+
+    return this.getById(createdFaqMessageModel.id);
   }
 }

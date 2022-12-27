@@ -1,11 +1,11 @@
-import { UsersGetAllItemAdminResponseDto } from "../types";
+import { UserWithGrantDto } from "../types";
 
 type FaqMessagesGetAllItemResponseDto = {
   id: number;
   createdAt: string;
   message: string;
   authorId: number;
-  author: UsersGetAllItemAdminResponseDto;
+  author: UserWithGrantDto;
 };
 
 export { type FaqMessagesGetAllItemResponseDto };

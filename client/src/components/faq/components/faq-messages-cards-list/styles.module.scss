@@ -1,0 +1,9 @@
+.faqMessagesCardsListWrapper {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  width: 100%;
+  align-items: center;
+  height: calc(100vh - 170px);
+  overflow-y: scroll;
+}

@@ -3,6 +3,7 @@ import { isAdmin, isAuthenticated } from "@/common/helpers/helpers";
 import { createRouter, createWebHistory } from "vue-router";
 import {
   Administration,
+  Faq,
   News,
   PublicSchedule,
   SignIn,
@@ -32,6 +33,11 @@ const router = createRouter({
       path: AppRoutes.NEWS,
       name: pathSlashStripper(AppRoutes.NEWS),
       component: News,
+    },
+    {
+      path: AppRoutes.FAQ,
+      name: pathSlashStripper(AppRoutes.FAQ),
+      component: Faq,
     },
     {
       path: AppRoutes.ADMINISTRATION,

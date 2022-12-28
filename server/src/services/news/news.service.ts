@@ -1,9 +1,10 @@
-import { Repository } from 'typeorm';
+import { Like, Repository } from 'typeorm';
 import { Injectable, InjectRepository } from 'src/common/decorators/decorators';
 import { ExceptionsMessages } from 'src/common/enums/enums';
 import { NotFoundException } from 'src/common/exceptions/excpetions';
 import {
   CreateNewsRequestDto,
+  GetNewsByParamsDto,
   NewsGetAllItemResponseDto,
   NewsGetAllResponseDto,
   UpdateNewsRequestDto,
@@ -28,8 +29,14 @@ export class NewsService {
     });
   }
 
-  async getAll(): Promise<NewsGetAllResponseDto> {
+  async getAll(params: GetNewsByParamsDto): Promise<NewsGetAllResponseDto> {
+    const { title } = params;
     const newsModels = await this.repository.find({
+      where: title
+        ? {
+            title: Like(`${params.title}%`),
+          }
+        : null,
       select: {
         id: true,
         title: true,

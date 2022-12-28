@@ -7,12 +7,14 @@ import {
   Delete,
   Param,
   UseGuards,
+  Query,
 } from 'src/common/decorators/decorators';
 import { ApiPath, ExceptionsMessages, NewsApi } from 'src/common/enums/enums';
 import { NotFoundException } from 'src/common/exceptions/excpetions';
 import {
   CreateNewsValidationDto,
   GetByIdParams,
+  GetNewsParams,
   UpdateNewsValidationDto,
 } from 'src/common/validation-dtos/validation-dtos';
 import { AdminRoleGuard } from 'src/guards/guards';
@@ -23,8 +25,8 @@ export class NewsController {
   constructor(private newsService: NewsService) {}
 
   @Get(NewsApi.ROOT)
-  getAll() {
-    return this.newsService.getAll();
+  getAll(@Query() params: GetNewsParams) {
+    return this.newsService.getAll(params);
   }
 
   @UseGuards(AdminRoleGuard)

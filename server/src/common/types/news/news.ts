@@ -1,3 +1,4 @@
+export {type GetNewsByParamsDto} from './get-news-by-params-dto.type'
 export {
   type CreateNewsRequestDto,
   type NewsGetAllItemResponseDto,

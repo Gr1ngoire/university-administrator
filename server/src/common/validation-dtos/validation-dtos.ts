@@ -21,7 +21,11 @@ export {
   GetSchedulesByParams,
   UpdateGroupValidationDto,
 } from './groups/groups';
-export { CreateNewsValidationDto, UpdateNewsValidationDto } from './news/news';
+export {
+  CreateNewsValidationDto,
+  GetNewsParams,
+  UpdateNewsValidationDto,
+} from './news/news';
 export {
   CreateScheduleValidationDto,
   UpdateScheduleValidationDto,

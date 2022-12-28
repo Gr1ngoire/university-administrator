@@ -22,11 +22,16 @@ class News {
     this.apiPrefix = apiPrefix;
   }
 
-  public getAll(): Promise<NewsGetAllResponseDto> {
+  public getAll(searchTitle?: string): Promise<NewsGetAllResponseDto> {
     return this.http.load<NewsGetAllResponseDto>(
       `${this.apiPrefix}${ApiPath.NEWS}`,
       {
         method: HttpMethod.GET,
+        queryString: searchTitle
+          ? {
+              title: searchTitle,
+            }
+          : undefined,
       }
     );
   }

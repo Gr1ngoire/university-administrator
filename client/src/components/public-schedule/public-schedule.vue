@@ -49,7 +49,7 @@ const scheduleRecordsWithSundayRecordAsTheLastDay = computed<
 });
 
 const handleGroupSwitch: (event: Event) => void = (event: Event): void => {
-  const input = event.target as HTMLInputElement;
+  const input = event.target as HTMLSelectElement;
   store.dispatch(PublicScheduleActions.GET_ALL_SCHEDULES, input.value);
 };
 </script>

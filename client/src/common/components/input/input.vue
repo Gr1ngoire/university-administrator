@@ -7,6 +7,7 @@ type InputType = "text" | "number" | "password" | "email";
 type Props = {
   type: InputType;
   name: string;
+  placeholder?: string;
   errorMessage?: string;
   value?: string;
   nameToDisplay?: string;
@@ -34,6 +35,7 @@ const firstLetterUppercased = computed(() => {
     <label :class="styles.inputLabel">{{ firstLetterUppercased }}</label>
     <input
       :class="styles.input"
+      :placeholder="placeholder"
       :type="type"
       :name="name"
       :value="value"

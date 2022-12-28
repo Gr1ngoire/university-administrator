@@ -68,9 +68,12 @@ const mutations: MutationTree<State> = {
 };
 
 const actions: ActionTree<State, RootState> = {
-  async [Actions.GET_ALL_NEWS]({ commit }: ActionContext<State, RootState>) {
+  async [Actions.GET_ALL_NEWS](
+    { commit }: ActionContext<State, RootState>,
+    searchTitle?: string
+  ) {
     state.dataStatus = DataStatus.PENDING;
-    const { items } = await newsService.getAll();
+    const { items } = await newsService.getAll(searchTitle);
 
     commit(Mutations.CLEAR_NEWS);
     commit(Mutations.ADD_NEWS, items);

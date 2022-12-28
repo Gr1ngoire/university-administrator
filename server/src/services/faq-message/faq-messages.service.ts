@@ -21,12 +21,7 @@ export class FaqMessagesService {
     const faqMessagesModels = await this.repository.find({
       relations: {
         author: {
-          grant: {
-            id: true,
-            userId: true,
-            grant: true,
-            granterId: true,
-          },
+          grant: true,
         },
       },
       select: {
@@ -51,12 +46,7 @@ export class FaqMessagesService {
       where: { id },
       relations: {
         author: {
-          grant: {
-            id: true,
-            userId: true,
-            grant: true,
-            granterId: true,
-          },
+          grant: true,
         },
       },
       select: {

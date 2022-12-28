@@ -1,5 +1,9 @@
 import { AppRoutes } from "@/common/enums/enums";
-import { isAdmin, isAuthenticated } from "@/common/helpers/helpers";
+import {
+  isAdmin as isAdministrator,
+  isAuthenticated,
+} from "@/common/helpers/helpers";
+import { ref } from "@/hooks/hooks";
 import { createRouter, createWebHistory } from "vue-router";
 import {
   Administration,
@@ -52,7 +56,9 @@ const router = createRouter({
 });
 
 router.beforeEach((to) => {
-  if (!isAuthenticated()) {
+  const isAuth = ref(isAuthenticated());
+  const isAdmin = ref(isAdministrator());
+  if (!isAuth) {
     switch (to.path) {
       case AppRoutes.ADMINISTRATION:
         return { path: AppRoutes.SIGN_UP };
@@ -65,7 +71,7 @@ router.beforeEach((to) => {
     }
   }
 
-  if (isAuthenticated() && !isAdmin()) {
+  if (isAuth && !isAdmin) {
     switch (to.path) {
       case AppRoutes.ADMINISTRATION:
         return { path: AppRoutes.SIGN_UP };

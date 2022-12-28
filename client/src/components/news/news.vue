@@ -4,7 +4,7 @@ import { NewsActions } from "@/store/actions";
 import { Button, Input } from "@/common/components/components";
 import { CreateNewsForm, NewsCardsList } from "./components/components";
 import styles from "./styles.module.scss";
-import { isAdmin } from "@/common/helpers/helpers";
+import { debounce, isAdmin } from "@/common/helpers/helpers";
 
 const store = useStore();
 const news = computed(() => store.state.news.news);
@@ -15,9 +15,13 @@ const handleToggle: () => void = (): void => {
   newsCreationFormShowState.value = !newsCreationFormShowState.value;
 };
 
+const delayedSearchFunctoion = debounce((value: string) =>
+  store.dispatch(NewsActions.GET_ALL_NEWS, value)
+);
+
 const handleNewsSearch: (event: Event) => void = (event: Event): void => {
   const input = event.target as HTMLInputElement;
-  store.dispatch(NewsActions.GET_ALL_NEWS, input.value);
+  delayedSearchFunctoion(input.value);
 };
 </script>
 

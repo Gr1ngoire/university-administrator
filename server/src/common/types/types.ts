@@ -38,10 +38,11 @@ export {
 } from './news/news';
 export {
   type CreateScheduleRequestDto,
+  type GetSchedulesByParamsDto,
   type SchedulesGetAllItemResponseDto,
   type SchedulesGetAllResponseDto,
   type UpdateScheduleRequestDto,
-} from './schedules/schedule';
+} from './schedules/schedules';
 export {
   type CreateStudentRequestDto,
   type StudentsGetAllItemResponseDto,

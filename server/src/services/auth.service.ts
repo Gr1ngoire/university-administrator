@@ -132,7 +132,7 @@ export class AuthService {
       };
     } catch {
       throw new UnauthorizedException({
-        message: ExceptionsMessages.USER_IS_UNUTHORIZED,
+        message: ExceptionsMessages.USER_IS_UNAUTHORIZED,
       });
     }
   }

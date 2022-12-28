@@ -17,6 +17,7 @@ import type {
   UserSignUpRequestDto,
   UserWithGrantDto,
 } from "@/common/types/types";
+import { StorageKey } from "@/common/enums/enums";
 
 enum Actions {
   SIGN_IN = "signIn",
@@ -75,11 +76,15 @@ const actions: ActionTree<State, RootState> = {
   async [Actions.GET_CURRENT_USER]({
     commit,
   }: ActionContext<State, RootState>) {
-    state.dataStatus = DataStatus.PENDING;
-    const user = await authService.getCurrentUser();
+    const isTokenInStorage = Boolean(storageService.getItem(StorageKey.TOKEN));
 
-    commit(Mutations.SET_USER, user);
-    state.dataStatus = DataStatus.FULFILLED;
+    if (isTokenInStorage) {
+      state.dataStatus = DataStatus.PENDING;
+      const user = await authService.getCurrentUser();
+
+      commit(Mutations.SET_USER, user);
+      state.dataStatus = DataStatus.FULFILLED;
+    }
   },
 
   async [Actions.LOG_OUT]({ commit }: ActionContext<State, RootState>) {

@@ -17,7 +17,7 @@ enum ExceptionsMessages {
   SUCH_STUDENT_ALREADY_EXISTS = 'Such student already exists',
   SUCH_TEACHER_ALREADY_EXISTS = 'Such teacher already exists',
   SUCH_USER_IS_ALREADY_GRANTED = 'Such user is already granted, please edit exisitng grant record',
-  USER_IS_UNUTHORIZED = 'User is unuthorised',
+  USER_IS_UNAUTHORIZED = 'User is unauthorised',
   USER_NOT_FOUND = 'User not found',
   USER_WITH_SUCH_EMAIL_ALREADY_EXISTS = 'User with such email already exists',
   TEACHER_NOT_FOUND = 'Teacher not found',

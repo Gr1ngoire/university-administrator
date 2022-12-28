@@ -6,18 +6,27 @@ import type {
   MutationTree,
 } from "vuex";
 import { DataStatus } from "@/common/enums/enums";
-import { schedule as schedulesService } from "@/services/services";
+import {
+  group as groupsService,
+  schedule as schedulesService,
+} from "@/services/services";
 import type { RootState } from "../root-state";
 import type { State } from "./state";
-import type { SchedulesGetAllItemResponseDto } from "@/common/types/types";
+import type {
+  GroupsGetAllItemResponseDto,
+  SchedulesGetAllItemResponseDto,
+} from "@/common/types/types";
 
 enum Actions {
   GET_ALL_SCHEDULES = "getAllSchedules",
+  GET_ALL_GROUPS = "getAllGroups",
 }
 
 enum Mutations {
   ADD_SCHEDULES = "addSchedules",
   CLEAR_SCHEDULES = "clearSchedules",
+  ADD_GROUPS = "addGroups",
+  CLEAR_GROUPS = "clearGroups",
 }
 
 enum Getters {
@@ -26,6 +35,7 @@ enum Getters {
 
 const state: State = {
   schedules: [],
+  groups: [],
   dataStatus: DataStatus.IDLE,
 };
 
@@ -73,17 +83,35 @@ const mutations: MutationTree<State> = {
   [Mutations.CLEAR_SCHEDULES](state: State) {
     state.schedules = [];
   },
+
+  [Mutations.ADD_GROUPS](state: State, groups: GroupsGetAllItemResponseDto[]) {
+    state.groups = [...state.groups, ...groups];
+  },
+
+  [Mutations.CLEAR_GROUPS](state: State) {
+    state.groups = [];
+  },
 };
 
 const actions: ActionTree<State, RootState> = {
-  async [Actions.GET_ALL_SCHEDULES]({
-    commit,
-  }: ActionContext<State, RootState>) {
+  async [Actions.GET_ALL_SCHEDULES](
+    { commit }: ActionContext<State, RootState>,
+    groupId?: string
+  ) {
     state.dataStatus = DataStatus.PENDING;
-    const { items } = await schedulesService.getAll();
+    const { items } = await schedulesService.getAll(groupId);
 
     commit(Mutations.CLEAR_SCHEDULES);
     commit(Mutations.ADD_SCHEDULES, items);
+    state.dataStatus = DataStatus.FULFILLED;
+  },
+
+  async [Actions.GET_ALL_GROUPS]({ commit }: ActionContext<State, RootState>) {
+    state.dataStatus = DataStatus.PENDING;
+    const { items } = await groupsService.getAll();
+
+    commit(Mutations.CLEAR_GROUPS);
+    commit(Mutations.ADD_GROUPS, items);
     state.dataStatus = DataStatus.FULFILLED;
   },
 };

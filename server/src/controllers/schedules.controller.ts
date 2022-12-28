@@ -1,5 +1,6 @@
 import {
   Body,
+  Query,
   Controller,
   Get,
   Post,
@@ -18,6 +19,7 @@ import { SchedulesService } from 'src/services/services';
 import {
   CreateScheduleValidationDto,
   GetByIdParams,
+  GetSchedulesByParams,
   UpdateScheduleValidationDto,
 } from 'src/common/validation-dtos/validation-dtos';
 import { AdminRoleGuard } from 'src/guards/guards';
@@ -27,8 +29,8 @@ export class SchedulesController {
   constructor(private scheduleService: SchedulesService) {}
 
   @Get(SchedulesApi.ROOT)
-  getAll() {
-    return this.scheduleService.getAll();
+  getAll(@Query() params: GetSchedulesByParams) {
+    return this.scheduleService.getAll(params);
   }
 
   @UseGuards(AdminRoleGuard)

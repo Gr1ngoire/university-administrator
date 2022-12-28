@@ -1,5 +1,6 @@
 export {
   Body,
+  Query,
   Controller,
   Delete,
   Get,

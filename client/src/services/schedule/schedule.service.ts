@@ -22,11 +22,16 @@ class Schedule {
     this.apiPrefix = apiPrefix;
   }
 
-  public getAll(): Promise<SchedulesGetAllResponseDto> {
+  public getAll(groupIdParam?: string): Promise<SchedulesGetAllResponseDto> {
     return this.http.load<SchedulesGetAllResponseDto>(
       `${this.apiPrefix}${ApiPath.SCHEDULES}`,
       {
         method: HttpMethod.GET,
+        queryString: groupIdParam
+          ? {
+              groupId: groupIdParam,
+            }
+          : undefined,
       }
     );
   }

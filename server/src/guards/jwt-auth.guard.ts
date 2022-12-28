@@ -23,7 +23,7 @@ export class JwtAuthGuard implements CanActivate {
 
       if (bearer !== 'Bearer' || !token) {
         throw new UnauthorizedException({
-          message: ExceptionsMessages.USER_IS_UNUTHORIZED,
+          message: ExceptionsMessages.USER_IS_UNAUTHORIZED,
         });
       }
 
@@ -32,7 +32,7 @@ export class JwtAuthGuard implements CanActivate {
       return true;
     } catch (e) {
       throw new UnauthorizedException({
-        message: ExceptionsMessages.USER_IS_UNUTHORIZED,
+        message: ExceptionsMessages.USER_IS_UNAUTHORIZED,
       });
     }
   }

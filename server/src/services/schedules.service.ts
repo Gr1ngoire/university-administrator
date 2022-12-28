@@ -8,6 +8,7 @@ import {
 import { Schedule } from 'src/entities/entities';
 import {
   CreateScheduleRequestDto,
+  GetSchedulesByParamsDto,
   SchedulesGetAllItemResponseDto,
   SchedulesGetAllResponseDto,
   UpdateScheduleRequestDto,
@@ -43,8 +44,15 @@ export class SchedulesService {
     });
   }
 
-  async getAll(): Promise<SchedulesGetAllResponseDto> {
+  async getAll(
+    params: GetSchedulesByParamsDto,
+  ): Promise<SchedulesGetAllResponseDto> {
     const schedulesModels = await this.repository.find({
+      where: params.groupId
+        ? {
+            groupId: params.groupId,
+          }
+        : null,
       relations: {
         teacher: {
           user: true,

@@ -18,7 +18,6 @@ import {
 import { ApiPath, ExceptionsMessages, GroupsApi } from 'src/common/enums/enums';
 import { AdminRoleGuard } from 'src/guards/guards';
 
-@UseGuards(AdminRoleGuard)
 @Controller(ApiPath.GROUPS)
 export class GroupsController {
   constructor(private groupsService: GroupsService) {}
@@ -28,6 +27,7 @@ export class GroupsController {
     return this.groupsService.getAll();
   }
 
+  @UseGuards(AdminRoleGuard)
   @Get(GroupsApi.$ID)
   async getById(@Param() params: GetByIdParams) {
     const { id } = params;
@@ -40,11 +40,13 @@ export class GroupsController {
     return group;
   }
 
+  @UseGuards(AdminRoleGuard)
   @Post(GroupsApi.ROOT)
   create(@Body() group: CreateGroupValidationDto) {
     return this.groupsService.create(group);
   }
 
+  @UseGuards(AdminRoleGuard)
   @Patch(GroupsApi.$ID)
   update(
     @Param() params: GetByIdParams,
@@ -55,6 +57,7 @@ export class GroupsController {
     return this.groupsService.update(id, group);
   }
 
+  @UseGuards(AdminRoleGuard)
   @Delete(GroupsApi.$ID)
   delete(@Param() params: GetByIdParams) {
     const { id } = params;

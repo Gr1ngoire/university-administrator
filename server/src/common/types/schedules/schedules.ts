@@ -1,3 +1,4 @@
+export {type GetSchedulesByParamsDto} from './get-schedules-by-params.type-dto'
 export {
   type CreateScheduleRequestDto,
   type SchedulesGetAllItemResponseDto,

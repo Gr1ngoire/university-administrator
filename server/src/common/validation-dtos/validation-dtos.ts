@@ -18,6 +18,7 @@ export {
 } from './grants/grants';
 export {
   CreateGroupValidationDto,
+  GetSchedulesByParams,
   UpdateGroupValidationDto,
 } from './groups/groups';
 export { CreateNewsValidationDto, UpdateNewsValidationDto } from './news/news';

@@ -1,6 +1,7 @@
 export { Injectable, Inject, Module, InjectRepository } from './common/common';
 export {
   Body,
+  Query,
   Controller,
   Delete,
   Get,

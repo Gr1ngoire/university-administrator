@@ -27,16 +27,6 @@ export class GrantsService {
     private usersService: UsersService,
   ) {}
 
-  getModelById(id: number): Promise<Grant | null> {
-    return this.repository.findOne({
-      where: { id },
-      relations: {
-        user: true,
-        granter: true,
-      },
-    });
-  }
-
   async isUserAdmin(userId: number): Promise<boolean> {
     const { grant } = await this.repository.findOne({ where: { userId } });
     return grant === Grants.ADMIN;
@@ -53,42 +43,48 @@ export class GrantsService {
         user: true,
         granter: true,
       },
+      select: {
+        id: true,
+        userId: true,
+        grant: true,
+        granterId: true,
+      },
     });
 
     return {
-      items: grantsModels.map(
-        ({ id, userId, user, grant, granterId, granter }) => ({
-          id,
-          userId,
-          user,
-          grant,
-          granterId,
-          granter,
-        }),
-      ),
+      items: grantsModels,
     };
   }
 
-  async getById(
-    idToFind: number,
-  ): Promise<GrantsGetAllItemAdminResponseDto | null> {
-    const department = await this.getModelById(idToFind);
-
-    const { id, userId, user, grant, granterId, granter } = department;
-    return { id, userId, user, grant, granterId, granter };
+  getById(id: number): Promise<GrantsGetAllItemAdminResponseDto | null> {
+    return this.repository.findOne({
+      where: {
+        id,
+      },
+      relations: {
+        user: true,
+        granter: true,
+      },
+      select: {
+        id: true,
+        userId: true,
+        grant: true,
+        granterId: true,
+      },
+    });
   }
 
   async create(
     grant: CreateGrantRequestDto,
   ): Promise<GrantsGetAllItemAdminResponseDto> {
     const { userId, granterId } = grant;
-    const userToGrant = await this.usersService.getModelById(userId);
+    const userToGrant = await this.usersService.getById(userId);
 
     if (!userToGrant) {
       throw new BadRequestException(ExceptionsMessages.USER_NOT_FOUND);
     }
 
-    const granterInDb = await this.usersService.getModelById(granterId);
+    const granterInDb = await this.usersService.getById(granterId);
 
     if (!granterInDb) {
       throw new BadRequestException(ExceptionsMessages.GRANTER_DOES_NOT_EXIST);
@@ -122,7 +118,7 @@ export class GrantsService {
       throw new NotFoundException(ExceptionsMessages.GRANT_RECORD_NOT_FOUND);
     }
 
-    const granterInDb = await this.usersService.getModelById(granterId);
+    const granterInDb = await this.usersService.getById(granterId);
 
     if (!granterInDb) {
       throw new BadRequestException(ExceptionsMessages.GRANTER_DOES_NOT_EXIST);
@@ -144,7 +140,7 @@ export class GrantsService {
   }
 
   async delete(id: number): Promise<number> {
-    const grantRecord = await this.getModelById(id);
+    const grantRecord = await this.repository.findOne({ where: { id } });
 
     if (!grantRecord) {
       throw new NotFoundException(ExceptionsMessages.GRANT_RECORD_NOT_FOUND);

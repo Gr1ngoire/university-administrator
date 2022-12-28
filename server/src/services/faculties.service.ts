@@ -18,29 +18,29 @@ export class FacultiesService {
     @InjectRepository(Faculty) private repository: Repository<Faculty>,
   ) {}
 
-  getModelById(id: number): Promise<Faculty | null> {
-    return this.repository.findOne({ where: { id } });
+  getById(id: number): Promise<FacultiesGetAllItemResponseDto | null> {
+    return this.repository.findOne({
+      where: { id },
+      select: {
+        id: true,
+        name: true,
+        shortName: true,
+      },
+    });
   }
 
   async getAll(): Promise<FacultiesGetAllResponseDto> {
-    const facultiesModels = await this.repository.find();
+    const facultiesModels = await this.repository.find({
+      select: {
+        id: true,
+        name: true,
+        shortName: true,
+      },
+    });
 
     return {
-      items: facultiesModels.map(({ id, name, shortName }) => ({
-        id,
-        name,
-        shortName,
-      })),
+      items: facultiesModels,
     };
-  }
-
-  async getById(
-    idToFind: number,
-  ): Promise<FacultiesGetAllItemResponseDto | null> {
-    const faculty = await this.getModelById(idToFind);
-
-    const { id, name, shortName } = faculty;
-    return { id, name, shortName };
   }
 
   async create(
@@ -57,7 +57,7 @@ export class FacultiesService {
     idToUpdate: number,
     faculty: UpdateFacultyRequestDto,
   ): Promise<FacultiesGetAllItemResponseDto> {
-    const facultyToUpdate = await this.getModelById(idToUpdate);
+    const facultyToUpdate = await this.getById(idToUpdate);
 
     if (!facultyToUpdate) {
       throw new NotFoundException(ExceptionsMessages.FACULTY_NOT_FOUND);
@@ -71,7 +71,7 @@ export class FacultiesService {
   }
 
   async delete(id: number): Promise<number> {
-    const faculty = await this.getModelById(id);
+    const faculty = await this.repository.findOne({ where: { id } });
 
     if (!faculty) {
       throw new NotFoundException(ExceptionsMessages.FACULTY_NOT_FOUND);

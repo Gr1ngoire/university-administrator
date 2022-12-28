@@ -17,53 +17,60 @@ export class FaqMessagesService {
     private usersService: UsersService,
   ) {}
 
-  getModelById(id: number): Promise<FaqMessage | null> {
-    return this.repository.findOne({
-      where: { id },
-      relations: {
-        author: {
-          grant: true,
-        },
-      },
-    });
-  }
-
   async getAll(): Promise<FaqMessagesGetAllResponseDto> {
     const faqMessagesModels = await this.repository.find({
       relations: {
         author: {
-          grant: true,
+          grant: {
+            id: true,
+            userId: true,
+            grant: true,
+            granterId: true,
+          },
         },
       },
+      select: {
+        id: true,
+        createdAt: true,
+        message: true,
+        authorId: true,
+      },
     });
+
     return {
-      items: faqMessagesModels.map(
-        ({ id, createdAt, message, author, authorId }) => ({
-          id,
-          createdAt: String(createdAt),
-          message,
-          author: {
-            ...author,
-            grant: author.grant.grant,
-          },
-          authorId,
-        }),
-      ),
+      items: faqMessagesModels.map((faqMessage) => ({
+        ...faqMessage,
+        createdAt: String(faqMessage.createdAt),
+        author: { ...faqMessage.author, grant: faqMessage.author.grant.grant },
+      })),
     };
   }
 
-  async getById(
-    idToFind: number,
-  ): Promise<FaqMessagesGetAllItemResponseDto | null> {
-    const faqMessage = await this.getModelById(idToFind);
+  async getById(id: number): Promise<FaqMessagesGetAllItemResponseDto | null> {
+    const faqMessage = await this.repository.findOne({
+      where: { id },
+      relations: {
+        author: {
+          grant: {
+            id: true,
+            userId: true,
+            grant: true,
+            granterId: true,
+          },
+        },
+      },
+      select: {
+        id: true,
+        createdAt: true,
+        message: true,
+        authorId: true,
+      },
+    });
 
-    const { id, createdAt, message, authorId, author } = faqMessage;
     return {
-      id,
-      createdAt: String(createdAt),
-      message,
-      authorId,
-      author: { ...author, grant: author.grant.grant },
+      ...faqMessage,
+      createdAt: String(faqMessage.createdAt),
+      author: { ...faqMessage.author, grant: faqMessage.author.grant.grant },
     };
   }
 

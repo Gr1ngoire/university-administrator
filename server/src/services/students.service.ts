@@ -23,7 +23,7 @@ export class StudentsService {
     private groupsService: GroupsService,
   ) {}
 
-  getModelById(id: number): Promise<Student | null> {
+  getById(id: number): Promise<StudentsGetAllItemResponseDto | null> {
     return this.repository.findOne({
       where: { id },
       relations: {
@@ -33,6 +33,11 @@ export class StudentsService {
             faculty: true,
           },
         },
+      },
+      select: {
+        id: true,
+        userId: true,
+        groupId: true,
       },
     });
   }
@@ -47,39 +52,29 @@ export class StudentsService {
           },
         },
       },
+      select: {
+        id: true,
+        userId: true,
+        groupId: true,
+      },
     });
 
     return {
-      items: studentsModels.map(({ id, userId, user, groupId, group }) => ({
-        id,
-        userId,
-        user,
-        groupId,
-        group,
-      })),
+      items: studentsModels,
     };
-  }
-
-  async getById(
-    idToFind: number,
-  ): Promise<StudentsGetAllItemResponseDto | null> {
-    const student = await this.getModelById(idToFind);
-
-    const { id, userId, user, groupId, group } = student;
-    return { id, userId, user, groupId, group };
   }
 
   async create(
     student: CreateStudentRequestDto,
   ): Promise<StudentsGetAllItemResponseDto> {
     const { userId, groupId } = student;
-    const groupToJoin = await this.groupsService.getModelById(groupId);
+    const groupToJoin = await this.groupsService.getById(groupId);
 
     if (!groupToJoin) {
       throw new BadRequestException(ExceptionsMessages.GROUP_DOES_NOT_EXIST);
     }
 
-    const userInDb = await this.usersService.getModelById(userId);
+    const userInDb = await this.usersService.getById(userId);
 
     if (!userInDb) {
       throw new BadRequestException(ExceptionsMessages.USER_NOT_FOUND);
@@ -113,9 +108,7 @@ export class StudentsService {
     }
 
     if (student.groupId !== studentToUpdate.groupId) {
-      const groupToJoin = await this.groupsService.getModelById(
-        student.groupId,
-      );
+      const groupToJoin = await this.groupsService.getById(student.groupId);
 
       if (!groupToJoin) {
         throw new BadRequestException(ExceptionsMessages.GROUP_DOES_NOT_EXIST);
@@ -129,7 +122,7 @@ export class StudentsService {
   }
 
   async delete(id: number): Promise<number> {
-    const student = await this.getModelById(id);
+    const student = await this.repository.findOne({ where: { id } });
 
     if (!student) {
       throw new NotFoundException(ExceptionsMessages.STUDENT_NOT_FOUND);

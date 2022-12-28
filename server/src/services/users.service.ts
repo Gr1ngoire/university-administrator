@@ -27,9 +27,19 @@ export class UsersService {
     private grantsService: GrantsService,
   ) {}
 
-  getModelById(id: number): Promise<User | null> {
+  getById(id: number): Promise<UsersGetAllItemAdminResponseDto | null> {
     return this.repository.findOne({
-      where: { id },
+      where: {
+        id,
+      },
+      select: {
+        id: true,
+        name: true,
+        surname: true,
+        secondName: true,
+        phone: true,
+        email: true,
+      },
     });
   }
 
@@ -46,29 +56,20 @@ export class UsersService {
   }
 
   async getAll(): Promise<UsersGetAllAdminResponseDto> {
-    const usersModels = await this.repository.find();
+    const usersModels = await this.repository.find({
+      select: {
+        id: true,
+        name: true,
+        surname: true,
+        secondName: true,
+        phone: true,
+        email: true,
+      },
+    });
 
     return {
-      items: usersModels.map(
-        ({ id, name, surname, secondName, phone, email }) => ({
-          id,
-          name,
-          surname,
-          secondName,
-          phone,
-          email,
-        }),
-      ),
+      items: usersModels,
     };
-  }
-
-  async getById(
-    idToFind: number,
-  ): Promise<UsersGetAllItemAdminResponseDto | null> {
-    const user = await this.getModelById(idToFind);
-
-    const { id, name, surname, secondName, phone, email } = user;
-    return { id, name, surname, secondName, phone, email };
   }
 
   async create(
@@ -127,7 +128,7 @@ export class UsersService {
   }
 
   async delete(id: number): Promise<number> {
-    const user = await this.getModelById(id);
+    const user = await this.repository.findOne({ where: { id } });
 
     if (!user) {
       throw new NotFoundException(ExceptionsMessages.USER_NOT_FOUND);

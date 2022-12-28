@@ -21,11 +21,17 @@ export class DepartmentsService {
     private facultiesService: FacultiesService,
   ) {}
 
-  getModelById(id: number): Promise<Department | null> {
+  getById(id: number): Promise<DepartmentsGetAllItemResponseDto | null> {
     return this.repository.findOne({
       where: { id },
       relations: {
         faculty: true,
+      },
+      select: {
+        id: true,
+        name: true,
+        shortName: true,
+        facultyId: true,
       },
     });
   }
@@ -35,36 +41,23 @@ export class DepartmentsService {
       relations: {
         faculty: true,
       },
+      select: {
+        id: true,
+        name: true,
+        shortName: true,
+        facultyId: true,
+      },
     });
 
     return {
-      items: departmentsModels.map(
-        ({ id, name, shortName, facultyId, faculty }) => ({
-          id,
-          name,
-          shortName,
-          facultyId,
-          faculty,
-        }),
-      ),
+      items: departmentsModels,
     };
-  }
-
-  async getById(
-    idToFind: number,
-  ): Promise<DepartmentsGetAllItemResponseDto | null> {
-    const department = await this.getModelById(idToFind);
-
-    const { id, name, shortName, facultyId, faculty } = department;
-    return { id, name, shortName, facultyId, faculty };
   }
 
   async create(
     department: CreateDepartmentRequestDto,
   ): Promise<DepartmentsGetAllItemResponseDto> {
-    const facultyInDb = this.facultiesService.getModelById(
-      department.facultyId,
-    );
+    const facultyInDb = this.facultiesService.getById(department.facultyId);
 
     if (!facultyInDb) {
       throw new BadRequestException(ExceptionsMessages.FACULTY_NOT_FOUND);
@@ -91,7 +84,7 @@ export class DepartmentsService {
       department.facultyId &&
       department.facultyId !== departmentToUpdate.facultyId
     ) {
-      const facultyToJoin = await this.facultiesService.getModelById(
+      const facultyToJoin = await this.facultiesService.getById(
         department.facultyId,
       );
 
@@ -107,7 +100,7 @@ export class DepartmentsService {
   }
 
   async delete(id: number): Promise<number> {
-    const department = await this.getModelById(id);
+    const department = await this.repository.findOne({ where: { id } });
 
     if (!department) {
       throw new NotFoundException(ExceptionsMessages.DEPARTMENT_NOT_FOUND);

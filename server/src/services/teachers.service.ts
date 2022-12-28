@@ -23,7 +23,7 @@ export class TeachersService {
     private departmentsService: DepartmentsService,
   ) {}
 
-  getModelById(id: number): Promise<Teacher | null> {
+  getById(id: number): Promise<TeachersGetAllItemResponseDto | null> {
     return this.repository.findOne({
       where: { id },
       relations: {
@@ -31,6 +31,11 @@ export class TeachersService {
         department: {
           faculty: true,
         },
+      },
+      select: {
+        id: true,
+        userId: true,
+        departmentId: true,
       },
     });
   }
@@ -43,41 +48,29 @@ export class TeachersService {
           faculty: true,
         },
       },
+      select: {
+        id: true,
+        userId: true,
+        departmentId: true,
+      },
     });
 
     return {
-      items: teachersModels.map(
-        ({ id, userId, user, departmentId, department }) => ({
-          id,
-          userId,
-          user,
-          departmentId,
-          department,
-        }),
-      ),
+      items: teachersModels,
     };
-  }
-
-  async getById(
-    idToFind: number,
-  ): Promise<TeachersGetAllItemResponseDto | null> {
-    const teacher = await this.getModelById(idToFind);
-
-    const { id, userId, user, departmentId, department } = teacher;
-    return { id, userId, user, departmentId, department };
   }
 
   async create(
     teacher: CreateTeacherRequestDto,
   ): Promise<TeachersGetAllItemResponseDto> {
     const { userId, departmentId } = teacher;
-    const userInDb = await this.usersService.getModelById(teacher.userId);
+    const userInDb = await this.usersService.getById(teacher.userId);
 
     if (!userInDb) {
       throw new BadRequestException(ExceptionsMessages.USER_NOT_FOUND);
     }
 
-    const departmentToJoin = await this.departmentsService.getModelById(
+    const departmentToJoin = await this.departmentsService.getById(
       departmentId,
     );
 
@@ -104,13 +97,15 @@ export class TeachersService {
     idToUpdate: number,
     teacher: UpdateTeacherRequestDto,
   ): Promise<TeachersGetAllItemResponseDto> {
-    const teacherToUpdate = await this.getModelById(idToUpdate);
+    const teacherToUpdate = await this.repository.findOne({
+      where: { id: idToUpdate },
+    });
 
     if (!teacherToUpdate) {
       throw new NotFoundException(ExceptionsMessages.TEACHER_NOT_FOUND);
     }
 
-    const departmentToJoin = await this.departmentsService.getModelById(
+    const departmentToJoin = await this.departmentsService.getById(
       teacher.departmentId,
     );
 
@@ -127,7 +122,7 @@ export class TeachersService {
   }
 
   async delete(id: number): Promise<number> {
-    const teacher = await this.getModelById(id);
+    const teacher = await this.repository.findOne({ where: { id } });
 
     if (!teacher) {
       throw new NotFoundException(ExceptionsMessages.TEACHER_NOT_FOUND);

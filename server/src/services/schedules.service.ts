@@ -26,7 +26,7 @@ export class SchedulesService {
     private teachersService: TeachersService,
   ) {}
 
-  getModelById(id: number): Promise<Schedule | null> {
+  getById(id: number): Promise<SchedulesGetAllItemResponseDto | null> {
     return this.repository.findOne({
       where: { id },
       relations: {
@@ -40,6 +40,14 @@ export class SchedulesService {
             faculty: true,
           },
         },
+      },
+      select: {
+        id: true,
+        time: true,
+        classroom: true,
+        teacherId: true,
+        disciplineId: true,
+        groupId: true,
       },
     });
   }
@@ -65,76 +73,31 @@ export class SchedulesService {
           },
         },
       },
+      select: {
+        id: true,
+        time: true,
+        classroom: true,
+        teacherId: true,
+        disciplineId: true,
+        groupId: true,
+      },
     });
 
     return {
-      items: schedulesModels.map(
-        ({
-          id,
-          time,
-          classroom,
-          teacherId,
-          teacher,
-          disciplineId,
-          discipline,
-          groupId,
-          group,
-        }) => ({
-          id,
-          time,
-          classroom,
-          teacherId,
-          teacher,
-          disciplineId,
-          discipline,
-          groupId,
-          group,
-        }),
-      ),
-    };
-  }
-
-  async getById(
-    idToFind: number,
-  ): Promise<SchedulesGetAllItemResponseDto | null> {
-    const schedule = await this.getModelById(idToFind);
-
-    const {
-      id,
-      time,
-      classroom,
-      groupId,
-      group,
-      disciplineId,
-      discipline,
-      teacherId,
-      teacher,
-    } = schedule;
-    return {
-      id,
-      time,
-      classroom,
-      groupId,
-      group,
-      disciplineId,
-      discipline,
-      teacherId,
-      teacher,
+      items: schedulesModels,
     };
   }
 
   async create(
     schedule: CreateScheduleRequestDto,
   ): Promise<SchedulesGetAllItemResponseDto> {
-    const teacherInDb = await this.teachersService.getModelById(
-      schedule.teacherId,
-    );
+    const teacherInDb = await this.teachersService.getById(schedule.teacherId);
 
     if (!teacherInDb) {
       throw new BadRequestException(ExceptionsMessages.TEACHER_NOT_FOUND);
     }
 
-    const disciplineInDb = await this.disciplinesService.getModelById(
+    const disciplineInDb = await this.disciplinesService.getById(
       schedule.disciplineId,
     );
 
@@ -142,7 +105,7 @@ export class SchedulesService {
       throw new BadRequestException(ExceptionsMessages.DISCIPLINE_NOT_FOUD);
     }
 
-    const groupInDb = await this.groupsService.getModelById(schedule.groupId);
+    const groupInDb = await this.groupsService.getById(schedule.groupId);
 
     if (!groupInDb) {
       throw new BadRequestException(ExceptionsMessages.GROUP_NOT_FOUND);
@@ -169,7 +132,7 @@ export class SchedulesService {
       schedule.teacherId &&
       schedule.teacherId !== scheduleToUpdate.teacherId
     ) {
-      const techerToAdd = await this.teachersService.getModelById(
+      const techerToAdd = await this.teachersService.getById(
         schedule.teacherId,
       );
 
@@ -182,7 +145,7 @@ export class SchedulesService {
       schedule.disciplineId &&
       schedule.disciplineId !== scheduleToUpdate.disciplineId
     ) {
-      const disciplineToAdd = await this.disciplinesService.getModelById(
+      const disciplineToAdd = await this.disciplinesService.getById(
         schedule.disciplineId,
       );
 
@@ -192,9 +155,7 @@ export class SchedulesService {
     }
 
     if (schedule.groupId && schedule.groupId !== scheduleToUpdate.groupId) {
-      const groupToAdd = await this.groupsService.getModelById(
-        schedule.groupId,
-      );
+      const groupToAdd = await this.groupsService.getById(schedule.groupId);
 
       if (!groupToAdd) {
         throw new BadRequestException(ExceptionsMessages.GROUP_NOT_FOUND);
@@ -208,7 +169,7 @@ export class SchedulesService {
   }
 
   async delete(id: number): Promise<number> {
-    const schedule = await this.getModelById(id);
+    const schedule = await this.repository.findOne({ where: { id } });
 
     if (!schedule) {
       throw new NotFoundException(ExceptionsMessages.SCHEDULE_NOT_FOUND);

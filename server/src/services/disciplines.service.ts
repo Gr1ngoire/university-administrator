@@ -16,25 +16,29 @@ export class DisciplinesService {
     @InjectRepository(Discipline) private repository: Repository<Discipline>,
   ) {}
 
-  getModelById(id: number): Promise<Discipline | null> {
-    return this.repository.findOne({ where: { id } });
+  getById(idToFind: number): Promise<DisciplinesGetAllItemResponseDto | null> {
+    return this.repository.findOne({
+      where: {
+        id: idToFind,
+      },
+      select: {
+        id: true,
+        name: true,
+      },
+    });
   }
 
   async getAll(): Promise<DisciplinesGetAllResponseDto> {
-    const disciplinesModels = await this.repository.find();
+    const disciplinesModels = await this.repository.find({
+      select: {
+        id: true,
+        name: true,
+      },
+    });
 
     return {
-      items: disciplinesModels.map(({ id, name }) => ({ id, name })),
+      items: disciplinesModels,
     };
-  }
-
-  async getById(
-    idToFind: number,
-  ): Promise<DisciplinesGetAllItemResponseDto | null> {
-    const discipline = await this.getModelById(idToFind);
-
-    const { id, name } = discipline;
-    return { id, name };
   }
 
   async create(
@@ -51,7 +55,7 @@ export class DisciplinesService {
     idToUpdate: number,
     attributes: Partial<UpdateDisciplineRequestDto>,
   ): Promise<DisciplinesGetAllItemResponseDto> {
-    const discipline = await this.getModelById(idToUpdate);
+    const discipline = await this.getById(idToUpdate);
 
     if (!discipline) {
       throw new NotFoundException(ExceptionsMessages.DISCIPLINE_NOT_FOUD);
@@ -64,7 +68,11 @@ export class DisciplinesService {
   }
 
   async delete(id: number): Promise<number> {
-    const discipline = await this.getModelById(id);
+    const discipline = await this.repository.findOne({
+      where: {
+        id,
+      },
+    });
 
     if (!discipline) {
       throw new NotFoundException(ExceptionsMessages.DISCIPLINE_NOT_FOUD);

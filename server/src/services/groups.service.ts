@@ -21,13 +21,19 @@ export class GroupsService {
     private departmentsService: DepartmentsService,
   ) {}
 
-  getModelById(id: number): Promise<Group | null> {
+  getById(id: number): Promise<GroupsGetAllItemResponseDto | null> {
     return this.repository.findOne({
       where: { id },
       relations: {
         department: {
           faculty: true,
         },
+      },
+      select: {
+        id: true,
+        name: true,
+        departmentId: true,
+        course: true,
       },
     });
   }
@@ -39,32 +45,23 @@ export class GroupsService {
           faculty: true,
         },
       },
+      select: {
+        id: true,
+        name: true,
+        departmentId: true,
+        course: true,
+      },
     });
 
     return {
-      items: groupsModels.map(
-        ({ id, name, departmentId, department, course }) => ({
-          id,
-          name,
-          departmentId,
-          department,
-          course,
-        }),
-      ),
+      items: groupsModels,
     };
-  }
-
-  async getById(idToFind: number): Promise<GroupsGetAllItemResponseDto | null> {
-    const group = await this.getModelById(idToFind);
-
-    const { id, name, departmentId, department, course } = group;
-    return { id, name, departmentId, department, course };
   }
 
   async create(
     group: CreateGroupRequestDto,
   ): Promise<GroupsGetAllItemResponseDto> {
-    const departmentInDb = await this.departmentsService.getModelById(
+    const departmentInDb = await this.departmentsService.getById(
       group.departmentId,
     );
 
@@ -93,7 +90,7 @@ export class GroupsService {
       group.departmentId &&
       group.departmentId !== groupToUpdate.departmentId
     ) {
-      const departmentToJoin = await this.departmentsService.getModelById(
+      const departmentToJoin = await this.departmentsService.getById(
         group.departmentId,
       );
 
@@ -109,7 +106,7 @@ export class GroupsService {
   }
 
   async delete(id: number): Promise<number> {
-    const group = await this.getModelById(id);
+    const group = await this.repository.findOne({ where: { id } });
 
     if (!group) {
       throw new NotFoundException(ExceptionsMessages.GROUP_NOT_FOUND);

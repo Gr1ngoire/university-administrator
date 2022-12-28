@@ -14,27 +14,32 @@ import { News } from 'src/entities/entities';
 export class NewsService {
   constructor(@InjectRepository(News) private repository: Repository<News>) {}
 
-  getModelById(id: number): Promise<News | null> {
-    return this.repository.findOne({ where: { id } });
+  getById(id: number): Promise<NewsGetAllItemResponseDto | null> {
+    return this.repository.findOne({
+      where: {
+        id,
+      },
+      select: {
+        id: true,
+        title: true,
+        content: true,
+        imgUrl: true,
+      },
+    });
   }
 
   async getAll(): Promise<NewsGetAllResponseDto> {
-    const newsModels = await this.repository.find();
+    const newsModels = await this.repository.find({
+      select: {
+        id: true,
+        title: true,
+        content: true,
+        imgUrl: true,
+      },
+    });
     return {
-      items: newsModels.map(({ id, title, content, imgUrl }) => ({
-        id,
-        title,
-        content,
-        imgUrl,
-      })),
+      items: newsModels,
     };
-  }
-
-  async getById(idToFind: number): Promise<NewsGetAllItemResponseDto | null> {
-    const news = await this.getModelById(idToFind);
-
-    const { id, title, content, imgUrl } = news;
-    return { id, title, content, imgUrl };
   }
 
   async create(news: CreateNewsRequestDto): Promise<NewsGetAllItemResponseDto> {
@@ -52,7 +57,7 @@ export class NewsService {
     idToUpdate: number,
     news: Partial<UpdateNewsRequestDto>,
   ): Promise<NewsGetAllItemResponseDto> {
-    const newsToUpdate = await this.getModelById(idToUpdate);
+    const newsToUpdate = await this.getById(idToUpdate);
 
     if (!newsToUpdate) {
       throw new NotFoundException(ExceptionsMessages.NEWS_NOT_FOUND);
@@ -68,7 +73,11 @@ export class NewsService {
   }
 
   async delete(id: number): Promise<number> {
-    const news = await this.getModelById(id);
+    const news = await this.repository.findOne({
+      where: {
+        id,
+      },
+    });
 
     if (!news) {
       throw new NotFoundException(ExceptionsMessages.NEWS_NOT_FOUND);

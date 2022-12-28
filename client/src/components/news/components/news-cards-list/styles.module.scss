@@ -1,5 +1,5 @@
 .newsCardsListWrapper {
-  height: calc(100vh - 100px);
+  height: calc(100vh - 200px);
   overflow-y: scroll;
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));

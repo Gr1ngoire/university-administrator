@@ -1,4 +1,4 @@
-# Web register
+# 📖 University administrator
 
 ## University managing web application
 

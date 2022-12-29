@@ -7,7 +7,7 @@ enum ValidationExceptionMessages {
   EMAIL_SHOULD_BE_IN_PROPER_FORMAT = "Email should be in proper format",
   MESSAGE_CAN_NOT_BE_EMPTY = "Message can not be empty",
   NAME_CAN_NOT_BE_EMPTY = "Name can not be empty",
-  PASSWORD_FORMAT = "Password must be at least 8 characters in length and maximum 16 characters. Pasword must contain at least one digit, at least on upper cased letter and at least one lower cased letter",
+  PASSWORD_FORMAT = "Password must be at least 8 characters in length and maximum 16 characters. Pasword must contain at least one digit, at least on upper cased letter, at least one lower cased letter and ate least one special cheracter",
   PHONE_CAN_NOT_BE_EMPTY = "Phone can not be empty",
   PHONE_SHOULD_BE_IN_PROPER_FORMAT = "Phone should be in proper format",
   ROLE_MUST_BE_STUDENT_OR_TEACHER = "Role must be 'student' or 'teacher'",

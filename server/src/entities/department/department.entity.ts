@@ -1,9 +1,6 @@
-import { Faculty, Group, Teacher } from 'src/entities/entities';
+import { Default, Faculty, Group, Teacher } from 'src/entities/entities';
 import {
   Entity,
-  PrimaryGeneratedColumn,
-  UpdateDateColumn,
-  CreateDateColumn,
   Column,
   ManyToOne,
   JoinColumn,
@@ -12,25 +9,7 @@ import {
 import { DbTablesNames } from 'src/common/enums/enums';
 
 @Entity({ name: DbTablesNames.DEPARTMENTS })
-export class Department {
-  @PrimaryGeneratedColumn()
-  id: number;
-
-  @UpdateDateColumn({
-    name: 'updated_at',
-    type: 'timestamptz',
-    default: () => 'CURRENT_TIMESTAMP(6)',
-  })
-  updatedAt: Date;
-
-  @CreateDateColumn({
-    name: 'created_at',
-    type: 'timestamptz',
-    default: () => 'CURRENT_TIMESTAMP(6)',
-    onUpdate: 'CURRENT_TIMESTAMP(6)',
-  })
-  createdAt: Date;
-
+export class Department extends Default {
   @Column()
   name: string;
 

@@ -1,32 +1,9 @@
-import {
-  Entity,
-  PrimaryGeneratedColumn,
-  UpdateDateColumn,
-  CreateDateColumn,
-  Column,
-} from 'src/common/decorators/decorators';
+import { Entity, Column } from 'src/common/decorators/decorators';
 import { DbTablesNames } from 'src/common/enums/enums';
+import { Default } from 'src/entities/entities';
 
 @Entity({ name: DbTablesNames.NEWS })
-export class News {
-  @PrimaryGeneratedColumn()
-  id: number;
-
-  @UpdateDateColumn({
-    name: 'updated_at',
-    type: 'timestamptz',
-    default: () => 'CURRENT_TIMESTAMP(6)',
-  })
-  updatedAt: Date;
-
-  @CreateDateColumn({
-    name: 'created_at',
-    type: 'timestamptz',
-    default: () => 'CURRENT_TIMESTAMP(6)',
-    onUpdate: 'CURRENT_TIMESTAMP(6)',
-  })
-  createdAt: Date;
-
+export class News extends Default {
   @Column()
   title: string;
 

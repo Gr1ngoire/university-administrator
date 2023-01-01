@@ -1,3 +1,4 @@
+export { Default } from './default/default.entity';
 export { Department } from './department/department.entity';
 export { Discipline } from './discipline/discipline.entity';
 export { Faculty } from './faculty/faculty.entity';

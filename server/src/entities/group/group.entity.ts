@@ -1,36 +1,15 @@
 import { DbTablesNames } from 'src/common/enums/enums';
 import {
   Entity,
-  PrimaryGeneratedColumn,
-  UpdateDateColumn,
-  CreateDateColumn,
   Column,
   ManyToOne,
   JoinColumn,
   OneToMany,
 } from 'src/common/decorators/decorators';
-import { Department, Schedule, Student } from '../entities';
+import { Default, Department, Schedule, Student } from 'src/entities/entities';
 
 @Entity({ name: DbTablesNames.GROUPS })
-export class Group {
-  @PrimaryGeneratedColumn()
-  id: number;
-
-  @UpdateDateColumn({
-    name: 'updated_at',
-    type: 'timestamptz',
-    default: () => 'CURRENT_TIMESTAMP(6)',
-  })
-  updatedAt: Date;
-
-  @CreateDateColumn({
-    name: 'created_at',
-    type: 'timestamptz',
-    default: () => 'CURRENT_TIMESTAMP(6)',
-    onUpdate: 'CURRENT_TIMESTAMP(6)',
-  })
-  createdAt: Date;
-
+export class Group extends Default {
   @Column()
   name: string;
 

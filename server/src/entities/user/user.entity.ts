@@ -1,37 +1,20 @@
 import {
   Column,
-  CreateDateColumn,
   Entity,
   OneToMany,
   OneToOne,
-  PrimaryGeneratedColumn,
-  UpdateDateColumn,
 } from 'src/common/decorators/decorators';
 import { DbTablesNames } from 'src/common/enums/enums';
-import { Student, Teacher } from '../entities';
-import { FaqMessage } from '../faq-messages/faq-message.entity';
-import { Grant } from '../grant/grant.entity';
+import {
+  Default,
+  FaqMessage,
+  Grant,
+  Student,
+  Teacher,
+} from 'src/entities/entities';
 
 @Entity({ name: DbTablesNames.USERS })
-export class User {
-  @PrimaryGeneratedColumn()
-  id: number;
-
-  @UpdateDateColumn({
-    name: 'updated_at',
-    type: 'timestamptz',
-    default: () => 'CURRENT_TIMESTAMP(6)',
-  })
-  updatedAt: Date;
-
-  @CreateDateColumn({
-    name: 'created_at',
-    type: 'timestamptz',
-    default: () => 'CURRENT_TIMESTAMP(6)',
-    onUpdate: 'CURRENT_TIMESTAMP(6)',
-  })
-  createdAt: Date;
-
+export class User extends Default {
   @Column()
   name: string;
 

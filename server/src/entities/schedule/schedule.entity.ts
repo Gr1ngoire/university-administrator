@@ -1,35 +1,14 @@
 import {
   Column,
-  CreateDateColumn,
   Entity,
   ManyToOne,
-  PrimaryGeneratedColumn,
-  UpdateDateColumn,
   JoinColumn,
 } from 'src/common/decorators/decorators';
 import { DbTablesNames } from 'src/common/enums/enums';
-import { Discipline, Group, Teacher } from '../entities';
+import { Default, Discipline, Group, Teacher } from 'src/entities/entities';
 
 @Entity({ name: DbTablesNames.SCHEDULES })
-export class Schedule {
-  @PrimaryGeneratedColumn()
-  id: number;
-
-  @UpdateDateColumn({
-    name: 'updated_at',
-    type: 'timestamptz',
-    default: () => 'CURRENT_TIMESTAMP(6)',
-  })
-  updatedAt: Date;
-
-  @CreateDateColumn({
-    name: 'created_at',
-    type: 'timestamptz',
-    default: () => 'CURRENT_TIMESTAMP(6)',
-    onUpdate: 'CURRENT_TIMESTAMP(6)',
-  })
-  createdAt: Date;
-
+export class Schedule extends Default {
   @Column()
   time: string;
 
